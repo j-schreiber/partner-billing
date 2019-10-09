@@ -1,0 +1,15 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef1"
+            },
+            "Name": "Aycomba GmbH",
+            "BillingStreet": "Leopoldstraße 1",
+            "BillingPostalCode": "80336",
+            "BillingCity": "München",
+            "BillingCountryCode": "DE"
+        }
+    ]
+}
