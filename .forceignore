@@ -2,11 +2,18 @@
 # More information: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_exclude_source.htm
 #
 
+# DX files
 package.xml
 
-# LWC configuration files
+# LWC configuration files & tests
 **/jsconfig.json
 **/.eslintrc.json
-
-# LWC Jest
 **/__tests__/**
+
+# Incompatible metadata that may cause push/pull errors (because it is not yet supported)
+# regularily review here: https://developer.salesforce.com/docs/metadata-coverage
+*.profile
+OrderStatus.standardValueSet
+*.settings
+*.site-meta.xml
+*.appMenu-meta

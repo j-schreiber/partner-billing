@@ -1,11 +1,22 @@
 {
-  "packageDirectories": [
-    {
-      "path": "sfdx-source/unpackaged",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "sfdx-source/unpackaged",
+            "default": true
+        },
+        {
+            "path": ".\\sfdx-source\\packaged",
+            "package": "Partner ERP",
+            "versionName": "Ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "versionDescription": "Enterprise Resource Planning capabilities for Partners",
+            "default": false
+        }
+    ],
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "46.0",
+    "packageAliases": {
+        "Partner ERP": "0Ho4P000000GmhySAC"
     }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "46.0"
 }

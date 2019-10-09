@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlannedEndDate__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>The planned date, where this project is scheduled to be finished</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The planned date, where this project is scheduled to be finished</inlineHelpText>
+    <label>Planned End Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

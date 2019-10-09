@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProjectNumber__c</fullName>
+    <description>Internal Project auto-number field to generate unique easy-to-reference id for projects</description>
+    <displayFormat>{YYYY}-{0000}</displayFormat>
+    <externalId>true</externalId>
+    <inlineHelpText>Automatically generated id</inlineHelpText>
+    <label>Project Number</label>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>
