@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duration_Must_Be_Billable_Fractal</fullName>
+    <active>true</active>
+    <description>Ensures that calculated difference between start and end time is at least 5 minutes and positive number</description>
+    <errorConditionFormula>Duration__c &lt; 0.08</errorConditionFormula>
+    <errorDisplayField>EndTime__c</errorDisplayField>
+    <errorMessage>Duration must be positive at least 5 minutes (0,08)</errorMessage>
+</ValidationRule>

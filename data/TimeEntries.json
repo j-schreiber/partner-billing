@@ -1,0 +1,11 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef1"
+            },
+            "Project__c": "ProjectRef1"
+        }
+    ]
+}

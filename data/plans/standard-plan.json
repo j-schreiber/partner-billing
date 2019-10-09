@@ -4,5 +4,17 @@
         "saveRefs": true,
         "resolveRefs": false,
         "files": ["../BusinessAccounts.json"]
+    },
+    {
+        "sobject": "Project__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../Projects.json"]
+    },
+    {
+        "sobject": "TimeEntry__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../TimeEntries.json"]
     }
 ]
