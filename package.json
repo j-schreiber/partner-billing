@@ -1,0 +1,27 @@
+{
+  "name": "partner-erp",
+  "version": "0.1.0",
+  "description": "ERP functionality for salesforce freelancers",
+  "main": "index.js",
+  "scripts": {
+    "test:unit": "lwc-jest",
+    "test:unit:watch": "lwc-jest --watch",
+    "test:unit:debug": "lwc-jest --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlietzau/partner-erp.git"
+  },
+  "author": "jlietzau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlietzau/partner-erp/issues"
+  },
+  "homepage": "https://github.com/jlietzau/partner-erp#readme",
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^0.8.0",
+    "@salesforce/sfdx-lwc-jest": "^0.5.5",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1"
+  }
+}
