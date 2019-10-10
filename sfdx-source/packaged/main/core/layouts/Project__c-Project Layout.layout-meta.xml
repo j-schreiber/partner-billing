@@ -28,10 +28,21 @@
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsTopToBottom</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Status</label>
+        <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Status__c</field>
             </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>PlannedStartDate__c</field>
@@ -41,7 +52,25 @@
                 <field>PlannedEndDate__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Statistics</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>TotalDuration__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>TotalDurationBilled__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns/>
+        <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -75,9 +104,12 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Date__c</fields>
+        <fields>Status__c</fields>
+        <fields>DailyRate__c</fields>
         <fields>Duration__c</fields>
-        <fields>StartTime__c</fields>
-        <fields>EndTime__c</fields>
+        <fields>TotalAmount__c</fields>
+        <fields>Product__c</fields>
+        <fields>Resource__c</fields>
         <relatedList>TimeEntry__c.Project__c</relatedList>
     </relatedLists>
     <relatedLists>
