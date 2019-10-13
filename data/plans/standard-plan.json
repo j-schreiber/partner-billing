@@ -6,10 +6,10 @@
         "files": ["../BusinessAccounts.json"]
     },
     {
-        "sobject": "Project__c",
+        "sobject": "Budget__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../Projects.json"]
+        "files": ["../Budgets.json"]
     },
     {
         "sobject": "TimeEntry__c",
