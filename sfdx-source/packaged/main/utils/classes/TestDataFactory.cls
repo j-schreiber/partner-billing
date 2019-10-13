@@ -13,8 +13,29 @@ public class TestDataFactory {
                            AccountSource = 'Testing');
     }
 
+    public static Budget__c CreateDefaultBudget() {
+        return new Budget__c(Name = 'Test Budget 2019',
+                             Status__c = 'Planned');
+    }
+
+    public static TimeEntry__c CreateDefaultTimeEntry() {
+        return new TimeEntry__c(Status__c = 'New',
+                                DailyRate__c = 1250.00,
+                                Date__c = System.today(),
+                                StartTime__c = Time.newInstance(7, 30, 0, 0),
+                                EndTime__c = Time.newInstance(13, 0, 0, 0));
+    }
+
     public static Account CreateAccount(Account template) {
         return (Account)mergeSObjects(template, CreateDefaultAccount());
+    }
+
+    public static Budget__c CreateBudget(Budget__c template) {
+        return (Budget__c)mergeSObjects(template, CreateDefaultBudget());
+    }
+
+    public static TimeEntry__c CreateTimeEntry(TimeEntry__c template) {
+        return (TimeEntry__c)mergeSObjects(template, CreateDefaultTimeEntry());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {
