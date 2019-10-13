@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Registers a trigger handler that implements the interface with the framework and allows to control execution.</description>
+    <label>Handler Control</label>
+    <pluralLabel>Handler Controls</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
