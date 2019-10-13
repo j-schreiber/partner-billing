@@ -4,37 +4,7 @@
         <application>Enterprise_Resource_Planning</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Grants full access to all ERP functionality: Create projects, add time entries and create invoices</description>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Project__c.Opportunity__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Project__c.PlannedEndDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Project__c.PlannedStartDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Project__c.ProjectNumber__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Project__c.TotalDurationBilled__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Project__c.TotalDuration__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <description>Grants full access to all ERP functionality: Create and manage Budgets, Time Entries, Invoices.</description>
     <fieldPermissions>
         <editable>false</editable>
         <field>Budget__c.Number__c</field>
@@ -116,15 +86,6 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>Project__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
         <object>Budget__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
@@ -151,7 +112,7 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Project__c</tab>
+        <tab>Budget__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

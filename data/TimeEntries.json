@@ -5,7 +5,7 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef1"
             },
-            "Project__c": "BudgetRef1",
+            "Budget__c": "BudgetRef1",
             "Date__c": "2019-10-10",
             "StartTime__c": "",
             "EndTime__c": ""

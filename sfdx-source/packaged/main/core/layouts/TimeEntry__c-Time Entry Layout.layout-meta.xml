@@ -18,7 +18,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Project__c</field>
+                <field>Account__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Budget__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
