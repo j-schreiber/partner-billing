@@ -60,11 +60,54 @@ public class TimeEntryTriggerHandler_Test {
 
     @isTest
     static void update_ChangeTotalAmount_BudgetSummaryRecalculated() {
-        
+        // SETUP
+        Budget__c b = [SELECT Id,Account__c FROM Budget__c LIMIT 1];
+        TimeEntry__c toUpdate = TestDataFactory.CreateTimeEntry(
+            new TimeEntry__c(
+                Budget__c = b.Id,
+                Account__c = b.Account__c,
+                DailyRate__c = 1500.00,
+                StartTime__c = Time.newInstance(8,0,0,0),
+                EndTime__c = Time.newInstance(12,0,0,0),
+                Status__c = 'New')
+        );
+        insert toUpdate;
+
+        // ACTION
+        toUpdate.EndTime__c = Time.newInstance(13,0,0,0);
+        toUpdate.DailyRate__c = 1600;
+        toUpdate.Status__c = 'Invoiced';
+        Database.SaveResult sr = Database.update(toUpdate, false);
+
+        // VERIFY
+        System.assertEquals(true, sr.isSuccess(), sr.getErrors());
+        Budget__c newBudget = [SELECT Id,TotalAmountLogged__c,TotalAmountInvoiced__c FROM Budget__c WHERE Id = :b.Id];
+        System.assertEquals(1000.00, newBudget.TotalAmountLogged__c, 'TotalAmountLogged__c');
+        System.assertEquals(1000.00, newBudget.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
     }
 
     @isTest
     static void delete_ValidTimeEntry_BudgetSummaryRecalculated() {
-        
+        // SETUP
+        Budget__c b = [SELECT Id,Account__c FROM Budget__c LIMIT 1];
+        TimeEntry__c toDelete = TestDataFactory.CreateTimeEntry(
+            new TimeEntry__c(
+                Budget__c = b.Id,
+                Account__c = b.Account__c,
+                DailyRate__c = 1500.00,
+                StartTime__c = Time.newInstance(8,0,0,0),
+                EndTime__c = Time.newInstance(12,0,0,0),
+                Status__c = 'New')
+        );
+        insert toDelete;
+
+        // ACTION
+        Database.DeleteResult dr = Database.delete(toDelete, false);
+
+        // VERIFY
+        System.assertEquals(true, dr.isSuccess(), dr.getErrors());
+        Budget__c newBudget = [SELECT Id,TotalAmountLogged__c,TotalAmountInvoiced__c FROM Budget__c WHERE Id = :b.Id];
+        System.assertEquals(0.00, newBudget.TotalAmountLogged__c, 'TotalAmountLogged__c');
+        System.assertEquals(0.00, newBudget.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
     }
 }

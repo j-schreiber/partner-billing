@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TotalAmountInvoiced__c</fullName>
     <externalId>false</externalId>
-    <label>Total Ampount Invoiced</label>
+    <label>Total Amount Invoiced</label>
     <precision>18</precision>
     <required>false</required>
     <scale>2</scale>

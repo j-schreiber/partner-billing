@@ -12,6 +12,8 @@ public without sharing class BudgetTriggerHandler implements ITriggerHandler {
                 budgetTimeEntries.put(b.Id, b.TimeEntries__r);
             }
         }
+
+        System.debug('Time Entries: ' + budgetTimeEntries);
     }
 
     /** @Description
@@ -24,7 +26,11 @@ public without sharing class BudgetTriggerHandler implements ITriggerHandler {
         switch on Trigger.OperationType {
             when BEFORE_INSERT { for (SObject so : Trigger.new) beforeInsert((Budget__c)so); }
             when BEFORE_UPDATE { for (SObject so : Trigger.old) beforeUpdate((Budget__c)so, (Budget__c)Trigger.newMap.get(so.Id)); }
-            when AFTER_UNDELETE { for (SObject so : Trigger.new) afterUndelete((Budget__c)so); }
+            when AFTER_UNDELETE {
+                List<Budget__c> budgetsToUndelete = [SELECT Id FROM Budget__c WHERE Id IN :Trigger.newMap.keySet() FOR UPDATE];
+                for (Budget__c b : budgetsToUndelete) afterUndelete(b);
+                update budgetsToUndelete;
+            }
         }
     }
 
