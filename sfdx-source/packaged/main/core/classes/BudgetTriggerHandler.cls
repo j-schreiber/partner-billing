@@ -7,7 +7,7 @@ public without sharing class BudgetTriggerHandler implements ITriggerHandler {
 
         // load time entries in update and undelete context only
         if (Trigger.isUpdate || Trigger.isUndelete) {
-            for (Budget__c b : [SELECT Id, (SELECT Id,DailyRate__c,Date__c,Status__c,TotalAmount__c,Duration__c FROM TimeEntries__r) 
+            for (Budget__c b : [SELECT Id, (SELECT Id,DailyRate__c,Date__c,Status__c,TotalAmount__c,Duration__c,IsInvoiced__c FROM TimeEntries__r) 
                                 FROM Budget__c WHERE Id IN :Trigger.newMap.keySet()]) {
                 budgetTimeEntries.put(b.Id, b.TimeEntries__r);
             }
@@ -60,7 +60,7 @@ public without sharing class BudgetTriggerHandler implements ITriggerHandler {
     private void updateTotalAmountInvoiced(Budget__c newSo) {
         List<TimeEntry__c> invoicedTimeEntries = new List<TimeEntry__c>();
         for (TimeEntry__c te : budgetTimeEntries.get(newSo.Id)) {
-            if (te.Status__c == 'Invoiced') invoicedTimeEntries.add(te);
+            if (te.IsInvoiced__c) invoicedTimeEntries.add(te);
         }
 
         newSo.TotalAmountInvoiced__c = ListUtils.summarizeSObjectListField(

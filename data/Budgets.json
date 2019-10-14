@@ -9,7 +9,8 @@
             "Account__c": "@AccountRef1",
             "Status__c": "Active",
             "PlannedStartDate__c": "2019-03-01",
-            "PlannedEndDate__c": "2019-10-31"
+            "PlannedEndDate__c": "2019-10-31",
+            "Limit__c": 15500
         },
         {
             "attributes": {
@@ -20,7 +21,8 @@
             "Account__c": "@AccountRef1",
             "Status__c": "Planned",
             "PlannedStartDate__c": "2020-03-01",
-            "PlannedEndDate__c": "2020-12-31"
+            "PlannedEndDate__c": "2020-12-31",
+            "Limit__c": 50000
         }
     ]
 }

@@ -12,6 +12,12 @@
         "files": ["../Budgets.json"]
     },
     {
+        "sobject": "Invoice__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../Invoices.json"]
+    },
+    {
         "sobject": "TimeEntry__c",
         "saveRefs": true,
         "resolveRefs": true,

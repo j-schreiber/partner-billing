@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Invoice that was manually or automatically created for this Time Entry. If the Invoice is set, the Time Entry is locked from modification.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Invoice that was created from this Time Entry</inlineHelpText>
+    <label>Invoice</label>
+    <referenceTo>Invoice__c</referenceTo>
+    <relationshipLabel>Time Entries</relationshipLabel>
+    <relationshipName>TimeEntries</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

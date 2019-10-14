@@ -38,14 +38,19 @@ public class TimeEntryTriggerHandler_Test {
     static void insert_InvoicedTimeEntry_BudgetSummaryRecalculated() {
         // SETUP
         Budget__c b = [SELECT Id,Account__c FROM Budget__c LIMIT 1];
+
+        Invoice__c invoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = b.Account__c));
+        insert invoice;
+
         TimeEntry__c toInsert = TestDataFactory.CreateTimeEntry(
             new TimeEntry__c(
                 Budget__c = b.Id,
                 Account__c = b.Account__c,
+                Invoice__c = invoice.Id,
                 DailyRate__c = 1500.00,
                 StartTime__c = Time.newInstance(8,0,0,0),
                 EndTime__c = Time.newInstance(12,0,0,0),
-                Status__c = 'Invoiced')
+                Status__c = 'Approved')
         );
 
         // ACTION
@@ -73,10 +78,14 @@ public class TimeEntryTriggerHandler_Test {
         );
         insert toUpdate;
 
+        Invoice__c invoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = b.Account__c));
+        insert invoice;
+
         // ACTION
         toUpdate.EndTime__c = Time.newInstance(13,0,0,0);
         toUpdate.DailyRate__c = 1600;
-        toUpdate.Status__c = 'Invoiced';
+        toUpdate.Invoice__c = invoice.Id;
+
         Database.SaveResult sr = Database.update(toUpdate, false);
 
         // VERIFY

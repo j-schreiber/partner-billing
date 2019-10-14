@@ -15,6 +15,7 @@ public class TestDataFactory {
 
     public static Budget__c CreateDefaultBudget() {
         return new Budget__c(Name = 'Test Budget 2019',
+                             Limit__c = 10000,
                              Status__c = 'Planned');
     }
 
@@ -24,6 +25,16 @@ public class TestDataFactory {
                                 Date__c = System.today(),
                                 StartTime__c = Time.newInstance(7, 30, 0, 0),
                                 EndTime__c = Time.newInstance(13, 0, 0, 0));
+    }
+
+    public static Invoice__c CreateDefaultInvoice() {
+        return new Invoice__c(Status__c = 'New',
+                              BillingStreet__c = 'Test Street 1',
+                              BillingPostalCode__c = '10000',
+                              BillingCity__c = 'Berlin',
+                              BillingCountry__c = 'Deutschland',
+                              BillingState__c = 'Berlin',
+                              Date__c = System.today());
     }
 
     public static Account CreateAccount(Account template) {
@@ -36,6 +47,10 @@ public class TestDataFactory {
 
     public static TimeEntry__c CreateTimeEntry(TimeEntry__c template) {
         return (TimeEntry__c)mergeSObjects(template, CreateDefaultTimeEntry());
+    }
+
+    public static Invoice__c CreateInvoice(Invoice__c template) {
+        return (Invoice__c)mergeSObjects(template, CreateDefaultInvoice());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

@@ -73,7 +73,7 @@ public class BudgetTriggerHandler_Test {
                 DailyRate__c = 1500.00,
                 StartTime__c = Time.newInstance(8,0,0,0),
                 EndTime__c = Time.newInstance(12,0,0,0),
-                Status__c = 'Invoiced')
+                Status__c = 'Approved')
         );
         insert te;
 
@@ -92,6 +92,6 @@ public class BudgetTriggerHandler_Test {
         Budget__c actualRecord = [SELECT Id,TotalAmountLogged__c,TotalAmountInvoiced__c,(SELECT Id FROM TimeEntries__r) FROM Budget__c WHERE Id = :toUndelete.Id];
         System.assertEquals(1, actualRecord.TimeEntries__r.size(), 'TimeEntries__r.size()');
         System.assertEquals(800.0, actualRecord.TotalAmountLogged__c, 'TotalAmountLogged__c');
-        System.assertEquals(800.0, actualRecord.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
+        System.assertEquals(0.0, actualRecord.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
     }
 }

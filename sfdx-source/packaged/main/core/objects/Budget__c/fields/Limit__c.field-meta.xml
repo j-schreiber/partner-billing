@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limit__c</fullName>
+    <externalId>false</externalId>
+    <label>Limit</label>
+    <precision>18</precision>
+    <required>true</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <description>The top limit that is set for the budget. Baseline to track total amounts (logged and invoiced) against.</description>
+    <inlineHelpText>Enter the limit of this budget</inlineHelpText>
+    <type>Currency</type>
+</CustomField>

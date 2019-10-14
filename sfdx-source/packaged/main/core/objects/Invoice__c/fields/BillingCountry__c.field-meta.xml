@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BillingCountry__c</fullName>
+    <description>Billing Country of this invoice. Copied from Account's Billing Address when created</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is copied from the Account's Billing Address</inlineHelpText>
+    <label>Billing Country</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <length>100</length>
+</CustomField>
