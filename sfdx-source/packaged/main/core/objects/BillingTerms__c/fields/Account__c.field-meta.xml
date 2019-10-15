@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account__c</fullName>
+    <label>Invoice</label>
+    <description>The Account where this billing terms apply</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The Account where this billing terms apply</inlineHelpText>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Billing Terms</relationshipLabel>
+    <relationshipName>BillingTerms</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+</CustomField>

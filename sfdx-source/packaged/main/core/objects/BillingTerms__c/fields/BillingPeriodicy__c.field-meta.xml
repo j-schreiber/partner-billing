@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Status__c</fullName>
+    <fullName>BillingPeriodicy__c</fullName>
     <externalId>false</externalId>
-    <label>Status</label>
+    <label>Billing Periodicy</label>
+    <description>Controls the billing cycle, for when time entries are gathered and converted to an invoice.</description>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -11,19 +12,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Draft</fullName>
+                <fullName>Monthly</fullName>
                 <default>true</default>
-                <label>Draft</label>
-            </value>
-            <value>
-                <fullName>Activated</fullName>
-                <default>false</default>
-                <label>Activated</label>
-            </value>
-            <value>
-                <fullName>Cancelled</fullName>
-                <default>false</default>
-                <label>Cancelled</label>
+                <label>Monthly</label>
             </value>
         </valueSetDefinition>
     </valueSet>
