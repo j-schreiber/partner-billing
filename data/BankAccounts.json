@@ -1,0 +1,14 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "BankAccount__c",
+                "referenceId": "BankAccountRef1"
+            },
+            "Name": "German Business Bank Account: Postbank AG",
+            "IsDefault__c": true,
+            "IBAN__c": "DE70100000000123456789",
+            "BankName__c": "Deutsche Postbank AG"
+        }
+    ]
+}

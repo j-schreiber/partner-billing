@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsDefault__c</fullName>
+    <description>Activates this bank account as default. The default bank account will be used when creating invoices.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Activate to use this as your default bank account for all invoices.</inlineHelpText>
+    <label>Is Default</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

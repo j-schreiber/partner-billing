@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Account__c</fullName>
+    <description>The Billing Account for this Invoice. Information from this Account are printed on the Invoice.</description>
     <externalId>false</externalId>
     <label>Account</label>
     <referenceTo>Account</referenceTo>
@@ -11,5 +12,4 @@
     <trackTrending>false</trackTrending>
     <type>MasterDetail</type>
     <writeRequiresMasterRead>true</writeRequiresMasterRead>
-    <description>The Billing Account for this Invoice. Information from this Account are printed on the Invoice.</description>
 </CustomField>
