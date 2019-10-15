@@ -9,7 +9,8 @@
             "Product__c": "@ProductRef1",
             "ServiceDate__c": "2019-06-01",
             "Price__c": 1249.00,
-            "Quantity__c": 0.60
+            "Quantity__c": 0.60,
+            "Tax__c": 19
         },
         {
             "attributes": {
@@ -20,7 +21,8 @@
             "Product__c": "@ProductRef2",
             "ServiceDate__c": "2019-06-02",
             "Price__c": 750.00,
-            "Quantity__c": 1
+            "Quantity__c": 1,
+            "Tax__c": 19
         },
         {
             "attributes": {
@@ -31,7 +33,8 @@
             "Product__c": "@ProductRef2",
             "ServiceDate__c": "2019-06-15",
             "Price__c": 750.00,
-            "Quantity__c": 1
+            "Quantity__c": 1,
+            "Tax__c": 19
         }
     ]
 }

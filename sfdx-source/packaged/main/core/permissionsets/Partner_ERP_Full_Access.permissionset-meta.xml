@@ -142,6 +142,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>InvoiceLineItem__c.Tax__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>BillingTerms__c.AutomatedBilling__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -158,6 +163,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>BillingTerms__c.ValidTo__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>PriceBookEntry.Tax__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>

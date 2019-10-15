@@ -1,0 +1,24 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "PricebookEntry",
+                "referenceId": "PricebookEntryRef1"
+            },
+            "UnitPrice": 1250,
+            "Product2Id": "@ProductRef1",
+            "Pricebook2Id": "@PricebookRef1"
+        },
+        {
+            "attributes": {
+                "type": "PricebookEntry",
+                "referenceId": "PricebookEntryRef2"
+            },
+            "UseStandardPrice": true,
+            "UnitPrice": 1250,
+            "Product2Id": "@ProductRef1",
+            "Pricebook2Id": "@PricebookRef2",
+            "Tax__c": 0.19
+        }
+    ]
+}
