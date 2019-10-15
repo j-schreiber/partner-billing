@@ -4,6 +4,9 @@
         "paths": {
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
+            ],
+            "c/invoicePdfQuickAction": [
+                "invoicePdfQuickAction/invoicePdfQuickAction.js"
             ]
         },
         "experimentalDecorators": true

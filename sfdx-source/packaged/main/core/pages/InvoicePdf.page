@@ -1,0 +1,12 @@
+<apex:page renderAs="Pdf" controller="InvoicePdfController">
+    <h1>Invoice PDF: {!$CurrentPage.parameters.Id}</h1>
+
+    <div>
+        <c:InvoicePdfRecipient />
+    </div>
+
+    <div>
+        <c:InvoicePdfLineItemTable />
+    </div>
+
+</apex:page>
