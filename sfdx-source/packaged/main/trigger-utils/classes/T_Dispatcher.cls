@@ -52,7 +52,7 @@ public class T_Dispatcher {
         sObjDispatcher.executeHandlers();
         // VERIFY
         System.assertEquals(
-            [SELECT COUNT() FROM HandlerControl__mdt WHERE SObject__c = 'Account' AND IsActive__c = true], 
+            [SELECT COUNT() FROM HandlerControl__mdt WHERE SObject__r.QualifiedApiName = 'Account' AND IsActive__c = true], 
             sObjDispatcher.activeHandlers.size(), 
             'activeHandlers.size()'
         );
@@ -61,12 +61,26 @@ public class T_Dispatcher {
     @isTest
     static void executeHandlers_TimeEntry_AllHandlersExecuted(){
         // SETUP
-        Dispatcher sObjDispatcher = new Dispatcher(Account.getSObjectType());
+        Dispatcher sObjDispatcher = new Dispatcher(TimeEntry__c.getSObjectType());
         // ACTION
         sObjDispatcher.executeHandlers();
         // VERIFY
         System.assertEquals(
-            [SELECT COUNT() FROM HandlerControl__mdt WHERE SObject__c = 'TimeEntry__c' AND IsActive__c = true], 
+            [SELECT COUNT() FROM HandlerControl__mdt WHERE SObject__r.QualifiedApiName = 'TimeEntry__c' AND IsActive__c = true], 
+            sObjDispatcher.activeHandlers.size(), 
+            'activeHandlers.size()'
+        );    
+    }
+
+    @isTest
+    static void executeHandlers_Budget_AllHandlersExecuted(){
+        // SETUP
+        Dispatcher sObjDispatcher = new Dispatcher(Budget__c.getSObjectType());
+        // ACTION
+        sObjDispatcher.executeHandlers();
+        // VERIFY
+        System.assertEquals(
+            [SELECT COUNT() FROM HandlerControl__mdt WHERE SObject__r.QualifiedApiName = 'Budget__c' AND IsActive__c = true], 
             sObjDispatcher.activeHandlers.size(), 
             'activeHandlers.size()'
         );    

@@ -4,16 +4,13 @@ public without sharing class BudgetTriggerHandler implements ITriggerHandler {
     private Map<Id, List<TimeEntry__c>> budgetTimeEntries = new Map<Id, List<TimeEntry__c>>();
 
     public BudgetTriggerHandler() {
-
         // load time entries in update and undelete context only
-        if (Trigger.isUpdate || Trigger.isUndelete) {
+        if (Trigger.isExecuting && (Trigger.isUpdate || Trigger.isUndelete)) {
             for (Budget__c b : [SELECT Id, (SELECT Id,DailyRate__c,Date__c,Status__c,TotalAmount__c,Duration__c,IsInvoiced__c FROM TimeEntries__r) 
                                 FROM Budget__c WHERE Id IN :Trigger.newMap.keySet()]) {
                 budgetTimeEntries.put(b.Id, b.TimeEntries__r);
             }
         }
-
-        System.debug('Time Entries: ' + budgetTimeEntries);
     }
 
     /** @Description

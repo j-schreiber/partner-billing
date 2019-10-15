@@ -28,7 +28,7 @@ public class TestDataFactory {
     }
 
     public static Invoice__c CreateDefaultInvoice() {
-        return new Invoice__c(Status__c = 'New',
+        return new Invoice__c(Status__c = 'Draft',
                               BillingStreet__c = 'Test Street 1',
                               BillingPostalCode__c = '10000',
                               BillingCity__c = 'Berlin',
