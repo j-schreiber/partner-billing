@@ -1,0 +1,1 @@
+sfdx force:package:version:create -x -p "Partner Billing" -w 10 -v $DevHubAlias

@@ -6,10 +6,11 @@
         },
         {
             "path": ".\\sfdx-source\\packaged",
-            "package": "Partner ERP",
+            "package": "Partner Billing",
             "versionName": "Ver 0.1",
             "versionNumber": "0.1.0.NEXT",
-            "versionDescription": "Enterprise Resource Planning capabilities for Partners",
+            "versionDescription": "Billing capabilities for Consultants and Freelancers",
+            "definitionFile": "config/project-scratch-def.json",
             "default": false
         }
     ],
@@ -17,6 +18,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "47.0",
     "packageAliases": {
-        "Partner ERP": "0Ho4P000000GmhySAC"
+        "Partner Billing": "0Ho4P000000GmhySAC",
+        "Partner Billing@0.1.0-1": "04t4P000002KiKJQA0"
     }
 }
