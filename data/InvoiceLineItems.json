@@ -1,0 +1,37 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef1"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef1",
+            "ServiceDate__c": "2019-06-01",
+            "Price__c": 1249.00,
+            "Quantity__c": 0.60
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef2"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "ServiceDate__c": "2019-06-02",
+            "Price__c": 750.00,
+            "Quantity__c": 1
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef3"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "ServiceDate__c": "2019-06-15",
+            "Price__c": 750.00,
+            "Quantity__c": 1
+        }
+    ]
+}

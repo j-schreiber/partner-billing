@@ -7,7 +7,7 @@
     },
     {
         "sobject": "Product2",
-        "saveRefs": false,
+        "saveRefs": true,
         "resolveRefs": false,
         "files": ["../Products.json"]
     },
@@ -28,6 +28,12 @@
         "saveRefs": true,
         "resolveRefs": true,
         "files": ["../Invoices.json"]
+    },
+    {
+        "sobject": "InvoiceLineItem__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../InvoiceLineItems.json"]
     },
     {
         "sobject": "TimeEntry__c",

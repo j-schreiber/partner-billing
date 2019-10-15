@@ -7,11 +7,12 @@
             },
             "Budget__c": "@BudgetRef1",
             "Account__c": "@AccountRef1",
-            "Date__c": "2019-09-30",
+            "Date__c": "2019-08-30",
             "DailyRate__c": 1400,
             "StartTime__c": "09:00:00.000",
             "EndTime__c": "15:00:00.000",
-            "Status__c": "Invoiced"
+            "Status__c": "Approved",
+            "Invoice__c": "@InvoiceRef3"
         },
         {
             "attributes": {
@@ -57,7 +58,6 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef5"
             },
-            "Budget__c": "@BudgetRef1",
             "Account__c": "@AccountRef1",
             "Date__c": "2019-10-10",
             "DailyRate__c": 1250,

@@ -6,6 +6,7 @@
                 "referenceId": "ProductRef1"
             },
             "Name": "Standard Beratungsdienstleistung",
+            "Description": "Coaching und Consulting, konzeptionelle Arbeit, ohne Implementierung",
             "IsActive": true,
             "Family": "Coaching"
         },

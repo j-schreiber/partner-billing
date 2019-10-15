@@ -62,6 +62,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Invoice__c.TotalAmount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Resource__c.HourlyRate__c</field>
         <readable>true</readable>
     </fieldPermissions>
