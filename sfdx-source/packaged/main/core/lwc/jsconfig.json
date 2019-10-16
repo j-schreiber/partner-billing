@@ -2,11 +2,11 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "c/timeEntriesBillingCanvas": [
-                "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
-            ],
             "c/invoicePdfQuickAction": [
                 "invoicePdfQuickAction/invoicePdfQuickAction.js"
+            ],
+            "c/timeEntriesBillingCanvas": [
+                "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
             ]
         },
         "experimentalDecorators": true

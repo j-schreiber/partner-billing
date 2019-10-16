@@ -2,7 +2,7 @@
     <h1>Invoice PDF: {!$CurrentPage.parameters.Id}</h1>
 
     <div>
-        <c:InvoicePdfRecipient />
+        <c:InvoicePdfCustomerInformation />
     </div>
 
     <div>

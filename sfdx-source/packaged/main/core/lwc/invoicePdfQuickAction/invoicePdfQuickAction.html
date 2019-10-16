@@ -1,8 +1,18 @@
 <template>
-    <h1>{invoiceId}</h1>
 
-    <!-- Pdf Renderer -->
-    <div style="width:800px;height:700px">
-        <iframe src={invoicePdfUrl} width="100%" height="100%"></iframe>
+    <!-- Vertical grid to align header, content, footer -->
+    <div class="slds-grid slds-grid_vertical">
+        <!-- Pdf Renderer -->
+        <div class="slds-col slds-size_1-of-1" style="height:750px">
+            <iframe src={invoicePdfUrl} class="ayc-container_full"></iframe>
+        </div>
+    
+        <!-- Action buttons to save generated PDF as attachment or abort -->
+        <div class="slds-grid slds-grid_align-center slds-m-top_large">
+            <div>
+                <lightning-button variant="brand" label={LABELS.BUTTON_LABEL_SAVE}></lightning-button>
+            </div>
+        </div>
     </div>
+
 </template>
