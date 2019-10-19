@@ -34,7 +34,16 @@ public class TestDataFactory {
                               BillingCity__c = 'Berlin',
                               BillingCountry__c = 'Deutschland',
                               BillingState__c = 'Berlin',
-                              Date__c = System.today());
+                              Date__c = Date.newInstance(2019, 10, 20));
+    }
+
+    public static InvoiceLineItem__c CreateDefaultInvoiceLineItem() {
+        return new InvoiceLineItem__c(Description__c = 'This is a test line item!',
+                                      Price__c = 1333.37,
+                                      Quantity__c = 1.00,
+                                      Tax__c = 19,
+                                      Unit__c = 'Each',
+                                      ServiceDate__c = Date.newInstance(2019, 10, 20));
     }
 
     public static Account CreateAccount(Account template) {
@@ -51,6 +60,10 @@ public class TestDataFactory {
 
     public static Invoice__c CreateInvoice(Invoice__c template) {
         return (Invoice__c)mergeSObjects(template, CreateDefaultInvoice());
+    }
+
+    public static InvoiceLineItem__c CreateInvoiceLineItem(InvoiceLineItem__c template) {
+        return (InvoiceLineItem__c)mergeSObjects(template, CreateDefaultInvoiceLineItem());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

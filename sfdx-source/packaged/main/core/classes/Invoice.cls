@@ -17,7 +17,7 @@ public class Invoice {
     /** @Description    Initialize the object by invoice id */
     public Invoice(Id recordId) {
         this([
-            SELECT Id,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,
+            SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,
             Account__r.Name,
             (
                 SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c FROM LineItems__r
@@ -52,12 +52,20 @@ public class Invoice {
 
     public void addFileToAttachments(Blob fileToSave) {
         Attachment att = new Attachment(Body = fileToSave,
-                                        Name = '2019-10-19_' + Record.Account__r.Name + '_' + (Attachments.size() + 1) + '.pdf',
+                                        Name = generateInvoicePdfName(),
                                         ParentId = Record.Id);
         Attachments.add(att);        
     }
 
     public void commitAllChanges() {
         upsert Attachments;
+    }
+
+    private String generateInvoicePdfName() {
+        return System.now().format('YYYY-MM-dd') + '_' + 
+            Record.Name + '_' +
+            Record.Account__r.Name + '_' +
+            (Attachments.size() + 1) + '_' +
+            '.pdf';
     }
 }
