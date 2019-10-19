@@ -21,6 +21,10 @@
                 <field>TotalAmount__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>TotalGrossAmount__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Date__c</field>
             </layoutItems>

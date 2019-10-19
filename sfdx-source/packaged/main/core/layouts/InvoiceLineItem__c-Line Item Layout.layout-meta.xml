@@ -42,6 +42,10 @@
                 <field>Amount__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>GrossAmount__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Tax__c</field>
             </layoutItems>

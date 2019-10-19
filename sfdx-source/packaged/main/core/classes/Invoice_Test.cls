@@ -10,4 +10,14 @@ public class Invoice_Test {
     static void init_WithoutLineItems_AllDefaultsInitialized() {
         
     }
+
+    @isTest
+    static void createPdf_WithLineItems_PdfBlobCreated() {
+
+    }
+
+    @isTest
+    static void saveFileAsAttachment_ValidPdf_AttachmentSaved() {
+
+    }
 }

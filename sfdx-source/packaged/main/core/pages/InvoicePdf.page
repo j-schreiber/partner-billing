@@ -1,5 +1,8 @@
-<apex:page renderAs="Pdf" controller="InvoicePdfController">
+<apex:page renderAs="Pdf" controller="VFInvoicePdfController">
     <h1>Invoice PDF: {!$CurrentPage.parameters.Id}</h1>
+
+    {!Invoice.Record.TotalAmount__c}
+    {!Invoice.Record.TotalGrossAmount__c}
 
     <div>
         <c:InvoicePdfCustomerInformation />
