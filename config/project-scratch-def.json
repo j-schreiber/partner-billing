@@ -3,6 +3,9 @@
   "edition": "Enterprise",
   "features": ["StateAndCountryPicklist"],
   "country": "DE",
+  "street": "Test Street 1",
+  "postalCode": "81667",
+  "city": "München",
   "language": "en_US",
   "settings": {
     "orgPreferenceSettings": {

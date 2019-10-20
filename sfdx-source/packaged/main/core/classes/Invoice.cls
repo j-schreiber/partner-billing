@@ -37,8 +37,9 @@ public class Invoice {
         this([
             SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,
             Account__r.Name,Account__r.CustomerId__c,
+            Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,
             (
-                SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c FROM LineItems__r
+                SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__r.Name FROM LineItems__r
             ),
             (
                 SELECT Id,Name FROM Attachments

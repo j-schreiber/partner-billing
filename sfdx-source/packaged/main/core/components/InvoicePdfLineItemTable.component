@@ -1,3 +1,53 @@
 <apex:component>
-    <h1>Line Item Table</h1>
+
+    <apex:attribute name="Invoice" required="true" type="Invoice" description="Invoice decorator object"/>
+
+    <p>Betreff: Rechnung</p>
+    <p>Sehr geehrte Damen und Herren,<br/>ich bedanke mich für die gute Zusammenarbeit und erlaube mir, folgende Aufwände in Rechnung zu stellen.</p>
+
+    <apex:pageBlock>
+        <apex:pageBlockTable value="{! Invoice.LineItems }" var="li">
+            <apex:column value="{! li.Record.Product__r.Name }"/>
+            <apex:column value="{! li.Record.Description__c }"/>
+            <apex:column value="{! li.Record.ServiceDate__c }"/>
+            <apex:column value="{! li.Record.Price__c }"/>
+            <apex:column value="{! li.Record.Quantity__c }"/>
+            <apex:column value="{! li.Record.Tax__c }"/>
+            <apex:column value="{! li.Record.Amount__c }"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+
+    <br />
+    <br />
+
+    <!-- Total summary table -->
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalNetAmount}
+                </td>
+                <td>
+                    <apex:outputField value="{! Invoice.Record.TotalAmount__c }"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalTaxes}
+                </td>
+                <td>
+                    {!Invoice.TotalTaxes}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalGrossAmount}
+                </td>
+                <td>
+                    <apex:outputField value="{! Invoice.Record.TotalGrossAmount__c }"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </apex:component>

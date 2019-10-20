@@ -7,7 +7,6 @@ public class InvoicePdfController {
     *   Creates the invoice pdf file (embedded visualforce) and saves it as attachment to the
     *   invoice record. Every time the method is called, a new PDF is generated and saved as new attachment.
     *
-    *   @param  pdfFile     The PDF file to save
     *   @param  invoiceId   The invoice id where the PDF is saved
     */
     @AuraEnabled

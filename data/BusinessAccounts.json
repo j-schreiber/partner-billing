@@ -9,7 +9,8 @@
             "BillingStreet": "Leopoldstraße 1",
             "BillingPostalCode": "80336",
             "BillingCity": "München",
-            "BillingCountryCode": "DE"
+            "BillingCountryCode": "DE",
+            "CustomerId__c": "1000"
         },
         {
             "attributes": {
@@ -20,7 +21,8 @@
             "BillingStreet": "Maximilienstraße 1",
             "BillingPostalCode": "80336",
             "BillingCity": "München",
-            "BillingCountryCode": "DE"
+            "BillingCountryCode": "DE",
+            "CustomerId__c": "1001"
         }
     ]
 }

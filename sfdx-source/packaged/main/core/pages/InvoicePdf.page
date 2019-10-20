@@ -1,15 +1,41 @@
 <apex:page renderAs="Pdf" controller="VFInvoicePdfController">
-    <h1>Invoice PDF: {!$CurrentPage.parameters.Id}</h1>
-
-    {!Invoice.Record.TotalAmount__c}
-    {!Invoice.Record.TotalGrossAmount__c}
-
+    
+    <!-- Company & Customer Address -->
     <div>
-        <c:InvoicePdfCustomerInformation />
+        <p>
+            {!Organization.Name}    {!Organization.Street} {!Organization.PostalCode} {!Organization.City}
+        </p>
+        <p>
+            {!Invoice.Record.Account__r.Name}<br />
+            {!Invoice.Record.BillingStreet__c}<br />
+            {!Invoice.Record.BillingPostalCode__c} {!Invoice.Record.BillingCity__c}<br />
+            {!Invoice.Record.BillingCountry__c}
+        </p>
     </div>
 
+    <!-- Invoice Header -->
+    <table>
+        <thead>
+            <tr>
+                <th>{!$Label.InvoicePdf_Label_CustomerId}</th>
+                <th>{!$Label.InvoicePdf_Label_InvoiceId}</th>
+                <th>{!$Label.InvoicePdf_Label_InvoiceDate}</th>
+            </tr>
+        </thead>
+            <tr>
+                <td>{!Invoice.Record.Account__r.CustomerId__c}</td>
+                <td>{!Invoice.Record.Name}</td>
+                <td>
+                    <apex:outputField value="{! Invoice.Record.Date__c }"/>
+                </td>
+            </tr>
+        <tbody>
+
+        </tbody>
+    </table>
+
     <div>
-        <c:InvoicePdfLineItemTable />
+        <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
     </div>
 
 </apex:page>

@@ -48,4 +48,28 @@
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
         <value>Invoice Date</value>
     </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalNetAmount</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Total Net</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalGrossAmount</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Total Gross</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalTaxes</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Total Taxes</value>
+    </labels>
 </CustomLabels>

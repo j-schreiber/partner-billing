@@ -40,7 +40,7 @@ public class Invoice_Test {
     @isTest
     static void saveFileAsAttachment_ValidPdf_AttachmentAdded() {
         // SETUP
-        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
+        Invoice__c record = [SELECT Id,Name FROM Invoice__c LIMIT 1];
         Invoice invObj = new Invoice(record.Id);
         // ACTION
         Blob pdfMock = Blob.valueOf('Teststring');
