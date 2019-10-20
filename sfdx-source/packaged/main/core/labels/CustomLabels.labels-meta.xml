@@ -24,4 +24,28 @@
         <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
         <value>PDF successfully saved!</value>
     </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_CustomerId</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Customer Reference Number</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_InvoiceId</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Invoice Number</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_InvoiceDate</fullName>
+        <categories>visualforce,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Invoice Date</value>
+    </labels>
 </CustomLabels>

@@ -7,6 +7,11 @@
     <description>Grants full access to all ERP functionality: Create and manage Budgets, Time Entries, Invoices.</description>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.CustomerId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>BankAccount__c.IsDefault__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -243,6 +248,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>BillingTerms__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Account</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>
