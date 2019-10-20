@@ -26,6 +26,7 @@ export default class InvoicePdfQuickAction extends LightningElement {
         .then( () => {
             // function body to handle SUCCESS
             //console.log('Success ...');
+            this.dispatchEvent(new CustomEvent('savesuccess'));
             this.isWorking = false;
         })
         .catch( () => {
