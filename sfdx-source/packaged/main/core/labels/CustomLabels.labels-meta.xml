@@ -8,4 +8,20 @@
         <shortDescription>Used in Aura / LWC UI for Button Label</shortDescription>
         <value>Save PDF to Attachments</value>
     </labels>
+    <labels>
+        <fullName>Toast_Title_GenericError</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>An error occured during processing!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_PdfSaveSuccess</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>PDF successfully saved!</value>
+    </labels>
 </CustomLabels>
