@@ -1,7 +1,15 @@
 public with sharing class VFInvoicePdfController {
     
     /** @Description    The fully initialized invoice object for this context */
-    public static InvoicePrint InvoiceObject;
+    public InvoicePrint Invoice {
+        public get {
+            if (Invoice == null) {
+                Invoice = new InvoicePrint(ApexPages.currentPage().getParameters().get('Id'));
+            }
+            return Invoice;
+        }
+        private set;
+    }
 
     /** @Description    The fully initialized org data for this context */
     public static Organization OrgData;
@@ -15,17 +23,13 @@ public with sharing class VFInvoicePdfController {
         public set;
     }
 
-    /** @Description    
-    *   Visualforce pseudo getter for invoice object. Initialized the decorator object
-    *   from the invoice id page parameter.
-    *
-    *   @return         Lazy-init invoice object
-    */
-    public static InvoicePrint getInvoice() {
-        if (InvoiceObject == null) {
-            InvoiceObject = new InvoicePrint(ApexPages.currentPage().getParameters().get('Id'));
+    /** @Description    Language Property from Page Parameters */
+    public String Language {
+        public get {
+            Language = Invoice.Record.PdfLanguage__c;
+            return Language;
         }
-        return InvoiceObject;
+        public set;
     }
 
     /** @Description

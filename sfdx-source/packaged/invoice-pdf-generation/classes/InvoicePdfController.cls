@@ -16,4 +16,5 @@ public class InvoicePdfController {
         inv.addFileToAttachments(pdfFile);
         inv.commitAllChanges();
     }
+
 }

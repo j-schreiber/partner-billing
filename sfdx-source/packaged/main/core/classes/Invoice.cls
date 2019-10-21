@@ -35,7 +35,7 @@ public virtual class Invoice {
     /** @Description    Initialize the object by invoice id */
     public Invoice(Id recordId) {
         this([
-            SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,
+            SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,
             Account__r.Name,Account__r.CustomerId__c,
             Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,
             (

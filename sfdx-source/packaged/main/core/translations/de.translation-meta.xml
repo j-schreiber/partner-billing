@@ -20,4 +20,20 @@
         <label>Rechnungsnummer</label>
         <name>InvoicePdf_Label_InvoiceId</name>
     </customLabels>
+    <customLabels>
+        <label>Rechnungsdatum</label>
+        <name>InvoicePdf_Label_InvoiceDate</name>
+    </customLabels>
+    <customLabels>
+        <label>Gesamt (Netto)</label>
+        <name>InvoicePdf_Label_TotalNetAmount</name>
+    </customLabels>
+    <customLabels>
+        <label>Gesamt (Brutto)</label>
+        <name>InvoicePdf_Label_TotalGrossAmount</name>
+    </customLabels>
+    <customLabels>
+        <label>Umsatzsteuer</label>
+        <name>InvoicePdf_Label_TotalTaxes</name>
+    </customLabels>
 </Translations>

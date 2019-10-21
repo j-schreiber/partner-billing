@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>RenderTimesheetInPdf__c</fullName>
+    <fullName>PdfRenderTimesheet__c</fullName>
     <description>Pdf Control to render the invoice's timesheet</description>
     <externalId>false</externalId>
     <inlineHelpText>Activate to add the timesheet to PDF</inlineHelpText>
-    <label>Render Timesheet in PDF</label>
+    <label>Show Timesheet (PDF)</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
     <defaultValue>true</defaultValue>

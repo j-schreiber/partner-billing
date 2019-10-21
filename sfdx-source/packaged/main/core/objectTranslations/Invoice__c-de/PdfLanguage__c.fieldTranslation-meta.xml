@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Set the languge of the rendered PDF --></help>
+    <label>Sprache (PDF)</label>
+    <name>PdfLanguage__c</name>
+    <picklistValues>
+        <masterLabel>English (Germany)</masterLabel>
+        <translation>Englisch (Deutschland)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>English (USA)</masterLabel>
+        <translation>Englisch (USA)</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>German (Germany)</masterLabel>
+        <translation>Deutsch (Deutschland)</translation>
+    </picklistValues>
+</CustomFieldTranslation>
