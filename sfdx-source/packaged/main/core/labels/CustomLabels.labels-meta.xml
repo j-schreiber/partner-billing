@@ -26,7 +26,7 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_CustomerId</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
@@ -34,7 +34,7 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_InvoiceId</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
@@ -42,7 +42,7 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_InvoiceDate</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
@@ -50,7 +50,7 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_TotalNetAmount</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
@@ -58,7 +58,7 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_TotalGrossAmount</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
@@ -66,10 +66,42 @@
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_TotalTaxes</fullName>
-        <categories>visualforce,label</categories>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Total Taxes</value>
+        <value>VAT Charge</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Text_Greeting</fullName>
+        <categories>visualforce,text,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as greeting</shortDescription>
+        <value>Dear Sirs and Madams</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Text_Introduction</fullName>
+        <categories>visualforce,text,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as introduction</shortDescription>
+        <value>thank you for your business!</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Text_TermsAndConditions</fullName>
+        <categories>visualforce,text,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as general payment terms</shortDescription>
+        <value>Payment is due within 30 days from Invoice Date.</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Text_DetailsInTimesheet</fullName>
+        <categories>visualforce,text,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in pdf rendering page when timesheet is added</shortDescription>
+        <value>See the attached timesheet for a detailed composition of all billed hours and task description.</value>
     </labels>
 </CustomLabels>

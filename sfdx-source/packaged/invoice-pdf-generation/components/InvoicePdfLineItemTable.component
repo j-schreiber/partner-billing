@@ -2,9 +2,6 @@
 
     <apex:attribute name="Invoice" required="true" type="InvoicePrint" description="Invoice decorator object"/>
 
-    <p class="font-size_large text-format_bold">Betreff: Rechnung</p>
-    <p class="font-size_medium">Sehr geehrte Damen und Herren,<br/>ich bedanke mich für die gute Zusammenarbeit und erlaube mir, folgende Aufwände in Rechnung zu stellen.</p>
-
     <!-- Detail table of invoice line items -->
     <table class="ayc-size_12of12">
         <thead>

@@ -60,6 +60,10 @@ body {
     margin-top: 32px;
 }
 
+.ayc-m-top_xx-large {
+    margin-top: 40px;
+}
+
 .ayc-size_12of12 {
     width: 100%;
 }
@@ -98,6 +102,11 @@ table {
 
 .ayc-table-align_right {
     margin: 0 0 0 auto;
+}
+
+.ayc-content-align_center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ayc-p-around_none {

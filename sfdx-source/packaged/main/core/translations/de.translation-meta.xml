@@ -36,4 +36,20 @@
         <label>Umsatzsteuer</label>
         <name>InvoicePdf_Label_TotalTaxes</name>
     </customLabels>
+    <customLabels>
+        <label>Sehr geehrte Damen und Herren</label>
+        <name>InvoicePdf_Text_Greeting</name>
+    </customLabels>
+    <customLabels>
+        <label>ich bedanke mich für die gute Zusammenarbeit und erlaube mir, die folgenden Aufwände in Rechnung zu stellen.</label>
+        <name>InvoicePdf_Text_Introduction</name>
+    </customLabels>
+    <customLabels>
+        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum.</label>
+        <name>InvoicePdf_Text_TermsAndConditions</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine ausführliche Aufstellung der abgerechneten Stunden mit detaillierter Aufgabenbeschreibung entnehmen Sie bitte dem angehängten Timesheet.</label>
+        <name>InvoicePdf_Text_DetailsInTimesheet</name>
+    </customLabels>
 </Translations>
