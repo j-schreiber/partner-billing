@@ -15,8 +15,11 @@ sfdx force:org:create -s -a $ScratchOrgAlias -d $Duration -f .\config\project-sc
 Write-Host "sfdx force:source:push -u $ScratchOrgAlias"
 sfdx force:source:push -u $ScratchOrgAlias
 
-Write-Host "sfdx force:user:permset:assign -n Partner_ERP_Full_Access -u $ScratchOrgAlias"
-sfdx force:user:permset:assign -n Partner_ERP_Full_Access -u $ScratchOrgAlias
+Write-Host "sfdx force:user:permset:assign -n PartnerBilling_Invoicing_FullAccess -u $ScratchOrgAlias"
+sfdx force:user:permset:assign -n PartnerBilling_Invoicing_FullAccess -u $ScratchOrgAlias
+
+Write-Host "sfdx force:user:permset:assign -n PartnerBilling_Core_FullAccess -u $ScratchOrgAlias"
+sfdx force:user:permset:assign -n PartnerBilling_Core_FullAccess -u $ScratchOrgAlias
 
 Write-Host "sfdx force:data:tree:import -p .\data\plans\standard-plan.json -u $ScratchOrgAlias"
 sfdx force:data:tree:import -p .\data\plans\standard-plan.json -u $ScratchOrgAlias

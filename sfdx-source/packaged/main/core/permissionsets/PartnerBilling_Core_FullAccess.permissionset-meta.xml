@@ -4,7 +4,7 @@
         <application>Enterprise_Resource_Planning</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Grants full access to all ERP functionality: Create and manage Budgets, Time Entries, Invoices.</description>
+    <description>Grants full access to core functionality: Manage Budgets, Time Entries, Bank Accounts, etc</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.CustomerId__c</field>
@@ -186,7 +186,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Partner ERP: Full Access</label>
+    <label>Partner Billing: Core Access</label>
     <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
@@ -206,9 +206,9 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>Invoice__c</object>

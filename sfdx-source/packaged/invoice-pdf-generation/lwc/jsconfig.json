@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "c/timeEntriesBillingCanvas": [
+                "../../main/core/lwc/timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
+            ]
+        }
+    }
+}

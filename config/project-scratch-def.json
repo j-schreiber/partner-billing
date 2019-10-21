@@ -3,16 +3,19 @@
   "edition": "Enterprise",
   "features": ["StateAndCountryPicklist"],
   "country": "DE",
-  "street": "Test Street 1",
-  "postalCode": "81667",
-  "city": "München",
   "language": "en_US",
   "settings": {
-    "orgPreferenceSettings": {
-      "s1DesktopEnabled": true,
-      "pathAssistantsEnabled": true,
-      "translation": true,
-      "chatterEnabled": true
+    "lightningExperienceSettings": {
+        "enableS1DesktopEnabled": true
+    },
+    "pathAssistantSettings": {
+        "pathAssistantEnabled": true
+    },
+    "languageSettings": {
+        "enableTranslationWorkbench": true
+    },
+    "chatterSettings": {
+        "enableChatter": true
     }
   }
 }

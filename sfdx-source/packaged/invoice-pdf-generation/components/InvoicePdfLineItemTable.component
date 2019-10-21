@@ -8,8 +8,6 @@
     <apex:pageBlock>
         <apex:pageBlockTable value="{! Invoice.LineItems }" var="li">
             <apex:column value="{! li.Record.Product__r.Name }"/>
-            <apex:column value="{! li.Record.Description__c }"/>
-            <apex:column value="{! li.Record.ServiceDate__c }"/>
             <apex:column value="{! li.Record.Price__c }"/>
             <apex:column value="{! li.Record.Quantity__c }"/>
             <apex:column value="{! li.Record.Tax__c }"/>
