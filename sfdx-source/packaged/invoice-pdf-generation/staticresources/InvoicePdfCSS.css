@@ -1,0 +1,90 @@
+/** Set complete page as beeing A4 */
+body {
+    font-family: "Verdana", sans-serif;
+}
+
+page {
+    background: white;
+    display: block;
+    width: 21cm;
+    height: 29.7cm;
+}
+
+p {
+    font-size: 12px;
+}
+
+.text-align_right {
+    text-align: right;
+}
+
+.text-align_left {
+    text-align: left;
+}
+
+.text-align_center {
+    text-align: center;
+}
+
+.text-format_bold {
+    font-weight: bold;
+}
+
+.font-size_medium {
+    font-size: 14px;
+}
+
+.font-size_small {
+    font-size: 12px;
+}
+
+.font-size_x-small {
+    font-size: 10px;
+}
+
+.font-size_xx-small {
+    font-size: 8px;
+}
+
+.ayc-m-bottom_large {
+    margin-bottom: 24px;
+}
+
+.ayc-m-top_large {
+    margin-top: 24px;
+}
+
+.ayc-m-bottom_x-large {
+    margin-bottom: 32px;
+}
+
+.ayc-m-top_x-large {
+    margin-top: 32px;
+}
+
+.container_full {
+    width: 100%;
+    max-width: 19cm;
+}
+
+.container_1of3 {
+    width: 33%;
+}
+
+.container-alignment_right {
+    position: absolute;
+    right: 0px;
+}
+
+td, th {
+    padding: 0px 10px 0px 0px;
+    white-space: nowrap;
+    max-width: 6cm;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.has-borders {
+    border-collapse: collapse;
+    border: 1px solid black;
+}

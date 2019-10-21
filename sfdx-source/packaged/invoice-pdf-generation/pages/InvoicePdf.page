@@ -1,11 +1,13 @@
-<apex:page renderAs="Pdf" controller="VFInvoicePdfController">
+<apex:page controller="VFInvoicePdfController" standardStylesheets="false">
+
+    <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
     
     <!-- Company & Customer Address -->
     <div>
-        <p>
+        <p class="font-size_x-small">
             {!Organization.Name}    {!Organization.Street} {!Organization.PostalCode} {!Organization.City}
         </p>
-        <p>
+        <p class="font-size_medium">
             {!Invoice.Record.Account__r.Name}<br />
             {!Invoice.Record.BillingStreet__c}<br />
             {!Invoice.Record.BillingPostalCode__c} {!Invoice.Record.BillingCity__c}<br />
@@ -14,25 +16,28 @@
     </div>
 
     <!-- Invoice Header -->
-    <table>
-        <thead>
-            <tr>
-                <th>{!$Label.InvoicePdf_Label_CustomerId}</th>
-                <th>{!$Label.InvoicePdf_Label_InvoiceId}</th>
-                <th>{!$Label.InvoicePdf_Label_InvoiceDate}</th>
-            </tr>
-        </thead>
-            <tr>
-                <td>{!Invoice.Record.Account__r.CustomerId__c}</td>
-                <td>{!Invoice.Record.Name}</td>
-                <td>
-                    <apex:outputField value="{! Invoice.Record.Date__c }"/>
-                </td>
-            </tr>
-        <tbody>
-
-        </tbody>
-    </table>
+    <div>
+        <table class="container_full ayc-m-top_large ayc-m-bottom_large">
+            <thead>
+                <tr>
+                    <th class="text-align_center">{!$Label.InvoicePdf_Label_CustomerId}</th>
+                    <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceId}</th>
+                    <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
+                </tr>
+            </thead>
+                <tr>
+                    <td class="text-align_center">{!Invoice.Record.Account__r.CustomerId__c}</td>
+                    <td class="text-align_center">{!Invoice.Record.Name}</td>
+                    <td class="text-align_center">
+                        <apex:outputField value="{! Invoice.Record.Date__c }"/>
+                    </td>
+                </tr>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+    
 
     <div>
         <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />

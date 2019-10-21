@@ -30,7 +30,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Customer Reference Number</value>
+        <value>Customer Number</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_InvoiceId</fullName>

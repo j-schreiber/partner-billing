@@ -1,7 +1,7 @@
 public with sharing class VFInvoicePdfController {
     
     /** @Description    The fully initialized invoice object for this context */
-    public static Invoice InvoiceObject;
+    public static InvoicePrint InvoiceObject;
 
     /** @Description    The fully initialized org data for this context */
     public static Organization OrgData;
@@ -12,9 +12,9 @@ public with sharing class VFInvoicePdfController {
     *
     *   @return         Lazy-init invoice object
     */
-    public static Invoice getInvoice() {
+    public static InvoicePrint getInvoice() {
         if (InvoiceObject == null) {
-            InvoiceObject = new Invoice(ApexPages.currentPage().getParameters().get('Id'));
+            InvoiceObject = new InvoicePrint(ApexPages.currentPage().getParameters().get('Id'));
         }
         return InvoiceObject;
     }

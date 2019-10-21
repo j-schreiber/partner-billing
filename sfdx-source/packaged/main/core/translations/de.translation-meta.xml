@@ -12,4 +12,12 @@
         <label>Bei der Verarbeitung ist ein Fehler aufgetreten!</label>
         <name>Toast_Title_GenericError</name>
     </customLabels>
+    <customLabels>
+        <label>Kundennummer</label>
+        <name>InvoicePdf_Label_CustomerId</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnungsnummer</label>
+        <name>InvoicePdf_Label_InvoiceId</name>
+    </customLabels>
 </Translations>
