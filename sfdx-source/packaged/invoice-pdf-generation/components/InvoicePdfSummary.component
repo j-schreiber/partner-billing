@@ -1,0 +1,36 @@
+<apex:component>
+
+    <apex:attribute name="Invoice" required="true" type="InvoicePrint" description="Invoice decorator object"/>
+
+    <!-- Total summary table -->
+    <table class="ayc-table-align_right">
+        <tbody>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalNetAmount}
+                </td>
+                <td class="text-align_right">
+                    <apex:outputField value="{! Invoice.Record.TotalAmount__c }"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalTaxes}
+                </td>
+                <td class="text-align_right">
+                    {!Invoice.TotalTaxesFormatted}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {!$Label.InvoicePdf_Label_TotalGrossAmount}
+                </td>
+                <td class="text-align_right text-format_bold">
+                    <apex:outputField value="{! Invoice.Record.TotalGrossAmount__c }"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+</apex:component>

@@ -1,7 +1,7 @@
-<apex:page controller="VFInvoicePdfController" standardStylesheets="false">
+<apex:page controller="VFInvoicePdfController" standardStylesheets="false" applyBodyTag="false" showHeader="false" renderAs="{!renderAs}">
 
     <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
-    
+
     <!-- Company & Customer Address -->
     <div>
         <p class="font-size_x-small">
@@ -16,8 +16,8 @@
     </div>
 
     <!-- Invoice Header -->
-    <div>
-        <table class="container_full ayc-m-top_large ayc-m-bottom_large">
+    <div class="ayc-size_12of12 ayc-align_center ayc-m-top_large ayc-m-bottom_large">
+        <table class="ayc-size_12of12">
             <thead>
                 <tr>
                     <th class="text-align_center">{!$Label.InvoicePdf_Label_CustomerId}</th>
@@ -25,6 +25,7 @@
                     <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
                 </tr>
             </thead>
+            <tbody>
                 <tr>
                     <td class="text-align_center">{!Invoice.Record.Account__r.CustomerId__c}</td>
                     <td class="text-align_center">{!Invoice.Record.Name}</td>
@@ -32,15 +33,16 @@
                         <apex:outputField value="{! Invoice.Record.Date__c }"/>
                     </td>
                 </tr>
-            <tbody>
-    
             </tbody>
         </table>
     </div>
     
-
-    <div>
+    <div class="ayc-m-bottom_large container_full">
         <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
     </div>
 
+    <div class="ayc-align_right">
+        <c:InvoicePdfSummary Invoice="{! Invoice }" />
+    </div>
+    
 </apex:page>

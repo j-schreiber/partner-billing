@@ -1,17 +1,12 @@
 /** Set complete page as beeing A4 */
 body {
     font-family: "Verdana", sans-serif;
+    font-size: 10pt;
 }
 
-page {
-    background: white;
-    display: block;
-    width: 21cm;
-    height: 29.7cm;
-}
-
-p {
-    font-size: 12px;
+@page {
+    size: A4 portrait;
+    background-color: greenyellow;
 }
 
 .text-align_right {
@@ -30,20 +25,24 @@ p {
     font-weight: bold;
 }
 
+.font-size_large {
+    font-size: 13pt;
+}
+
 .font-size_medium {
-    font-size: 14px;
+    font-size: 11pt;
 }
 
 .font-size_small {
-    font-size: 12px;
+    font-size: 9pt;
 }
 
 .font-size_x-small {
-    font-size: 10px;
+    font-size: 8pt;
 }
 
 .font-size_xx-small {
-    font-size: 8px;
+    font-size: 7pt;
 }
 
 .ayc-m-bottom_large {
@@ -62,18 +61,27 @@ p {
     margin-top: 32px;
 }
 
-.container_full {
+.ayc-size_12of12 {
     width: 100%;
-    max-width: 19cm;
 }
 
-.container_1of3 {
+.ayc-size_1of3 {
     width: 33%;
 }
 
-.container-alignment_right {
-    position: absolute;
-    right: 0px;
+.ayc-align_right {
+    justify-content: right;
+    display: flex;
+}
+
+.ayc-align_left {
+    justify-content: left;
+    display: flex;
+}
+
+.ayc-align_center {
+    justify-content: center;
+    display: flex;
 }
 
 td, th {
@@ -84,7 +92,15 @@ td, th {
     text-overflow: ellipsis;
 }
 
-.has-borders {
+table {
+    border-style: hidden;
     border-collapse: collapse;
-    border: 1px solid black;
+}
+
+.ayc-table-align_right {
+    margin: 0 0 0 auto;
+}
+
+.ayc-p-around_none {
+    padding: 0px
 }

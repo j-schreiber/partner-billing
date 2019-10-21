@@ -6,6 +6,15 @@ public with sharing class VFInvoicePdfController {
     /** @Description    The fully initialized org data for this context */
     public static Organization OrgData;
 
+    /** @Description    Render As Property from Page Parameters */
+    public String renderAs {
+        public get {
+            renderAs = ApexPages.currentPage().getParameters().get('renderAs');
+            return renderAs;
+        }
+        public set;
+    }
+
     /** @Description    
     *   Visualforce pseudo getter for invoice object. Initialized the decorator object
     *   from the invoice id page parameter.

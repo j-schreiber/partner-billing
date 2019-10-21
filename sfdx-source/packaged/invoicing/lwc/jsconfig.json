@@ -2,6 +2,9 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "c/invoicePdfQuickAction": [
+                "../../invoice-pdf-generation/lwc/invoicePdfQuickAction/invoicePdfQuickAction.js"
+            ],
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
             ]
@@ -10,7 +13,8 @@
     },
     "include": [
         "**/*",
-        "../../../../../.sfdx/typings/lwc/**/*.d.ts"
+        "../../../../../.sfdx/typings/lwc/**/*.d.ts",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
     ],
     "typeAcquisition": {
         "include": [
