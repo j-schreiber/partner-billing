@@ -2,7 +2,7 @@
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Grants access to perform Billing Runs and manage Invoices.</description>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Partner Billing: Billing Run</label>
+    <label>Partner Billing: Invoicing</label>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
