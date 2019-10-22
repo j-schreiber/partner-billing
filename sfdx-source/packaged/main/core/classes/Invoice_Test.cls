@@ -29,6 +29,30 @@ public class Invoice_Test {
     }
 
     @isTest
+    static void init_InvalidId_EmptyInvoiceInitialized() {
+        // ACTION
+        Invoice actualObj = new Invoice('abc');
+        // VERIFY
+        System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
+        System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
+        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(0.0, actualObj.TotalTaxes, 'Invoice.TotalTaxes');
+        System.assertEquals(0.0, actualObj.TotalTaxesPercentage, 'Invoice.TotalTaxesPercentage');
+    }
+
+    @isTest
+    static void init_Null_EmptyInvoiceInitialized() {
+        // SETUP
+        String recordId;
+        // ACTION
+        Invoice actualObj = new Invoice(recordId);
+        // VERIFY
+        System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
+        System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
+        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+    }
+
+    @isTest
     static void createPdf_WithLineItems_PdfBlobCreated() {
         // SETUP
         Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];

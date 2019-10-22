@@ -5,9 +5,11 @@
     <!-- Detail table of invoice line items -->
     <table class="ayc-size_12of12">
         <thead>
-            <apex:repeat value="{! $ObjectType.InvoiceLineItem__c.fieldsets.PdfColumns}" var="fieldName">
-                <th class="font-size_small {! IF(fieldName.Type=='currency' || fieldName.Type=='double' || fieldName.Type=='percent','text-align_right','text-align_left') }">{! fieldName.Label }</th>
-            </apex:repeat>
+            <tr>
+                <apex:repeat value="{! $ObjectType.InvoiceLineItem__c.fieldsets.PdfColumns}" var="fieldName">
+                    <th class="font-size_small ayc-p-bottom_x-small {! IF(fieldName.Type=='currency' || fieldName.Type=='double' || fieldName.Type=='percent','text-align_right','text-align_left') }">{! fieldName.Label }</th>
+                </apex:repeat>
+            </tr>
         </thead>
         <tbody>
             <apex:repeat value="{! Invoice.LineItems }" var="lineItem">

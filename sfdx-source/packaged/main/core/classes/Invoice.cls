@@ -17,7 +17,11 @@ public virtual class Invoice {
     /** @Description    Calculated total taxes */
     public Decimal TotalTaxes {
         public get {
-            TotalTaxes = Record.TotalGrossAmount__c - Record.TotalAmount__c;
+            if (Record.TotalGrossAmount__c == null || Record.TotalAmount__c == null) {
+                TotalTaxes = 0;
+            } else {
+                TotalTaxes = Record.TotalGrossAmount__c - Record.TotalAmount__c;
+            }
             return TotalTaxes;
         }
         private set;
@@ -26,26 +30,36 @@ public virtual class Invoice {
     /** @Description    Calculated total taxes percentage */
     public Decimal TotalTaxesPercentage {
         public get {
-            TotalTaxesPercentage = TotalTaxes.divide(Record.TotalAmount__c, 4);
+            if (Record.TotalAmount__c == null) {
+                TotalTaxesPercentage = 0;
+            } else {
+                TotalTaxesPercentage = TotalTaxes.divide(Record.TotalAmount__c, 4);
+            }
             return TotalTaxesPercentage;
         }
         private set;
     }
 
     /** @Description    Initialize the object by invoice id */
-    public Invoice(Id recordId) {
-        this([
-            SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,
-            Account__r.Name,Account__r.CustomerId__c,
-            Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,
-            (
-                SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__r.Name,Productname__c FROM LineItems__r
-            ),
-            (
-                SELECT Id,Name FROM Attachments
-            )
-            FROM Invoice__c WHERE Id = :recordId
-        ]);
+    public Invoice(String recordId) {
+        try {
+            this([
+                SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,
+                Account__r.Name,Account__r.CustomerId__c,
+                Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,
+                (
+                    SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__r.Name,Productname__c FROM LineItems__r
+                ),
+                (
+                    SELECT Id,Name FROM Attachments
+                )
+                FROM Invoice__c WHERE Id = :recordId
+            ]);
+        } catch (Exception e) {
+            Record = new Invoice__c();
+            LineItems = new List<InvoiceLineItem>();
+            Attachments = new List<Attachment>();
+        }
     }
 
     /** @Description    Initialize the object with the fully queried record */

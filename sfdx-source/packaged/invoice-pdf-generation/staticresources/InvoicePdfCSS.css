@@ -11,17 +11,22 @@ body {
     font-size: 10pt;
     margin: 0px;
     padding: 0px;
+    height: 100vh;
 }
 
 /** Set print format for this page page as beeing A4 */
 @page {
     size: A4 portrait;
-    margin: 0mm;
+    margin: 0mm 0mm 0mm 0mm;
     font-family: "Verdana", sans-serif;
     font-size: 10pt;
 
     @bottom-center {
-        content: counter(page) " of " counter(pages);
+        content: element(footer);
+    }
+
+    @top-center {
+        content: element(header);
     }
     
 }
@@ -62,12 +67,33 @@ body {
     font-size: 7pt;
 }
 
+.ayc-m-bottom_x-small {
+    margin-bottom: 8px;
+}
+
+.ayc-m-bottom_small {
+    margin-bottom: 12px;
+}
+
+.ayc-p-bottom_x-small {
+    padding-bottom: 8px;
+}
+
+.ayc-p-bottom_small {
+    padding-bottom: 12px;
+}
+
 .ayc-m-bottom_large {
     margin-bottom: 24px;
 }
 
 .ayc-m-top_large {
     margin-top: 24px;
+}
+
+.ayc-p-vertical_large {
+    padding-bottom: 24px;
+    padding-top: 24px;
 }
 
 .ayc-m-bottom_x-large {
@@ -131,19 +157,55 @@ table {
     padding: 0px
 }
 
-.header, .footer {
+#header {
     width: 100%;
-    height: 3cm;
+    height: 25mm;
     background-color: rgb(206, 204, 204);
     color: white;
     text-align: center;
+    position: fixed; 
+    top: 0mm;
+}
+
+#footer {
+    height: 17mm;
+    background-color: rgb(206, 204, 204);
+    color: white;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    top: 280mm;
 }
 
 .letter-address {
-    position: absolute;
-    width: 7.5cm;
-    height: 4.0cm;
-    margin-top: 6cm;
-    margin-left: 2cm;
+    position: relative;
+    width: 85mm;
+    height: 40mm;
+}
 
+.letter-address-sender {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 8pt;
+    text-decoration: underline;
+}
+
+.letter-body {
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    position: absolute;
+    top: 60mm;
+    left: 25mm;
+    right: 10mm;
+    bottom: 20mm;
+    padding-bottom: 2cm;
+}
+
+.letter-subject {
+    position: relative;
+    font-weight: bold;
+    font-size: 11pt;
 }
