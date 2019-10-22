@@ -1,0 +1,3 @@
+<apex:component>
+    <h1>Mein Footer</h1>
+</apex:component>
