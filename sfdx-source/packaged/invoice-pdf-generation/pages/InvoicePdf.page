@@ -1,14 +1,12 @@
-<apex:page controller="VFInvoicePdfController" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" showHeader="false" renderAs="{!renderAs}"
+<apex:page controller="VFInvoicePdfController" standardStylesheets="false" applyBodyTag="true" applyHtmlTag="false" showHeader="false" renderAs="{!renderAs}"
     language="{!language}">
 
     <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
 
-    <div id="header">
-        <c:pdfCompanyHeader />
-    </div>
-
-    <div id="footer">
-        <p>Mein toller Footer!</p>
+    <div class="header">
+        <div>
+            <c:pdfCompanyHeader />
+        </div>
     </div>
 
     <div class="content">
@@ -70,6 +68,24 @@
 
         </div>
 
+    </div>
+
+    <div class="footer_left">
+        <div>
+            <p>Content für linker Footer</p>
+        </div>
+    </div>
+
+    <div class="footer_right">
+        <div>
+            <p>FOOTER: RIGHT</p>
+        </div>
+    </div>
+
+    <div class="footer_center">
+        <div>
+            <p>FOOTER: CENTER</p>
+        </div>
     </div>
 
 </apex:page>

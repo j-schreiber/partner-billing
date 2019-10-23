@@ -19,6 +19,14 @@
     @bottom-center {
         content: element(footer-content);
     }
+
+    @bottom-left {
+        content: element(footer-content);
+    }
+
+    @bottom-right {
+        content: element(footer-content);
+    }
 }
 
 * {

@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <apex:repeat value="{! Invoice.LineItems }" var="lineItem">
-                <tr>
+                <tr style="page-break-after: auto">
                     <apex:repeat value="{! $ObjectType.InvoiceLineItem__c.fieldsets.PdfColumns}" var="fieldName">
                         <!-- set text alignment to "right", if this is a number field -->
                         <td class="{! IF(fieldName.Type=='currency' || fieldName.Type=='double' || fieldName.Type=='percent','text-align_right','') } font-size_small">
