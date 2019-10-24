@@ -14,7 +14,7 @@ body {
     height: 100%;
 }
 
-/** Content / CSS override for display as PDF (renderAs=pdf) */
+/** Page Formatting & Margin Boxes (Footer/Header) when printing */
 @page {
     size: A4 portrait;
     margin: 30mm 0mm 20mm 0mm; /** Margins for header & footer */
@@ -24,29 +24,7 @@ body {
 
     @bottom-center {
         background-color: rgb(206, 204, 204);
-        content: element(custom-footer-center);
-        display: flex;
-        justify-content: center;
-    }
-
-    @bottom-right {
-        background-color: rgb(206, 204, 204);
-        content: element(custom-footer-right)
-    }
-
-    @bottom-left {
-        background-color: rgb(206, 204, 204);
-        content: element(custom-footer-left)
-    }
-
-    @top-right {
-        background-color: rgb(206, 204, 204);
-        content: element(custom-header);
-    }
-
-    @top-left {
-        background-color: rgb(206, 204, 204);
-        content: element(custom-header);
+        content: element(custom-footer);
     }
 
     @top-center {
@@ -59,19 +37,11 @@ body {
 /** Specific CSS for display on screens (NO renderAs=pdf) */
 @media screen {
     div.header {
-        display: none;
-    }
-    /**
-    div.footer_center {
-        display: none;
-    }
-    */
-    div.footer_left {
-        display: none;
+        display: none !important;
     }
 
-    div.footer_right {
-        display: none;
+    div.footer {
+        display: none !important;
     }
 
     .content {
@@ -80,105 +50,31 @@ body {
     }
 }
 
-.text-align_right {
-    text-align: right;
+/** Override standard CSS for footer */
+div.footer td {
+    padding: 0mm;
+    max-width: initial;
 }
 
-.text-align_left {
-    text-align: left;
-}
-
-.text-align_center {
+div.footer {
+    height: 15mm;
+    color: black;
     text-align: center;
-}
-
-.text-format_bold {
-    font-weight: bold;
-}
-
-.font-size_large {
-    font-size: 13pt;
-}
-
-.font-size_medium {
-    font-size: 11pt;
-}
-
-.font-size_small {
-    font-size: 9pt;
-}
-
-.font-size_x-small {
     font-size: 8pt;
-}
-
-.font-size_xx-small {
-    font-size: 7pt;
-}
-
-.ayc-m-bottom_x-small {
-    margin-bottom: 8px;
-}
-
-.ayc-m-bottom_small {
-    margin-bottom: 12px;
-}
-
-.ayc-p-bottom_x-small {
-    padding-bottom: 8px;
-}
-
-.ayc-p-bottom_small {
-    padding-bottom: 12px;
-}
-
-.ayc-m-bottom_large {
-    margin-bottom: 24px;
-}
-
-.ayc-m-top_large {
-    margin-top: 24px;
-}
-
-.ayc-p-vertical_large {
-    padding-bottom: 24px;
-    padding-top: 24px;
-}
-
-.ayc-m-bottom_x-large {
-    margin-bottom: 32px;
-}
-
-.ayc-m-top_x-large {
-    margin-top: 32px;
-}
-
-.ayc-m-top_xx-large {
-    margin-top: 40px;
-}
-
-.ayc-size_12of12 {
-    width: 100%;
-}
-
-.ayc-size_1of3 {
-    width: 33%;
-}
-
-.ayc-align_right {
-    justify-content: right;
+    width: 100vw;
     display: flex;
+    align-items: center;
+    position: running(custom-footer);
 }
 
-.ayc-align_left {
-    justify-content: left;
-    display: flex;
-}
-
-.ayc-align_center {
-    justify-content: center;
-    display: flex;
-    margin: 0 auto;
+div.header {
+    width: 100vw;
+    height: 25mm;
+    color: white;
+    text-align: right;
+    padding: 3mm 5mm 0mm 5mm;
+    text-transform: uppercase;
+    position: running(custom-header);
 }
 
 td, th {
@@ -194,52 +90,6 @@ table {
     border-collapse: collapse;
 }
 
-.ayc-table-align_right {
-    margin: 0 0 0 auto;
-}
-
-.ayc-content-align_center {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.ayc-p-around_none {
-    padding: 0px
-}
-
-div.header {
-    width: 100%;
-    height: 25mm;
-    color: white;
-    text-align: center;
-    position: running(custom-header);
-}
-
-div.footer_left {
-    height: 15mm;
-    color: white;
-    width: 100%;
-    text-align: center;
-    position: running(custom-footer-left);
-}
-
-div.footer_right {
-    height: 15mm;
-    color: white;
-    width: 100%;
-    text-align: center;
-    position: running(custom-footer-right);
-}
-
-div.footer_center {
-    height: 15mm;
-    color: white;
-    width: 100%;
-    text-align: center;
-    font-size: 8pt;
-    position: running(custom-footer-center);
-}
-
 .letter-address {
     position: relative;
     width: 85mm;
@@ -249,7 +99,7 @@ div.footer_center {
 .letter-address-sender {
     margin-bottom: 8px;
     font-weight: bold;
-    font-size: 8pt;
+    font-size: 7pt;
     text-decoration: underline;
 }
 

@@ -2,42 +2,14 @@
     language="{!language}">
 
     <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
+    <apex:stylesheet value="{! $Resource.GenericCSS }" />
 
     <div class="header">
-        <div>
-            <c:pdfCompanyHeader />
-        </div>
+        <h1>{! Company.Name }</h1>
     </div>
 
-    <div class="footer_left">
-        <div>
-            <p>Content für linker Footer</p>
-        </div>
-    </div>
-
-    <div class="footer_right">
-        <div>
-            <p>FOOTER: RIGHT</p>
-        </div>
-    </div>
-
-    <div class="footer_center">
-        <div>
-            <table class="ayc-align_center">
-                <tr>
-                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankAccountOwner__c.Label}" /></td>
-                    <td class="text-align_right">{!BankAccount.BankAccountOwner__c}</td>
-                </tr>
-                <tr>
-                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankName__c.Label}" /></td>
-                    <td class="text-align_right">{!BankAccount.BankName__c}</td>
-                </tr>
-                <tr>
-                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.IBAN__c.Label}" /></td>
-                    <td class="text-align_right">{!BankAccount.IBAN__c}</td>
-                </tr>
-            </table>
-        </div>
+    <div class="footer">
+        <c:pdfCompanyFooter BankInfo="{! BankAccount }" OrgInfo="{! Company }"/>
     </div>
 
     <div class="content">
@@ -45,7 +17,7 @@
         <!-- Company & Customer Address -->
         <div class="letter-address">
             <p class="letter-address-sender">
-                {!Organization.Name} {!Organization.Street} {!Organization.PostalCode} {!Organization.City}
+                {! Company.Name }&nbsp;&nbsp;&nbsp;{! Company.Street }&nbsp;&nbsp;{! Company.PostalCode }&nbsp;{! Company.City }
             </p>
             <p class="font-size_medium">
                 {!Invoice.Record.Account__r.Name}
@@ -80,12 +52,13 @@
             </div>
 
             <!-- greeting and introduction text -->
-            <div class="ayc-p-vertical_large">
+            <div class="ayc-p-vertical_medium">
                 <p class="font-size_medium ayc-m-bottom_small">{!$Label.InvoicePdf_Text_Greeting},</p>
                 <p class="font-size_medium">{!$Label.InvoicePdf_Text_Introduction}</p>
             </div>
 
-            <div class="ayc-p-vertical_large">
+            <!-- generated table of line items -->
+            <div class="ayc-p-vertical_medium">
                 <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
             </div>
 

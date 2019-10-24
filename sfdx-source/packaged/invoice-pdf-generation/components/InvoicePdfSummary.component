@@ -3,7 +3,7 @@
     <apex:attribute name="Invoice" required="true" type="InvoicePrint" description="Invoice decorator object"/>
 
     <!-- Total summary table -->
-    <table class="ayc-table-align_right">
+    <table class="ayc-table-align_right" style="page-break-inside: avoid">
         <tbody>
             <tr>
                 <td>

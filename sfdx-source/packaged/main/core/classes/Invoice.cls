@@ -1,7 +1,6 @@
 /** @Description
 *   This is the decorator object for the custom object Invoice__c that implements
 *   functionality to create Invoices with Invoice Line Items, create PDFs and handle Attachments
-*
 */
 public virtual class Invoice {
 
@@ -75,31 +74,6 @@ public virtual class Invoice {
     }
 
     /** @Description
-    *   Creates a PDF from the InvoicePDF visualforce page and returns the Blob
-    *
-    *   @return             The created Pdf (from invoice visualforce page)
-    */
-    public Blob createPdf() {
-        PageReference invoicePdfPage = Page.InvoicePdf;
-        invoicePdfPage.getParameters().put('Id', Record.Id);
-        // Apex tests do not support PDF generation, therefore we "mock" a Blob
-        return Test.isRunningTest() ? Blob.valueOf('TestPDF') : invoicePdfPage.getContentAsPdf();
-    }
-
-    /** @Description
-    *   Saves a Blob (presumably a PDF file) to the internal attachments of the invoice.
-    *   This method only caches the file and does not commit the attachments.
-    *
-    *   @param  fileToSave  File that will be saved as attachment
-    */
-    public void addFileToAttachments(Blob fileToSave) {
-        Attachment att = new Attachment(Body = fileToSave,
-                                        Name = generateInvoicePdfName(),
-                                        ParentId = Record.Id);
-        Attachments.add(att);        
-    }
-
-    /** @Description
     *   Commits all changes made to the record or related records.
     */
     public void commitAllChanges() {
@@ -107,13 +81,4 @@ public virtual class Invoice {
     }
 
 
-    /**                                 PRIVATE AREA                                 */
-
-    private String generateInvoicePdfName() {
-        return System.now().format('YYYY-MM-dd') + '_' + 
-            Record.Name + '_' +
-            Record.Account__r.Name + '_' +
-            (Attachments.size() + 1) + '_' +
-            '.pdf';
-    }
 }

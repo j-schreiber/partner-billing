@@ -94,7 +94,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as general payment terms</shortDescription>
-        <value>Payment is due within 30 days from Invoice Date.</value>
+        <value>Payment is due within 30 days from Invoice Date to the below printed bank account. Please use Invoice Number for reference.</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Text_DetailsInTimesheet</fullName>

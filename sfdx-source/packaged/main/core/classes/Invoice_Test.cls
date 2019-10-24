@@ -20,12 +20,25 @@ public class Invoice_Test {
 
     @isTest
     static void init_WithLineItems_AllDefaultsInitialized() {
-
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        // VERIFY
+        System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
+        System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
     }
 
     @isTest
     static void init_WithoutLineItems_AllDefaultsInitialized() {
-        
+        // SETUP
+        delete [SELECT Id FROM InvoiceLineItem__c];
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        // VERIFY
+        System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
+        System.assertEquals(0, objUnderTest.LineItems.size(), 'LineItems.size()');
     }
 
     @isTest
@@ -50,43 +63,6 @@ public class Invoice_Test {
         System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
         System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
         System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
-    }
-
-    @isTest
-    static void createPdf_WithLineItems_PdfBlobCreated() {
-        // SETUP
-        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
-        Invoice invObj = new Invoice(record.Id);
-        // VERIFY
-        System.assertNotEquals(null, invObj.createPdf(), 'createPdf()');
-    }
-
-    @isTest
-    static void saveFileAsAttachment_ValidPdf_AttachmentAdded() {
-        // SETUP
-        Invoice__c record = [SELECT Id,Name FROM Invoice__c LIMIT 1];
-        Invoice invObj = new Invoice(record.Id);
-        // ACTION
-        Blob pdfMock = Blob.valueOf('Teststring');
-        invObj.addFileToAttachments(pdfMock);
-        // VERIFY
-        System.assertEquals(1, invObj.Attachments.size(), 'invObj.Attachments.size()');
-        System.assertEquals(pdfMock, invObj.Attachments[0].Body, 'invObj.Attachments[0].Body');
-        System.assertEquals(true, invObj.Attachments[0].Name.contains(record.Name), 'contains(record.Name)');
-    }
-
-    @isTest
-    static void commitAllChanges_HasAttachment_AttachmentSaved() {
-        // SETUP
-        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
-        Invoice invObj = new Invoice(record.Id);
-        // ACTION
-        Blob pdfMock = Blob.valueOf('Teststring');
-        invObj.addFileToAttachments(pdfMock);
-        invObj.commitAllChanges();
-        // VERIFY
-        System.assertEquals(1, invObj.Attachments.size(), 'invObj.Attachments.size()');
-        System.assertEquals(1, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT()');
     }
 
     /**                             GETTER & SETTER

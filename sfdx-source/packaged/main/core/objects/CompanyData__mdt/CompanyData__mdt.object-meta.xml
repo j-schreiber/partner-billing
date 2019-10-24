@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Stores Contact Information for the Organization. Compensates for the lack of creating custom fields on Organization Object. Used in Visualforce to display company info in header / footer</description>
+    <label>Company Data</label>
+    <pluralLabel>Company Data</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

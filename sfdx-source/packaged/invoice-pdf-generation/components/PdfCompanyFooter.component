@@ -1,3 +1,55 @@
 <apex:component>
-    <h1>Mein Footer</h1>
+
+    <apex:attribute name="BankInfo" required="true" type="BankAccount__c" description="The default bank account that is displayed"/>
+    <apex:attribute name="OrgInfo" required="true" type="OrganizationInfo" description="The company information that is displayed"/>
+
+    <div>
+        <table class="ayc-size_12of12 layout-table">
+            <tr>
+                <td style="width:33%">
+                    <table class="ayc-align_center">
+                        <tr class="text-align_left">
+                            <td>{! OrgInfo.Name }</td>
+                        </tr>
+                        <tr class="text-align_left">
+                            <td>{! OrgInfo.Street }</td>
+                        </tr>
+                        <tr class="text-align_left">
+                            <td>{! OrgInfo.PostalCode } {! OrgInfo.City }</td>
+                        </tr>
+                        <tr class="text-align_left">
+                            <td>{! OrgInfo.Country }</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 34%">
+                    <table class="ayc-align_center">
+                        <tr>
+                            <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankAccountOwner__c.Label}" /></td>
+                            <td class="text-align_right">{!BankInfo.BankAccountOwner__c}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankName__c.Label}" /></td>
+                            <td class="text-align_right">{!BankInfo.BankName__c}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.IBAN__c.Label}" /></td>
+                            <td class="text-align_right">{!BankInfo.IBAN__c}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 33%">
+                    <table class="ayc-align_center">
+                        <tr class="text-align_right">
+                            <td>{! OrgInfo.Phone }</td>
+                        </tr>
+                        <tr class="text-align_right">
+                            <td>{! OrgInfo.Email }</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
 </apex:component>

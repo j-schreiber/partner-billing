@@ -45,7 +45,7 @@
         <name>InvoicePdf_Text_Introduction</name>
     </customLabels>
     <customLabels>
-        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum.</label>
+        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum auf das unten stehende Konto. Bitte verwenden Sie für die Zahlung als Referenz die Rechnungsnnummer.</label>
         <name>InvoicePdf_Text_TermsAndConditions</name>
     </customLabels>
     <customLabels>

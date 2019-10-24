@@ -11,7 +11,7 @@ public class InvoicePdfController {
     */
     @AuraEnabled
     public static void savePdfToInvoice(Id invoiceId){
-        Invoice inv = new Invoice(invoiceId);
+        InvoicePrint inv = new InvoicePrint(invoiceId);
         Blob pdfFile = inv.createPdf();
         inv.addFileToAttachments(pdfFile);
         inv.commitAllChanges();

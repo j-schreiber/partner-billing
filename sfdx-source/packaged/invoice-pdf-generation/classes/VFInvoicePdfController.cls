@@ -12,7 +12,15 @@ public with sharing class VFInvoicePdfController {
     }
 
     /** @Description    The fully initialized org data for this context */
-    public static Organization OrgData;
+    public OrganizationInfo Company {
+        public get {
+            if (Company == null) {
+                Company = new OrganizationInfo();
+            }
+            return Company;
+        }
+        private set;
+    }
 
     /** @Description    Render As Property from Page Parameters */
     public String renderAs {
@@ -42,18 +50,6 @@ public with sharing class VFInvoicePdfController {
             return Language;
         }
         public set;
-    }
-
-    /** @Description
-    *   Visualforce pseudo getter for organization data
-    *
-    *   @return         Lazy-init org data
-    */
-    public static Organization getOrganization() {
-        if (OrgData == null) {
-            OrgData = [SELECT Id,Name,Street,City,PostalCode,Country,State FROM Organization LIMIT 1];
-        }
-        return OrgData;
     }
 
 }

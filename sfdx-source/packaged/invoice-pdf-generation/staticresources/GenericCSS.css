@@ -1,72 +1,118 @@
-/** Set print format for this page page as beeing A4 */
-@page {
-    size: A4 portrait;
-    margin: 30mm 0mm;
-    
-    @top-center {
-        content: element(header-content);
-    }
-
-    @top-left {
-        content: element(header-content);
-    }
-
-    @top-right {
-        content: element(header-content);
-    }
-
-    @bottom-center {
-        content: element(footer-content);
-        background-color: rgb(167, 73, 255);
-    }
-
-    @bottom-left {
-        content: element(footer-content);
-    }
-
-    @bottom-right {
-        content: element(footer-content);
-    }
+.text-align_right {
+    text-align: right;
 }
 
-* {
-    margin: 0px;
-    padding: 0px;
-    border: 0;
-    outline: 0;
+.text-align_left {
+    text-align: left;
 }
 
-div.header {
-    position: running(header-content);
-    background-color: rgb(124, 255, 112);
-    width: 100%;
+.text-align_center {
     text-align: center;
 }
 
-div.footer {
-    position: running(footer-content);
+.text-format_bold {
+    font-weight: bold;
+}
+
+.font-size_large {
+    font-size: 13pt;
+}
+
+.font-size_medium {
+    font-size: 11pt;
+}
+
+.font-size_small {
+    font-size: 9pt;
+}
+
+.font-size_x-small {
+    font-size: 8pt;
+}
+
+.font-size_xx-small {
+    font-size: 7pt;
+}
+
+.ayc-m-bottom_x-small {
+    margin-bottom: 8px;
+}
+
+.ayc-m-bottom_small {
+    margin-bottom: 12px;
+}
+
+.ayc-p-bottom_x-small {
+    padding-bottom: 8px;
+}
+
+.ayc-p-bottom_small {
+    padding-bottom: 12px;
+}
+
+.ayc-m-bottom_large {
+    margin-bottom: 24px;
+}
+
+.ayc-m-top_large {
+    margin-top: 24px;
+}
+
+.ayc-p-vertical_medium {
+    padding-bottom: 16px;
+    padding-top: 16px;
+}
+
+.ayc-p-vertical_large {
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+.ayc-m-bottom_x-large {
+    margin-bottom: 32px;
+}
+
+.ayc-m-top_x-large {
+    margin-top: 32px;
+}
+
+.ayc-m-top_xx-large {
+    margin-top: 40px;
+}
+
+.ayc-size_12of12 {
     width: 100%;
-    text-align: center;
 }
 
-.wide-text {
-    font-size: 15pt;
-    letter-spacing: 5pt;
-    line-height: 1cm;
-    background-color: rgba(112, 169, 255);
+.ayc-size_1of3 {
+    width: 33%;
 }
 
-@media print {
-    body {
-        background-color: rgba(112, 169, 255);
-    }
-
-    #content {
-        font-family: "Verdana", sans-serif;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        font-size: 14pt;
-    }
+.ayc-align_right {
+    justify-content: right;
+    display: flex;
 }
 
+.ayc-align_left {
+    justify-content: left;
+    display: flex;
+}
+
+.ayc-align_center {
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+}
+
+.ayc-table-align_right {
+    margin: 0 0 0 auto;
+}
+
+.ayc-content-align_center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ayc-p-around_none {
+    padding: 0px
+}
