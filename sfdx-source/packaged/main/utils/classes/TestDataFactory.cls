@@ -34,6 +34,7 @@ public class TestDataFactory {
                               BillingCity__c = 'Berlin',
                               BillingCountry__c = 'Deutschland',
                               BillingState__c = 'Berlin',
+                              PdfLanguage__c = 'de_DE',
                               Date__c = Date.newInstance(2019, 10, 20));
     }
 
@@ -44,6 +45,14 @@ public class TestDataFactory {
                                       Tax__c = 19,
                                       Unit__c = 'Each',
                                       ServiceDate__c = Date.newInstance(2019, 10, 20));
+    }
+
+    public static BankAccount__c CreateDefaultBankAccount() {
+        return new BankAccount__c(Name = 'Test Business Bank Account',
+                                  BankAccountOwner__c = 'Test Company',
+                                  BankName__c = 'Testbank GmbH',
+                                  IBAN__c = 'DE70100000000123456789',
+                                  IsDefault__c = true);
     }
 
     public static Account CreateAccount(Account template) {
@@ -64,6 +73,10 @@ public class TestDataFactory {
 
     public static InvoiceLineItem__c CreateInvoiceLineItem(InvoiceLineItem__c template) {
         return (InvoiceLineItem__c)mergeSObjects(template, CreateDefaultInvoiceLineItem());
+    }
+
+    public static BankAccount__c CreateBankAccount(BankAccount__c template) {
+        return (BankAccount__c)mergeSObjects(template, CreateDefaultBankAccount());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

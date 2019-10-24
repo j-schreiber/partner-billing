@@ -9,7 +9,7 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
-    public InvoicePrint(Id recordId) {
+    public InvoicePrint(String recordId) {
         super(recordId);
     }
 

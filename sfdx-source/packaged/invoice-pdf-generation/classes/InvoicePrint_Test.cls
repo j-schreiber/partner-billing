@@ -30,7 +30,7 @@ public class InvoicePrint_Test {
     @isTest
     static void saveFileAsAttachment_ValidPdf_AttachmentAdded() {
         // SETUP
-        Invoice__c record = [SELECT Id,Name FROM Invoice__c LIMIT 1];
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
         InvoicePrint invObj = new InvoicePrint(record.Id);
         // ACTION
         Blob pdfMock = Blob.valueOf('Teststring');
@@ -39,6 +39,7 @@ public class InvoicePrint_Test {
         System.assertEquals(1, invObj.Attachments.size(), 'invObj.Attachments.size()');
         System.assertEquals(pdfMock, invObj.Attachments[0].Body, 'invObj.Attachments[0].Body');
         System.assertEquals(true, invObj.Attachments[0].Name.contains(record.Name), 'contains(record.Name)');
+        System.assertEquals(true, invObj.Attachments[0].Name.contains(record.PdfLanguage__c), 'contains(record.PdfLanguage__c)');
     }
 
     @isTest
