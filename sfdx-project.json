@@ -19,6 +19,8 @@
     "sourceApiVersion": "47.0",
     "packageAliases": {
         "Partner Billing": "0Ho4P000000GmhySAC",
-        "Partner Billing@0.1.0-1": "04t4P000002KiKJQA0"
+        "Partner Billing@0.1.0-1": "04t4P000002KiKJQA0",
+        "Partner Billing@0.1.0-2": "04t4P000002KiWHQA0",
+        "Partner Billing@0.1.0-3": "04t4P000002KiWMQA0"
     }
 }
