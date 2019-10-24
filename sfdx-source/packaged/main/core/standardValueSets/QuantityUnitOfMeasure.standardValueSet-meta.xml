@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Each</fullName>
+        <default>false</default>
+        <label>Each</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Per Workday (8h)</fullName>
+        <default>false</default>
+        <label>Per Workday (8h)</label>
+    </standardValue>
+</StandardValueSet>

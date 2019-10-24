@@ -9,7 +9,20 @@
             "BillingStreet": "Leopoldstraße 1",
             "BillingPostalCode": "80336",
             "BillingCity": "München",
-            "BillingCountryCode": "DE"
+            "BillingCountryCode": "DE",
+            "CustomerId__c": "1000"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef2"
+            },
+            "Name": "Testfirma GmbH",
+            "BillingStreet": "Maximilienstraße 1",
+            "BillingPostalCode": "80336",
+            "BillingCity": "München",
+            "BillingCountryCode": "DE",
+            "CustomerId__c": "1001"
         }
     ]
 }

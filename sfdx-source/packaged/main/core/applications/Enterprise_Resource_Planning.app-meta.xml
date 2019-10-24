@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#FDBA01</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Track projects, time entries and generate invoices.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Enterprise Resource Planning</label>
+    <navType>Standard</navType>
+    <tabs>BankAccount__c</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>standard-Product2</tabs>
+    <tabs>Budget__c</tabs>
+    <tabs>TimeEntry__c</tabs>
+    <tabs>Invoice__c</tabs>
+    <tabs>Payment__c</tabs>
+    <tabs>Billing</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Enterprise_Resource_Planning_UtilityBar</utilityBar>
+</CustomApplication>

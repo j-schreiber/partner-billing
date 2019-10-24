@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Uses Invoice PDF visualforce page to render as PDF. The aura component allows to save the PDF as attachment to the invoice.</description>
+    <height>850</height>
+    <label>Create PDF</label>
+    <lightningComponent>invoicePdfQuickActionWrapper</lightningComponent>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>LightningComponent</type>
+    <width>850</width>
+</QuickAction>

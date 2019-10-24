@@ -1,0 +1,69 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef1"
+            },
+            "Budget__c": "@BudgetRef1",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-08-30",
+            "DailyRate__c": 1400,
+            "StartTime__c": "09:00:00.000",
+            "EndTime__c": "15:00:00.000",
+            "Status__c": "Approved",
+            "Invoice__c": "@InvoiceRef3"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef2"
+            },
+            "Budget__c": "@BudgetRef1",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-10-09",
+            "DailyRate__c": 1250,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "12:15:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef3"
+            },
+            "Budget__c": "@BudgetRef1",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-10-09",
+            "DailyRate__c": 1250,
+            "StartTime__c": "13:15:00.000",
+            "EndTime__c": "18:30:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef4"
+            },
+            "Budget__c": "@BudgetRef1",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-10-10",
+            "DailyRate__c": 1250,
+            "StartTime__c": "07:30:00.000",
+            "EndTime__c": "12:30:00.000",
+            "Status__c": "New"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef5"
+            },
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-10-10",
+            "DailyRate__c": 1250,
+            "StartTime__c": "13:30:00.000",
+            "EndTime__c": "18:00:00.000",
+            "Status__c": "New"
+        }
+    ]
+}

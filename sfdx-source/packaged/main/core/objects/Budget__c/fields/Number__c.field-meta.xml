@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number__c</fullName>
+    <description>Auto-number field to generate an unique Id for every budget.</description>
+    <displayFormat>{YYYY}-{0000}</displayFormat>
+    <externalId>true</externalId>
+    <inlineHelpText>External Budget-Id</inlineHelpText>
+    <label>Budget Number</label>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

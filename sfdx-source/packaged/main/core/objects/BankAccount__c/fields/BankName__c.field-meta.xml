@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BankName__c</fullName>
+    <description>Readable name of the bank. Will be printed on Invoice.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the name of the bank.</inlineHelpText>
+    <label>Bank Name</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <length>100</length>
+</CustomField>

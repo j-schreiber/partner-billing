@@ -1,0 +1,77 @@
+<apex:page controller="VFInvoicePdfController" standardStylesheets="false" applyBodyTag="true" applyHtmlTag="false" showHeader="false" renderAs="{!renderAs}"
+    language="{!language}">
+
+    <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
+    <apex:stylesheet value="{! $Resource.GenericCSS }" />
+
+    <div class="header">
+        <h1>{! Company.Name }</h1>
+    </div>
+
+    <div class="footer">
+        <c:pdfCompanyFooter BankInfo="{! BankAccount }" OrgInfo="{! Company }"/>
+    </div>
+
+    <div class="content">
+
+        <!-- Company & Customer Address -->
+        <div class="letter-address">
+            <p class="letter-address-sender">
+                {! Company.Name }&nbsp;&nbsp;&nbsp;{! Company.Street }&nbsp;&nbsp;{! Company.PostalCode }&nbsp;{! Company.City }
+            </p>
+            <p class="font-size_medium">
+                {!Invoice.Record.Account__r.Name}
+                <br /> {!Invoice.Record.BillingStreet__c}
+                <br /> {!Invoice.Record.BillingPostalCode__c} {!Invoice.Record.BillingCity__c}
+                <br /> {!Invoice.Record.BillingCountry__c}
+            </p>
+        </div>
+
+        <!-- Invoice Header -->
+        <div class="letter-body">
+
+            <div class="ayc-p-vertical_large">
+                <table class="ayc-size_12of12">
+                    <thead>
+                        <tr>
+                            <th class="text-align_center">{!$Label.InvoicePdf_Label_CustomerId}</th>
+                            <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceId}</th>
+                            <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-align_center">{!Invoice.Record.Account__r.CustomerId__c}</td>
+                            <td class="text-align_center">{!Invoice.Record.Name}</td>
+                            <td class="text-align_center">
+                                <apex:outputField value="{! Invoice.Record.Date__c }" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- greeting and introduction text -->
+            <div class="ayc-p-vertical_medium">
+                <p class="font-size_medium ayc-m-bottom_small">{!$Label.InvoicePdf_Text_Greeting},</p>
+                <p class="font-size_medium">{!$Label.InvoicePdf_Text_Introduction}</p>
+            </div>
+
+            <!-- generated table of line items -->
+            <div class="ayc-p-vertical_medium">
+                <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
+            </div>
+
+            <div class="ayc-align_right">
+                <c:InvoicePdfSummary Invoice="{! Invoice }" />
+            </div>
+
+            <div class="ayc-p-vertical_large">
+                <p class="font-size_medium ayc-content-align_center">{!$Label.InvoicePdf_Text_TermsAndConditions}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</apex:page>

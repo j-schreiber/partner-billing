@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Open_Time_Entries</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Budget__c</columns>
+    <columns>Product__c</columns>
+    <columns>Resource__c</columns>
+    <columns>DailyRate__c</columns>
+    <columns>StartTime__c</columns>
+    <columns>EndTime__c</columns>
+    <columns>Date__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>IsInvoiced__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>My Open Time Entries</label>
+</ListView>

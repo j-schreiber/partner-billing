@@ -1,0 +1,5 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <div class="slds-m-around_none">
+        <c:invoicePdfQuickAction invoiceId="{!v.recordId}" onsavesuccess="{!c.refreshView}"/>
+    </div>
+</aura:component>	

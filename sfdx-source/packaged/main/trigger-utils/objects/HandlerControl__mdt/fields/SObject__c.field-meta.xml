@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SObject__c</fullName>
+    <description>The SObject for which the configuration will be executed.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Select the SObject-Type where this configuration will be triggered</inlineHelpText>
+    <label>SObject</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>Triggers</relationshipLabel>
+    <relationshipName>Triggers</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

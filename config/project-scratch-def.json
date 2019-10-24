@@ -5,11 +5,17 @@
   "country": "DE",
   "language": "en_US",
   "settings": {
-    "orgPreferenceSettings": {
-      "s1DesktopEnabled": true,
-      "pathAssistantsEnabled": true,
-      "translation": true,
-      "chatterEnabled": true
+    "lightningExperienceSettings": {
+        "enableS1DesktopEnabled": true
+    },
+    "pathAssistantSettings": {
+        "pathAssistantEnabled": true
+    },
+    "languageSettings": {
+        "enableTranslationWorkbench": true
+    },
+    "chatterSettings": {
+        "enableChatter": true
     }
   }
 }

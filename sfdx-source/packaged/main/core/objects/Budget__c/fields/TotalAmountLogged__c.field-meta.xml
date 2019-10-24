@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalAmountLogged__c</fullName>
+    <externalId>false</externalId>
+    <label>Total Amount Logged</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+    <description>Sum of all time entries (calculated amount) for this Budget</description>
+    <inlineHelpText>Sum of amount for all Time Entries to this Budget</inlineHelpText>
+</CustomField>

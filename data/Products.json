@@ -1,0 +1,24 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef1"
+            },
+            "Name": "Standard Beratungsdienstleistung",
+            "Description": "Coaching und Consulting, konzeptionelle Arbeit, ohne Implementierung",
+            "IsActive": true,
+            "Family": "Coaching"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef2"
+            },
+            "Name": "Standard Implementierung",
+            "Description": "Implementierungsdienstleistung auf der Salesforce Plattform: Umsetzung von deklarativen oder programmatischen Anpassungen.",
+            "IsActive": true,
+            "Family": "Implementation"
+        }
+    ]
+}

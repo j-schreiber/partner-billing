@@ -1,0 +1,384 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef1"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef1",
+            "ServiceDate__c": "2019-06-01",
+            "Price__c": 1249.00,
+            "Quantity__c": 0.60,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef2"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "ServiceDate__c": "2019-06-02",
+            "Price__c": 750.00,
+            "Quantity__c": 1,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef3"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "ServiceDate__c": "2019-06-15",
+            "Price__c": 750.00,
+            "Quantity__c": 1,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef4"
+            },
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef1",
+            "ServiceDate__c": "2019-06-27",
+            "Price__c": 1249.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef5"
+            },
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Description__c": "See referenced time sheet for details",
+            "Price__c": 750.00,
+            "Quantity__c": 6.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef6"
+            },
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef1",
+            "Description__c": "See referenced time sheet for details",
+            "Price__c": 1249.00,
+            "Quantity__c": 1.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef7"
+            },
+            "Invoice__c": "@InvoiceRef2",
+            "Description__c": "We did this and that. Also something where no product is available, so this is the custom and very detailed description.",
+            "Price__c": 650.00,
+            "Quantity__c": 7.75,
+            "Tax__c": 0
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef8"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef9"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef10"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef11"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef12"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef13"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef14"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef15"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef16"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef17"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef18"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef19"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef20"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef21"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef22"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef23"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef24"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef25"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef26"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef27"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef28"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef29"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef30"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef31"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef32"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef33"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef34"
+            },
+            "Invoice__c": "@InvoiceRef3",
+            "Product__c": "@ProductRef2",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19
+        }
+    ]
+}

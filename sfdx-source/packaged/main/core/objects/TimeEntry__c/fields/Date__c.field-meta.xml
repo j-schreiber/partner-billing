@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date__c</fullName>
+    <defaultValue>TODAY()</defaultValue>
+    <description>The calender date where this time entry / work occured</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Calender date where work was done</inlineHelpText>
+    <label>Date</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

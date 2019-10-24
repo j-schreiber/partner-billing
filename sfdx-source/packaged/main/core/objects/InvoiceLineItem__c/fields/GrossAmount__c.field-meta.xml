@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GrossAmount__c</fullName>
+    <externalId>false</externalId>
+    <formula>Amount__c * (1 + Tax__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <description>Calculated "Gross" amount, that is with taxes</description>
+    <inlineHelpText>Gross Amount (including taxes)</inlineHelpText>
+    <label>Amount (Gross)</label>
+    <precision>18</precision>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

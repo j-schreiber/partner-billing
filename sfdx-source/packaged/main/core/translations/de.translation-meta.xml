@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>PDF als Anhang speichern</label>
+        <name>Button_Label_SaveToAttachments</name>
+    </customLabels>
+    <customLabels>
+        <label>PDF erfolgreich gespeichert!</label>
+        <name>Toast_Title_PdfSaveSuccess</name>
+    </customLabels>
+    <customLabels>
+        <label>Bei der Verarbeitung ist ein Fehler aufgetreten!</label>
+        <name>Toast_Title_GenericError</name>
+    </customLabels>
+    <customLabels>
+        <label>Kundennummer</label>
+        <name>InvoicePdf_Label_CustomerId</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnungsnummer</label>
+        <name>InvoicePdf_Label_InvoiceId</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnungsdatum</label>
+        <name>InvoicePdf_Label_InvoiceDate</name>
+    </customLabels>
+    <customLabels>
+        <label>Gesamt (Netto)</label>
+        <name>InvoicePdf_Label_TotalNetAmount</name>
+    </customLabels>
+    <customLabels>
+        <label>Gesamt (Brutto)</label>
+        <name>InvoicePdf_Label_TotalGrossAmount</name>
+    </customLabels>
+    <customLabels>
+        <label>Umsatzsteuer</label>
+        <name>InvoicePdf_Label_TotalTaxes</name>
+    </customLabels>
+    <customLabels>
+        <label>Sehr geehrte Damen und Herren</label>
+        <name>InvoicePdf_Text_Greeting</name>
+    </customLabels>
+    <customLabels>
+        <label>ich bedanke mich für die gute Zusammenarbeit und erlaube mir, die folgenden Aufwände in Rechnung zu stellen.</label>
+        <name>InvoicePdf_Text_Introduction</name>
+    </customLabels>
+    <customLabels>
+        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum auf das unten stehende Konto. Bei Zahlung als Referenz bitte Rechnungsnummer angeben.</label>
+        <name>InvoicePdf_Text_TermsAndConditions</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine ausführliche Aufstellung der abgerechneten Stunden mit detaillierter Aufgabenbeschreibung entnehmen Sie bitte dem angehängten Timesheet.</label>
+        <name>InvoicePdf_Text_DetailsInTimesheet</name>
+    </customLabels>
+</Translations>

@@ -1,0 +1,45 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef1"
+            },
+            "Status__c": "Activated",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-06-30",
+            "BillingStreet__c": "Rechnungsstraße 1",
+            "BillingPostalCode__c": "86159",
+            "BillingCity__c": "Augsburg",
+            "BillingCountry__c": "Deutschland",
+            "BillingState__c": "Bayern"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef2"
+            },
+            "Status__c": "Activated",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-07-31"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef3"
+            },
+            "Status__c": "Activated",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-08-31"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef4"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-09-30"
+        }
+    ]
+}

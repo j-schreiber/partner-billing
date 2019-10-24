@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidTo__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>End date of this billing terms</description>
+    <externalId>false</externalId>
+    <inlineHelpText>End Date of this billing terms</inlineHelpText>
+    <label>Valid To</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

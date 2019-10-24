@@ -1,8 +1,44 @@
 [
     {
+        "sobject": "BankAccount__c",
+        "saveRefs": false,
+        "resolveRefs": false,
+        "files": ["../BankAccounts.json"]
+    },
+    {
+        "sobject": "Product2",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": ["../Products.json"]
+    },
+    {
         "sobject": "Account",
         "saveRefs": true,
         "resolveRefs": false,
         "files": ["../BusinessAccounts.json"]
+    },
+    {
+        "sobject": "Budget__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../Budgets.json"]
+    },
+    {
+        "sobject": "Invoice__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../Invoices.json"]
+    },
+    {
+        "sobject": "InvoiceLineItem__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../InvoiceLineItems.json"]
+    },
+    {
+        "sobject": "TimeEntry__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": ["../TimeEntries.json"]
     }
 ]

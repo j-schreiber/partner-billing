@@ -1,0 +1,123 @@
+/** reset the complete page from any other css or browser specific interpretations */
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 0;
+    outline: 0;
+}
+
+body {
+    font-family: "Verdana", sans-serif;
+    font-size: 10pt;
+    margin: 0px;
+    padding: 0mm;
+    height: 100%;
+}
+
+/** Page Formatting & Margin Boxes (Footer/Header) when printing */
+@page {
+    size: A4 portrait;
+    margin: 30mm 0mm 20mm 0mm; /** Margins for header & footer */
+    padding: 5mm 0mm; /** Paddings for content page area to header/footer */
+    font-family: "Verdana", sans-serif;
+    font-size: 10pt;
+
+    @bottom-center {
+        background-color: rgb(206, 204, 204);
+        content: element(custom-footer);
+    }
+
+    @top-center {
+        background-color: rgb(206, 204, 204);
+        content: element(custom-header);
+    }
+    
+}
+
+/** Specific CSS for display on screens (NO renderAs=pdf) */
+@media screen {
+    div.header {
+        display: none !important;
+    }
+
+    div.footer {
+        display: none !important;
+    }
+
+    .content {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+}
+
+/** Override standard CSS for footer */
+div.footer td {
+    padding: 0mm;
+    max-width: initial;
+}
+
+div.footer {
+    height: 15mm;
+    color: black;
+    text-align: center;
+    font-size: 8pt;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    position: running(custom-footer);
+}
+
+div.header {
+    width: 100vw;
+    height: 25mm;
+    color: white;
+    text-align: right;
+    padding: 3mm 5mm 0mm 5mm;
+    text-transform: uppercase;
+    position: running(custom-header);
+}
+
+td, th {
+    padding: 0px 10px 0px 0px;
+    white-space: nowrap;
+    max-width: 6cm;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table {
+    border-style: hidden;
+    border-collapse: collapse;
+}
+
+.letter-address {
+    position: relative;
+    width: 85mm;
+    height: 40mm;
+}
+
+.letter-address-sender {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 7pt;
+    text-decoration: underline;
+}
+
+.letter-body {
+    position: relative;
+    width: 100%;
+}
+
+/** Set paddings for ISO standard letter */
+.content {
+    position: static;
+    padding-top: 30mm;
+    padding-left: 25mm;
+    padding-right: 10mm;
+}
+
+.letter-subject {
+    position: relative;
+    font-weight: bold;
+    font-size: 11pt;
+}
