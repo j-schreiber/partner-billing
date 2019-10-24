@@ -10,39 +10,45 @@ body {
     font-family: "Verdana", sans-serif;
     font-size: 10pt;
     margin: 0px;
-    padding: 0px;
+    padding: 0mm;
     height: 100%;
 }
 
 /** Set print format for this page page as beeing A4 */
 @page {
     size: A4 portrait;
-    padding: 30mm 0mm 20mm 0mm;
-    margin: 0mm;
+    margin: 30mm 0mm 20mm 0mm;
+    padding: 5mm 0mm;
     font-family: "Verdana", sans-serif;
     font-size: 10pt;
 
     @bottom-center {
+        background-color: rgb(206, 204, 204);
         content: element(custom-footer-center);
     }
 
     @bottom-right {
+        background-color: rgb(206, 204, 204);
         content: element(custom-footer-right)
     }
 
     @bottom-left {
+        background-color: rgb(206, 204, 204);
         content: element(custom-footer-left)
     }
 
     @top-right {
+        background-color: rgb(206, 204, 204);
         content: element(custom-header);
     }
 
     @top-left {
+        background-color: rgb(206, 204, 204);
         content: element(custom-header);
     }
 
     @top-center {
+        background-color: rgb(206, 204, 204);
         content: element(custom-header);
     }
     
@@ -177,7 +183,6 @@ table {
 div.header {
     width: 100%;
     height: 25mm;
-    background-color: rgb(206, 204, 204);
     color: white;
     text-align: center;
     position: running(custom-header);
@@ -185,7 +190,6 @@ div.header {
 
 div.footer_left {
     height: 20mm;
-    background-color: rgb(206, 204, 204);
     color: white;
     width: 100%;
     text-align: center;
@@ -194,7 +198,6 @@ div.footer_left {
 
 div.footer_right {
     height: 20mm;
-    background-color: rgb(206, 204, 204);
     color: white;
     width: 100%;
     text-align: center;
@@ -203,7 +206,6 @@ div.footer_right {
 
 div.footer_center {
     height: 15mm;
-    background-color: rgb(206, 204, 204);
     color: white;
     width: 100%;
     text-align: center;

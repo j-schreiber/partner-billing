@@ -15,9 +15,9 @@
         content: element(header-content);
     }
 
-
     @bottom-center {
         content: element(footer-content);
+        background-color: rgb(167, 73, 255);
     }
 
     @bottom-left {
@@ -40,15 +40,12 @@ div.header {
     position: running(header-content);
     background-color: rgb(124, 255, 112);
     width: 100%;
-    height: 30mm;
     text-align: center;
 }
 
 div.footer {
     position: running(footer-content);
-    background-color: rgb(167, 73, 255);
     width: 100%;
-    height: 30mm;
     text-align: center;
 }
 

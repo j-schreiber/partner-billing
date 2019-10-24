@@ -9,6 +9,24 @@
         </div>
     </div>
 
+    <div class="footer_left">
+        <div>
+            <p>Content für linker Footer</p>
+        </div>
+    </div>
+
+    <div class="footer_right">
+        <div>
+            <p>FOOTER: RIGHT</p>
+        </div>
+    </div>
+
+    <div class="footer_center">
+        <div>
+            <p>FOOTER: CENTER</p>
+        </div>
+    </div>
+
     <div class="content">
 
         <!-- Company & Customer Address -->
@@ -68,24 +86,6 @@
 
         </div>
 
-    </div>
-
-    <div class="footer_left">
-        <div>
-            <p>Content für linker Footer</p>
-        </div>
-    </div>
-
-    <div class="footer_right">
-        <div>
-            <p>FOOTER: RIGHT</p>
-        </div>
-    </div>
-
-    <div class="footer_center">
-        <div>
-            <p>FOOTER: CENTER</p>
-        </div>
     </div>
 
 </apex:page>
