@@ -6,6 +6,7 @@
                 "referenceId": "BankAccountRef1"
             },
             "Name": "German Business Bank Account: Postbank AG",
+            "BankAccountOwner__c": "Jannis Lietzau",
             "IsDefault__c": true,
             "IBAN__c": "DE70100000000123456789",
             "BankName__c": "Deutsche Postbank AG"

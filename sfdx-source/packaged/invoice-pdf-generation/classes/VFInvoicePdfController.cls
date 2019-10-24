@@ -23,6 +23,18 @@ public with sharing class VFInvoicePdfController {
         public set;
     }
 
+    /** @Description    Get default bank account */
+    public BankAccount__c BankAccount {
+        public get {
+            if (BankAccount == null) {
+                List<BankAccount__c> baccs = [SELECT Id,BankName__c,IBAN__c,BankAccountOwner__c FROM BankAccount__c WHERE IsDefault__c = true];
+                BankAccount = baccs.isEmpty() ? new BankAccount__c() : baccs[0];
+            }
+            return BankAccount;
+        }
+        public set;
+    }
+
     /** @Description    Language Property from Page Parameters */
     public String Language {
         public get {

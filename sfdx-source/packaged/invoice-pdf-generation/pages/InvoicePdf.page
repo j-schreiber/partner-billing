@@ -23,7 +23,20 @@
 
     <div class="footer_center">
         <div>
-            <p>FOOTER: CENTER</p>
+            <table class="ayc-align_center">
+                <tr>
+                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankAccountOwner__c.Label}" /></td>
+                    <td class="text-align_right">{!BankAccount.BankAccountOwner__c}</td>
+                </tr>
+                <tr>
+                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.BankName__c.Label}" /></td>
+                    <td class="text-align_right">{!BankAccount.BankName__c}</td>
+                </tr>
+                <tr>
+                    <td class="text-align_left"><apex:outputLabel value="{! $ObjectType.BankAccount__c.fields.IBAN__c.Label}" /></td>
+                    <td class="text-align_right">{!BankAccount.IBAN__c}</td>
+                </tr>
+            </table>
         </div>
     </div>
 

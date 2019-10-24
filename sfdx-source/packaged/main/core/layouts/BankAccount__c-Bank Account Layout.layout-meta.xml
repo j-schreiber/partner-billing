@@ -28,6 +28,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
+                <field>BankAccountOwner__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
                 <field>BankName__c</field>
             </layoutItems>
             <layoutItems>

@@ -14,17 +14,19 @@ body {
     height: 100%;
 }
 
-/** Set print format for this page page as beeing A4 */
+/** Content / CSS override for display as PDF (renderAs=pdf) */
 @page {
     size: A4 portrait;
-    margin: 30mm 0mm 20mm 0mm;
-    padding: 5mm 0mm;
+    margin: 30mm 0mm 20mm 0mm; /** Margins for header & footer */
+    padding: 5mm 0mm; /** Paddings for content page area to header/footer */
     font-family: "Verdana", sans-serif;
     font-size: 10pt;
 
     @bottom-center {
         background-color: rgb(206, 204, 204);
         content: element(custom-footer-center);
+        display: flex;
+        justify-content: center;
     }
 
     @bottom-right {
@@ -52,6 +54,30 @@ body {
         content: element(custom-header);
     }
     
+}
+
+/** Specific CSS for display on screens (NO renderAs=pdf) */
+@media screen {
+    div.header {
+        display: none;
+    }
+    /**
+    div.footer_center {
+        display: none;
+    }
+    */
+    div.footer_left {
+        display: none;
+    }
+
+    div.footer_right {
+        display: none;
+    }
+
+    .content {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
 }
 
 .text-align_right {
@@ -152,6 +178,7 @@ body {
 .ayc-align_center {
     justify-content: center;
     display: flex;
+    margin: 0 auto;
 }
 
 td, th {
@@ -189,7 +216,7 @@ div.header {
 }
 
 div.footer_left {
-    height: 20mm;
+    height: 15mm;
     color: white;
     width: 100%;
     text-align: center;
@@ -197,7 +224,7 @@ div.footer_left {
 }
 
 div.footer_right {
-    height: 20mm;
+    height: 15mm;
     color: white;
     width: 100%;
     text-align: center;
@@ -209,6 +236,7 @@ div.footer_center {
     color: white;
     width: 100%;
     text-align: center;
+    font-size: 8pt;
     position: running(custom-footer-center);
 }
 
@@ -230,6 +258,7 @@ div.footer_center {
     width: 100%;
 }
 
+/** Set paddings for ISO standard letter */
 .content {
     position: static;
     padding-top: 30mm;
