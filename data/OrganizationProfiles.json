@@ -1,0 +1,55 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "OrganizationProfile__c",
+                "referenceId": "OrgProfileRef1"
+            },
+            "Name": "Standard Default Profile DE",
+            "IsDefault__c": true,
+            "OrganizationName__c": "Test Company GmbH",
+            "Street__c": "Teststraße 1",
+            "PostalCode__c": "80123",
+            "City__c": "München",
+            "Country__c": "Deutschland",
+            "State__c": "Bayern",
+            "Email__c": "info@example.com",
+            "Phone__c": "+49 89 1234 456 - 0",
+            "VATNumber__c": "DE123456789"
+        },
+        {
+            "attributes": {
+                "type": "OrganizationProfile__c",
+                "referenceId": "OrgProfileRef2"
+            },
+            "Name": "Standard Default Profile EN",
+            "IsDefault__c": false,
+            "OrganizationName__c": "Test Company GmbH",
+            "Street__c": "Test Street 1",
+            "PostalCode__c": "80123",
+            "City__c": "Munich",
+            "Country__c": "Germany",
+            "State__c": "Bavaria",
+            "Email__c": "info@example.com",
+            "Phone__c": "+49 89 1234 456 - 0",
+            "VATNumber__c": "DE123456789"
+        },
+        {
+            "attributes": {
+                "type": "OrganizationProfile__c",
+                "referenceId": "OrgProfileRef3"
+            },
+            "Name": "Special Sub Division Profile",
+            "IsDefault__c": false,
+            "OrganizationName__c": "Other Company UG",
+            "Street__c": "Leopoldstraße 1",
+            "PostalCode__c": "80336",
+            "City__c": "München",
+            "Country__c": "Deutschland",
+            "State__c": "Bayern",
+            "Email__c": "info@sub-company-name.com",
+            "Phone__c": "+49 89 1234 456 - 0",
+            "VATNumber__c": "DE120000000"
+        }
+    ]
+}

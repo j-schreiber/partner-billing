@@ -6,6 +6,12 @@
         "files": ["../BankAccounts.json"]
     },
     {
+        "sobject": "OrganizationProfile__c",
+        "saveRefs": false,
+        "resolveRefs": false,
+        "files": ["../OrganizationProfiles.json"]
+    },
+    {
         "sobject": "Product2",
         "saveRefs": true,
         "resolveRefs": false,
