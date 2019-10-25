@@ -22,6 +22,21 @@ public with sharing class VFInvoicePdfController {
         private set;
     }
 
+    public OrganizationProfile__c OrgProfile {
+        public get {
+            if (OrgProfile == null) {
+                String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
+                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c
+                                                         FROM OrganizationProfile__c
+                                                         WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
+                                                         ORDER BY IsDefault__c ASC];
+                OrgProfile = profiles.isEmpty() ? new OrganizationProfile__c() : profiles[0];
+            }
+            return OrgProfile;
+        }
+        private set;
+    }
+
     /** @Description    Render As Property from Page Parameters */
     public String renderAs {
         public get {

@@ -5,8 +5,11 @@ public class VFInvoicePdfController_Test {
     static void makeData(){
         Account a = TestDataFactory.CreateDefaultAccount();
         insert a;
+
         Invoice__c defaultInvoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id));
         insert defaultInvoice;
+
+        insert TestDataFactory.CreateDefaultOrganizationProfile();
     }
     
     @isTest
@@ -40,20 +43,6 @@ public class VFInvoicePdfController_Test {
     }
 
     @isTest
-    static void getCompany_MetadataDataWrapped() {
-        // ACTION
-        OrganizationInfo oInfo = new VFInvoicePdfController().Company;
-        // VERIFY
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'NAME'].Value__c, oInfo.Name, 'Name');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'PHONE'].Value__c, oInfo.Phone, 'Phone');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'EMAIL'].Value__c, oInfo.Email, 'Email');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'STREET'].Value__c, oInfo.Street, 'Street');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'POSTAL_CODE'].Value__c, oInfo.PostalCode, 'PostalCode');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'CITY'].Value__c, oInfo.City, 'City');
-        System.assertEquals([SELECT Value__c FROM CompanyData__mdt WHERE DeveloperName = 'COUNTRY'].Value__c, oInfo.Country, 'Country');
-    }
-
-    @isTest
     static void getRenderAs_ValueFromPageParam() {
         // SETUP
         Test.setCurrentPage(Page.InvoicePdf);
@@ -82,7 +71,7 @@ public class VFInvoicePdfController_Test {
     }
 
     @isTest
-    static void getLanguage_ValueFromInvoiceReturned() {
+    static void getLanguage_NoParam_ValueFromInvoiceReturned() {
         // SETUP
         Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
         record.PdfLanguage__c = 'en_DE';
@@ -92,5 +81,59 @@ public class VFInvoicePdfController_Test {
         
         // VERIFY
         System.assertEquals('en_DE', new VFInvoicePdfController().Language, 'Language');
+    }
+
+    @isTest
+    static void getOrgProfile_NoParam_NoDefaultProfileExists_EmptyProfileGenerated() {
+        // SETUP
+        delete [SELECT Id FROM OrganizationProfile__c];
+        Test.setCurrentPage(Page.InvoicePdf);
+
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+
+        // VERIFY
+        System.assertEquals(new OrganizationProfile__c(), op, 'OrgProfile');
+    }
+
+    @isTest
+    static void getOrgProfile_NoParam_DefaultProfileExists_DefaultProfileReturned() {
+        // SETUP
+        Test.setCurrentPage(Page.InvoicePdf);
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+        // VERIFY
+        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        System.assertEquals(expectedProfile.Id, op.Id, 'OrgProfile');
+    }
+
+    @isTest
+    static void getOrgProfile_InvalidParam_DefaultProfileExists_DefaultProfileReturned() {
+        // SETUP
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('orgProfileId', 'test-id');
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+        // VERIFY
+        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        System.assertEquals(expectedProfile.Id, op.Id, 'OrgProfile');
+    }
+
+    @isTest
+    static void getOrgProfile_ValidParam_DefaultProfileExists_RequestedProfileReturned() {
+        // SETUP
+        OrganizationProfile__c newProfile = TestDataFactory.CreateOrganizationProfile(
+            new OrganizationProfile__c(IsDefault__c = false, OrganizationName__c = 'Other Company GmbH')
+        );
+        insert newProfile;
+
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('orgProfileId', newProfile.Id);
+
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+
+        // VERIFY
+        System.assertEquals(newProfile.Id, op.Id, 'OrgProfile');
     }
 }

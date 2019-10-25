@@ -1,7 +1,7 @@
 <apex:component>
 
     <apex:attribute name="BankInfo" required="true" type="BankAccount__c" description="The default bank account that is displayed"/>
-    <apex:attribute name="OrgInfo" required="true" type="OrganizationInfo" description="The company information that is displayed"/>
+    <apex:attribute name="OrgProfile" required="true" type="OrganizationProfile__c" description="The company information that is displayed"/>
 
     <div>
         <table class="ayc-size_12of12 layout-table">
@@ -9,16 +9,16 @@
                 <td style="width:33%">
                     <table class="ayc-align_center">
                         <tr class="text-align_left">
-                            <td>{! OrgInfo.Name }</td>
+                            <td>{! OrgProfile.OrganizationName__c }</td>
                         </tr>
                         <tr class="text-align_left">
-                            <td>{! OrgInfo.Street }</td>
+                            <td>{! OrgProfile.Street__c }</td>
                         </tr>
                         <tr class="text-align_left">
-                            <td>{! OrgInfo.PostalCode } {! OrgInfo.City }</td>
+                            <td>{! OrgProfile.PostalCode__c } {! OrgProfile.City__c }</td>
                         </tr>
                         <tr class="text-align_left">
-                            <td>{! OrgInfo.Country }</td>
+                            <td>{! OrgProfile.Country__c }</td>
                         </tr>
                     </table>
                 </td>
@@ -41,13 +41,13 @@
                 <td style="width: 33%">
                     <table class="ayc-align_center">
                         <tr class="text-align_right">
-                            <td>{! OrgInfo.Phone }</td>
+                            <td>{! OrgProfile.Phone__c }</td>
                         </tr>
                         <tr class="text-align_right">
-                            <td>{! OrgInfo.Email }</td>
+                            <td>{! OrgProfile.Email__c }</td>
                         </tr>
                         <tr class="text-align_right">
-                            <td>{! OrgInfo.VATNumber }</td>
+                            <td>{! OrgProfile.VATNumber__c }</td>
                         </tr>
                     </table>
                 </td>

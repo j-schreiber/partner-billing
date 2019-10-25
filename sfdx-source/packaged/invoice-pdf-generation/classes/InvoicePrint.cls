@@ -14,7 +14,8 @@ public class InvoicePrint extends Invoice {
     }
 
     /** @Description
-    *   Creates a PDF from the InvoicePDF visualforce page and returns the Blob
+    *   Creates a PDF from the InvoicePDF visualforce page and returns the Blob. Method
+    *   does not set the organization profile and uses visualforce page's default behavior.
     *
     *   @return             The created Pdf (from invoice visualforce page)
     */
@@ -23,6 +24,39 @@ public class InvoicePrint extends Invoice {
         invoicePdfPage.getParameters().put('Id', Record.Id);
         // Apex tests do not support PDF generation, therefore we "mock" a Blob
         return Test.isRunningTest() ? Blob.valueOf('TestPDF') : invoicePdfPage.getContentAsPdf();
+    }
+
+    /** @Description
+    *   Creates a PDF from the InvoicePDF visualforce page with the selected organization profile id
+    *   and returns the Blob.
+    *
+    *   @param  orgProfileId    The organization profile id that will be used to render header/footer
+    *
+    *   @return                 The created Pdf (from invoice visualforce page)
+    */
+    public Blob createPdf(Id orgProfileId) {
+        PageReference invoicePdfPage = Page.InvoicePdf;
+        invoicePdfPage.getParameters().put('Id', Record.Id);
+        invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
+        // Apex tests do not support PDF generation, therefore we "mock" a Blob
+        return Test.isRunningTest() ? Blob.valueOf('TestPDF') : invoicePdfPage.getContentAsPdf();
+    }
+
+    /** @Description
+    *   Creates a PDF from the InvoicePDF visualforce page with the selected organization profile id
+    *   and overwrites the invoice's language.
+    *
+    *   @param  orgProfileId    The organization profile id that will be used to render header/footer
+    *   @param  renderLanguage  Language value to overwrite the records language
+    *
+    *   @return                 The created Pdf (from invoice visualforce page)
+    */
+    public PageReference createPdf(Id orgProfileId, String renderLanguage) {
+        PageReference invoicePdfPage = Page.InvoicePdf;
+        invoicePdfPage.getParameters().put('Id', Record.Id);
+        invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
+        invoicePdfPage.getParameters().put('lang', renderLanguage);
+        return invoicePdfPage;
     }
 
     /** @Description

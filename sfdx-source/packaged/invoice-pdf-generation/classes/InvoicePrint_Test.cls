@@ -3,6 +3,8 @@ public class InvoicePrint_Test {
 
     @TestSetup
     static void makeData(){
+        insert TestDataFactory.CreateDefaultOrganizationProfile();
+
         Account a = TestDataFactory.CreateDefaultAccount();
         insert a;
 
@@ -25,6 +27,32 @@ public class InvoicePrint_Test {
         InvoicePrint invObj = new InvoicePrint(record.Id);
         // VERIFY
         System.assertNotEquals(null, invObj.createPdf(), 'createPdf()');
+    }
+
+    @isTest
+    static void createPdf_ValidOrgProfileId_WithLineItems_PdfBlobCreated() {
+        // SETUP
+        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
+        OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        InvoicePrint invObj = new InvoicePrint(record.Id);
+        // VERIFY
+        System.assertNotEquals(null, invObj.createPdf(orgProfile.Id), 'createPdf(orgProfile.Id)');
+    }
+
+    @isTest
+    static void createPdf_ValidOrgProfileId_Language_WithLineItems_AllParamsInPageReference() {
+        // SETUP
+        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
+        OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        InvoicePrint invObj = new InvoicePrint(record.Id);
+
+        // ACTION
+        PageReference invoicePdfPage = invObj.createPdf(orgProfile.Id, 'de_DE');
+
+        // VERIFY
+        System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
+        System.assertEquals(orgProfile.Id, invoicePdfPage.getParameters().get('orgProfileId'), 'getParameters().get(orgProfileId)');
+        System.assertEquals('de_DE', invoicePdfPage.getParameters().get('lang'), 'getParameters().get(de_DE)');
     }
 
     @isTest

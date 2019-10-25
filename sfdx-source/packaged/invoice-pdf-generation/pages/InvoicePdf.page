@@ -9,7 +9,7 @@
     </div>
 
     <div class="footer">
-        <c:pdfCompanyFooter BankInfo="{! BankAccount }" OrgInfo="{! Company }"/>
+        <c:pdfCompanyFooter BankInfo="{! BankAccount }" OrgProfile="{! OrgProfile }"/>
     </div>
 
     <div class="content">
@@ -17,7 +17,7 @@
         <!-- Company & Customer Address -->
         <div class="letter-address">
             <p class="letter-address-sender">
-                {! Company.Name }&nbsp;&nbsp;&nbsp;{! Company.Street }&nbsp;&nbsp;{! Company.PostalCode }&nbsp;{! Company.City }
+                {! OrgProfile.OrganizationName__c }&nbsp;&nbsp;&nbsp;{! OrgProfile.Street__c }&nbsp;&nbsp;{! OrgProfile.PostalCode__c }&nbsp;{! OrgProfile.City__c }
             </p>
             <p class="font-size_medium">
                 {!Invoice.Record.Account__r.Name}

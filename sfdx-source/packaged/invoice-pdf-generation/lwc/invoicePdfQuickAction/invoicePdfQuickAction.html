@@ -2,6 +2,26 @@
 
     <!-- Vertical grid to align header, content, footer -->
     <div class="slds-grid slds-grid_vertical">
+        
+        <!-- Control Elements to change the pdf's content -->
+        <div class="slds-col slds-grid slds-m-bottom_large slds-grid_align-center">
+            <div class="slds-col">
+                <lightning-combobox class="slds-m-around_small" 
+                                    label="Select Organization Profile" 
+                                    options={organizationProfiles}
+                                    value={selectedProfile}
+                                    onchange={handleProfileSelection}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-combobox class="slds-m-around_small" 
+                                    label="Select PDF Language"
+                                    options={availableLanguages}
+                                    value={selectedLanguage}
+                                    onchange={handleLanguageSelection}></lightning-combobox>
+            </div>
+        </div>
+
         <!-- Pdf Renderer -->
         <div class="slds-col slds-size_1-of-1 slds-is-relative" style="height:750px">
             <template if:true={isWorking}>
