@@ -6,6 +6,7 @@ public class OrganizationInfo {
     public String Email {public get; private set;}
     public String Phone {public get; private set;}
     public String Name {public get; private set;}
+    public String VATNumber {public get; private set;}
 
     public String Street {public get; private set;}
     public String PostalCode {public get; private set;}
@@ -24,6 +25,7 @@ public class OrganizationInfo {
         PostalCode = data.get('POSTAL_CODE');
         City = data.get('CITY');
         Country = data.get('COUNTRY');
+        VATNumber = data.get('VAT_NUMBER');
     }
 
 }

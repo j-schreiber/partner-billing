@@ -46,6 +46,9 @@
                         <tr class="text-align_right">
                             <td>{! OrgInfo.Email }</td>
                         </tr>
+                        <tr class="text-align_right">
+                            <td>{! OrgInfo.VATNumber }</td>
+                        </tr>
                     </table>
                 </td>
             </tr>
