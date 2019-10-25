@@ -84,6 +84,20 @@ public class VFInvoicePdfController_Test {
     }
 
     @isTest
+    static void getLanguage_Param_OverwriteValueFromInvoice() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfLanguage__c = 'en_DE';
+        update record;
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+        ApexPages.currentPage().getParameters().put('lang', 'de_CH');
+        
+        // VERIFY
+        System.assertEquals('de_CE', new VFInvoicePdfController().Language, 'Language');
+    }
+
+    @isTest
     static void getOrgProfile_NoParam_NoDefaultProfileExists_EmptyProfileGenerated() {
         // SETUP
         delete [SELECT Id FROM OrganizationProfile__c];

@@ -53,6 +53,20 @@ public class InvoicePrint_Test {
         System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
         System.assertEquals(orgProfile.Id, invoicePdfPage.getParameters().get('orgProfileId'), 'getParameters().get(orgProfileId)');
         System.assertEquals('de_DE', invoicePdfPage.getParameters().get('lang'), 'getParameters().get(de_DE)');
+        System.assertEquals('de_DE', invObj.Record.PdfLanguage__c, 'Invoice.Record.PdfLanguage__c');
+    }
+
+    @isTest
+    static void getPdfTitle_DefaultInput_FullName() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,Account__r.Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint invObj = new InvoicePrint(record.Id);
+        // ACTION
+        String pdfTitle = invObj.PdfTitle;
+        // VERIFY
+        System.assert(pdfTitle.contains(record.Name), 'contains(record.Name)');
+        System.assert(pdfTitle.contains(record.PdfLanguage__c), 'contains(record.PdfLanguage__c)');
+        System.assert(pdfTitle.contains(record.Account__r.Name), 'contains(record.Account__r.Name)');
     }
 
     @isTest

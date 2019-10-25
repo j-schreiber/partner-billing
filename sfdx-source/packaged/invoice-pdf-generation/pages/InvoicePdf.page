@@ -1,11 +1,11 @@
 <apex:page controller="VFInvoicePdfController" standardStylesheets="false" applyBodyTag="true" applyHtmlTag="false" showHeader="false" renderAs="{!renderAs}"
-    language="{!language}">
+    language="{!language}" title="{! Invoice.PdfTitle }" >
 
     <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
     <apex:stylesheet value="{! $Resource.GenericCSS }" />
 
     <div class="header">
-        <h1>{! Company.Name }</h1>
+        <h1>{! OrgProfile.OrganizationName__c }</h1>
     </div>
 
     <div class="footer">

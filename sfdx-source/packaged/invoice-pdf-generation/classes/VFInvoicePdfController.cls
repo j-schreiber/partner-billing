@@ -11,17 +11,6 @@ public with sharing class VFInvoicePdfController {
         private set;
     }
 
-    /** @Description    The fully initialized org data for this context */
-    public OrganizationInfo Company {
-        public get {
-            if (Company == null) {
-                Company = new OrganizationInfo();
-            }
-            return Company;
-        }
-        private set;
-    }
-
     public OrganizationProfile__c OrgProfile {
         public get {
             if (OrgProfile == null) {
@@ -61,7 +50,11 @@ public with sharing class VFInvoicePdfController {
     /** @Description    Language Property from Page Parameters */
     public String Language {
         public get {
-            Language = Invoice.Record.PdfLanguage__c;
+            if (String.isNotBlank(ApexPages.currentPage().getParameters().get('lang'))) {
+                Language = ApexPages.currentPage().getParameters().get('lang');
+            } else {
+                Language = Invoice.Record.PdfLanguage__c;
+            }
             return Language;
         }
         public set;

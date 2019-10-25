@@ -9,6 +9,15 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
+    public String PdfTitle {
+        public get {
+            PdfTitle = Record.PdfLanguage__c + '_' + Record.Name + '_' +
+                Record.Account__r.Name + '_' + (Attachments.size() + 1);
+            return PdfTitle;
+        }
+        private set;
+    }
+
     public InvoicePrint(String recordId) {
         super(recordId);
     }
@@ -56,6 +65,7 @@ public class InvoicePrint extends Invoice {
         invoicePdfPage.getParameters().put('Id', Record.Id);
         invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
         invoicePdfPage.getParameters().put('lang', renderLanguage);
+        Record.PdfLanguage__c = renderLanguage;
         return invoicePdfPage;
     }
 
@@ -67,7 +77,7 @@ public class InvoicePrint extends Invoice {
     */
     public void addFileToAttachments(Blob fileToSave) {
         Attachment att = new Attachment(Body = fileToSave,
-                                        Name = generateInvoicePdfName(),
+                                        Name = PdfTitle + '.pdf',
                                         ParentId = Record.Id);
         Attachments.add(att);        
     }
