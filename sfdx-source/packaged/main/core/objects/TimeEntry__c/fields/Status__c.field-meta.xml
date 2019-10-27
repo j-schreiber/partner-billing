@@ -5,6 +5,7 @@
     <label>Status</label>
     <required>true</required>
     <trackTrending>false</trackTrending>
+    <trackHistory>true</trackHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>

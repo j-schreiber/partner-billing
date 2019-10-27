@@ -4,9 +4,11 @@
     <columns>NAME</columns>
     <columns>Account__c</columns>
     <columns>Budget__c</columns>
+    <columns>Invoice__c</columns>
     <columns>DailyRate__c</columns>
     <columns>Date__c</columns>
     <columns>Duration__c</columns>
+    <columns>Status__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

@@ -154,6 +154,16 @@
         <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Product__c</fields>
+        <fields>Date__c</fields>
+        <fields>DailyRate__c</fields>
+        <fields>Duration__c</fields>
+        <fields>Description__c</fields>
+        <fields>TotalAmount__c</fields>
+        <relatedList>TimeEntry__c.Invoice__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
@@ -162,7 +172,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0U000000a0Dk</masterLabel>
+        <masterLabel>00h2F000000f4fO</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
