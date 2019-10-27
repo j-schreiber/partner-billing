@@ -74,7 +74,7 @@ export default class InvoicePdfQuickAction extends LightningElement {
     }
 
     get invoicePdfUrl() {
-        return '/apex/InvoicePdf?Id=' + this.invoiceId + '&orgProfile=' + this.selectedProfile + '&lang=' + this.selectedLanguage;
+        return '/apex/InvoicePdf?Id=' + this.invoiceId + '&orgProfileId=' + this.selectedProfile + '&lang=' + this.selectedLanguage;
     }
 
     savePdf() {
