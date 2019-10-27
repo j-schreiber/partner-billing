@@ -6,5 +6,5 @@
     <lightningComponent>invoicePdfQuickActionWrapper</lightningComponent>
     <optionsCreateFeedItem>false</optionsCreateFeedItem>
     <type>LightningComponent</type>
-    <width>850</width>
+    <width>-100</width>
 </QuickAction>

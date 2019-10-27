@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OrganizationName__c</fullName>
+    <description>The organization's name that will be used in headers and footers of generated PDFs</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Your company's name</inlineHelpText>
+    <label>Organization Name</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

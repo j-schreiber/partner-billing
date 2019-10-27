@@ -116,3 +116,8 @@
 .ayc-p-around_none {
     padding: 0px
 }
+
+.slds-modal__container{
+    max-width: 55rem !important;
+    width: 60% !important;
+}

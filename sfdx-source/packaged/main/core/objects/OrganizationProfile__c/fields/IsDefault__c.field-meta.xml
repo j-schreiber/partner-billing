@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsDefault__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Activates this profile to use as default, if the user does not have a specific profile configured.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Use this profile as default for all users</inlineHelpText>
+    <label>Is Default</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

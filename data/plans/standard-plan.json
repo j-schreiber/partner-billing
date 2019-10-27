@@ -1,9 +1,15 @@
 [
     {
         "sobject": "BankAccount__c",
-        "saveRefs": false,
+        "saveRefs": true,
         "resolveRefs": false,
         "files": ["../BankAccounts.json"]
+    },
+    {
+        "sobject": "OrganizationProfile__c",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": ["../OrganizationProfiles.json"]
     },
     {
         "sobject": "Product2",

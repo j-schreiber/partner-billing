@@ -9,7 +9,20 @@
             "BankAccountOwner__c": "Jannis Lietzau",
             "IsDefault__c": true,
             "IBAN__c": "DE70100000000123456789",
-            "BankName__c": "Deutsche Postbank AG"
+            "BankName__c": "Postbank",
+            "BankNameFull__c": "Postbank - eine Niederlassung der deutschen Bank AG"
+        },
+        {
+            "attributes": {
+                "type": "BankAccount__c",
+                "referenceId": "BankAccountRef2"
+            },
+            "Name": "International Business Bank Account: N26",
+            "BankAccountOwner__c": "Jannis Lietzau",
+            "IsDefault__c": false,
+            "IBAN__c": "DE23100110010012345678",
+            "BankName__c": "N26",
+            "BankNameFull__c": "N26 Bank GmbH"
         }
     ]
 }

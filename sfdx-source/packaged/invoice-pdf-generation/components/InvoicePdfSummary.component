@@ -18,7 +18,8 @@
                     {!$Label.InvoicePdf_Label_TotalTaxes}
                 </td>
                 <td class="text-align_right">
-                    {!Invoice.TotalTaxesFormatted}
+                    <!-- Formatter-SObject pattern to format calculated values with standard apex:outputField -->
+                    <apex:outputField value="{! Invoice.TotalTaxesFormatted.Currency__c }"/>
                 </td>
             </tr>
             <tr>

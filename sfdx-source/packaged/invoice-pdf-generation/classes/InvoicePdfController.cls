@@ -4,17 +4,30 @@
 public class InvoicePdfController {
 
     /** @Description
-    *   Creates the invoice pdf file (embedded visualforce) and saves it as attachment to the
+    *   Creates the invoice pdf file (as displayed in iframed visualforce) and saves it as attachment to the
     *   invoice record. Every time the method is called, a new PDF is generated and saved as new attachment.
     *
-    *   @param  invoiceId   The invoice id where the PDF is saved
+    *   @param  invoiceId       The invoice id where the PDF is saved
+    *   @param  orgProfileId    The organization profile that will be used to render footer/header
+    *   @param  renderLanguage  The language that will be used to render all translatable labels
     */
     @AuraEnabled
-    public static void savePdfToInvoice(Id invoiceId){
+    public static void savePdfToInvoice(Id invoiceId, Id orgProfileId, String renderLanguage){
         InvoicePrint inv = new InvoicePrint(invoiceId);
-        Blob pdfFile = inv.createPdf();
-        inv.addFileToAttachments(pdfFile);
+        PageReference pdfFile = inv.createPdf(orgProfileId, renderLanguage);
+        inv.addFileToAttachments(pdfFile.getContentAsPdf());
         inv.commitAllChanges();
+    }
+
+    /** @Description
+    *   Queries all available organization profiles for the user 
+    *
+    *   @return                 All Organization Profiles, default profile first
+    */
+    @AuraEnabled
+    public static List<OrganizationProfile__c> getOrganizationProfiles(){
+        return [SELECT Id,Name,IsDefault__c
+                FROM OrganizationProfile__c ORDER BY IsDefault__c DESC];
     }
 
 }

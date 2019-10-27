@@ -55,6 +55,20 @@ public class TestDataFactory {
                                   IsDefault__c = true);
     }
 
+    public static OrganizationProfile__c CreateDefaultOrganizationProfile() {
+        return new OrganizationProfile__c(Name = 'Default Testing Profile',
+                                          OrganizationName__c = 'Test Company Ltd.',
+                                          IsDefault__c = true,
+                                          Street__c = 'Test Street 1',
+                                          PostalCode__c = '80123',
+                                          City__c = 'Munich',
+                                          State__c = 'Bavaria',
+                                          Country__c = 'Germany',
+                                          Email__c = 'info@example.com',
+                                          Phone__c = '+49 89 123-0',
+                                          VATNumber__c = 'DE123456789');
+    }
+
     public static Account CreateAccount(Account template) {
         return (Account)mergeSObjects(template, CreateDefaultAccount());
     }
@@ -77,6 +91,10 @@ public class TestDataFactory {
 
     public static BankAccount__c CreateBankAccount(BankAccount__c template) {
         return (BankAccount__c)mergeSObjects(template, CreateDefaultBankAccount());
+    }
+
+    public static OrganizationProfile__c CreateOrganizationProfile(OrganizationProfile__c template) {
+        return(OrganizationProfile__c)mergeSObjects(template, CreateDefaultOrganizationProfile());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

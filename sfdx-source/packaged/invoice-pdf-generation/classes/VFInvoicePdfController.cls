@@ -11,13 +11,18 @@ public with sharing class VFInvoicePdfController {
         private set;
     }
 
-    /** @Description    The fully initialized org data for this context */
-    public OrganizationInfo Company {
+    public OrganizationProfile__c OrgProfile {
         public get {
-            if (Company == null) {
-                Company = new OrganizationInfo();
+            if (OrgProfile == null) {
+                String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
+                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
+                                                         BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
+                                                         FROM OrganizationProfile__c
+                                                         WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
+                                                         ORDER BY IsDefault__c ASC];
+                OrgProfile = profiles.isEmpty() ? new OrganizationProfile__c() : profiles[0];
             }
-            return Company;
+            return OrgProfile;
         }
         private set;
     }
@@ -35,8 +40,7 @@ public with sharing class VFInvoicePdfController {
     public BankAccount__c BankAccount {
         public get {
             if (BankAccount == null) {
-                List<BankAccount__c> baccs = [SELECT Id,BankName__c,IBAN__c,BankAccountOwner__c FROM BankAccount__c WHERE IsDefault__c = true];
-                BankAccount = baccs.isEmpty() ? new BankAccount__c() : baccs[0];
+                BankAccount = OrgProfile.BankAccount__r == null ? new BankAccount__c() : OrgProfile.BankAccount__r;
             }
             return BankAccount;
         }
@@ -46,7 +50,11 @@ public with sharing class VFInvoicePdfController {
     /** @Description    Language Property from Page Parameters */
     public String Language {
         public get {
-            Language = Invoice.Record.PdfLanguage__c;
+            if (String.isNotBlank(ApexPages.currentPage().getParameters().get('lang'))) {
+                Language = ApexPages.currentPage().getParameters().get('lang');
+            } else {
+                Language = Invoice.Record.PdfLanguage__c;
+            }
             return Language;
         }
         public set;
