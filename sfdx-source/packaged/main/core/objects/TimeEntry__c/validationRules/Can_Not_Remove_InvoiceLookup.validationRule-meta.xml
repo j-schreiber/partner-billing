@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Can_Not_Remove_InvoiceLookup</fullName>
+    <active>true</active>
+    <description>Prevents removal of invoice, once it is set</description>
+    <errorConditionFormula>ISCHANGED(Invoice__c) &amp;&amp; !ISBLANK(PRIORVALUE(Invoice__c)) &amp;&amp; !ISNEW()</errorConditionFormula>
+    <errorDisplayField>Invoice__c</errorDisplayField>
+    <errorMessage>Invoice can not be removed, once it is set</errorMessage>
+</ValidationRule>

@@ -7,7 +7,10 @@ public class TimeEntryTriggerHandler_Test {
         insert a;
 
         Budget__c b = TestDataFactory.CreateBudget(new Budget__c(Account__c = a.Id));
-        insert b;   
+        insert b;
+
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id));
+        insert inv;
     }
 
     @isTest
@@ -67,6 +70,8 @@ public class TimeEntryTriggerHandler_Test {
     static void update_ChangeTotalAmount_BudgetSummaryRecalculated() {
         // SETUP
         Budget__c b = [SELECT Id,Account__c FROM Budget__c LIMIT 1];
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
+
         TimeEntry__c toUpdate = TestDataFactory.CreateTimeEntry(
             new TimeEntry__c(
                 Budget__c = b.Id,
@@ -78,12 +83,11 @@ public class TimeEntryTriggerHandler_Test {
         );
         insert toUpdate;
 
-        Invoice__c invoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = b.Account__c));
-        insert invoice;
-
         // ACTION
         toUpdate.EndTime__c = Time.newInstance(13,0,0,0);
         toUpdate.DailyRate__c = 1600;
+        update toUpdate;
+
         toUpdate.Invoice__c = invoice.Id;
 
         Database.SaveResult sr = Database.update(toUpdate, false);
@@ -93,6 +97,80 @@ public class TimeEntryTriggerHandler_Test {
         Budget__c newBudget = [SELECT Id,TotalAmountLogged__c,TotalAmountInvoiced__c FROM Budget__c WHERE Id = :b.Id];
         System.assertEquals(1000.00, newBudget.TotalAmountLogged__c, 'TotalAmountLogged__c');
         System.assertEquals(1000.00, newBudget.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
+    }
+
+    @isTest
+    static void update_NoInvoiceRelated_UpdateSucceeds() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        TimeEntry__c teUnderTest = TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id));
+        insert teUnderTest;
+
+        // ACTION
+        teUnderTest.Status__c = 'Approved';
+        teUnderTest.StartTime__c = Time.newInstance(8,0,0,0);
+        teUnderTest.EndTime__c = Time.newInstance(13,30,0,0);
+        Database.SaveResult sr = Database.update(teUnderTest, false);
+
+        // VERIFY
+        System.assertEquals(true, sr.isSuccess(), sr.getErrors());
+    }
+
+    @isTest
+    static void update_AuditableFields_InvoiceRelated_UpdateBlocked() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
+
+        TimeEntry__c teUnderTest = TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id, Invoice__c = invoice.Id));
+        insert teUnderTest;
+
+        // ACTION
+        teUnderTest.Status__c = 'Approved';
+        teUnderTest.StartTime__c = Time.newInstance(8,0,0,0);
+        teUnderTest.EndTime__c = Time.newInstance(13,30,0,0);
+        Database.SaveResult sr = Database.update(teUnderTest, false);
+
+        // VERIFY
+        System.assertEquals(false, sr.isSuccess(), sr.getErrors());
+        System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, sr.getErrors()[0].getStatusCode(), 'sr.getErrors()[0].getStatusCode()');
+    }
+
+    @isTest
+    static void update_NonAuditableFields_InvoiceRelated_UpdateSuccessfull() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
+
+        TimeEntry__c teUnderTest = TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id, Invoice__c = invoice.Id));
+        insert teUnderTest;
+
+        // ACTION
+        teUnderTest.Status__c = 'Approved';
+        teUnderTest.Description__c = 'Random Text';
+        Database.SaveResult sr = Database.update(teUnderTest, false);
+
+        // VERIFY
+        System.assertEquals(true, sr.isSuccess(), sr.getErrors());
+        //System.assertEquals()
+    }
+
+    @isTest
+    static void update_InvoiceRelated_RemoveInvoice_UpdateBlocked() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
+
+        TimeEntry__c teUnderTest = TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id, Invoice__c = invoice.Id));
+        insert teUnderTest;
+
+        // ACTION
+        teUnderTest.Invoice__c = null;
+        Database.SaveResult sr = Database.update(teUnderTest, false);
+
+        // VERIFY
+        System.assertEquals(false, sr.isSuccess(), sr.getErrors());
+        System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, sr.getErrors()[0].getStatusCode(), 'sr.getErrors()[0].getStatusCode()');
     }
 
     @isTest
