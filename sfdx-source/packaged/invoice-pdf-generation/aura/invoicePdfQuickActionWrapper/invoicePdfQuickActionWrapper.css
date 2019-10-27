@@ -1,5 +1,4 @@
-.THIS .ayc-container_full {
-    width: 100%;
-    max-width: 60rem;
-    min-width: 20rem;
+.THIS.slds-modal__container{
+    max-width: 70rem !important;
+    width:90% !important;
 }

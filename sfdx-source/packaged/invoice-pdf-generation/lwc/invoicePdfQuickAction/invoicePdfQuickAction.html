@@ -1,7 +1,7 @@
 <template>
 
     <!-- Vertical grid to align header, content, footer -->
-    <div class="slds-grid slds-grid_vertical">
+    <div class="slds-grid slds-grid_vertical slds-grid_vertical-stretch">
         
         <!-- Control Elements to change the pdf's content -->
         <div class="slds-col slds-grid slds-m-bottom_small slds-grid_align-center">
@@ -23,7 +23,7 @@
         </div>
 
         <!-- Pdf Renderer -->
-        <div class="slds-col slds-size_1-of-1 slds-is-relative" style="height:750px">
+        <div class="slds-col slds-size_1-of-1 slds-is-relative pdf-container">
             <template if:true={isWorking}>
                 <lightning-spinner alternative-text="Saving PDF ..." size="large"></lightning-spinner>
             </template>
