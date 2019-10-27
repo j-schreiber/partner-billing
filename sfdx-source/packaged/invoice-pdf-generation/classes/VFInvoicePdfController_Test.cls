@@ -58,16 +58,39 @@ public class VFInvoicePdfController_Test {
     }
 
     @isTest
-    static void getBankAccount_HasDefaultBankAccount_DefaultBankAccount() {
+    static void getBankAccount_HasBankAccount_RelatedBankAccount() {
         // SETUP
         BankAccount__c defaultBA = TestDataFactory.CreateBankAccount(new BankAccount__c(IsDefault__c = true));
         BankAccount__c otherBA = TestDataFactory.CreateBankAccount(new BankAccount__c(IsDefault__c = false, IBAN__c = 'DE000000000000000'));
         insert new List<BankAccount__c>{defaultBA, otherBA};
+
+        OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        orgProfile.BankAccount__c = defaultBA.Id;
+        update orgProfile;
+
         // VERIFY
         System.assertEquals(defaultBA.Id, new VFInvoicePdfController().BankAccount.Id, 'BankAccount.Id');
         System.assertEquals(defaultBA.BankAccountOwner__c, new VFInvoicePdfController().BankAccount.BankAccountOwner__c, 'BankAccount.BankAccountOwner__c');
         System.assertEquals(defaultBA.BankName__c, new VFInvoicePdfController().BankAccount.BankName__c, 'BankAccount.BankName__c');
         System.assertEquals(defaultBA.IBAN__c, new VFInvoicePdfController().BankAccount.IBAN__c, 'BankAccount.IBAN__c');
+    }
+
+    @isTest
+    static void getBankAccount_NonDefaultBankAccount_RelatedBankAccount() {
+        // SETUP
+        BankAccount__c defaultBA = TestDataFactory.CreateBankAccount(new BankAccount__c(IsDefault__c = true));
+        BankAccount__c otherBA = TestDataFactory.CreateBankAccount(new BankAccount__c(IsDefault__c = false, IBAN__c = 'DE000000000000000'));
+        insert new List<BankAccount__c>{defaultBA, otherBA};
+
+        OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        orgProfile.BankAccount__c = otherBA.Id;
+        update orgProfile;
+
+        // VERIFY
+        System.assertEquals(otherBA.Id, new VFInvoicePdfController().BankAccount.Id, 'BankAccount.Id');
+        System.assertEquals(otherBA.BankAccountOwner__c, new VFInvoicePdfController().BankAccount.BankAccountOwner__c, 'BankAccount.BankAccountOwner__c');
+        System.assertEquals(otherBA.BankName__c, new VFInvoicePdfController().BankAccount.BankName__c, 'BankAccount.BankName__c');
+        System.assertEquals(otherBA.IBAN__c, new VFInvoicePdfController().BankAccount.IBAN__c, 'BankAccount.IBAN__c');
     }
 
     @isTest
@@ -94,7 +117,7 @@ public class VFInvoicePdfController_Test {
         ApexPages.currentPage().getParameters().put('lang', 'de_CH');
         
         // VERIFY
-        System.assertEquals('de_CE', new VFInvoicePdfController().Language, 'Language');
+        System.assertEquals('de_CH', new VFInvoicePdfController().Language, 'Language');
     }
 
     @isTest

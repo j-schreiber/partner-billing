@@ -9,6 +9,7 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
+    /** @Description    Generated PDF title from language, name and related parent account */
     public String PdfTitle {
         public get {
             PdfTitle = Record.PdfLanguage__c + '_' + Record.Name + '_' +
@@ -84,11 +85,4 @@ public class InvoicePrint extends Invoice {
 
     /**                                 PRIVATE AREA                                 */
 
-    private String generateInvoicePdfName() {
-        return Record.PdfLanguage__c + '_' + 
-            Record.Name + '_' +
-            Record.Account__r.Name + '_' +
-            (Attachments.size() + 1) + '_' +
-            '.pdf';
-    }
 }

@@ -15,7 +15,8 @@ public with sharing class VFInvoicePdfController {
         public get {
             if (OrgProfile == null) {
                 String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
-                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c
+                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
+                                                         BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
                                                          FROM OrganizationProfile__c
                                                          WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
                                                          ORDER BY IsDefault__c ASC];
@@ -39,8 +40,7 @@ public with sharing class VFInvoicePdfController {
     public BankAccount__c BankAccount {
         public get {
             if (BankAccount == null) {
-                List<BankAccount__c> baccs = [SELECT Id,BankName__c,IBAN__c,BankAccountOwner__c FROM BankAccount__c WHERE IsDefault__c = true];
-                BankAccount = baccs.isEmpty() ? new BankAccount__c() : baccs[0];
+                BankAccount = OrgProfile.BankAccount__r == null ? new BankAccount__c() : OrgProfile.BankAccount__r;
             }
             return BankAccount;
         }
