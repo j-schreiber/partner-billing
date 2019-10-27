@@ -70,6 +70,15 @@ public class InvoicePrint_Test {
     }
 
     @isTest
+    static void getFormattedTotalTaxes_DefaultInput_FormatterPopulated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,Account__r.Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint invObj = new InvoicePrint(record.Id);
+        // VERIFY
+        System.assertEquals(invObj.TotalTaxes, invObj.TotalTaxesFormatted.Currency__c, 'TotalTaxesFormatted.Currency__c');
+    }
+
+    @isTest
     static void saveFileAsAttachment_ValidPdf_AttachmentAdded() {
         // SETUP
         Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];

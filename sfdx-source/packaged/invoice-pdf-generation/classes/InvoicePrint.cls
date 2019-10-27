@@ -1,9 +1,9 @@
 public class InvoicePrint extends Invoice {
 
-    /** @Description    Wraps the total taxes with currency formatting */
-    public String TotalTaxesFormatted {
+    /** @Description    Uses Formatter-SObject Pattern to return calculated taxes */
+    public Formatter__c TotalTaxesFormatted {
         public get {
-            TotalTaxesFormatted = TotalTaxes.format() + ' €';
+            TotalTaxesFormatted = new Formatter__c(Currency__c = TotalTaxes);
             return TotalTaxesFormatted;
         }
         private set;
