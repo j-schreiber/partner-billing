@@ -6,6 +6,7 @@
                 "referenceId": "OrgProfileRef1"
             },
             "Name": "Standard Default Profile DE",
+            "BankAccount__c": "@BankAccountRef1",
             "IsDefault__c": true,
             "OrganizationName__c": "Test Company GmbH",
             "Street__c": "Teststraße 1",
@@ -23,6 +24,7 @@
                 "referenceId": "OrgProfileRef2"
             },
             "Name": "Standard Default Profile EN",
+            "BankAccount__c": "@BankAccountRef1",
             "IsDefault__c": false,
             "OrganizationName__c": "Test Company GmbH",
             "Street__c": "Test Street 1",

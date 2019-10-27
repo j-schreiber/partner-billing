@@ -2,11 +2,10 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
+    <columns>BankAccount__c</columns>
     <columns>IsDefault__c</columns>
     <columns>OrganizationName__c</columns>
     <columns>VATNumber__c</columns>
-    <columns>Street__c</columns>
-    <columns>PostalCode__c</columns>
     <columns>City__c</columns>
     <columns>Country__c</columns>
     <columns>Phone__c</columns>

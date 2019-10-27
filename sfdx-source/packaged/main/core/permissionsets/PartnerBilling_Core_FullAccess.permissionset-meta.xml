@@ -12,6 +12,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>BankAccount__c.BankNameFull__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>BankAccount__c.IsDefault__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -138,6 +143,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Invoice__c.TotalGrossAmount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>OrganizationProfile__c.BankAccount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

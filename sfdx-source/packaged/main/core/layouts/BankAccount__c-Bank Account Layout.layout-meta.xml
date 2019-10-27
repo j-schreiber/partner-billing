@@ -35,6 +35,10 @@
                 <field>BankName__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BankNameFull__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Required</behavior>
                 <field>IBAN__c</field>
             </layoutItems>

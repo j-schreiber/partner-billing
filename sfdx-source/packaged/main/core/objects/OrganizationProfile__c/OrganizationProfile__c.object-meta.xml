@@ -128,6 +128,14 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Organization_Profile_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -138,6 +146,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>CUSTOM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Configure and manage organization profiles. Profiles are used when generating invoice PDFs to populate the sender information.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -147,9 +156,8 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ReadWrite</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <label>Organization Profile</label>
-    <description>Configure and manage organization profiles. Profiles are used when generating invoice PDFs to populate the sender information.</description>
     <nameField>
         <label>Profile Name</label>
         <type>Text</type>

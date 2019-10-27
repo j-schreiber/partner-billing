@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BankNameFull__c</fullName>
+    <description>Full legal name of the bank. Use this if printable name is too long.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter full legal name of the bank</inlineHelpText>
+    <label>Bank Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <length>255</length>
+</CustomField>

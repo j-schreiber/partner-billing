@@ -21,6 +21,10 @@
                 <behavior>Edit</behavior>
                 <field>IsDefault__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BankAccount__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
