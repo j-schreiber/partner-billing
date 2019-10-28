@@ -8,7 +8,7 @@
             "path": ".\\sfdx-source\\packaged",
             "package": "Partner Billing",
             "versionName": "Ver 0.1",
-            "versionNumber": "0.1.1.NEXT",
+            "versionNumber": "0.1.2.NEXT",
             "versionDescription": "Billing capabilities for Consultants and Freelancers",
             "definitionFile": "config/project-scratch-def.json",
             "default": false
@@ -23,6 +23,7 @@
         "Partner Billing@0.1.0-2": "04t4P000002KiWHQA0",
         "Partner Billing@0.1.0-3": "04t4P000002KiWMQA0",
         "Partner Billing@0.1.0-4": "04t4P000002KiXeQAK",
-        "Partner Billing@0.1.1-1": "04t4P000002KiXjQAK"
+        "Partner Billing@0.1.1-1": "04t4P000002KiXjQAK",
+        "Partner Billing@0.1.2-1": "04t4P000002KiXoQAK"
     }
 }
