@@ -128,5 +128,7 @@ table {
 
 .timesheet-cell_text {
     max-width: 8cm;
-    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }

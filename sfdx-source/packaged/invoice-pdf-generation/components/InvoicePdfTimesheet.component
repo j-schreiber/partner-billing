@@ -3,15 +3,10 @@
     <apex:attribute name="TimeEntries" required="false" type="TimeEntry__c[]" description="Time Entries from invoice record"/>
 
     <!-- Detail table of invoice line items -->
-    <table class="ayc-size_12of12">
+    <table class="ayc-size_12of12" style="table-layout: fixed">
         <thead>
             <tr>
-                <!--
-                <apex:repeat value="{! $ObjectType.TimeEntry__c.fieldsets.PdfTimesheetColumns}" var="fieldName">
-                    <th class="font-size_small ayc-p-bottom_x-small {! IF(fieldName.Type=='currency' || fieldName.Type=='double' || fieldName.Type=='percent','text-align_right','text-align_left') }">{! fieldName.Label }</th>
-                </apex:repeat>
-                -->
-                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Name.Label}</th>
+                <th class="text-align_left" style="width:3cm">{! $ObjectType.TimeEntry__c.fields.Name.Label}</th>
                 <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Date__c.Label}</th>
                 <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Duration__c.Label}</th>
                 <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Resource__c.Label}</th>
@@ -22,23 +17,21 @@
             <apex:repeat value="{! TimeEntries }" var="Entry">
                 <tr style="page-break-after: auto">
 
-                    <td>{! Entry.Name }</td>
-                    <td>
+                    <td class="font-size_small">
+                        {! Entry.Name }
+                    </td>
+                    <td class="font-size_small">
                         <apex:outputField value="{! Entry.Date__c }" />
                     </td>
-                    <td>
+                    <td class="font-size_small">
                         <apex:outputField value="{! Entry.Duration__c }" />
                     </td>
-                    <td>Resource</td>
-                    <td class="timesheet-cell_text">{! Entry.Description__c }</td>
-
-                    <!--
-                    <apex:repeat value="{! $ObjectType.TimeEntry__c.fieldsets.PdfTimesheetColumns}" var="fieldName">
-                        <td class="{! IF(fieldName.Type=='currency' || fieldName.Type=='double' || fieldName.Type=='percent','text-align_right','') } font-size_small timesheet-table-cell">
-                            <apex:outputField value="{! entry[fieldName] }" />
-                        </td>
-                    </apex:repeat> 
-                    -->
+                    <td class="font-size_small">
+                        Resource
+                    </td>
+                    <td class="timesheet-cell_text font-size_small">
+                        {! Entry.Description__c }
+                    </td>
                 </tr>
             </apex:repeat>
         </tbody>

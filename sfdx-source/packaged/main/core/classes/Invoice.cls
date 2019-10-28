@@ -53,7 +53,7 @@ public virtual class Invoice {
                     SELECT Id,Name FROM Attachments
                 ),
                 (
-                    SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c FROM TimeEntries__r
+                    SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c FROM TimeEntries__r ORDER BY Date__c ASC
                 )
                 FROM Invoice__c WHERE Id = :recordId
             ]);
