@@ -77,7 +77,8 @@
             "DailyRate__c": 1249,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "13:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
         },
         {
             "attributes": {
@@ -91,7 +92,8 @@
             "DailyRate__c": 1249,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "12:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
         },
         {
             "attributes": {
@@ -105,7 +107,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
         },
         {
             "attributes": {
@@ -119,7 +122,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "09:00:00.000",
             "EndTime__c": "17:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
         },
         {
             "attributes": {
@@ -133,7 +137,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
         },
         {
             "attributes": {
@@ -147,7 +152,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -161,7 +167,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -175,7 +182,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -189,7 +197,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -203,7 +212,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -217,7 +227,8 @@
             "DailyRate__c": 750,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -231,7 +242,8 @@
             "DailyRate__c": 1249,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "16:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         },
         {
             "attributes": {
@@ -245,7 +257,8 @@
             "DailyRate__c": 1249,
             "StartTime__c": "08:00:00.000",
             "EndTime__c": "12:00:00.000",
-            "Status__c": "Approved"
+            "Status__c": "Approved",
+            "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
         }
     ]
 }
