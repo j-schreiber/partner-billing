@@ -54,7 +54,10 @@
             <!-- greeting and introduction text -->
             <div class="ayc-p-vertical_medium">
                 <p class="font-size_medium ayc-m-bottom_small">{!$Label.InvoicePdf_Text_Greeting},</p>
-                <p class="font-size_medium">{!$Label.InvoicePdf_Text_Introduction}</p>
+                <p class="font-size_medium">
+                    {! $Label.InvoicePdf_Text_Introduction }
+                    {! IF(Invoice.Record.PdfRenderTimesheet__c, $Label.InvoicePdf_Text_DetailsInTimesheet, '') }
+                </p>
             </div>
 
             <!-- generated table of line items -->
@@ -73,5 +76,11 @@
         </div>
 
     </div>
+
+    <apex:pageBlock rendered="{! Invoice.Record.PdfRenderTimesheet__c }">
+        <div class="content timesheet-body ayc-p-vertical_large">
+            <c:InvoicePdfTimesheet TimeEntries="{! Invoice.Record.TimeEntries__r }" />
+        </div>
+    </apex:pageBlock>
 
 </apex:page>

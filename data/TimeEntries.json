@@ -64,6 +64,188 @@
             "StartTime__c": "13:30:00.000",
             "EndTime__c": "18:00:00.000",
             "Status__c": "New"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef6"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef1",
+            "Date__c": "2019-06-01",
+            "DailyRate__c": 1249,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "13:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef7"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef1",
+            "Date__c": "2019-06-27",
+            "DailyRate__c": 1249,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "12:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef8"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-06-02",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef9"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef1",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-06-15",
+            "DailyRate__c": 750,
+            "StartTime__c": "09:00:00.000",
+            "EndTime__c": "17:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef10"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-01",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef11"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-02",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef12"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-03",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef13"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-05",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef14"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-08",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef15"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-09",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef16"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef2",
+            "Date__c": "2019-07-10",
+            "DailyRate__c": 750,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef17"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef1",
+            "Date__c": "2019-07-01",
+            "DailyRate__c": 1249,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "16:00:00.000",
+            "Status__c": "Approved"
+        },
+        {
+            "attributes": {
+                "type": "TimeEntry__c",
+                "referenceId": "TimeEntryRef17"
+            },
+            "Account__c": "@AccountRef1",
+            "Invoice__c": "@InvoiceRef2",
+            "Product__c": "@ProductRef1",
+            "Date__c": "2019-07-15",
+            "DailyRate__c": 1249,
+            "StartTime__c": "08:00:00.000",
+            "EndTime__c": "12:00:00.000",
+            "Status__c": "Approved"
         }
     ]
 }

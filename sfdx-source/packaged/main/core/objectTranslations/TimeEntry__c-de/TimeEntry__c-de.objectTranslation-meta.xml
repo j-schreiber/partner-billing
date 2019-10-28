@@ -60,7 +60,7 @@
             <section>Invoicing</section>
         </sections>
     </layouts>
-    <nameFieldLabel>Zeitaufwand Nummer</nameFieldLabel>
+    <nameFieldLabel>Nummer</nameFieldLabel>
     <validationRules>
         <errorMessage>Rechnung kann nicht mehr entfernt werden, sobald der Zeitaufwand abgerechnet wurde.</errorMessage>
         <name>Can_Not_Remove_InvoiceLookup</name>
