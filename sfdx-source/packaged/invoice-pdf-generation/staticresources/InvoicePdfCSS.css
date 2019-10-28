@@ -132,3 +132,9 @@ table {
     overflow-wrap: break-word;
     white-space: normal;
 }
+
+.timesheet-cell {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 0.5pt solid black;
+}

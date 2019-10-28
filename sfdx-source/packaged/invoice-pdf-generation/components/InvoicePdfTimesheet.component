@@ -17,19 +17,19 @@
             <apex:repeat value="{! TimeEntries }" var="Entry">
                 <tr style="page-break-after: auto">
 
-                    <td class="font-size_small">
+                    <td class="font-size_small timesheet-cell">
                         {! Entry.Name }
                     </td>
-                    <td class="font-size_small">
+                    <td class="font-size_small timesheet-cell">
                         <apex:outputField value="{! Entry.Date__c }" />
                     </td>
-                    <td class="font-size_small">
+                    <td class="font-size_small timesheet-cell">
                         <apex:outputField value="{! Entry.Duration__c }" />
                     </td>
-                    <td class="font-size_small">
+                    <td class="font-size_small timesheet-cell">
                         Resource
                     </td>
-                    <td class="timesheet-cell_text font-size_small">
+                    <td class="timesheet-cell_text font-size_small timesheet-cell">
                         {! Entry.Description__c }
                     </td>
                 </tr>
