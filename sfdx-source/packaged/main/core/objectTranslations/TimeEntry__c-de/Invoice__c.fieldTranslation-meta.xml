@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Invoice that was created from this Time Entry --></help>
+    <label>Rechnung</label>
+    <name>Invoice__c</name>
+    <relationshipLabel><!-- Time Entries --></relationshipLabel>
+</CustomFieldTranslation>
