@@ -41,9 +41,7 @@ public class TimeEntryTriggerHandler_Test {
     static void insert_InvoicedTimeEntry_BudgetSummaryRecalculated() {
         // SETUP
         Budget__c b = [SELECT Id,Account__c FROM Budget__c LIMIT 1];
-
-        Invoice__c invoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = b.Account__c));
-        insert invoice;
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
 
         TimeEntry__c toInsert = TestDataFactory.CreateTimeEntry(
             new TimeEntry__c(
@@ -196,5 +194,22 @@ public class TimeEntryTriggerHandler_Test {
         Budget__c newBudget = [SELECT Id,TotalAmountLogged__c,TotalAmountInvoiced__c FROM Budget__c WHERE Id = :b.Id];
         System.assertEquals(0.00, newBudget.TotalAmountLogged__c, 'TotalAmountLogged__c');
         System.assertEquals(0.00, newBudget.TotalAmountInvoiced__c, 'TotalAmountInvoiced__c');
+    }
+
+    @isTest
+    static void delete_InvoicedTimeEntry_DeleteBlocked() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c invoice = [SELECT Id FROM Invoice__c LIMIT 1];
+        TimeEntry__c teUnderTest = TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id,Invoice__c = invoice.Id));
+        insert teUnderTest;
+
+        // ACTION
+        Database.DeleteResult dr = Database.delete(teUnderTest, false);
+
+        // VERIFY
+        System.assertEquals(false, dr.isSuccess(), 'DeleteResult.isSuccess()');
+        System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, dr.getErrors()[0].getStatusCode(), 'dr.getErrors()[0].getStatusCode()');
+        System.assertEquals(Label.ValidationError_CanNotDeleteInvoicedTimeEntry, dr.getErrors()[0].getMessage(), 'dr.getErrors()[0].getMessage()');
     }
 }

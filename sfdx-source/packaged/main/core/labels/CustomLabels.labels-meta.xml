@@ -104,4 +104,12 @@
         <shortDescription>Used in pdf rendering page when timesheet is added</shortDescription>
         <value>See the attached timesheet for a detailed composition of all billed hours and task description.</value>
     </labels>
+    <labels>
+        <fullName>ValidationError_CanNotDeleteInvoicedTimeEntry</fullName>
+        <categories>trigger,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Displayed for time entry records that are in deletion but are invoiced</shortDescription>
+        <value>A Time Entry can not be deleted, once it is invoiced!</value>
+    </labels>
 </CustomLabels>

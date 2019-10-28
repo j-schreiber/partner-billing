@@ -52,4 +52,8 @@
         <label>Eine ausführliche Aufstellung der abgerechneten Stunden mit detaillierter Aufgabenbeschreibung entnehmen Sie bitte dem angehängten Timesheet.</label>
         <name>InvoicePdf_Text_DetailsInTimesheet</name>
     </customLabels>
+    <customLabels>
+        <label>Ein Zeitaufwand kann nicht mehr gelöscht werden, sobald er abgerechnet wurde.</label>
+        <name>ValidationError_CanNotDeleteInvoicedTimeEntry</name>
+    </customLabels>
 </Translations>
