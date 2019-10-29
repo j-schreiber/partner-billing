@@ -146,5 +146,9 @@ table {
 .timesheet-cell {
     padding-top: 3px;
     padding-bottom: 3px;
-    border-bottom: 0.5pt solid black;
+    border-top: 0.5pt solid black;
+}
+
+tr:first-child td {
+    border-top: none;
 }

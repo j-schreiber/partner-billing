@@ -64,9 +64,9 @@ public with sharing class VFInvoicePdfController {
     public Boolean DisplayTimesheet {
         public get {
             if (String.isNotBlank(ApexPages.currentPage().getParameters().get('displayTimesheet'))) {
-                DisplayTimesheet = ApexPages.currentPage().getParameters().get('displayTimesheet') == 'true';
+                DisplayTimesheet = ApexPages.currentPage().getParameters().get('displayTimesheet') == 'true' && !Invoice.Record.TimeEntries__r.isEmpty();
             } else {
-                DisplayTimesheet = Invoice.Record.PdfRenderTimesheet__c;
+                DisplayTimesheet = Invoice.DisplayTimesheet;
             }
             return DisplayTimesheet;
         }
