@@ -10,6 +10,9 @@ import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
 import RENDER_TIMESHEET_FIELD from '@salesforce/schema/Invoice__c.PdfRenderTimesheet__c';
 
 import BUTTON_LABEL_SAVE from '@salesforce/label/c.Button_Label_SaveToAttachments';
+import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.InvoicePdf_Label_SelectOrgProfile';
+import OPTION_LABEL_RENDERLANG from '@salesforce/label/c.InvoicePdf_Label_SelectRenderLanguage';
+import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.InvoicePdf_Label_ActivateTimesheet';
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_PdfSaveSuccess';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
@@ -32,7 +35,6 @@ export default class InvoicePdfQuickAction extends LightningElement {
         if (data) {
             this.selectedLanguage = data.fields.PdfLanguage__c.value;
             this.displayTimesheet = data.fields.PdfRenderTimesheet__c.value;
-            console.log(data.fields.PdfRenderTimesheet__c.value);
         }
     }
 
@@ -43,7 +45,10 @@ export default class InvoicePdfQuickAction extends LightningElement {
     LABELS = {
         BUTTON_LABEL_SAVE,
         TOAST_TITLE_SUCCESS,
-        TOAST_TITLE_ERROR
+        TOAST_TITLE_ERROR,
+        OPTION_LABEL_ORGPROFILE,
+        OPTION_LABEL_RENDERLANG,
+        OPTION_LABEL_TIMESHEET
     }
 
     connectedCallback() {

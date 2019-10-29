@@ -78,11 +78,21 @@ div.header {
 }
 
 td, th {
-    padding: 0px 10px 0px 0px;
+    padding: 1px 5px 1px 5px;
     white-space: nowrap;
     max-width: 6cm;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+td:first-child, th:first-child {
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+td:last-child, th:last-child {
+    padding-left: 5px;
+    padding-right: 0px;
 }
 
 table {

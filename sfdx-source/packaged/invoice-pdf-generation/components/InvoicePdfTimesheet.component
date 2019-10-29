@@ -6,11 +6,11 @@
     <table class="ayc-size_12of12" style="table-layout: fixed">
         <thead>
             <tr>
-                <th class="text-align_left" style="width:3cm">{! $ObjectType.TimeEntry__c.fields.Name.Label}</th>
-                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Date__c.Label}</th>
-                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Duration__c.Label}</th>
-                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Resource__c.Label}</th>
-                <th class="text-align_left" style="width: 8cm">{! $ObjectType.TimeEntry__c.fields.Description__c.Label}</th>
+                <th class="text-align_left" style="width:33mm">{! $ObjectType.TimeEntry__c.fields.Name.Label}</th>
+                <th class="text-align_left" style="width:20mm">{! $ObjectType.TimeEntry__c.fields.Date__c.Label}</th>
+                <th class="text-align_left" style="width:15mm">{! $ObjectType.TimeEntry__c.fields.Duration__c.Label}</th>
+                <th class="text-align_left" style="width:27mm">{! $ObjectType.TimeEntry__c.fields.ResourceName__c.Label}</th>
+                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Description__c.Label}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +24,12 @@
                         <apex:outputField value="{! Entry.Date__c }" />
                     </td>
                     <td class="font-size_small timesheet-cell">
-                        <apex:outputField value="{! Entry.Duration__c }" />
-                    </td>
-                    <td class="font-size_small timesheet-cell">
-                        Resource
+                        <apex:outputField value="{! Entry.Duration__c }" />&nbsp;h
                     </td>
                     <td class="timesheet-cell_text font-size_small timesheet-cell">
+                        <apex:outputField value="{! Entry.ResourceName__c }" />
+                    </td>
+                    <td class="timesheet-cell_text font-size_x-small timesheet-cell">
                         {! Entry.Description__c }
                     </td>
                 </tr>

@@ -216,8 +216,18 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Resource__c.DayEndTime__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Resource__c.DayStartTime__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
-        <field>Resource__c.HourlyRate__c</field>
+        <field>Resource__c.Duration__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -258,6 +268,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>TimeEntry__c.Resource__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>TimeEntry__c.ResourceName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

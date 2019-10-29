@@ -11,16 +11,16 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>DailyRate__c</field>
+                <behavior>Edit</behavior>
+                <field>DayStartTime__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>HoursPerDay__c</field>
+                <behavior>Edit</behavior>
+                <field>DayEndTime__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>HourlyRate__c</field>
+                <field>Duration__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
