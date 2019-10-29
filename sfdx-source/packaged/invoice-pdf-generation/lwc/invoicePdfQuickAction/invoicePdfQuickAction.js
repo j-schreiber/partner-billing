@@ -99,7 +99,8 @@ export default class InvoicePdfQuickAction extends LightningElement {
         savePdfToInvoice({
             invoiceId : this.invoiceId,
             orgProfileId : this.selectedProfile,
-            renderLanguage : this.selectedLanguage
+            renderLanguage : this.selectedLanguage,
+            displayTimesheet: this.displayTimesheet
         })
         .then( () => {
             let successToast = new ShowToastEvent({
