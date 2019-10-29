@@ -19,6 +19,15 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
+    /** @Description    Calculates if the invoice has a valid and non empty time sheet that should be displayed */
+    public Boolean DisplayTimesheet {
+        public get {
+            DisplayTimesheet = Record.PdfRenderTimesheet__c && !Record.TimeEntries__r.isEmpty();
+            return DisplayTimesheet;
+        }
+        private set;
+    }
+
     public InvoicePrint(String recordId) {
         super(recordId);
     }

@@ -77,7 +77,7 @@
 
     </div>
 
-    <apex:pageBlock rendered="{! Invoice.Record.PdfRenderTimesheet__c }">
+    <apex:pageBlock rendered="{! DisplayTimesheet }">
         <div class="content timesheet-body ayc-p-vertical_large">
             <c:InvoicePdfTimesheet TimeEntries="{! Invoice.Record.TimeEntries__r }" />
         </div>

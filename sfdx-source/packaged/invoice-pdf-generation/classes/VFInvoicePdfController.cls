@@ -47,7 +47,7 @@ public with sharing class VFInvoicePdfController {
         public set;
     }
 
-    /** @Description    Language Property from Page Parameters */
+    /** @Description    Language property from page parameters */
     public String Language {
         public get {
             if (String.isNotBlank(ApexPages.currentPage().getParameters().get('lang'))) {
@@ -58,6 +58,19 @@ public with sharing class VFInvoicePdfController {
             return Language;
         }
         public set;
+    }
+
+    /** @Description    Render timesheet control property from page parameters */
+    public Boolean DisplayTimesheet {
+        public get {
+            if (String.isNotBlank(ApexPages.currentPage().getParameters().get('displayTimesheet'))) {
+                DisplayTimesheet = ApexPages.currentPage().getParameters().get('displayTimesheet') == 'true';
+            } else {
+                DisplayTimesheet = Invoice.Record.PdfRenderTimesheet__c;
+            }
+            return DisplayTimesheet;
+        }
+        private set;
     }
 
 }

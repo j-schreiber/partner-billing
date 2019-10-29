@@ -79,6 +79,42 @@ public class InvoicePrint_Test {
     }
 
     @isTest
+    static void getDisplayTimesheet_HasTimeEntries_True() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+
+        List<TimeEntry__c> tes = new List<TimeEntry__c>();
+        for (Integer i = 0; i < 10; i++) {
+            tes.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Invoice__c = record.Id, Account__c = record.Account__c)));
+        }
+        insert tes;
+
+        // ACTION
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        // VERIFY
+        objUnderTest.Record.PdfRenderTimesheet__c = true;
+        System.assertEquals(true, objUnderTest.DisplayTimesheet, 'RenderTimesheet = true; DisplayTimesheet');
+        objUnderTest.Record.PdfRenderTimesheet__c = false;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = false; DisplayTimesheet');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_NoTimeEntries_False() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+
+        // ACTION
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        // VERIFY
+        objUnderTest.Record.PdfRenderTimesheet__c = true;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = true; DisplayTimesheet');
+        objUnderTest.Record.PdfRenderTimesheet__c = false;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = false; DisplayTimesheet');
+    }
+
+    @isTest
     static void saveFileAsAttachment_ValidPdf_AttachmentAdded() {
         // SETUP
         Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];

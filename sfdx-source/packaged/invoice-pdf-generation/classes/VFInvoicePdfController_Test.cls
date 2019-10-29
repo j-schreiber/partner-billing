@@ -173,4 +173,33 @@ public class VFInvoicePdfController_Test {
         // VERIFY
         System.assertEquals(newProfile.Id, op.Id, 'OrgProfile');
     }
+
+    @isTest
+    static void getDisplayTimesheet_NoParam_ValueFromInvoiceReturned() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfRenderTimesheet__c = true;
+        update record;
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+        
+        // VERIFY
+        System.assertEquals(true, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_Param_OverwriteValueWithParam() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfRenderTimesheet__c = false;
+        update record;
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'true');
+        
+        // VERIFY
+        System.assertEquals(true, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'false');
+        System.assertEquals(false, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+    }
 }

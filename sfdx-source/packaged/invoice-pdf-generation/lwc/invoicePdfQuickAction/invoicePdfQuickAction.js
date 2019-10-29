@@ -7,6 +7,7 @@ import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInv
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 
 import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
+import RENDER_TIMESHEET_FIELD from '@salesforce/schema/Invoice__c.PdfRenderTimesheet__c';
 
 import BUTTON_LABEL_SAVE from '@salesforce/label/c.Button_Label_SaveToAttachments';
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_PdfSaveSuccess';
@@ -26,15 +27,18 @@ export default class InvoicePdfQuickAction extends LightningElement {
         }
     }
 
-    @wire(getRecord, { recordId: '$invoiceId', fields: [LANGUAGE_FIELD] })
+    @wire(getRecord, { recordId: '$invoiceId', fields: [LANGUAGE_FIELD, RENDER_TIMESHEET_FIELD] })
     setDataFromInvoice ({data}) {
         if (data) {
             this.selectedLanguage = data.fields.PdfLanguage__c.value;
+            this.displayTimesheet = data.fields.PdfRenderTimesheet__c.value;
+            console.log(data.fields.PdfRenderTimesheet__c.value);
         }
     }
 
     @track selectedProfile;
     @track selectedLanguage;
+    @track displayTimesheet;
 
     LABELS = {
         BUTTON_LABEL_SAVE,
@@ -73,8 +77,15 @@ export default class InvoicePdfQuickAction extends LightningElement {
         this.selectedLanguage = event.detail.value;
     }
 
+    handleTimesheetToggle(event) {
+        this.displayTimesheet = event.detail.checked;
+    }
+
     get invoicePdfUrl() {
-        return '/apex/InvoicePdf?Id=' + this.invoiceId + '&orgProfileId=' + this.selectedProfile + '&lang=' + this.selectedLanguage;
+        return '/apex/InvoicePdf?Id='+ this.invoiceId +
+            '&orgProfileId=' + this.selectedProfile +
+            '&lang=' + this.selectedLanguage +
+            '&displayTimesheet=' + this.displayTimesheet;
     }
 
     savePdf() {
