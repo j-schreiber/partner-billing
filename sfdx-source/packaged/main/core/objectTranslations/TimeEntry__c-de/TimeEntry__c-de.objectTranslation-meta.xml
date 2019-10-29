@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value>Zeitaufwand</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value>Zeitaufwände</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value>Zeitaufwand</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value>Zeitaufwände</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value>Zeitaufwandes</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value>Zeitaufwände</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value>Zeitaufwand</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value>Zeitaufwänden</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Time Entry Layout</layout>
+        <sections>
+            <label><!-- Calculation --></label>
+            <section>Calculation</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+        <sections>
+            <label><!-- Invoicing --></label>
+            <section>Invoicing</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nummer</nameFieldLabel>
+    <validationRules>
+        <errorMessage>Rechnung kann nicht mehr entfernt werden, sobald der Zeitaufwand abgerechnet wurde.</errorMessage>
+        <name>Can_Not_Remove_InvoiceLookup</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Nachdem der Zeitaufwand abgerechnet wurde, können die folgenden Felder nicht mehr bearbeitet werden: Tagessatz, Startzeit, Endzeit, Produkt und Datum</errorMessage>
+        <name>Can_Not_Update_Invoiced_TimeEntry</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Dauer muss positiv sein und mindestens 5 Minuten (0,08)</errorMessage>
+        <name>Duration_Must_Be_Billable_Fractal</name>
+    </validationRules>
+</CustomObjectTranslation>

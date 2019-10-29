@@ -21,26 +21,35 @@ public class InvoicePrint_Test {
     }
 
     @isTest
-    static void createPdf_WithLineItems_PdfBlobCreated() {
+    static void createPdf_NoParams_MinimalPageReference() {
         // SETUP
         Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
         InvoicePrint invObj = new InvoicePrint(record.Id);
+
+        // ACTION
+        PageReference invoicePdfPage = invObj.createPdf();
+
         // VERIFY
-        System.assertNotEquals(null, invObj.createPdf(), 'createPdf()');
+        System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
     }
 
     @isTest
-    static void createPdf_ValidOrgProfileId_WithLineItems_PdfBlobCreated() {
+    static void createPdf_OrgProfile_AllParamsInPageReference() {
         // SETUP
         Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
         OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
         InvoicePrint invObj = new InvoicePrint(record.Id);
+
+        // ACTION
+        PageReference invoicePdfPage = invObj.createPdf(orgProfile.Id);
+
         // VERIFY
-        System.assertNotEquals(null, invObj.createPdf(orgProfile.Id), 'createPdf(orgProfile.Id)');
+        System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
+        System.assertEquals(orgProfile.Id, invoicePdfPage.getParameters().get('orgProfileId'), 'getParameters().get(orgProfileId)');
     }
 
     @isTest
-    static void createPdf_ValidOrgProfileId_Language_WithLineItems_AllParamsInPageReference() {
+    static void createPdf_OrgProfile_Language_AllParamsInPageReference() {
         // SETUP
         Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
         OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
@@ -52,6 +61,24 @@ public class InvoicePrint_Test {
         // VERIFY
         System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
         System.assertEquals(orgProfile.Id, invoicePdfPage.getParameters().get('orgProfileId'), 'getParameters().get(orgProfileId)');
+        System.assertEquals('de_DE', invoicePdfPage.getParameters().get('lang'), 'getParameters().get(de_DE)');
+        System.assertEquals('de_DE', invObj.Record.PdfLanguage__c, 'Invoice.Record.PdfLanguage__c');
+    }
+
+    @isTest
+    static void createPdf_OrgProfile_Language_TimesheetTrue_AllParamsInPageReference() {
+        // SETUP
+        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
+        OrganizationProfile__c orgProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        InvoicePrint invObj = new InvoicePrint(record.Id);
+
+        // ACTION
+        PageReference invoicePdfPage = invObj.createPdf(orgProfile.Id, 'de_DE', true);
+
+        // VERIFY
+        System.assertEquals(record.Id, invoicePdfPage.getParameters().get('Id'), 'getParameters().get(Id)');
+        System.assertEquals(orgProfile.Id, invoicePdfPage.getParameters().get('orgProfileId'), 'getParameters().get(orgProfileId)');
+        System.assertEquals('true', invoicePdfPage.getParameters().get('displayTimesheet'), 'getParameters().get(displayTimesheet)');
         System.assertEquals('de_DE', invoicePdfPage.getParameters().get('lang'), 'getParameters().get(de_DE)');
         System.assertEquals('de_DE', invObj.Record.PdfLanguage__c, 'Invoice.Record.PdfLanguage__c');
     }
@@ -76,6 +103,42 @@ public class InvoicePrint_Test {
         InvoicePrint invObj = new InvoicePrint(record.Id);
         // VERIFY
         System.assertEquals(invObj.TotalTaxes, invObj.TotalTaxesFormatted.Currency__c, 'TotalTaxesFormatted.Currency__c');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_HasTimeEntries_True() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+
+        List<TimeEntry__c> tes = new List<TimeEntry__c>();
+        for (Integer i = 0; i < 10; i++) {
+            tes.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Invoice__c = record.Id, Account__c = record.Account__c)));
+        }
+        insert tes;
+
+        // ACTION
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        // VERIFY
+        objUnderTest.Record.PdfRenderTimesheet__c = true;
+        System.assertEquals(true, objUnderTest.DisplayTimesheet, 'RenderTimesheet = true; DisplayTimesheet');
+        objUnderTest.Record.PdfRenderTimesheet__c = false;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = false; DisplayTimesheet');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_NoTimeEntries_False() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+
+        // ACTION
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        // VERIFY
+        objUnderTest.Record.PdfRenderTimesheet__c = true;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = true; DisplayTimesheet');
+        objUnderTest.Record.PdfRenderTimesheet__c = false;
+        System.assertEquals(false, objUnderTest.DisplayTimesheet, 'RenderTimesheet = false; DisplayTimesheet');
     }
 
     @isTest

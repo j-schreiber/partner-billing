@@ -160,7 +160,7 @@
     <label>Time Entry</label>
     <nameField>
         <displayFormat>{YYYYMMDD}-{000000}</displayFormat>
-        <label>Time Entry Name</label>
+        <label>Number</label>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Time Entries</pluralLabel>

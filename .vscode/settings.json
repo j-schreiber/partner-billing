@@ -5,6 +5,6 @@
     "**/bower_components": true,
     "**/.sfdx": true
   },
-  "eslint.nodePath": "c:\\Users\\Jannis\\.vscode\\extensions\\salesforce.salesforcedx-vscode-lwc-47.2.0\\node_modules",
+  "eslint.nodePath": "c:\\Users\\Jannis\\.vscode\\extensions\\salesforce.salesforcedx-vscode-lwc-47.3.0\\node_modules",
   "salesforcedx-vscode-apex.java.home": "C:\\Program Files\\Amazon Corretto\\jdk11.0.4_10"
 }

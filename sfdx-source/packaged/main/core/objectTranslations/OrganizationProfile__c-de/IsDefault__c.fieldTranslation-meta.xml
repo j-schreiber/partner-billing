@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Aktivieren, um dieses Profil als Standard für alle Anwender zu benutzen</help>
+    <label>Ist Standard</label>
+    <name>IsDefault__c</name>
+</CustomFieldTranslation>

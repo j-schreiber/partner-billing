@@ -23,6 +23,18 @@
             "BillingCity": "München",
             "BillingCountryCode": "DE",
             "CustomerId__c": "1001"
+        },
+        {
+            "attributes": {
+                "type": "Account",
+                "referenceId": "AccountRef3"
+            },
+            "Name": "Occhio GmbH",
+            "BillingStreet": "Wiener Platz 7",
+            "BillingPostalCode": "81667",
+            "BillingCity": "München",
+            "BillingCountryCode": "DE",
+            "CustomerId__c": "1002"
         }
     ]
 }

@@ -1,0 +1,22 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Resource__c",
+                "referenceId": "ResourceRef1"
+            },
+            "Name": "Jannis Lietzau",
+            "DayStartTime__c": "09:00:00.000",
+            "DayEndTime__c": "18:00:00.000"
+        },
+        {
+            "attributes": {
+                "type": "Resource__c",
+                "referenceId": "ResourceRef2"
+            },
+            "Name": "Franz-Martin von und zu Holzhausen-Schwerin",
+            "DayStartTime__c": "13:00:00.000",
+            "DayEndTime__c": "15:00:00.000"
+        }
+    ]
+}

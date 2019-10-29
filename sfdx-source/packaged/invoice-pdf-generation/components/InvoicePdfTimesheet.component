@@ -1,0 +1,40 @@
+<apex:component>
+
+    <apex:attribute name="TimeEntries" required="false" type="TimeEntry__c[]" description="Time Entries from invoice record"/>
+
+    <!-- Detail table of invoice line items -->
+    <table class="ayc-size_12of12" style="table-layout: fixed">
+        <thead>
+            <tr>
+                <th class="text-align_left" style="width:33mm">{! $ObjectType.TimeEntry__c.fields.Name.Label}</th>
+                <th class="text-align_left" style="width:20mm">{! $ObjectType.TimeEntry__c.fields.Date__c.Label}</th>
+                <th class="text-align_left" style="width:15mm">{! $ObjectType.TimeEntry__c.fields.Duration__c.Label}</th>
+                <th class="text-align_left" style="width:27mm">{! $ObjectType.TimeEntry__c.fields.ResourceName__c.Label}</th>
+                <th class="text-align_left">{! $ObjectType.TimeEntry__c.fields.Description__c.Label}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{! TimeEntries }" var="Entry">
+                <tr style="page-break-after: auto">
+
+                    <td class="font-size_small timesheet-cell">
+                        {! Entry.Name }
+                    </td>
+                    <td class="font-size_small timesheet-cell">
+                        <apex:outputField value="{! Entry.Date__c }" />
+                    </td>
+                    <td class="font-size_small timesheet-cell">
+                        <apex:outputField value="{! Entry.Duration__c }" />&nbsp;h
+                    </td>
+                    <td class="timesheet-cell_text font-size_small timesheet-cell">
+                        <apex:outputField value="{! Entry.ResourceName__c }" />
+                    </td>
+                    <td class="timesheet-cell_text font-size_x-small timesheet-cell">
+                        {! Entry.Description__c }
+                    </td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+    </table>
+
+</apex:component>

@@ -9,6 +9,11 @@ public class VFInvoicePdfController_Test {
         Invoice__c defaultInvoice = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id));
         insert defaultInvoice;
 
+        List<TimeEntry__c> tes = new List<TimeEntry__c>();
+        tes.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id)));
+        tes.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c = a.Id)));
+        insert tes;
+
         insert TestDataFactory.CreateDefaultOrganizationProfile();
     }
     
@@ -172,5 +177,65 @@ public class VFInvoicePdfController_Test {
 
         // VERIFY
         System.assertEquals(newProfile.Id, op.Id, 'OrgProfile');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_NoParam_ValueFromInvoiceReturned() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfRenderTimesheet__c = true;
+        update record;
+
+        List<TimeEntry__c> tes = [SELECT Id FROM TimeEntry__c];
+        for (TimeEntry__c te : tes) te.Invoice__c = record.Id;
+        update tes;
+
+        // ACTION
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+
+        // VERIFY
+        System.assertEquals(true, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_ParamTrue_OverrideValueFromInvoice() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfRenderTimesheet__c = false;
+        update record;
+
+        List<TimeEntry__c> tes = [SELECT Id FROM TimeEntry__c];
+        for (TimeEntry__c te : tes) te.Invoice__c = record.Id;
+        update tes;
+
+        // ACTION
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'true');
+        
+        // VERIFY
+        System.assertEquals(true, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'false');
+        System.assertEquals(false, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+    }
+
+    @isTest
+    static void getDisplayTimesheet_ParamTrue_NoTimeEntries_False() {
+        // SETUP
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.PdfRenderTimesheet__c = false;
+        update record;
+        delete [SELECT Id FROM TimeEntry__c];
+        Test.setCurrentPage(Page.InvoicePdf);
+
+        // ACTION
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'true');
+        
+        // VERIFY
+        System.assertEquals(false, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
+        ApexPages.currentPage().getParameters().put('displayTimesheet', 'false');
+        System.assertEquals(false, new VFInvoicePdfController().DisplayTimesheet, 'DisplayTimesheet');
     }
 }

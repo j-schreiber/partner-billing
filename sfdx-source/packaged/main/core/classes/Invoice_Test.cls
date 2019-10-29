@@ -27,6 +27,7 @@ public class Invoice_Test {
         // VERIFY
         System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
         System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertEquals(0, objUnderTest.Record.TimeEntries__r.size(), 'Record.TimeEntries__r.size()');
     }
 
     @isTest
@@ -39,6 +40,26 @@ public class Invoice_Test {
         // VERIFY
         System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
         System.assertEquals(0, objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertEquals(0, objUnderTest.Record.TimeEntries__r.size(), 'Record.TimeEntries__r.size()');
+    }
+
+    @isTest
+    static void init_WithTimeEntries_TimesheetInitialized() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+
+        List<TimeEntry__c> tes = new List<TimeEntry__c>();
+        for (Integer i = 0; i < 10; i++) {
+            tes.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Invoice__c = record.Id, Account__c = record.Account__c)));
+        }
+        insert tes;
+
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        
+        // VERIFY
+        System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
+        System.assertEquals(tes.size(), objUnderTest.Record.TimeEntries__r.size(), 'Record.TimeEntries__r.size()');
     }
 
     @isTest

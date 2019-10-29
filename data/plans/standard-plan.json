@@ -12,6 +12,12 @@
         "files": ["../OrganizationProfiles.json"]
     },
     {
+        "sobject": "Resource__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": ["../Resources.json"]
+    },
+    {
         "sobject": "Product2",
         "saveRefs": true,
         "resolveRefs": false,

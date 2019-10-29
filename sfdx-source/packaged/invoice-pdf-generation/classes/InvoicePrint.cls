@@ -19,6 +19,15 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
+    /** @Description    Calculates if the invoice has a valid and non empty time sheet that should be displayed */
+    public Boolean DisplayTimesheet {
+        public get {
+            DisplayTimesheet = Record.PdfRenderTimesheet__c && !Record.TimeEntries__r.isEmpty();
+            return DisplayTimesheet;
+        }
+        private set;
+    }
+
     public InvoicePrint(String recordId) {
         super(recordId);
     }
@@ -27,13 +36,12 @@ public class InvoicePrint extends Invoice {
     *   Creates a PDF from the InvoicePDF visualforce page and returns the Blob. Method
     *   does not set the organization profile and uses visualforce page's default behavior.
     *
-    *   @return             The created Pdf (from invoice visualforce page)
+    *   @return             Initialized visualforce PDF renderer page
     */
-    public Blob createPdf() {
+    public PageReference createPdf() {
         PageReference invoicePdfPage = Page.InvoicePdf;
         invoicePdfPage.getParameters().put('Id', Record.Id);
-        // Apex tests do not support PDF generation, therefore we "mock" a Blob
-        return Test.isRunningTest() ? Blob.valueOf('TestPDF') : invoicePdfPage.getContentAsPdf();
+        return invoicePdfPage;
     }
 
     /** @Description
@@ -42,14 +50,12 @@ public class InvoicePrint extends Invoice {
     *
     *   @param  orgProfileId    The organization profile id that will be used to render header/footer
     *
-    *   @return                 The created Pdf (from invoice visualforce page)
+    *   @return                 Initialized visualforce PDF renderer page
     */
-    public Blob createPdf(Id orgProfileId) {
-        PageReference invoicePdfPage = Page.InvoicePdf;
-        invoicePdfPage.getParameters().put('Id', Record.Id);
+    public PageReference createPdf(Id orgProfileId) {
+        PageReference invoicePdfPage = createPdf();
         invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
-        // Apex tests do not support PDF generation, therefore we "mock" a Blob
-        return Test.isRunningTest() ? Blob.valueOf('TestPDF') : invoicePdfPage.getContentAsPdf();
+        return invoicePdfPage;
     }
 
     /** @Description
@@ -57,16 +63,31 @@ public class InvoicePrint extends Invoice {
     *   and overwrites the invoice's language.
     *
     *   @param  orgProfileId    The organization profile id that will be used to render header/footer
-    *   @param  renderLanguage  Language value to overwrite the records language
+    *   @param  lang            Language value to overwrite the records language
     *
-    *   @return                 The created Pdf (from invoice visualforce page)
+    *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId, String renderLanguage) {
-        PageReference invoicePdfPage = Page.InvoicePdf;
-        invoicePdfPage.getParameters().put('Id', Record.Id);
-        invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
-        invoicePdfPage.getParameters().put('lang', renderLanguage);
-        Record.PdfLanguage__c = renderLanguage;
+    public PageReference createPdf(Id orgProfileId, String lang) {
+        PageReference invoicePdfPage = createPdf(orgProfileId);
+        invoicePdfPage.getParameters().put('lang', lang);
+        Record.PdfLanguage__c = lang;
+        return invoicePdfPage;
+    }
+
+    /** @Description
+    *   Creates a PDF from the InvoicePDF visualforce page with the selected organization profile id
+    *   and overwrites the invoice's language and the display timesheet option.
+    *
+    *   @param  orgProfileId    The organization profile id that will be used to render header/footer
+    *   @param  lang            Language value to overwrite the records language
+    *   @param  timesheet       Controls render option of embedded timesheet
+    *
+    *   @return                 Initialized visualforce PDF renderer page
+    */
+    public PageReference createPdf(Id orgProfileId, String lang, Boolean timesheet) {
+        PageReference invoicePdfPage = createPdf(orgProfileId, lang);
+        invoicePdfPage.getParameters().put('displayTimesheet', String.valueOf(timesheet));
+        Record.PdfRenderTimesheet__c = timesheet;
         return invoicePdfPage;
     }
 
