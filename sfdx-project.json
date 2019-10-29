@@ -7,8 +7,8 @@
         {
             "path": ".\\sfdx-source\\packaged",
             "package": "Partner Billing",
-            "versionName": "Ver 0.1",
-            "versionNumber": "0.1.2.NEXT",
+            "versionName": "Ver 0.2",
+            "versionNumber": "0.2.0.NEXT",
             "versionDescription": "Billing capabilities for Consultants and Freelancers",
             "definitionFile": "config/project-scratch-def.json",
             "default": false
