@@ -17,16 +17,15 @@ export default class TimeEntriesFilterHeader extends LightningElement {
         this.dispatchFilterUpdate();
     }
 
-    renderedCallback() {
+    connectedCallback() {
         this.dispatchFilterUpdate();
     }
 
     dispatchFilterUpdate() {
         this.dispatchEvent(
             new CustomEvent(
-                'filterupdate', {
-                    detail : this.selectedFilters
-                })
+                'filterupdate', { detail : this.selectedFilters }
+            )
         );
     }
 }

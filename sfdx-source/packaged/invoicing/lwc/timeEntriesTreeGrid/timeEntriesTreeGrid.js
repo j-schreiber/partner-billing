@@ -4,7 +4,7 @@ import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTim
 const COLUMN_DEFINITION = [
     {
         type: 'text',
-        fieldName: 'Account__r.Name',
+        fieldName: 'AccountName',
         label: 'Accountname'
     },
     {
@@ -14,28 +14,41 @@ const COLUMN_DEFINITION = [
     },
     {
         type: 'date',
-        fieldName: 'Date__c',
+        fieldName: 'ServiceDate',
         label: 'Date'
     },
     {
         type: 'date',
-        fieldName: 'StartTime__c',
-        label: 'Start Time'
+        fieldName: 'StartTime',
+        label: 'Start Time',
+        typeAttributes: {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
     },
     {
         type: 'date',
-        fieldName: 'EndTime__c',
-        label: 'End Time'
+        fieldName: 'EndTime',
+        label: 'End Time',
+        typeAttributes: {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
     },
     {
-        type: 'number',
-        fieldName: 'Duration__c',
+        type: 'text',
+        fieldName: 'Duration',
         label: 'Duration'
     },
     {
         type: 'currency',
-        fieldName: 'TotalAmount__c',
-        label: 'Amount'
+        fieldName: 'DailyRate',
+        label: 'Daily Rate'
+    },
+    {
+        type: 'currency',
+        fieldName: 'TotalAmount',
+        label: 'Total Amount'
     }
 ]
 
@@ -48,12 +61,10 @@ export default class TimeEntriesTreeGrid extends LightningElement {
 
     connectedCallback() {
         this.filters = {};
-    }
-
-    renderedCallback() {
 
         getTimeEntries({
-
+            startDate : this.filters.startDate,
+            endDate : this.filters.endDate
         })
         .then( (result) => {
             this.gridData = result;

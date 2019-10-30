@@ -4,11 +4,11 @@
         <lightning-button slot="actions" label="Invoice Selected" variant="brand"></lightning-button>
         
         <div class="slds-p-around_medium">
-            <lightning-tree-grid
+            <lightning-datatable
                 columns={columns}
                 data={gridData}
-                key-field="Id"
-            ></lightning-tree-grid>
+                key-field="Id">
+            </lightning-datatable>
         </div>
 
     </lightning-card>
