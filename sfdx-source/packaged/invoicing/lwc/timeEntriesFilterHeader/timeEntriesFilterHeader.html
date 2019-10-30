@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Filters">
+
+        <div class="slds-p-around_medium slds-grid slds-grid_align-center">
+            <lightning-input class="slds-m-right_medium"
+                             type="date"
+                             name="startDateInput"
+                             label="Minimum start date"
+                             onchange={handleStartDateChange}
+                             max={selectedFilters.endDate}
+                             value={selectedFilters.startDate} ></lightning-input>
+            <lightning-input type="date"
+                             name="endDateInput"
+                             label="Maximum end date"
+                             onchange={handleEndDateChange}
+                             min={selectedFilters.startDate}
+                             value={selectedFilters.endDate}></lightning-input>
+        </div>
+
+    </lightning-card>
+</template>

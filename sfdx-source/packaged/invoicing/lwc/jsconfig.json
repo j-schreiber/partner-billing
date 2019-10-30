@@ -5,8 +5,17 @@
             "c/invoicePdfQuickAction": [
                 "../../invoice-pdf-generation/lwc/invoicePdfQuickAction/invoicePdfQuickAction.js"
             ],
+            "c/invoicesTreeGrid": [
+                "invoicesTreeGrid/invoicesTreeGrid.js"
+            ],
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
+            ],
+            "c/timeEntriesFilterHeader": [
+                "timeEntriesFilterHeader/timeEntriesFilterHeader.js"
+            ],
+            "c/timeEntriesTreeGrid": [
+                "timeEntriesTreeGrid/timeEntriesTreeGrid.js"
             ]
         },
         "experimentalDecorators": true

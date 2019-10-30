@@ -1,3 +1,11 @@
 <template>
-    Dies ist 1 Test.
+
+    <div>
+        <c-time-entries-filter-header onfilterupdate={updateTimeEntries}></c-time-entries-filter-header>
+    </div>
+
+    <div class="slds-m-top_medium">
+        <c-time-entries-tree-grid filters={activeFilters}></c-time-entries-tree-grid>
+    </div>
+    
 </template>

@@ -24,4 +24,17 @@ public with sharing class BillingController {
     private static Invoice__c createInvoiceFromTimeEntries(Id accountId, List<TimeEntry__c> timeEntries) {
         return new Invoice__c();
     }
+
+    /** @Description
+    *   Gets non-invoiced time entries for the specified filter criteria
+    *
+    *   @param  startDate       Minimum Date
+    *   @param  endDate         Maximum Date
+    *
+    *   @return                 List of Time Entries
+    */
+    @AuraEnabled
+    public static List<TimeEntry__c> getNonInvoicedTimeEntries() {
+        return [SELECT Id,Name,Account__r.Name,Date__c,StartTime__c,EndTime__c,Duration__c,DailyRate__c,TotalAmount__c FROM TimeEntry__c WHERE IsInvoiced__c = false ORDER BY Account__c,Date__c];
+    }
 }

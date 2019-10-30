@@ -1,0 +1,15 @@
+<template>
+    <lightning-card>
+
+        <lightning-button slot="actions" label="Invoice Selected" variant="brand"></lightning-button>
+        
+        <div class="slds-p-around_medium">
+            <lightning-tree-grid
+                columns={columns}
+                data={gridData}
+                key-field="Id"
+            ></lightning-tree-grid>
+        </div>
+
+    </lightning-card>
+</template>
