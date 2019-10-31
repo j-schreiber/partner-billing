@@ -56,4 +56,16 @@
         <label>Ein Zeitaufwand kann nicht mehr gelöscht werden, sobald er abgerechnet wurde.</label>
         <name>ValidationError_CanNotDeleteInvoicedTimeEntry</name>
     </customLabels>
+    <customLabels>
+        <label>Wähle Leistungszeitraum</label>
+        <name>Invoicing_Label_FilterHeader</name>
+    </customLabels>
+    <customLabels>
+        <label>Beginn Leistungszeitraum</label>
+        <name>Invoicing_Label_ServiceDateStart</name>
+    </customLabels>
+    <customLabels>
+        <label>Ende Leistungszeitraum</label>
+        <name>Invoicing_Label_ServiceDateEnd</name>
+    </customLabels>
 </Translations>

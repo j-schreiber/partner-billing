@@ -16,6 +16,9 @@
             ],
             "c/timeEntriesTreeGrid": [
                 "../../invoicing/lwc/timeEntriesTreeGrid/timeEntriesTreeGrid.js"
+            ],
+            "c/progressBar": [
+                "../../main/utils/lwc/progressBar/progressBar.js"
             ]
         },
         "experimentalDecorators": true

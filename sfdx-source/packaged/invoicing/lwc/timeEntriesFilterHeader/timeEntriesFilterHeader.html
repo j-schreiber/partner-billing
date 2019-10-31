@@ -1,17 +1,17 @@
 <template>
-    <lightning-card title="Filters">
+    <lightning-card title={LABELS.CARD_TITLE}>
 
         <div class="slds-p-around_medium slds-grid slds-grid_align-center">
             <lightning-input class="slds-m-right_medium"
                              type="date"
                              name="startDateInput"
-                             label="Minimum start date"
+                             label={LABELS.STARTDATE_PICKER_LABEL}
                              onchange={handleStartDateChange}
                              max={selectedFilters.endDate}
                              value={selectedFilters.startDate} ></lightning-input>
             <lightning-input type="date"
                              name="endDateInput"
-                             label="Maximum end date"
+                             label={LABELS.ENDDATE_PICKER_LABEL}
                              onchange={handleEndDateChange}
                              min={selectedFilters.startDate}
                              value={selectedFilters.endDate}></lightning-input>

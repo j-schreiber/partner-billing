@@ -136,4 +136,28 @@
         <shortDescription>Displayed for time entry records that are in deletion but are invoiced</shortDescription>
         <value>A Time Entry can not be deleted, once it is invoiced!</value>
     </labels>
+    <labels>
+        <fullName>Invoicing_Label_FilterHeader</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as text in invoicing LWC</shortDescription>
+        <value>Select Service Period</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_ServiceDateStart</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as date picker label in invoicing LWC</shortDescription>
+        <value>Service Period Start</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_ServiceDateEnd</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as date picker label in invoicing LWC</shortDescription>
+        <value>Service Period End</value>
+    </labels>
 </CustomLabels>

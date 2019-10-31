@@ -16,7 +16,20 @@
             ],
             "c/timeEntriesTreeGrid": [
                 "../../../invoicing/lwc/timeEntriesTreeGrid/timeEntriesTreeGrid.js"
+            ],
+            "c/progressBar": [
+                "progressBar/progressBar.js"
             ]
-        }
+        },
+        "experimentalDecorators": true
+    },
+    "include": [
+        "**/*",
+        "../../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
     }
 }
