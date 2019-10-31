@@ -2,12 +2,12 @@ import { LightningElement, track } from 'lwc';
 
 export default class TimeEntriesBillingCanvas extends LightningElement {
 
-    @track activeFilters;
+    @track activeFilters = {};
 
     updateTimeEntries(event) {
-        console.log('Start Date: ' + event.detail.startDate);
-        console.log('End Date: ' + event.detail.endDate);
         this.activeFilters = event.detail;
+        //this.template.querySelector('c-time-entries-tree-grid').filters = event.detail;
+        //this.template.querySelector('c-time-entries-tree-grid').refreshData();
     }
 
 }

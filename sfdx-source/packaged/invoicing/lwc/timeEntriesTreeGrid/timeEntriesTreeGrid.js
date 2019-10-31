@@ -58,9 +58,9 @@ export default class TimeEntriesTreeGrid extends LightningElement {
     @track gridData;
     @track columns = COLUMN_DEFINITION;
 
+    @api refreshData() {
 
-    connectedCallback() {
-        this.filters = {};
+        console.log('Getting time entries with: ' + JSON.stringify(this.filters));
 
         getTimeEntries({
             startDate : this.filters.startDate,
