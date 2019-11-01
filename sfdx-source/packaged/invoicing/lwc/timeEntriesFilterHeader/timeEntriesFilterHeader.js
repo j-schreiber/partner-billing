@@ -18,19 +18,13 @@ export default class TimeEntriesFilterHeader extends LightningElement {
 
     handleStartDateChange(event) {
         this.selectedFilters.startDate = event.detail.value;
-        this.dispatchFilterUpdate();
     }
 
     handleEndDateChange(event) {
         this.selectedFilters.endDate = event.detail.value;
-        this.dispatchFilterUpdate();
     }
 
-    connectedCallback() {
-        this.dispatchFilterUpdate();
-    }
-
-    dispatchFilterUpdate() {
+    handleSearchButtonClick() {
         this.dispatchEvent(
             new CustomEvent(
                 'filterupdate', { detail : this.selectedFilters }

@@ -9,12 +9,17 @@
                              onchange={handleStartDateChange}
                              max={selectedFilters.endDate}
                              value={selectedFilters.startDate} ></lightning-input>
-            <lightning-input type="date"
+            <lightning-input class="slds-m-right_medium"
+                             type="date"
                              name="endDateInput"
                              label={LABELS.ENDDATE_PICKER_LABEL}
                              onchange={handleEndDateChange}
                              min={selectedFilters.startDate}
                              value={selectedFilters.endDate}></lightning-input>
+            <lightning-button class="ayc-align-self_bottom" 
+                              label="Get Time Entries" 
+                              variant="brand" 
+                              onclick={handleSearchButtonClick}></lightning-button>
         </div>
 
     </lightning-card>

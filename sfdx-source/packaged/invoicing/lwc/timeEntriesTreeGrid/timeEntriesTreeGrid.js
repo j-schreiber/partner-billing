@@ -54,17 +54,24 @@ const COLUMN_DEFINITION = [
 
 export default class TimeEntriesTreeGrid extends LightningElement {
 
-    @api filters;
+    @api
+    get filters() {
+        return this.activeFilters;
+    }
+    set filters(value) {
+        this.activeFilters = value;
+        this.refreshData(this.activeFilters);
+    }
+
+    @track activeFilters;
     @track gridData;
     @track columns = COLUMN_DEFINITION;
 
-    @api refreshData() {
-
-        console.log('Getting time entries with: ' + JSON.stringify(this.filters));
+    refreshData(filters) {
 
         getTimeEntries({
-            startDate : this.filters.startDate,
-            endDate : this.filters.endDate
+            startDate : filters.startDate,
+            endDate : filters.endDate
         })
         .then( (result) => {
             this.gridData = result;
