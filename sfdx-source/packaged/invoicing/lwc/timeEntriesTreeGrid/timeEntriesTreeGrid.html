@@ -1,14 +1,38 @@
 <template>
     <lightning-card>
 
-        <lightning-button slot="actions" label="Invoice Selected" variant="brand"></lightning-button>
+        <lightning-button slot="actions" label="Invoice Selected" variant="brand" onclick={startBillingCycle}></lightning-button>
         
-        <div class="slds-p-around_medium">
+        <div class="slds-grid">
+            <div>
+                <lightning-input class="slds-m-around_small" 
+                                label="Override Service Period"
+                                type="toggle"
+                                message-toggle-active="Override from filter"
+                                message-toggle-inactive="Calculate from Time Entries"
+                                checked
+                                onchange={handleServicePeriodToggle}></lightning-input>
+            </div>
+            <div>
+                <lightning-input class="slds-m-around_small" 
+                                label="Collapse Time Entries"
+                                type="toggle"
+                                message-toggle-active="Collapse"
+                                message-toggle-inactive="Don't Collapse"
+                                checked
+                                onchange={handleCollapseToggle}></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-p-around_medium slds-is-relative">
             <lightning-datatable
                 columns={columns}
                 data={gridData}
                 key-field="Id">
             </lightning-datatable>
+            <template if:true={isWorking}>
+                <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
+            </template>
         </div>
 
     </lightning-card>

@@ -1,11 +1,22 @@
 import { LightningElement, api, track } from 'lwc';
-import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
+import createInvoices from '@salesforce/apex/BillingController.createInvoicesFromTimeEntries';
+
+import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicingRunSuccess';
+import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
 const COLUMN_DEFINITION = [
     {
         type: 'text',
         fieldName: 'AccountName',
         label: 'Accountname'
+    },
+    {
+        type: 'text',
+        fieldName: 'ProductName',
+        label: 'Product'
     },
     {
         type: 'text',
@@ -66,6 +77,17 @@ export default class TimeEntriesTreeGrid extends LightningElement {
     @track activeFilters;
     @track gridData;
     @track columns = COLUMN_DEFINITION;
+    @track isWorking = false;
+
+    @track selectedOptions = {
+        collapseTimeEntries : true,
+        overrideServicePeriod : true
+    };
+
+    LABELS = {
+        TOAST_TITLE_SUCCESS,
+        TOAST_TITLE_ERROR
+    }
 
     refreshData(filters) {
 
@@ -79,6 +101,45 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         .catch( () => {
             this.gridDate = [];
         });
+    }
+
+    handleCollapseToggle(event) {
+        this.selectedOptions.collapseTimeEntries = event.detail.checked
+    }
+
+    handleServicePeriodToggle(event) {
+        this.selectedOptions.overrideServicePeriod = event.detail.checked
+    }
+
+    startBillingCycle() {
+
+        this.isWorking = true;
+
+        createInvoices({
+            timeEntryIds: this.getSelectedIds(),
+            options: this.selectedOptions,
+            filters: this.activeFilters,
+        })
+        .then(() => {
+            let successToast = new ShowToastEvent({
+                title : this.LABELS.TOAST_TITLE_SUCCESS,
+                variant : 'success'
+            });
+            this.dispatchEvent(successToast);
+            this.isWorking = false;
+
+            this.refreshData(this.activeFilters);
+        })
+        .catch(() => {
+            this.isWorking = false;
+        });
+    }
+
+    getSelectedIds() {
+        let selectedRows = this.template.querySelector('lightning-datatable').getSelectedRows();
+        let selectedIds = [];
+        selectedRows.forEach( (entry) => {selectedIds.push(entry.Id)} );
+        return selectedIds;
     }
 
 }

@@ -25,6 +25,14 @@
         <value>PDF successfully saved!</value>
     </labels>
     <labels>
+        <fullName>Toast_Title_InvoicingRunSuccess</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Invoices successfully generated!</value>
+    </labels>
+    <labels>
         <fullName>InvoicePdf_Label_CustomerId</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>

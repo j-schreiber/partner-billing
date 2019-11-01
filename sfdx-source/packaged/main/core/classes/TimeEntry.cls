@@ -12,6 +12,11 @@ public class TimeEntry {
     }
 
     @AuraEnabled
+    public String ProductName {
+        public get { return Record.Product__r.Name; }
+    }
+
+    @AuraEnabled
     public String Name {
         public get { return Record.Name; }
     }
