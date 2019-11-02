@@ -5,9 +5,11 @@
 public virtual class Invoice {
 
     /** @Description    The decorated original SObject */
+    @AuraEnabled
     public Invoice__c Record {public get; private set;}
 
     /** @Description    The invoice line items */
+    @AuraEnabled
     public List<InvoiceLineItem> LineItems {public get; private set;}
 
     /** @Description    Attachments for this invoice */
@@ -39,24 +41,19 @@ public virtual class Invoice {
         private set;
     }
 
+    public static final String QUERY_STRING =
+        'SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,' +
+                'Account__r.Name,Account__r.CustomerId__c,ServicePeriodFrom__c,ServicePeriodTo__c,' +
+                'Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,'+
+                '(SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__r.Name,Productname__c FROM LineItems__r),'+
+                '(SELECT Id,Name FROM Attachments),'+
+                '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
+        ' FROM Invoice__c';
+
     /** @Description    Initialize the object by invoice id */
     public Invoice(String recordId) {
         try {
-            this([
-                SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,
-                Account__r.Name,Account__r.CustomerId__c,ServicePeriodFrom__c,ServicePeriodTo__c,
-                Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,
-                (
-                    SELECT Id,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__r.Name,Productname__c FROM LineItems__r
-                ),
-                (
-                    SELECT Id,Name FROM Attachments
-                ),
-                (
-                    SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC
-                )
-                FROM Invoice__c WHERE Id = :recordId
-            ]);
+            this(Database.query(Invoice.QUERY_STRING + ' WHERE Id = :recordId'));
         } catch (Exception e) {
             Record = new Invoice__c();
             LineItems = new List<InvoiceLineItem>();

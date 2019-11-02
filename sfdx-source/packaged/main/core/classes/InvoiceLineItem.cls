@@ -4,6 +4,7 @@
 public class InvoiceLineItem {
 
     /** @Description    The decorated original SObject */
+    @AuraEnabled
     public InvoiceLineItem__c Record {public get; private set;}
 
     /** @Description    Reference to the parent invoice of this line item */

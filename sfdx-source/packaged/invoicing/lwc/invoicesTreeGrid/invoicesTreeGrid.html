@@ -1,3 +1,51 @@
 <template>
-    
+
+    <lightning-card>
+        <table class="slds-m-around_medium invoice-table">
+            <thead>
+                <tr>
+                    <th>Invoice Number</th>
+                    <th>Account Name</th>
+                    <th>Invoice Date</th>
+                    <th>Service Period Start</th>
+                    <th>Service Period End</th>
+                    <th>Total Amount (Net)</th>
+                    <th>Total Amount (Gross)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={invoiceData} for:item='invoice'>
+                    <tr key={invoice.Record.Id}>
+                        <td>
+                            {invoice.Record.Name}
+                        </td>
+                        <td>
+                            {invoice.Record.Account__r.Name}
+                        </td>
+                        <td>
+                            <lightning-formatted-date-time value={invoice.Record.Date__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                        </td>
+                        <td>
+                            <lightning-formatted-date-time value={invoice.Record.ServicePeriodFrom__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                        </td>
+                        <td>
+                            <lightning-formatted-date-time value={invoice.Record.ServicePeriodTo__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                        </td>
+                        <td>
+                            <lightning-formatted-number value={invoice.Record.TotalAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
+                        </td>
+                        <td>
+                            <lightning-formatted-number value={invoice.Record.TotalGrossAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
+                        </td>
+                        <td>
+                            <lightning-button-stateful label-when-off="Activate" label-when-on="Activated" icon-name-when-off="utility:check" icon-name-when-on="utility:close"></lightning-button-stateful>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+            
+        </table>
+    </lightning-card>
+
 </template>

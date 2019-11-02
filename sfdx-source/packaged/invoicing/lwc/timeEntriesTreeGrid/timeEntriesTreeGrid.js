@@ -127,8 +127,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
             });
             this.dispatchEvent(successToast);
             this.isWorking = false;
-
             this.refreshData(this.activeFilters);
+            this.dispatchEvent(new CustomEvent('stepcompleted'));
         })
         .catch(() => {
             this.isWorking = false;

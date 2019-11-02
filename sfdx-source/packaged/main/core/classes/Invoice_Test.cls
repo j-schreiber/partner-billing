@@ -34,7 +34,7 @@ public class Invoice_Test {
     static void init_WithoutLineItems_AllDefaultsInitialized() {
         // SETUP
         delete [SELECT Id FROM InvoiceLineItem__c];
-        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
         // ACTION
         Invoice objUnderTest = new Invoice(record.Id);
         // VERIFY

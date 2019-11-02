@@ -1,0 +1,9 @@
+.invoice-table td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 10pt;
+}
+
+.invoice-table th {
+    font-size: 10pt;
+}

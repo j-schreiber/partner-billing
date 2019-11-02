@@ -48,4 +48,20 @@ public with sharing class BillingController {
             results.add(new TimeEntry(te));
         return results;
     }
+
+    /** @Description
+    *   Retrieves all invoices for the specified filter certeria
+    *
+    *   @param  status          Filtered status value for invoices
+    *
+    *   @return                 List of Invoices that match criteria
+    */
+    @AuraEnabled
+    public static List<Invoice> getInvoices(String status) {
+        List<Invoice> results = new List<Invoice>();
+        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = :status')) {
+            results.add(new Invoice(inv));
+        }
+        return results;
+    }
 }

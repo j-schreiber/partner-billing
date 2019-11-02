@@ -1,9 +1,9 @@
 <template>
     <lightning-card>
 
-        <lightning-button slot="actions" label="Invoice Selected" variant="brand" onclick={startBillingCycle}></lightning-button>
+        <lightning-button slot="actions" label="Create Invoices for Selected" variant="brand" onclick={startBillingCycle}></lightning-button>
         
-        <div class="slds-grid">
+        <div class="slds-grid slds-p-horizontal_medium">
             <div>
                 <lightning-input class="slds-m-around_small" 
                                 label="Override Service Period"
@@ -24,12 +24,8 @@
             </div>
         </div>
 
-        <div class="slds-p-around_medium slds-is-relative">
-            <lightning-datatable
-                columns={columns}
-                data={gridData}
-                key-field="Id">
-            </lightning-datatable>
+        <div class="slds-p-horizontal_medium slds-is-relative">
+            <lightning-datatable columns={columns} data={gridData} key-field="Id"></lightning-datatable>
             <template if:true={isWorking}>
                 <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
             </template>
