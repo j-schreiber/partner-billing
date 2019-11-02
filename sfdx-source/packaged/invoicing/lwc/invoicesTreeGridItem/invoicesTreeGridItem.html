@@ -1,0 +1,34 @@
+<template>
+    <th scope="row">Invoice Number</th>
+    <th scope="row">Account Name</th>
+    <th scope="row">Invoice Date</th>
+    <th scope="row">Service Period Start</th>
+    <th scope="row">Service Period End</th>
+    <th scope="row">Total Amount (Net)</th>
+    <th scope="row">Total Amount (Gross)</th>
+    <th scope="row"></th>
+    <td>
+        {rowdata.Record.Name}
+    </td>
+    <td>
+        {rowdata.Record.Account__r.Name}
+    </td>
+    <td>
+        <lightning-formatted-date-time value={rowdata.Record.Date__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+    </td>
+    <td>
+        <lightning-formatted-date-time value={rowdata.Record.ServicePeriodFrom__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+    </td>
+    <td>
+        <lightning-formatted-date-time value={rowdata.Record.ServicePeriodTo__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+    </td>
+    <td>
+        <lightning-formatted-number value={rowdata.Record.TotalAmount__c} format-style="currency" currency-code={rowdata.Record.CurrencyIsoCode}></lightning-formatted-number>
+    </td>
+    <td>
+        <lightning-formatted-number value={rowdata.Record.TotalGrossAmount__c} format-style="currency" currency-code={rowdata.Record.CurrencyIsoCode}></lightning-formatted-number>
+    </td>
+    <td>
+        <lightning-button-stateful label-when-off="Activate" label-when-on="Activated" icon-name-when-off="utility:check" icon-name-when-on="utility:close"></lightning-button-stateful>
+    </td>
+</template>

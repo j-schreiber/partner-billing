@@ -59,7 +59,7 @@ public with sharing class BillingController {
     @AuraEnabled
     public static List<Invoice> getInvoices(String status) {
         List<Invoice> results = new List<Invoice>();
-        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = :status')) {
+        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = :status ORDER BY Date__c')) {
             results.add(new Invoice(inv));
         }
         return results;

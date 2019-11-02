@@ -1,51 +1,54 @@
 <template>
 
     <lightning-card>
-        <table class="slds-m-around_medium invoice-table">
-            <thead>
-                <tr>
-                    <th>Invoice Number</th>
-                    <th>Account Name</th>
-                    <th>Invoice Date</th>
-                    <th>Service Period Start</th>
-                    <th>Service Period End</th>
-                    <th>Total Amount (Net)</th>
-                    <th>Total Amount (Gross)</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template for:each={invoiceData} for:item='invoice'>
-                    <tr key={invoice.Record.Id}>
-                        <td>
-                            {invoice.Record.Name}
-                        </td>
-                        <td>
-                            {invoice.Record.Account__r.Name}
-                        </td>
-                        <td>
-                            <lightning-formatted-date-time value={invoice.Record.Date__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
-                        </td>
-                        <td>
-                            <lightning-formatted-date-time value={invoice.Record.ServicePeriodFrom__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
-                        </td>
-                        <td>
-                            <lightning-formatted-date-time value={invoice.Record.ServicePeriodTo__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
-                        </td>
-                        <td>
-                            <lightning-formatted-number value={invoice.Record.TotalAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
-                        </td>
-                        <td>
-                            <lightning-formatted-number value={invoice.Record.TotalGrossAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
-                        </td>
-                        <td>
-                            <lightning-button-stateful label-when-off="Activate" label-when-on="Activated" icon-name-when-off="utility:check" icon-name-when-on="utility:close"></lightning-button-stateful>
-                        </td>
+        <div class="slds-p-horizontal_medium">
+            <table class="invoice-table slds-table slds-table_bordered slds-border_left slds-border_right">
+                <thead>
+                    <tr>
+                        <th scope="col">Invoice Number</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Invoice Date</th>
+                        <th scope="col">Service Period Start</th>
+                        <th scope="col">Service Period End</th>
+                        <th scope="col">Total Amount (Net)</th>
+                        <th scope="col">Total Amount (Gross)</th>
+                        <th scope="col"></th>
                     </tr>
-                </template>
-            </tbody>
-            
-        </table>
+                </thead>
+                <tbody>
+                    <template for:each={invoiceData} for:item='invoice'>
+                        <!--<tr key={invoice.Record.Id}>
+                            <td>
+                                {invoice.Record.Name}
+                            </td>
+                            <td>
+                                {invoice.Record.Account__r.Name}
+                            </td>
+                            <td>
+                                <lightning-formatted-date-time value={invoice.Record.Date__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                            </td>
+                            <td>
+                                <lightning-formatted-date-time value={invoice.Record.ServicePeriodFrom__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                            </td>
+                            <td>
+                                <lightning-formatted-date-time value={invoice.Record.ServicePeriodTo__c} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time>
+                            </td>
+                            <td>
+                                <lightning-formatted-number value={invoice.Record.TotalAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
+                            </td>
+                            <td>
+                                <lightning-formatted-number value={invoice.Record.TotalGrossAmount__c} format-style="currency" currency-code={invoice.Record.CurrencyIsoCode}></lightning-formatted-number>
+                            </td>
+                            <td>
+                                <lightning-button-stateful label-when-off="Activate" label-when-on="Activated" icon-name-when-off="utility:check" icon-name-when-on="utility:close"></lightning-button-stateful>
+                            </td>
+                        </tr>-->
+
+                        <c-invoices-tree-grid-item rowdata={invoice} key={invoice.Record.Id}></c-invoices-tree-grid-item>
+                    </template>
+                </tbody>
+            </table>
+        </div>
     </lightning-card>
 
 </template>

@@ -19,6 +19,9 @@
             ],
             "c/progressBar": [
                 "progressBar/progressBar.js"
+            ],
+            "c/invoicesTreeGridItem": [
+                "../../../invoicing/lwc/invoicesTreeGridItem/invoicesTreeGridItem.js"
             ]
         },
         "experimentalDecorators": true
