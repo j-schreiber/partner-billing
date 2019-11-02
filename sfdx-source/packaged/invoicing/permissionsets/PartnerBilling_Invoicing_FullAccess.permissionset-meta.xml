@@ -13,7 +13,7 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>
-        <tab>Billing</tab>
+        <tab>Invoicing</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>

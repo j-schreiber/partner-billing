@@ -382,10 +382,6 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Invoicing</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
         <tab>Budget__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
