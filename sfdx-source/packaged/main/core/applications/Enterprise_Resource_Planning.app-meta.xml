@@ -17,7 +17,7 @@
     <tabs>Budget__c</tabs>
     <tabs>TimeEntry__c</tabs>
     <tabs>Invoice__c</tabs>
-    <tabs>Payment__c</tabs>
+    <tabs>BankAccountTransaction__c</tabs>
     <tabs>Invoicing</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Enterprise_Resource_Planning_UtilityBar</utilityBar>

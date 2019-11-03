@@ -155,6 +155,7 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <description>Invoices for Accounts</description>
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Invoice</label>
     <nameField>
