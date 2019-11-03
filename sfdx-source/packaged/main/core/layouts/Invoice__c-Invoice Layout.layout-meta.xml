@@ -155,6 +155,7 @@
         <fields>ServiceDate__c</fields>
         <fields>Price__c</fields>
         <fields>Tax__c</fields>
+        <fields>Discount__c</fields>
         <fields>Quantity__c</fields>
         <fields>Description__c</fields>
         <relatedList>InvoiceLineItem__c.Invoice__c</relatedList>
