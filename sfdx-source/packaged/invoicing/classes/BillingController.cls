@@ -64,4 +64,14 @@ public with sharing class BillingController {
         }
         return results;
     }
+
+    /** @Description
+    *   Updates invoice records
+    *
+    *   @param  invoices        Dirty invoices to update
+    */
+    @AuraEnabled
+    public static void updateInvoices(List<Invoice__c> invoices) {
+        for (Invoice__c inv : invoices) System.debug(inv);
+    }
 }

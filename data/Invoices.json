@@ -48,6 +48,61 @@
             "Date__c": "2019-09-30",
             "ServicePeriodFrom__c": "2019-09-01",
             "ServicePeriodTo__c": "2019-09-30"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef5"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef2",
+            "Date__c": "2019-09-30",
+            "ServicePeriodFrom__c": "2019-09-01",
+            "ServicePeriodTo__c": "2019-09-30"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef6"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef2",
+            "Date__c": "2019-09-30",
+            "ServicePeriodFrom__c": "2019-09-01",
+            "ServicePeriodTo__c": "2019-09-30"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef7"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef3",
+            "Date__c": "2019-10-02",
+            "ServicePeriodFrom__c": "2019-09-01",
+            "ServicePeriodTo__c": "2019-09-30"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef8"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef3",
+            "Date__c": "2019-10-04",
+            "ServicePeriodFrom__c": "2019-09-01",
+            "ServicePeriodTo__c": "2019-09-30"
+        },
+        {
+            "attributes": {
+                "type": "Invoice__c",
+                "referenceId": "InvoiceRef9"
+            },
+            "Status__c": "Draft",
+            "Account__c": "@AccountRef1",
+            "Date__c": "2019-09-01",
+            "ServicePeriodFrom__c": "2019-08-01",
+            "ServicePeriodTo__c": "2019-08-31"
         }
     ]
 }

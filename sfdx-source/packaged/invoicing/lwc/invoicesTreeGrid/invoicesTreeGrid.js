@@ -1,10 +1,12 @@
 import { LightningElement, track } from 'lwc';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
+import updateInvoices from '@salesforce/apex/BillingController.updateInvoices';
 
 export default class InvoicesTreeGrid extends LightningElement {
 
     @track invoiceData = [];
+    @track dirtyInvoices = {};
 
     lineItemColumns = [
         {
@@ -55,5 +57,26 @@ export default class InvoicesTreeGrid extends LightningElement {
         .catch(() => {
 
         })
+    }
+
+    cacheUpdatedRecord(event) {
+        let changedRecord = event.detail;
+        console.log('Record: ' + JSON.stringify(changedRecord));
+        this.dirtyInvoices[changedRecord.Id] = changedRecord;
+        console.log('Dirty Invoices: ' + JSON.stringify(this.dirtyInvoices));
+    }
+
+    updateInvoices() {
+
+        updateInvoices({
+            invoices: this.dirtyInvoices
+        })
+        .then(() => {
+            // success toast
+        })
+        .catch(() => {
+            // error toast
+        })
+
     }
 }
