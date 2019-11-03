@@ -22,7 +22,7 @@ export default class TimeEntriesBillingCanvas extends LightningElement {
     }
 
     increaseProcessStage() {
-        if (this.processStage < 5) this.processStage++;
+        if (this.processStage < 4) this.processStage++;
     }
 
     decreaseProcessStage() {

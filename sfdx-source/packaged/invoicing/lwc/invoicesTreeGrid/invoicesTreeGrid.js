@@ -1,12 +1,16 @@
 import { LightningElement, track } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
 import updateInvoices from '@salesforce/apex/BillingController.updateInvoices';
+
+import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicesUpdated';
 
 export default class InvoicesTreeGrid extends LightningElement {
 
     @track invoiceData = [];
     @track dirtyInvoices = {};
+    @track isWorking = false;
 
     lineItemColumns = [
         {
@@ -45,37 +49,55 @@ export default class InvoicesTreeGrid extends LightningElement {
             label: 'Amount (Gross)'
         }
     ]
+
+    LABELS = {
+        TOAST_TITLE_SUCCESS
+    }
     
     connectedCallback() {
+
+        this.isWorking = true;
 
         getInvoices({
             status: 'Draft'
         })
         .then((result) => {
             this.invoiceData = result;
+            this.isWorking = false;
         })
         .catch(() => {
-
+            this.isWorking = false;
         })
     }
 
     cacheUpdatedRecord(event) {
         let changedRecord = event.detail;
-        console.log('Record: ' + JSON.stringify(changedRecord));
         this.dirtyInvoices[changedRecord.Id] = changedRecord;
-        console.log('Dirty Invoices: ' + JSON.stringify(this.dirtyInvoices));
     }
 
-    updateInvoices() {
+    updateDirtyInvoices() {
+
+        this.isWorking = true;
+
+        console.log('Update Invoices: ' + JSON.stringify(this.dirtyInvoices));
 
         updateInvoices({
-            invoices: this.dirtyInvoices
+            invoices: Object.values(this.dirtyInvoices)
         })
         .then(() => {
-            // success toast
+            let successToast = new ShowToastEvent({
+                title : this.LABELS.TOAST_TITLE_SUCCESS,
+                variant : 'success'
+            });
+            this.dispatchEvent(successToast);
+            this.isWorking = false;
+            this.dispatchEvent(new CustomEvent('stepcompleted'));
+            console.log('Success!');
         })
-        .catch(() => {
+        .catch((error) => {
             // error toast
+            this.isWorking = false;
+            console.log('Error! ' + JSON.stringify(error));
         })
 
     }

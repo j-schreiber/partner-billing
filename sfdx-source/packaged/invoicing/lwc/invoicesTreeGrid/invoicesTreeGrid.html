@@ -2,9 +2,9 @@
 
     <lightning-card>
         
-        <lightning-button slot="actions" label="Commit Updates" variant="brand" onclick={updateInvoices}></lightning-button>
+        <lightning-button slot="actions" label="Commit Updates" variant="brand" onclick={updateDirtyInvoices}></lightning-button>
         
-        <div class="slds-p-horizontal_medium">
+        <div class="slds-p-horizontal_medium slds-is-relative">
             <table class="invoice-table slds-table slds-table_bordered slds-border_left slds-border_right">
                 <thead>
                     <tr>
@@ -24,6 +24,9 @@
                     </template>
                 </tbody>
             </table>
+            <template if:true={isWorking}>
+                <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
+            </template>
         </div>
     </lightning-card>
 

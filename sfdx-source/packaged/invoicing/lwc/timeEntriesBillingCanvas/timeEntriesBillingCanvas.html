@@ -9,10 +9,9 @@
                 <div class="slds-col slds-size_8-of-12 slds-p-vertical_x-small">
                     <lightning-progress-indicator current-step={processIndicatorStage} type="base" variant="base">
                         <lightning-progress-step label="Select Time Entries" value="1"></lightning-progress-step>
-                        <lightning-progress-step label="Preview Invoices" value="2"></lightning-progress-step>
-                        <lightning-progress-step label="Commit Invoices" value="3"></lightning-progress-step>
-                        <lightning-progress-step label="Generate PDFs" value="4"></lightning-progress-step>
-                        <lightning-progress-step label="Send PDFs" value="5"></lightning-progress-step>
+                        <lightning-progress-step label="Check Invoices" value="2"></lightning-progress-step>
+                        <lightning-progress-step label="Generate PDFs" value="3"></lightning-progress-step>
+                        <lightning-progress-step label="Send PDFs" value="4"></lightning-progress-step>
                     </lightning-progress-indicator>
                 </div>
                
@@ -34,7 +33,7 @@
 
         <template if:true={displayInvoicesPreview}>
             <div class="slds-m-vertical_small">
-                <c-invoices-tree-grid></c-invoices-tree-grid>
+                <c-invoices-tree-grid onstepcompleted={increaseProcessStage}></c-invoices-tree-grid>
             </div>
         </template>
     </div>
