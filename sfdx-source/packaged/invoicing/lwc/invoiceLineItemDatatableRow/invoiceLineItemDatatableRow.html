@@ -1,40 +1,66 @@
 <template>
     <td>
-        {rowdata.Record.Name}
-    </td>
-    <td>
         {rowdata.Record.Productname__c}
     </td> 
     <td>
         <lightning-input
-            value={rowdata.Record.Price__c}
+            value={record.Price__c}
             type="number"
             formatter="currency"
             variant="label-hidden"
+            onchange={updatePrice}
             step="0.01">
         </lightning-input>
     </td> 
     <td>
         <lightning-input
-            value={rowdata.Record.Quantity__c}
+            value={record.Quantity__c}
             type="number"
             variant="label-hidden"
+            onchange={updateQuantity}
             step="0.0001">
         </lightning-input>
     </td>
     <td>
-        {rowdata.Record.Tax__c}
+        <lightning-input
+            value={record.Tax__c}
+            type="number"
+            formatter="percent-fixed"
+            variant="label-hidden"
+            onchange={updateTax}
+            step="0.01">
+        </lightning-input>
     </td>
     <td>
-        {rowdata.Record.Discount__c}
+        <lightning-input
+            value={record.Discount__c}
+            type="number"
+            formatter="percent-fixed"
+            variant="label-hidden"
+            max="100"
+            onchange={updateDiscount}
+            step="0.01">
+        </lightning-input>
     </td>
     <td>
-        {rowdata.Record.Amount__c}
+        <lightning-formatted-number
+            value={Amount}
+            format-style="currency"
+            currency-code={rowdata.Record.CurrencyIsoCode}>
+        </lightning-formatted-number>
     </td>
     <td>
-        {rowdata.Record.GrossAmount__c}
+        <lightning-formatted-number
+            value={GrossAmount}
+            format-style="currency"
+            currency-code={rowdata.Record.CurrencyIsoCode}>
+        </lightning-formatted-number>
     </td>
     <td>
-        {rowdata.Record.Description__c}
+        <lightning-input
+            value={rowdata.Record.Description__c}
+            type="text"
+            variant="label-hidden">
+        </lightning-input>
     </td>
 </template>

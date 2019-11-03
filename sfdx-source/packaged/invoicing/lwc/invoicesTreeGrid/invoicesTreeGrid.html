@@ -26,7 +26,7 @@
                         <!-- Table of line items, if this invoice has any -->
                         <template if:true={invoice.hasLineItems}>
                             <tr key={invoice.Record.Id}>
-                                <td colspan="7" class="lineitem-table-cell">
+                                <td colspan="8" class="lineitem-table-cell">
                                     <c-invoice-line-item-datatable lineitems={invoice.LineItems}></c-invoice-line-item-datatable>
                                 </td>
                             </tr>
