@@ -1,0 +1,22 @@
+<template>
+    <thead>
+        <th>Name</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Tax</th>
+        <th>Discount</th>
+        <th>Amount (Net)</th>
+        <th>Amount (Gross)</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <template for:each={lineitems} for:item='lineitem'>
+            <c-invoice-line-item-datatable-row 
+                rowdata={lineitem}
+                key={lineitem.Record.Id}
+                onrecordchange={cacheUpdatedRecord}>
+            </c-invoice-line-item-datatable-row>
+        </template>
+    </tbody>
+</template>

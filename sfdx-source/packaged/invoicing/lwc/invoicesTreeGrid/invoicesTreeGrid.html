@@ -20,7 +20,18 @@
                 </thead>
                 <tbody>
                     <template for:each={invoiceData} for:item='invoice'>
+                        <!-- The invoice record itself -->
                         <c-invoices-tree-grid-item rowdata={invoice} key={invoice.Record.Id} onrecordchange={cacheUpdatedRecord}></c-invoices-tree-grid-item>
+                        
+                        <!-- Table of line items, if this invoice has any -->
+                        <template if:true={invoice.hasLineItems}>
+                            <tr key={invoice.Record.Id}>
+                                <td colspan="7" class="lineitem-table-cell">
+                                    <c-invoice-line-item-datatable lineitems={invoice.LineItems}></c-invoice-line-item-datatable>
+                                </td>
+                            </tr>
+                        </template>
+
                     </template>
                 </tbody>
             </table>
