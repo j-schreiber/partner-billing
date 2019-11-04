@@ -74,4 +74,15 @@ public with sharing class BillingController {
     public static void updateInvoices(List<Invoice__c> invoices) {
         for (Invoice__c inv : invoices) System.debug(inv);
     }
+
+    /** @Description
+    *   Upsert invoice line items records. This method updates existing and
+    *   inserts new records.
+    *
+    *   @param  lineItems       Dirty invoice line items to update
+    */
+    @AuraEnabled
+    public static void upsertInvoiceLineItems(List<InvoiceLineItem__c> lineItems) {
+        for (InvoiceLineItem__c ili : lineItems) System.debug(ili);
+    }
 }

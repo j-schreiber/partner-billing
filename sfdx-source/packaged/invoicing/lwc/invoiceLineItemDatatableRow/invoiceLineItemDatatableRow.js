@@ -40,13 +40,13 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         );
     }
 
+    @api
     get Amount() {
         return (this.record.Price__c * this.record.Quantity__c * ((100 - this.record.Discount__c) / 100));
     }
 
+    @api
     get GrossAmount() {
-        console.log('Amount: ' + this.Amount);
-        console.log('Tax Factor: ' + ((1 + this.record.Tax__c / 100)));
         return (this.Amount * ((1 + this.record.Tax__c / 100)));
     }
 }

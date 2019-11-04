@@ -1,21 +1,24 @@
 <template>
-    <thead>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Tax</th>
-        <th class="cell-width_small">Discount</th>
-        <th>Amount (Net)</th>
-        <th>Amount (Gross)</th>
-        <th class="cell-max-width_x-large">Description</th>
-    </thead>
-    <tbody>
-        <template for:each={lineitems} for:item='lineitem'>
-            <c-invoice-line-item-datatable-row 
-                rowdata={lineitem}
-                key={lineitem.Record.Id}
-                onrecordchange={bubbleRecordChange}>
-            </c-invoice-line-item-datatable-row>
-        </template>
-    </tbody>
+    <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+
+        <thead>
+            <th>Product</th>
+            <th class="cell-width_small">Price</th>
+            <th class="cell-width_small">Quantity</th>
+            <th class="cell-width_small">Tax</th>
+            <th class="cell-width_small">Discount</th>
+            <th>Amount (Net)</th>
+            <th>Amount (Gross)</th>
+            <th class="cell-max-width_x-large">Description</th>
+        </thead>
+        <tbody>
+            <template for:each={lineitems} for:item='lineitem'>
+                <c-invoice-line-item-datatable-row 
+                    rowdata={lineitem}
+                    key={lineitem.Record.Id}
+                    onrecordchange={bubbleRecordChange}>
+                </c-invoice-line-item-datatable-row>
+            </template>
+        </tbody>
+    </table>
 </template>

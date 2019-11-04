@@ -1,0 +1,108 @@
+<template>
+
+    <lightning-card title={invoiceTitle}>
+
+        <lightning-button-group slot="actions">
+            <lightning-button-stateful
+                label-when-off="Activate"
+                label-when-on="Activated"
+                data-id="activateButton"
+                icon-name-when-off="utility:check"
+                icon-name-when-on="utility:check"
+                selected={isActivated}
+                variant="success"
+                onclick={handleActivateButtonClick}>
+            </lightning-button-stateful>
+            <lightning-button-stateful
+                label-when-off="Cancel"
+                label-when-on="Cancelled"
+                data-id="cancelButton"
+                icon-name-when-off="utility:close"
+                icon-name-when-on="utility:close"
+                variant="destructive"
+                selected={isCancelled}
+                onclick={handleCancelButtonClick}>
+            </lightning-button-stateful>
+        </lightning-button-group>
+
+        <!-- card body -->
+        <div class="slds-p-horizontal_medium">
+            
+            <!-- the invoice body -->
+            <div class="slds-m-bottom_large slds-grid slds-grid_vertical">
+                <div class="slds-col slds-grid">
+                    <lightning-input
+                        value={rowdata.Record.Date__c}
+                        type="date"
+                        variant="label-inline"
+                        label="Invoice Date"
+                        onchange={handleDateInput}>
+                    </lightning-input>
+                    <lightning-input
+                        value={rowdata.Record.ServicePeriodFrom__c}
+                        type="date"
+                        label="Service Period Start"
+                        variant="label-inline"
+                        max={invoiceRecord.ServicePeriodTo__c}
+                        onchange={handleServicePeriodFromInput}>
+                    </lightning-input>
+                    <lightning-input 
+                        value={rowdata.Record.ServicePeriodTo__c}
+                        type="date"
+                        label="Service Period End"
+                        variant="label-inline"
+                        min={invoiceRecord.ServicePeriodFrom__c}
+                        onchange={handleServicePeriodToInput}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-grid slds-grid_align-end">
+                    <div class="slds-size_3-of-12">
+                        <table class="summary-table">
+                            <tbody>
+                                <tr>
+                                    <td class="slds-form-element__label">Total Amount (Net)</td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={TotalAmount}
+                                            format-style="currency"
+                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                        </lightning-formatted-number>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="slds-form-element__label">Total VAT</td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={TotalTaxes}
+                                            format-style="currency"
+                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                        </lightning-formatted-number>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="slds-form-element__label">Total Amount (Gross)</td>
+                                    <td>
+                                        <lightning-formatted-number
+                                            value={TotalGrossAmount}
+                                            format-style="currency"
+                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                        </lightning-formatted-number>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>            
+            
+            <!-- the line item table -->
+            <template if:true={rowdata.hasLineItems}>
+                <c-invoice-line-item-datatable lineitems={rowdata.LineItems} onrecordchange={bubbleLineItemChange}></c-invoice-line-item-datatable>
+            </template>
+
+        </div>
+        
+    </lightning-card>
+
+</template>

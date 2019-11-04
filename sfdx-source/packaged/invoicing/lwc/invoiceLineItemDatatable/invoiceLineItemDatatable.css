@@ -1,11 +1,7 @@
-:host {
-    display: table;
-}
-
 .cell-max-width_x-large {
     min-width: 300px;
 }
 
 .cell-width_small {
-    width: 125px;
+    width: 4cm;
 }

@@ -28,6 +28,12 @@
             ],
             "c/progressBar": [
                 "../../main/utils/lwc/progressBar/progressBar.js"
+            ],
+            "c/invoiceCard": [
+                "invoiceCard/invoiceCard.js"
+            ],
+            "c/invoiceCardList": [
+                "invoiceCardList/invoiceCardList.js"
             ]
         },
         "experimentalDecorators": true
