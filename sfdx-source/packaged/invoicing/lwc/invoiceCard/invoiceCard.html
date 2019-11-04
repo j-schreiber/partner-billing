@@ -97,9 +97,11 @@
             </div>            
             
             <!-- the line item table -->
-            <template if:true={rowdata.hasLineItems}>
-                <c-invoice-line-item-datatable lineitems={rowdata.LineItems} onrecordchange={bubbleLineItemChange}></c-invoice-line-item-datatable>
-            </template>
+            <c-invoice-line-item-datatable
+                lineitems={rowdata.LineItems}
+                invoice-id={rowdata.Record.Id}
+                onrecordchange={bubbleLineItemChange}>
+            </c-invoice-line-item-datatable>
 
         </div>
         

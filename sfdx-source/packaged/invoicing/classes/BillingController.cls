@@ -72,7 +72,7 @@ public with sharing class BillingController {
     */
     @AuraEnabled
     public static void updateInvoices(List<Invoice__c> invoices) {
-        for (Invoice__c inv : invoices) System.debug(inv);
+        for (Invoice__c inv : invoices) System.debug('Updating: ' + inv);
     }
 
     /** @Description
@@ -83,6 +83,16 @@ public with sharing class BillingController {
     */
     @AuraEnabled
     public static void upsertInvoiceLineItems(List<InvoiceLineItem__c> lineItems) {
-        for (InvoiceLineItem__c ili : lineItems) System.debug(ili);
+        for (InvoiceLineItem__c ili : lineItems) System.debug('Upserting: ' + ili);
+    }
+
+    /** @Description
+    *   Delete line items in array
+    *
+    *   @param  lineItems       Dirty invoice line items to delete
+    */
+    @AuraEnabled
+    public static void deleteInvoiceLineItems(List<InvoiceLineItem__c> lineItems) {
+        for (InvoiceLineItem__c ili : lineItems) System.debug('Deleting: ' + ili);
     }
 }

@@ -1,8 +1,12 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class InvoiceLineItemDatatable extends LightningElement {
     @api lineitems;
-    lineItems;
+    @api invoiceId;
+
+    @track internalLineItems = [];
+
+    lineItemTableRows;
 
     bubbleRecordChange(event) {
         this.dispatchEvent(
@@ -11,20 +15,36 @@ export default class InvoiceLineItemDatatable extends LightningElement {
     }
 
     renderedCallback() {
-        this.lineItems = this.template.querySelectorAll('c-invoice-line-item-datatable-row');
+        this.lineItemTableRows = this.template.querySelectorAll('c-invoice-line-item-datatable-row');
+    }
+
+    connectedCallback() {
+        this.internalLineItems.push(this.lineitems);
+        //this.internalLineItems.push(this.NewLineItem);
+        //console.log(JSON.stringify(this.internalLineItems));
+    }
+
+    get NewLineItem() {
+        return {
+            Record : {
+                Invoice__c : this.invoiceId,
+                Productname__c : "New",
+                Id : '1'
+            }
+        };
     }
 
     @api
     get SumAmount() {
         let sum = 0;
-        this.lineItems.forEach( (item) => {sum += item.Amount});
+        this.lineItemTableRows.forEach( (item) => {sum += item.Amount});
         return sum;
     }
 
     @api
     get SumGrossAmount() {
         let sum = 0;
-        this.lineItems.forEach( (item) => {sum += item.GrossAmount});
+        this.lineItemTableRows.forEach( (item) => {sum += item.GrossAmount});
         return sum;
     }
 }

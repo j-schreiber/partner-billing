@@ -12,6 +12,7 @@
             <th class="cell-max-width_x-large">Description</th>
         </thead>
         <tbody>
+            <!-- render all line items as table rows -->
             <template for:each={lineitems} for:item='lineitem'>
                 <c-invoice-line-item-datatable-row 
                     rowdata={lineitem}
