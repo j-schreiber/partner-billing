@@ -379,6 +379,84 @@
             "Price__c": 650.00,
             "Quantity__c": 0.5,
             "Tax__c": 19
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef35"
+            },
+            "Invoice__c": "@InvoiceRef4",
+            "Product__c": "@ProductRef1",
+            "Price__c": 650.00,
+            "Quantity__c": 0.5,
+            "Tax__c": 19,
+            "Discount__c": 20,
+            "Description__c": "Test data description"
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef36"
+            },
+            "Invoice__c": "@InvoiceRef4",
+            "Product__c": "@ProductRef1",
+            "Price__c": 650.00,
+            "Quantity__c": 7.5,
+            "Tax__c": 19,
+            "Discount__c": 15,
+            "Description__c": "Test data description"
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef37"
+            },
+            "Invoice__c": "@InvoiceRef4",
+            "Product__c": "@ProductRef2",
+            "Price__c": 1000.00,
+            "Quantity__c": 2.5,
+            "Tax__c": 9,
+            "Discount__c": 17.77,
+            "Description__c": "Test data description"
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef38"
+            },
+            "Invoice__c": "@InvoiceRef5",
+            "Product__c": "@ProductRef1",
+            "Price__c": 650.00,
+            "Quantity__c": 1.5,
+            "Tax__c": 0,
+            "Discount__c": 10,
+            "Description__c": "Test data description"
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef39"
+            },
+            "Invoice__c": "@InvoiceRef5",
+            "Product__c": "@ProductRef1",
+            "Price__c": 650.00,
+            "Quantity__c": 8.5,
+            "Tax__c": 19,
+            "Discount__c": 0,
+            "Description__c": "Test data description"
+        },
+        {
+            "attributes": {
+                "type": "InvoiceLineItem__c",
+                "referenceId": "InvoiceLineItemRef40"
+            },
+            "Invoice__c": "@InvoiceRef5",
+            "Product__c": "@ProductRef2",
+            "Price__c": 1100.00,
+            "Quantity__c": 9.5,
+            "Tax__c": 0,
+            "Discount__c": 50,
+            "Description__c": "Test data description"
         }
     ]
 }

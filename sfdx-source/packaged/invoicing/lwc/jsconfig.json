@@ -5,8 +5,17 @@
             "c/invoicePdfQuickAction": [
                 "../../invoice-pdf-generation/lwc/invoicePdfQuickAction/invoicePdfQuickAction.js"
             ],
+            "c/invoiceLineItemDatatable": [
+                "invoiceLineItemDatatable/invoiceLineItemDatatable.js"
+            ],
+            "c/invoiceLineItemDatatableRow": [
+                "invoiceLineItemDatatableRow/invoiceLineItemDatatableRow.js"
+            ],
             "c/invoicesTreeGrid": [
                 "invoicesTreeGrid/invoicesTreeGrid.js"
+            ],
+            "c/invoicesTreeGridItem": [
+                "invoicesTreeGridItem/invoicesTreeGridItem.js"
             ],
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
@@ -19,9 +28,6 @@
             ],
             "c/progressBar": [
                 "../../main/utils/lwc/progressBar/progressBar.js"
-            ],
-            "c/invoicesTreeGridItem": [
-                "invoicesTreeGridItem/invoicesTreeGridItem.js"
             ]
         },
         "experimentalDecorators": true
