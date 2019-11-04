@@ -6,6 +6,7 @@ import updateInvoices from '@salesforce/apex/BillingController.updateInvoices';
 import upsertInvoiceLineItems from '@salesforce/apex/BillingController.upsertInvoiceLineItems';
 
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicesUpdated';
+import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
 export default class InvoiceCardList extends LightningElement {
     @track invoiceData = [];
@@ -14,7 +15,8 @@ export default class InvoiceCardList extends LightningElement {
     @track isWorking = false;
 
     LABELS = {
-        TOAST_TITLE_SUCCESS
+        TOAST_TITLE_SUCCESS,
+        TOAST_TITLE_ERROR
     }
 
     connectedCallback() {
@@ -49,11 +51,20 @@ export default class InvoiceCardList extends LightningElement {
                 return invProm;
             })
             .then(() => {
-                //console.log('Invoices Resolved');
+                let successToast = new ShowToastEvent({
+                    title : this.LABELS.TOAST_TITLE_SUCCESS,
+                    variant : 'success'
+                });
+                this.dispatchEvent(successToast);
                 this.isWorking = false;
             })
             .catch((error) => {
-                //console.log('Something went wrong: ' + JSON.stringify(error));
+                let errToast = new ShowToastEvent({
+                    title : this.LABELS.TOAST_TITLE_ERROR,
+                    message : error,
+                    variant : 'error'
+                });
+                this.dispatchEvent(errToast);
                 this.isWorking = false;
             });
 
