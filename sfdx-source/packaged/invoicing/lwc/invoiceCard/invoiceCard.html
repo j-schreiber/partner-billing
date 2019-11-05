@@ -104,6 +104,7 @@
             <!-- the line item table -->
             <c-invoice-line-item-datatable
                 lineitems={internalLineItems}
+                onrecalculate={recalculateSums}
                 onrecordchange={bubbleLineItemChange}
                 onrecorddelete={removeLineItem}>
             </c-invoice-line-item-datatable>

@@ -1,7 +1,5 @@
 <template>
 
-    <p>Amount: {SumAmount}</p>
-    <p>Gross Amount: {SumGrossAmount}</p>
     <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
 
         <thead>
@@ -22,6 +20,7 @@
                     rowdata={lineitem}
                     key={lineitem.ExtId}
                     onrecorddelete={bubbleRecordDelete}
+                    onrecalculate={recalculateSums}
                     onrecordchange={bubbleRecordChange}>
                 </c-invoice-line-item-datatable-row>
             </template>

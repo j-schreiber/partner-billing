@@ -31,7 +31,7 @@ export default class InvoiceCardList extends LightningElement {
     }
 
     cacheUpdatedLineItem(event) {
-        console.log('Getting upsert: ' + JSON.stringify(event));
+        //console.log('Getting upsert: ' + JSON.stringify(event));
         if (!this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.set(event.detail.extId, {});
         let record = this.dirtyLineItems.get(event.detail.extId);
         record[event.detail.field] = event.detail.newValue;
@@ -39,7 +39,7 @@ export default class InvoiceCardList extends LightningElement {
     }
 
     cacheDeletedLineItem(event) {
-        console.log('Getting delete: ' + JSON.stringify(event.detail));
+        //console.log('Getting delete: ' + JSON.stringify(event.detail));
         if (this.dirtyLineItems.has(event.detail)) this.dirtyLineItems.delete(event.detail);
         if (event.detail.recordId && event.detail.recordId.length) this.deletedLineItems.add(event.detail.recordId);
     }

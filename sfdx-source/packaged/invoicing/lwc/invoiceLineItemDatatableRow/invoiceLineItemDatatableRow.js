@@ -5,6 +5,7 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     @track record;
     oldRecord = {};
 
+    /**                         LIFECYCLE HOOKS                             */
     connectedCallback() {
         this.record = {
             Id : this.rowdata.Record.Id,
@@ -17,8 +18,12 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         }
     }
 
+    disconnectedCallback() {
+        this.dispatchRecalculate();
+    }
+
     renderedCallback() {
-        
+        //console.log('Row rendered!' + JSON.stringify(this.record));   
     }
 
     /**                         INTERNALLY UPDATE DATA                        */
@@ -83,6 +88,10 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         );
     }
 
+    dispatchRecalculate() {
+        this.dispatchEvent(new CustomEvent('recalculate'));
+    }
+
     dispatchRecordChange(updatedField) {
         if (this.oldRecord[updatedField] !== this.record[updatedField]) {
             this.dispatchEvent(
@@ -97,6 +106,7 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
                     }
                 })
             );
+            this.dispatchRecalculate();
         }
         this.oldRecord[updatedField] = this.record[updatedField];
     }

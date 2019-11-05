@@ -5,14 +5,13 @@ const PICK_VAL_ACTIVATED = 'Activated';
 const PICK_VAL_CANCELLED = 'Cancelled';
 
 export default class InvoiceCard extends LightningElement {
-    @api rowdata;
-    @track invoiceRecord;
-    @track record;
-    @track lineItemTable;
-    @track invoiceDecorator;
+    invoiceDecorator;
 
+    @track record;
     @track internalLineItems = [];
-    @track newLineItems = [];
+
+    @track TotalAmount = 0;
+    @track TotalGrossAmount = 0;
 
     // used to construct the next line item id
     incremetor = 0;
@@ -23,6 +22,8 @@ export default class InvoiceCard extends LightningElement {
     }
     set invoiceWrapper(value) {
         this.invoiceDecorator = value;
+        this.TotalAmount = value.Record.TotalAmount__c;
+        this.TotalGrossAmount = value.Record.TotalGrossAmount__c;
 
         this.record = {
             Id : value.Record.Id,
@@ -31,7 +32,9 @@ export default class InvoiceCard extends LightningElement {
             ServicePeriodFrom__c : value.Record.ServicePeriodFrom__c,
             Account__r : { Name : value.Record.Account__r.Name },
             Status__c : value.Record.Status__c,
-            Name : value.Record.Name
+            Name : value.Record.Name,
+            TotalAmount__c : value.Record.TotalAmount__c,
+            TotalGrossAmount__c : value.Record.TotalGrossAmount__c
         }
 
         value.LineItems.forEach(
@@ -51,12 +54,6 @@ export default class InvoiceCard extends LightningElement {
                 this.internalLineItems.push(newItem);
             }
         );
-
-        //console.log(JSON.stringify(this.internalLineItems));
-    }
-
-    renderedCallback() {
-        this.lineItemTable = this.template.querySelector('c-invoice-line-item-datatable');
     }
 
     handleDateInput(event) {
@@ -84,6 +81,11 @@ export default class InvoiceCard extends LightningElement {
         this.dispatchUpdateEvent();
     }
 
+    recalculateSums(event) {
+        this.TotalAmount = event.detail.sumAmount;
+        this.TotalGrossAmount = event.detail.sumGrossAmount;
+    }
+
     addLineItem() {
         var newItem = this.NewLineItem;
         this.internalLineItems.push(newItem);
@@ -99,14 +101,6 @@ export default class InvoiceCard extends LightningElement {
 
     get invoiceTitle() {
         return this.record.Account__r.Name+ ' - ' + this.record.Name;
-    }
-
-    get TotalAmount() {
-        return this.lineItemTable ? this.lineItemTable.SumAmount : this.record.TotalAmount__c;
-    }
-
-    get TotalGrossAmount() {
-        return this.lineItemTable ? this.lineItemTable.SumGrossAmount : this.record.TotalGrossAmount__c;
     }
 
     get TotalTaxes() {
