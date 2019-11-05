@@ -1,9 +1,7 @@
 import { LightningElement, api } from 'lwc';
 
 export default class InvoiceLineItemDatatable extends LightningElement {
-    @api lineitems;
-
-    lineItemTableRows;
+    @api lineitems = []
 
     bubbleRecordChange(event) {
         this.dispatchEvent(
@@ -17,21 +15,17 @@ export default class InvoiceLineItemDatatable extends LightningElement {
         );
     }
 
-    renderedCallback() {
-        this.lineItemTableRows = this.template.querySelectorAll('c-invoice-line-item-datatable-row');
-    }
-
     @api
     get SumAmount() {
         let sum = 0;
-        this.lineItemTableRows.forEach( (item) => {sum += item.Amount});
+        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.Amount});
         return sum;
     }
 
     @api
     get SumGrossAmount() {
         let sum = 0;
-        this.lineItemTableRows.forEach( (item) => {sum += item.GrossAmount});
+        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.GrossAmount});
         return sum;
     }
 }

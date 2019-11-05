@@ -48,10 +48,6 @@ export default class InvoiceCardList extends LightningElement {
 
         this.isWorking = true;
 
-        console.log('Ids to delete: ' + JSON.stringify(this.lineItemIdsToDelete()));
-        console.log('Line Items to upsert: ' + JSON.stringify(this.lineItemsToUpsert()));
-        console.log('Invoices to update: ' + JSON.stringify(this.dirtyInvoices));
-
         deleteInvoiceLineItems({
             lineItemIds: this.lineItemIdsToDelete()
         })

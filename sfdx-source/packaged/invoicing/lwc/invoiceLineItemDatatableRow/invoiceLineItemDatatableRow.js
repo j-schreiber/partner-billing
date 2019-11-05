@@ -9,6 +9,7 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         this.record = {
             Id : this.rowdata.Record.Id,
             Price__c : this.rowdata.Record.Price__c,
+            Product__c : this.rowdata.Record.Product__c,
             Tax__c : this.rowdata.Record.Tax__c,
             Quantity__c : this.rowdata.Record.Quantity__c,
             Discount__c : this.rowdata.Record.Discount__c,
@@ -16,25 +17,42 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         }
     }
 
+    renderedCallback() {
+        
+    }
+
     /**                         INTERNALLY UPDATE DATA                        */
     updatePrice(event) {
-        this.record.Price__c = event.detail.value;
+        if (event.detail.value >= 0) {
+            this.record.Price__c = event.detail.value;
+        }
     }
 
     updateDiscount(event) {
-        this.record.Discount__c = event.detail.value;
+        if (event.detail.value >= 0 && event.detail.value <= 100) {
+            this.record.Discount__c = event.detail.value;
+        }
     }
 
     updateTax(event) {
-        this.record.Tax__c = event.detail.value;
+        if (event.detail.value >= 0) {
+            this.record.Tax__c = event.detail.value;
+        }
     }
 
     updateQuantity(event) {
-        this.record.Quantity__c = event.detail.value;
+        if (event.detail.value >= 0) {
+            this.record.Quantity__c = event.detail.value;
+        }
     }
 
     updateDescription(event) {
         this.record.Description__c = event.detail.value;
+    }
+
+    updateProduct(event) {
+        this.record.Product__c = event.detail.value;
+        this.dispatchRecordChange('Product__c');
     }
 
     /**                         SEND UPDATES TO PARENT                           */
@@ -56,10 +74,6 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
 
     sendDescriptionUpdate() {
         this.dispatchRecordChange('Description__c');
-    }
-
-    sendProductUpdate() {
-        this.dispatchRecordChange('Product__c');
     }
 
     /**                         ACTUAL EVENT DISPATCHERS                          */
