@@ -5,6 +5,12 @@
             "c/invoicePdfQuickAction": [
                 "../../../invoice-pdf-generation/lwc/invoicePdfQuickAction/invoicePdfQuickAction.js"
             ],
+            "c/invoiceCard": [
+                "../../../invoicing/lwc/invoiceCard/invoiceCard.js"
+            ],
+            "c/invoiceCardList": [
+                "../../../invoicing/lwc/invoiceCardList/invoiceCardList.js"
+            ],
             "c/invoiceLineItemDatatable": [
                 "../../../invoicing/lwc/invoiceLineItemDatatable/invoiceLineItemDatatable.js"
             ],
@@ -28,12 +34,6 @@
             ],
             "c/progressBar": [
                 "progressBar/progressBar.js"
-            ],
-            "c/invoiceCard": [
-                "../../../invoicing/lwc/invoiceCard/invoiceCard.js"
-            ],
-            "c/invoiceCardList": [
-                "../../../invoicing/lwc/invoiceCardList/invoiceCardList.js"
             ]
         },
         "experimentalDecorators": true

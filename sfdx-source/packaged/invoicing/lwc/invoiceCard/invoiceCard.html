@@ -32,26 +32,26 @@
             <div class="slds-m-bottom_large slds-grid slds-grid_vertical">
                 <div class="slds-col slds-grid">
                     <lightning-input
-                        value={rowdata.Record.Date__c}
+                        value={record.Date__c}
                         type="date"
                         variant="label-inline"
                         label="Invoice Date"
                         onchange={handleDateInput}>
                     </lightning-input>
                     <lightning-input
-                        value={rowdata.Record.ServicePeriodFrom__c}
+                        value={record.ServicePeriodFrom__c}
                         type="date"
                         label="Service Period Start"
                         variant="label-inline"
-                        max={invoiceRecord.ServicePeriodTo__c}
+                        max={record.ServicePeriodTo__c}
                         onchange={handleServicePeriodFromInput}>
                     </lightning-input>
                     <lightning-input 
-                        value={rowdata.Record.ServicePeriodTo__c}
+                        value={record.ServicePeriodTo__c}
                         type="date"
                         label="Service Period End"
                         variant="label-inline"
-                        min={invoiceRecord.ServicePeriodFrom__c}
+                        min={record.ServicePeriodFrom__c}
                         onchange={handleServicePeriodToInput}>
                     </lightning-input>
                 </div>
@@ -65,7 +65,7 @@
                                         <lightning-formatted-number
                                             value={TotalAmount}
                                             format-style="currency"
-                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                            currency-code={record.CurrencyIsoCode}>
                                         </lightning-formatted-number>
                                     </td>
                                 </tr>
@@ -75,7 +75,7 @@
                                         <lightning-formatted-number
                                             value={TotalTaxes}
                                             format-style="currency"
-                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                            currency-code={record.CurrencyIsoCode}>
                                         </lightning-formatted-number>
                                     </td>
                                 </tr>
@@ -85,7 +85,7 @@
                                         <lightning-formatted-number
                                             value={TotalGrossAmount}
                                             format-style="currency"
-                                            currency-code={rowdata.Record.CurrencyIsoCode}>
+                                            currency-code={record.CurrencyIsoCode}>
                                         </lightning-formatted-number>
                                     </td>
                                 </tr>
@@ -94,13 +94,18 @@
                     </div>
                     
                 </div>
-            </div>            
+            </div>
+
+            <lightning-button
+                label="Add Row"
+                onclick={addLineItem}>
+            </lightning-button>
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable
-                lineitems={rowdata.LineItems}
-                invoice-id={rowdata.Record.Id}
-                onrecordchange={bubbleLineItemChange}>
+                lineitems={internalLineItems}
+                onrecordchange={bubbleLineItemChange}
+                onrecorddelete={removeLineItem}>
             </c-invoice-line-item-datatable>
 
         </div>

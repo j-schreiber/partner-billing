@@ -3,14 +3,19 @@
     <lightning-card>
 
         <lightning-button-group slot="actions">
-            <lightning-button label="Revert All" onclick={revertDirtyInvoices}></lightning-button>
+            <lightning-button label="Revert All" onclick={revertAllChanges}></lightning-button>
             <lightning-button label="Commit All" variant="brand" onclick={commitDirtyRecords}></lightning-button>
         </lightning-button-group>
 
         <div class="slds-is-relative">
             <template for:each={invoiceData} for:item='invoice'>
                 <div key={invoice.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
-                    <c-invoice-card rowdata={invoice} oninvoicechange={cacheUpdatedInvoice} onlineitemchange={cacheUpdatedLineItem}></c-invoice-card>
+                    <c-invoice-card
+                        invoice-wrapper={invoice}
+                        oninvoicechange={cacheUpdatedInvoice}
+                        onlineitemdelete={cacheDeletedLineItem}
+                        onlineitemchange={cacheUpdatedLineItem}>
+                    </c-invoice-card>
                 </div>
             </template>
             <template if:true={isWorking}>

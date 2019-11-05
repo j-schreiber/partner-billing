@@ -9,6 +9,7 @@
             formatter="currency"
             variant="label-hidden"
             onchange={updatePrice}
+            onblur={sendPriceUpdate}
             step="0.01">
         </lightning-input>
     </td> 
@@ -18,6 +19,7 @@
             type="number"
             variant="label-hidden"
             onchange={updateQuantity}
+            onblur={sendQuantityUpdate}
             step="0.0001">
         </lightning-input>
     </td>
@@ -28,6 +30,7 @@
             formatter="percent-fixed"
             variant="label-hidden"
             onchange={updateTax}
+            onblur={sendTaxUpdate}
             step="0.01">
         </lightning-input>
     </td>
@@ -39,6 +42,7 @@
             variant="label-hidden"
             max="100"
             onchange={updateDiscount}
+            onblur={sendDiscountUpdate}
             step="0.01">
         </lightning-input>
     </td>
@@ -60,7 +64,16 @@
         <lightning-input
             value={rowdata.Record.Description__c}
             type="text"
+            onchange={updateDescription}
+            onblur={sendDescriptionUpdate}
             variant="label-hidden">
         </lightning-input>
+    </td>
+    <td>
+        <lightning-button-icon
+            icon-name="utility:delete"
+            alternative-text="Delete"
+            onclick={dispatchRecordDelete}>
+        </lightning-button-icon>
     </td>
 </template>

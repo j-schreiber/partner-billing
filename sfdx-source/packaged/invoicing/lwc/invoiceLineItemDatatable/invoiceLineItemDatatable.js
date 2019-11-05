@@ -1,10 +1,7 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class InvoiceLineItemDatatable extends LightningElement {
     @api lineitems;
-    @api invoiceId;
-
-    @track internalLineItems = [];
 
     lineItemTableRows;
 
@@ -14,24 +11,14 @@ export default class InvoiceLineItemDatatable extends LightningElement {
         );
     }
 
+    bubbleRecordDelete(event) {
+        this.dispatchEvent(
+            new CustomEvent('recorddelete', { detail : event.detail })
+        );
+    }
+
     renderedCallback() {
         this.lineItemTableRows = this.template.querySelectorAll('c-invoice-line-item-datatable-row');
-    }
-
-    connectedCallback() {
-        this.internalLineItems.push(this.lineitems);
-        //this.internalLineItems.push(this.NewLineItem);
-        //console.log(JSON.stringify(this.internalLineItems));
-    }
-
-    get NewLineItem() {
-        return {
-            Record : {
-                Invoice__c : this.invoiceId,
-                Productname__c : "New",
-                Id : '1'
-            }
-        };
     }
 
     @api

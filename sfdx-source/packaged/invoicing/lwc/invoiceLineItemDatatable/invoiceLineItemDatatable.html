@@ -10,13 +10,15 @@
             <th>Amount (Net)</th>
             <th>Amount (Gross)</th>
             <th class="cell-max-width_x-large">Description</th>
+            <th></th>
         </thead>
         <tbody>
             <!-- render all line items as table rows -->
             <template for:each={lineitems} for:item='lineitem'>
                 <c-invoice-line-item-datatable-row 
                     rowdata={lineitem}
-                    key={lineitem.Record.Id}
+                    key={lineitem.ExtId}
+                    onrecorddelete={bubbleRecordDelete}
                     onrecordchange={bubbleRecordChange}>
                 </c-invoice-line-item-datatable-row>
             </template>

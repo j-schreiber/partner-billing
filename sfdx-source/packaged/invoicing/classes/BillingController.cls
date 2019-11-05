@@ -92,7 +92,7 @@ public with sharing class BillingController {
     *   @param  lineItems       Dirty invoice line items to delete
     */
     @AuraEnabled
-    public static void deleteInvoiceLineItems(List<InvoiceLineItem__c> lineItems) {
-        for (InvoiceLineItem__c ili : lineItems) System.debug('Deleting: ' + ili);
+    public static void deleteInvoiceLineItems(List<Id> lineItemIds) {
+        for (Id i : lineItemIds) System.debug('Deleting: ' + i);
     }
 }
