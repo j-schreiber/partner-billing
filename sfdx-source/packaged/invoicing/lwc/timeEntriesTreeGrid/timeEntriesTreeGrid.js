@@ -1,4 +1,4 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
@@ -6,101 +6,61 @@ import createInvoices from '@salesforce/apex/BillingController.createInvoicesFro
 
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicingRunSuccess';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
+import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_FilterHeader';
+import STARTDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateStart';
+import ENDDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateEnd';
 
 const COLUMN_DEFINITION = [
-    {
-        type: 'text',
-        fieldName: 'AccountName',
-        label: 'Accountname'
-    },
-    {
-        type: 'text',
-        fieldName: 'ProductName',
-        label: 'Product'
-    },
-    {
-        type: 'text',
-        fieldName: 'Name',
-        label: 'Number'
-    },
-    {
-        type: 'date',
-        fieldName: 'ServiceDate',
-        label: 'Date'
-    },
-    {
-        type: 'date',
-        fieldName: 'StartTime',
-        label: 'Start Time',
-        typeAttributes: {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    },
-    {
-        type: 'date',
-        fieldName: 'EndTime',
-        label: 'End Time',
-        typeAttributes: {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    },
-    {
-        type: 'text',
-        fieldName: 'Duration',
-        label: 'Duration'
-    },
-    {
-        type: 'currency',
-        fieldName: 'DailyRate',
-        label: 'Daily Rate'
-    },
-    {
-        type: 'currency',
-        fieldName: 'TotalAmount',
-        label: 'Total Amount'
-    }
-]
+    { type: "text", fieldName: "AccountName", label: "Accountname" },
+    { type: "text", fieldName: "ProductName", label: "Product" },
+    { type: "text", fieldName: "Name", label: "Number" },
+    { type: "date", fieldName: "ServiceDate", label: "Date" },
+    { type: "date", fieldName: "StartTime", label: "Start Time", typeAttributes: { hour: "2-digit", minute: "2-digit" } },
+    { type: "date", fieldName: "EndTime", label: "End Time", typeAttributes: { hour: "2-digit", minute: "2-digit" } },
+    { type: "text", fieldName: "Duration", label: "Duration" },
+    { type: "currency", fieldName: "DailyRate", label: "Daily Rate" },
+    { type: "currency", fieldName: "TotalAmount", label: "Total Amount" }
+];
 
 export default class TimeEntriesTreeGrid extends LightningElement {
 
-    @api
-    get filters() {
-        return this.activeFilters;
-    }
-    set filters(value) {
-        this.activeFilters = value;
-        this.refreshData(this.activeFilters);
-    }
-
-    @track activeFilters;
-    @track gridData;
-    @track columns = COLUMN_DEFINITION;
+    @track gridData = [];
     @track isWorking = false;
 
-    @track selectedOptions = {
+    selectedOptions = {
         collapseTimeEntries : true,
         overrideServicePeriod : true
     };
 
+    selectedFilters = {
+        startDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString(),
+        endDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString(),
+    }
+
+    columns = COLUMN_DEFINITION;
+
     LABELS = {
+        CARD_TITLE,
+        STARTDATE_PICKER_LABEL,
+        ENDDATE_PICKER_LABEL,
         TOAST_TITLE_SUCCESS,
         TOAST_TITLE_ERROR
     }
 
-    refreshData(filters) {
+    connectedCallback() {
+        this.refreshData(this.selectedFilters);
+    }
 
-        getTimeEntries({
-            startDate : filters.startDate,
-            endDate : filters.endDate
-        })
-        .then( (result) => {
-            this.gridData = result;
-        })
-        .catch( () => {
-            this.gridDate = [];
-        });
+    handleStartDateChange(event) {
+        this.selectedFilters.startDate = event.detail.value;
+    }
+
+    handleEndDateChange(event) {
+        this.selectedFilters.endDate = event.detail.value;
+    }
+
+    handleSearchButtonClick() {
+        this.refreshData(this.selectedFilters);
     }
 
     handleCollapseToggle(event) {
@@ -109,6 +69,24 @@ export default class TimeEntriesTreeGrid extends LightningElement {
 
     handleServicePeriodToggle(event) {
         this.selectedOptions.overrideServicePeriod = event.detail.checked
+    }
+
+    refreshData(filters) {
+
+        this.isWorking = true;
+
+        getTimeEntries({
+            startDate : filters.startDate,
+            endDate : filters.endDate
+        })
+        .then( (result) => {
+            this.gridData = result;
+            this.isWorking = false;
+        })
+        .catch( () => {
+            this.gridDate = [];
+            this.isWorking = false;
+        });
     }
 
     startBillingCycle() {

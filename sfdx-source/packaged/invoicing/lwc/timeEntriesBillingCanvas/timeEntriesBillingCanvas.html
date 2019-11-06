@@ -24,9 +24,6 @@
     <div>
         <template if:true={displayTimeEntrySelection}>
             <div class="slds-m-vertical_small">
-                <c-time-entries-filter-header onfilterupdate={updateTimeEntries}></c-time-entries-filter-header>
-            </div>
-            <div class="slds-m-vertical_small">
                 <c-time-entries-tree-grid onstepcompleted={increaseProcessStage}></c-time-entries-tree-grid>
             </div>
         </template>

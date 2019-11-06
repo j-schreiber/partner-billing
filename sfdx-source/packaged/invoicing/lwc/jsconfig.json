@@ -29,9 +29,6 @@
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
             ],
-            "c/timeEntriesFilterHeader": [
-                "timeEntriesFilterHeader/timeEntriesFilterHeader.js"
-            ],
             "c/timeEntriesTreeGrid": [
                 "timeEntriesTreeGrid/timeEntriesTreeGrid.js"
             ],

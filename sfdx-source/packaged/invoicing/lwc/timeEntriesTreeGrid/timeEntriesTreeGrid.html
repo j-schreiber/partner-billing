@@ -1,35 +1,80 @@
 <template>
-    <lightning-card>
 
-        <lightning-button slot="actions" label="Create Invoices for Selected" variant="brand" onclick={startBillingCycle}></lightning-button>
-        
-        <div class="slds-grid slds-p-horizontal_medium">
-            <div>
-                <lightning-input class="slds-m-around_small" 
+    <div class="slds-m-bottom_medium">
+        <lightning-card title={LABELS.CARD_TITLE}>
+            <lightning-button 
+                class="slds-m-around_medium" 
+                label="Refresh Time Entries" 
+                variant="neutral"
+                slot="actions" 
+                onclick={handleSearchButtonClick}>
+            </lightning-button>
+
+            <lightning-button
+                slot="actions"
+                label="Create Invoices for Selected"
+                variant="brand"
+                onclick={startBillingCycle}>
+            </lightning-button>
+
+            <div class="slds-p-around_medium slds-grid slds-grid_align-space">
+                <div class="slds-grid">
+                    <lightning-input
+                        class="slds-m-right_medium"
+                        type="date"
+                        name="startDateInput"
+                        label={LABELS.STARTDATE_PICKER_LABEL}
+                        onchange={handleStartDateChange}
+                        max={selectedFilters.endDate}
+                        value={selectedFilters.startDate}>
+                    </lightning-input>
+                    <lightning-input
+                        class="slds-m-right_medium"
+                        type="date"
+                        name="endDateInput"
+                        label={LABELS.ENDDATE_PICKER_LABEL}
+                        onchange={handleEndDateChange}
+                        min={selectedFilters.startDate}
+                        value={selectedFilters.endDate}>
+                    </lightning-input>
+                </div>
+                <div class="slds-size_1-of-5">
+                    <div class="slds-grid slds-grid_vertical">
+                        <lightning-input class="slds-m-around_xx-small" 
                                 label="Override Service Period"
                                 type="toggle"
-                                message-toggle-active="Override from filter"
-                                message-toggle-inactive="Calculate from Time Entries"
+                                message-toggle-active="Filter"
+                                message-toggle-inactive="Time Entries"
                                 checked
                                 onchange={handleServicePeriodToggle}></lightning-input>
+                       
+                        <lightning-input class="slds-m-around_xx-small" 
+                                        label="Collapse Time Entries"
+                                        type="toggle"
+                                        message-toggle-active="Collapse"
+                                        message-toggle-inactive="Don't Collapse"
+                                        checked
+                                        onchange={handleCollapseToggle}></lightning-input>
+                    </div>
+                </div>
             </div>
-            <div>
-                <lightning-input class="slds-m-around_small" 
-                                label="Collapse Time Entries"
-                                type="toggle"
-                                message-toggle-active="Collapse"
-                                message-toggle-inactive="Don't Collapse"
-                                checked
-                                onchange={handleCollapseToggle}></lightning-input>
+    
+        </lightning-card>
+    </div>
+    
+    <div>
+        <lightning-card>
+            
+            <div class="slds-p-horizontal_medium slds-is-relative">
+                <div>
+                    <lightning-datatable columns={columns} data={gridData} key-field="Id"></lightning-datatable>
+                </div>
+                <template if:true={isWorking}>
+                    <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
+                </template>
             </div>
-        </div>
 
-        <div class="slds-p-horizontal_medium slds-is-relative">
-            <lightning-datatable columns={columns} data={gridData} key-field="Id"></lightning-datatable>
-            <template if:true={isWorking}>
-                <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
-            </template>
-        </div>
-
-    </lightning-card>
+        </lightning-card>
+    </div>
+    
 </template>
