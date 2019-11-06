@@ -48,6 +48,17 @@ body {
         margin: 0px !important;
         padding: 0px !important;
     }
+
+    div.line-item-container table {
+        table-layout: auto;
+    }
+
+}
+
+@media print {
+    div.line-item-container {
+        width: 175mm;
+    }
 }
 
 /** Override standard CSS for footer */
@@ -80,7 +91,6 @@ div.header {
 td, th {
     padding: 1px 5px 1px 5px;
     white-space: nowrap;
-    max-width: 6cm;
     overflow: hidden;
     text-overflow: ellipsis;
 }

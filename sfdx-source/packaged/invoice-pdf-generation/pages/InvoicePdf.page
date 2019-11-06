@@ -68,7 +68,7 @@
             </div>
 
             <!-- generated table of line items -->
-            <div class="ayc-p-vertical_medium">
+            <div class="ayc-p-vertical_medium line-item-container">
                 <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
             </div>
 
