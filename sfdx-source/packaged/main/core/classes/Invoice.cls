@@ -10,7 +10,9 @@ public virtual class Invoice {
 
     /** @Description    The invoice line items */
     @AuraEnabled
-    public List<InvoiceLineItem> LineItems {public get; private set;}
+    public List<InvoiceLineItem> LineItems {
+        public get { return LineItemMap.values(); }
+    }
 
     @AuraEnabled
     public Boolean hasLineItems {
@@ -55,14 +57,30 @@ public virtual class Invoice {
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
 
+    /** @Description    This map stores all line items for this invoice as line item decorator */
+    public Map<Id, InvoiceLineItem> LineItemMap {public get; private set;}
+
+    /** @Description    Stores all new line item records that will be added to the invoice */
+    private List<InvoiceLineItem__c> newLineItemRecords;
+
+    /** @Description    Stores all existing/persistent line item records that have been updated */
+    private Map<Id, InvoiceLineItem__c> dirtyLineItemRecords;
+
+    /** @Description    Initialize an empty and new invoice */
+    public Invoice() {
+        Record = new Invoice__c();
+        LineItemMap = new Map<Id, InvoiceLineItem>();
+        newLineItemRecords = new List<InvoiceLineItem__c>();
+        dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
+        Attachments = new List<Attachment>();
+    }
+
     /** @Description    Initialize the object by invoice id */
     public Invoice(String recordId) {
         try {
             this(Database.query(Invoice.QUERY_STRING + ' WHERE Id = :recordId'));
         } catch (Exception e) {
-            Record = new Invoice__c();
-            LineItems = new List<InvoiceLineItem>();
-            Attachments = new List<Attachment>();
+            this();
         }
     }
 
@@ -70,11 +88,28 @@ public virtual class Invoice {
     public Invoice(Invoice__c originalRecord) {
         Record = originalRecord;
         Attachments = Record.Attachments;
+        newLineItemRecords = new List<InvoiceLineItem__c>();
+        dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
 
         // get line items from related records
-        LineItems = new List<InvoiceLineItem>();
+        LineItemMap = new Map<Id, InvoiceLineItem>();
         if (originalRecord.LineItems__r != null) {
-            for (InvoiceLineItem__c ili : originalRecord.LineItems__r) LineItems.add(new InvoiceLineItem(ili));
+            for (InvoiceLineItem__c ili : originalRecord.LineItems__r) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
+        }
+    }
+
+    /** @Description
+    *   Add new line item (or line-item tree) to the invoice or replaces an
+    *   existing line item with an updated version.
+    *
+    *   @param  lineItem    The new line item or line item tree to add
+    */
+    public void addLineItemRecord(InvoiceLineItem__c toAdd) {
+        if (LineItemMap.containsKey(toAdd.Id)) {
+            dirtyLineItemRecords.put(toAdd.Id, toAdd);
+        } else {
+            new InvoiceLineItem(toAdd).setInvoice(this);
+            newLineItemRecords.add(toAdd);
         }
     }
 
@@ -82,8 +117,18 @@ public virtual class Invoice {
     *   Commits all changes made to the record or related records.
     */
     public void commitAllChanges() {
-        upsert Attachments;
-    }
 
+        Database.UpsertResult ur = Database.upsert(Record);
+
+        upsert Attachments;
+
+        Database.SaveResult[] existingSrs = Database.update(dirtyLineItemRecords.values());
+        for (Id lineitemId : dirtyLineItemRecords.keySet()) LineItemMap.get(lineitemId).updateRecord(dirtyLineItemRecords.get(lineItemId));
+        dirtyLineItemRecords.clear();
+
+        Database.SaveResult[] newSrs = Database.insert(newLineItemRecords);
+        for (InvoiceLineItem__c ili : newLineItemRecords) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
+        newLineItemRecords.clear();
+    }
 
 }

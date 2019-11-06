@@ -43,6 +43,7 @@ public class TestDataFactory {
                                       Price__c = 1333.37,
                                       Quantity__c = 1.00,
                                       Tax__c = 19,
+                                      Discount__c = 0,
                                       Unit__c = 'Each',
                                       ServiceDate__c = Date.newInstance(2019, 10, 20));
     }

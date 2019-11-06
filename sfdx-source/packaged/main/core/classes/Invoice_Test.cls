@@ -86,6 +86,83 @@ public class Invoice_Test {
         System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
     }
 
+    @isTest
+    static void init_BlankConstructor_EmptyInvoiceInitialized() {
+        // ACTION
+        Invoice actualObj = new Invoice();
+        // VERIFY
+        System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
+        System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
+        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+    }
+
+    @isTest
+    static void addLineItemRecord_NewLineItem_NotAddedToPersistentLineItems() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+
+        // ACTION
+        InvoiceLineItem__c ili = TestDataFactory.CreateDefaultInvoiceLineItem();
+        objUnderTest.addLineItemRecord(ili);
+
+        // VERIFY
+        System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertEquals(ili.Invoice__c, objUnderTest.Record.Id, 'Record.Id');
+    }
+
+    @isTest
+    static void addLineItemRecord_ExistingLineItem_NotAddedToPersistentLineItems() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        InvoiceLineItem__c lineItemToUpdate = [SELECT Id,Price__c,Quantity__c FROM InvoiceLineItem__c WHERE Invoice__c = :record.Id LIMIT 1];
+        Decimal originalQuantity = lineItemToUpdate.Quantity__c;
+        Invoice objUnderTest = new Invoice(record.Id);
+
+        // ACTION
+        lineItemToUpdate.Quantity__c = 1298.98;
+        objUnderTest.addLineItemRecord(lineItemToUpdate);
+
+        // VERIFY
+        System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertEquals(originalQuantity, objUnderTest.LineItemMap.get(lineItemToUpdate.Id).Record.Quantity__c, 'LineItemMap.get(lineItemToUpdate.Id).Recod.Quantity__c');
+    }
+
+    @isTest
+    static void commitAllChanges_HasNewLineItem_AddedToPersistentLineItems() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+        InvoiceLineItem__c ili = TestDataFactory.CreateDefaultInvoiceLineItem();
+        objUnderTest.addLineItemRecord(ili);
+
+        // ACTION
+        objUnderTest.commitAllChanges();
+
+        // VERIFY
+        System.assertEquals(record.LineItems__r.size() + 1, objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertNotEquals(null, ili.Id, 'ili.Record.Id');
+    }
+
+    @isTest
+    static void commitAllChanges_ExistingNewLineItem_PersistentLineItemsUpdated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        InvoiceLineItem__c lineItemToUpdate = [SELECT Id FROM InvoiceLineItem__c WHERE Invoice__c = :record.Id LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+        lineItemToUpdate.Quantity__c = 100;
+        lineItemToUpdate.Price__c = 999.12;
+        objUnderTest.addLineItemRecord(lineItemToUpdate);
+
+        // ACTION
+        objUnderTest.commitAllChanges();
+
+        // VERIFY
+        System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
+        System.assertEquals(lineItemToUpdate.Quantity__c, objUnderTest.LineItemMap.get(lineItemToUpdate.Id).Record.Quantity__c, 'LineItemMap.get(lineItemToUpdate.Id).Record.Quantity__c');
+        System.assertEquals(lineItemToUpdate.Price__c, objUnderTest.LineItemMap.get(lineItemToUpdate.Id).Record.Price__c, 'LineItemMap.get(lineItemToUpdate.Id).Record.Price__c');
+    }
+
     /**                             GETTER & SETTER
     *   - calculated taxes based on invoice net/gross
     *
