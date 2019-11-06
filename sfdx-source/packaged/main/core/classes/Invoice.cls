@@ -57,14 +57,17 @@ public virtual class Invoice {
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
 
-    /** @Description    This map stores all line items for this invoice as line item decorator */
+    /** @Description    All line items (with decorator object) for this invoice mapped by record id */
     public Map<Id, InvoiceLineItem> LineItemMap {public get; private set;}
 
-    /** @Description    Stores all new line item records that will be added to the invoice */
+    /** @Description    New line item records that will be added to the invoice */
     private List<InvoiceLineItem__c> newLineItemRecords;
 
-    /** @Description    Stores all existing/persistent line item records that have been updated */
+    /** @Description    Existing/persistent line item records that have been updated */
     private Map<Id, InvoiceLineItem__c> dirtyLineItemRecords;
+
+    /** @Description    Line item ids that will be deleted */
+    private Set<Id> deleteLineItemIds;
 
     /** @Description    Initialize an empty and new invoice */
     public Invoice() {
@@ -72,6 +75,7 @@ public virtual class Invoice {
         LineItemMap = new Map<Id, InvoiceLineItem>();
         newLineItemRecords = new List<InvoiceLineItem__c>();
         dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
+        deleteLineItemIds = new Set<Id>();
         Attachments = new List<Attachment>();
     }
 
@@ -89,6 +93,7 @@ public virtual class Invoice {
         Record = originalRecord;
         Attachments = Record.Attachments;
         newLineItemRecords = new List<InvoiceLineItem__c>();
+        deleteLineItemIds = new Set<Id>();
         dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
 
         // get line items from related records
@@ -114,6 +119,23 @@ public virtual class Invoice {
     }
 
     /** @Description
+    *   Marks the requested line item record from the invoice for deletion, if it exists and cleans
+    *   all child records in the process, if this line item was parent in a hierarchy (not yet implemented)
+    *
+    *   @param  lineItemId  The line item id to remove
+    *
+    *   @return             True, if at least one line item was marked for deletion
+    */
+    public Boolean removeLineItemId(Id lineItemId) {
+        if (LineItemMap.containsKey(lineItemId)) {
+            deleteLineItemIds.add(lineItemId);
+            dirtyLineItemRecords.remove(lineItemId);
+            return true;
+        }
+        return false;
+    }
+
+    /** @Description
     *   Commits all changes made to the record or related records.
     */
     public void commitAllChanges() {
@@ -129,6 +151,10 @@ public virtual class Invoice {
         Database.SaveResult[] newSrs = Database.insert(newLineItemRecords);
         for (InvoiceLineItem__c ili : newLineItemRecords) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
         newLineItemRecords.clear();
+
+        Database.DeleteResult[] deleteDrs = Database.delete(new List<Id>(deleteLineItemIds));
+        for (Id deletedId : deleteLineItemIds) LineItemMap.remove(deletedId);
+        deleteLineItemIds.clear();
     }
 
 }

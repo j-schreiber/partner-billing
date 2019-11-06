@@ -129,6 +129,35 @@ public class Invoice_Test {
     }
 
     @isTest
+    static void removeLineItemId_InvalidId_NoEffect() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+
+        // ACTION
+        Boolean actual = objUnderTest.removeLineItemId('a051k0000000000XXX');
+
+        // VERIFY
+        System.assertEquals(false, actual, 'return from removeLineItemId()');
+    }
+
+    @isTest
+    static void removeLineItemId_ValidId_MarkedForDeletion() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+
+        // ACTION
+        Id toDeleteId = record.LineItems__r[0].Id;
+        Boolean actual = objUnderTest.removeLineItemId(toDeleteId);
+
+        // VERIFY
+        System.assertEquals(true, actual, 'return from removeLineItemId()');
+        System.assertEquals(true, objUnderTest.LineItemMap.containsKey(toDeleteId), 'LineItemMap.containsKey(toDeleteId)');
+        System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
+    }
+
+    @isTest
     static void commitAllChanges_HasNewLineItem_AddedToPersistentLineItems() {
         // SETUP
         Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
@@ -161,6 +190,22 @@ public class Invoice_Test {
         System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
         System.assertEquals(lineItemToUpdate.Quantity__c, objUnderTest.LineItemMap.get(lineItemToUpdate.Id).Record.Quantity__c, 'LineItemMap.get(lineItemToUpdate.Id).Record.Quantity__c');
         System.assertEquals(lineItemToUpdate.Price__c, objUnderTest.LineItemMap.get(lineItemToUpdate.Id).Record.Price__c, 'LineItemMap.get(lineItemToUpdate.Id).Record.Price__c');
+    }
+
+    @isTest
+    static void commitAllChanges_LineItemMarkedForDeletion_LineItemDeleted() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+        Invoice objUnderTest = new Invoice(record.Id);
+        Id toDeleteId = record.LineItems__r[0].Id;
+        objUnderTest.removeLineItemId(toDeleteId);
+
+        // ACTION
+        objUnderTest.commitAllChanges();
+
+        // VERIFY
+        System.assertEquals(false, objUnderTest.LineItemMap.containsKey(toDeleteId), 'LineItemMap.containsKey(toDeleteId)');
+        System.assertEquals(record.LineItems__r.size() - 1, objUnderTest.LineItems.size(), 'LineItems.size()');
     }
 
     /**                             GETTER & SETTER

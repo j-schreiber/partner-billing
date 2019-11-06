@@ -11,6 +11,9 @@
             "c/invoiceCardList": [
                 "../../../invoicing/lwc/invoiceCardList/invoiceCardList.js"
             ],
+            "c/invoiceCardRecord": [
+                "../../../invoicing/lwc/invoiceCardRecord/invoiceCardRecord.js"
+            ],
             "c/invoiceLineItemDatatable": [
                 "../../../invoicing/lwc/invoiceLineItemDatatable/invoiceLineItemDatatable.js"
             ],

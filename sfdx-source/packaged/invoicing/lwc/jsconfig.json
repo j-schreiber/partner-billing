@@ -11,6 +11,9 @@
             "c/invoiceCardList": [
                 "invoiceCardList/invoiceCardList.js"
             ],
+            "c/invoiceCardRecord": [
+                "invoiceCardRecord/invoiceCardRecord.js"
+            ],
             "c/invoiceLineItemDatatable": [
                 "invoiceLineItemDatatable/invoiceLineItemDatatable.js"
             ],

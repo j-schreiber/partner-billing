@@ -1,0 +1,41 @@
+<template>
+    <template if:true={allLineItems}>
+
+        <lightning-card>
+            <!-- buttons for line item actions -->
+            <lightning-button-group slot="actions">
+                <lightning-button
+                    label="New Line Item"
+                    data-id="newLineItem"
+                    variant="neutral"
+                    onclick={addNewLineItem}>
+                </lightning-button>
+                <lightning-button
+                    label="Commit Changes"
+                    data-id="commitChanges"
+                    variant="neutral"
+                    onclick={commitLineItems}>
+                </lightning-button>
+                <lightning-button
+                    label="Revert Changes"
+                    data-id="revertChanges"
+                    variant="neutral"
+                    onclick={resetLineItems}>
+                </lightning-button>
+            </lightning-button-group>
+
+            <!-- the line item table -->
+            <div class="slds-p-horizontal_medium slds-is-relative">
+                <c-invoice-line-item-datatable
+                    lineitems={allLineItems}
+                    onrecordchange={updateLineItem}
+                    onrecorddelete={removeLineItem}>
+                </c-invoice-line-item-datatable>
+                <template if:true={isWorking}>
+                    <lightning-spinner alternative-text="Working ..." size="large"></lightning-spinner>
+                </template>
+            </div>
+
+        </lightning-card>
+    </template>
+</template>
