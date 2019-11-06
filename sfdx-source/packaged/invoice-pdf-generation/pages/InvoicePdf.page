@@ -36,6 +36,7 @@
                         <tr>
                             <th class="text-align_center">{!$Label.InvoicePdf_Label_CustomerId}</th>
                             <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceId}</th>
+                            <th class="text-align_center">{!$Label.InvoicePdf_Label_ServicePeriod}</th>
                             <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
                         </tr>
                     </thead>
@@ -43,6 +44,12 @@
                         <tr>
                             <td class="text-align_center">{!Invoice.Record.Account__r.CustomerId__c}</td>
                             <td class="text-align_center">{!Invoice.Record.Name}</td>
+                            <td class="text-align_center">
+                                <apex:outputText value="{! $Label.InvoicePdf_TextTemplate_ServicePeriod}">
+                                    <apex:param value="{! Invoice.Record.ServicePeriodFrom__c }" />
+                                    <apex:param value="{! Invoice.Record.ServicePeriodTo__c }" />
+                                </apex:outputText>
+                            </td>
                             <td class="text-align_center">
                                 <apex:outputField value="{! Invoice.Record.Date__c }" />
                             </td>

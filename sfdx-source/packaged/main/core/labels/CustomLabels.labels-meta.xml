@@ -73,6 +73,14 @@
         <value>Invoice Date</value>
     </labels>
     <labels>
+        <fullName>InvoicePdf_Label_ServicePeriod</fullName>
+        <categories>visualforce,label,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as generic table header</shortDescription>
+        <value>Service Period</value>
+    </labels>
+    <labels>
         <fullName>InvoicePdf_Label_TotalNetAmount</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
@@ -119,6 +127,14 @@
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
         <value>Timesheet</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_TextTemplate_ServicePeriod</fullName>
+        <categories>visualforce,text-template,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in pdf rendering VP as template to render service period</shortDescription>
+        <value>{0,date,dd.MM.yyyy} - {1,date,dd.MM.yyyy}</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Text_Greeting</fullName>

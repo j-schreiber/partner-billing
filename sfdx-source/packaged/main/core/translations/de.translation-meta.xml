@@ -13,6 +13,14 @@
         <name>Toast_Title_GenericError</name>
     </customLabels>
     <customLabels>
+        <label>Rechnungspositionen erfolgreich aktualisiert!</label>
+        <name>Toast_Title_LineItemsUpdated</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnung und Positionen erfolgreich aktualisiert!</label>
+        <name>Toast_Title_InvoicesUpdated</name>
+    </customLabels>
+    <customLabels>
         <label>Kundennummer</label>
         <name>InvoicePdf_Label_CustomerId</name>
     </customLabels>
@@ -23,6 +31,10 @@
     <customLabels>
         <label>Rechnungsdatum</label>
         <name>InvoicePdf_Label_InvoiceDate</name>
+    </customLabels>
+    <customLabels>
+        <label>Leistungszeitraum</label>
+        <name>InvoicePdf_Label_ServicePeriod</name>
     </customLabels>
     <customLabels>
         <label>Gesamt (Netto)</label>
