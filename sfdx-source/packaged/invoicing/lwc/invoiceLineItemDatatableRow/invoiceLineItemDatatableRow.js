@@ -1,5 +1,12 @@
 import { LightningElement, api, track } from 'lwc';
 
+import PRICE_FIELD from '@salesforce/schema/InvoiceLineItem__c.Price__c';
+import QUANTITY_FIELD from '@salesforce/schema/InvoiceLineItem__c.Quantity__c';
+import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
+import TAX_FIELD from '@salesforce/schema/InvoiceLineItem__c.Tax__c';
+import DISCOUNT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Discount__c';
+import DESCRIPTION_FIELD from '@salesforce/schema/InvoiceLineItem__c.Description__c';
+
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     @api rowdata;
     @track record;
@@ -28,26 +35,26 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
 
     /**                         INTERNALLY UPDATE DATA                        */
     updatePrice(event) {
-        if (event.detail.value >= 0) {
-            this.record.Price__c = event.detail.value;
+        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+            this.record.Price__c = Number(event.detail.value);
         }
     }
 
     updateDiscount(event) {
-        if (event.detail.value >= 0 && event.detail.value <= 100) {
-            this.record.Discount__c = event.detail.value;
+        if (!isNaN(event.detail.value) && event.detail.value >= 0 && event.detail.value <= 100) {
+            this.record.Discount__c = Number(event.detail.value);
         }
     }
 
     updateTax(event) {
-        if (event.detail.value >= 0) {
-            this.record.Tax__c = event.detail.value;
+        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+            this.record.Tax__c = Number(event.detail.value);
         }
     }
 
     updateQuantity(event) {
-        if (event.detail.value >= 0) {
-            this.record.Quantity__c = event.detail.value;
+        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+            this.record.Quantity__c = Number(event.detail.value);
         }
     }
 
@@ -56,29 +63,29 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     }
 
     updateProduct(event) {
-        this.record.Product__c = event.detail.value;
-        this.dispatchRecordChange('Product__c');
+        this.record.Product__c = (event.detail.value)[0];
+        this.dispatchRecordChange(PRODUCT_FIELD.fieldApiName);
     }
 
     /**                         SEND UPDATES TO PARENT                           */
     sendPriceUpdate() {
-        this.dispatchRecordChange('Price__c');
+        this.dispatchRecordChange(PRICE_FIELD.fieldApiName);
     }
 
     sendDiscountUpdate() {
-        this.dispatchRecordChange('Discount__c');
+        this.dispatchRecordChange(DISCOUNT_FIELD.fieldApiName);
     }
 
     sendTaxUpdate() {
-        this.dispatchRecordChange('Tax__c');
+        this.dispatchRecordChange(TAX_FIELD.fieldApiName);
     }
 
     sendQuantityUpdate() {
-        this.dispatchRecordChange('Quantity__c');
+        this.dispatchRecordChange(QUANTITY_FIELD.fieldApiName);
     }
 
     sendDescriptionUpdate() {
-        this.dispatchRecordChange('Description__c');
+        this.dispatchRecordChange(DESCRIPTION_FIELD.fieldApiName);
     }
 
     /**                         ACTUAL EVENT DISPATCHERS                          */
