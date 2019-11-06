@@ -1,5 +1,19 @@
 @isTest
 public class InvoiceTriggerHandler_Test {
+
+    @isTest
+    static void insert_BlankInvoice_DmlException() {
+        // SETUP
+        Invoice__c inv = new Invoice__c();
+
+        // ACTION
+        Database.SaveResult sr = Database.insert(inv, false);
+
+        // VERIFY
+        System.assertEquals(false, sr.isSuccess(), 'isSuccess()');
+        System.assertEquals(StatusCode.REQUIRED_FIELD_MISSING, sr.getErrors()[0].getStatusCode(), 'getErrors()[0].getStatusCode()');
+        System.assertEquals('Account__c', sr.getErrors()[0].getFields()[0], 'getErrors()[0].getFields()[0]');
+    }
     
     @isTest
     static void insert_NoBillingAddressInAccount_NoBillingAddresInInvoice_EmptyValues() {

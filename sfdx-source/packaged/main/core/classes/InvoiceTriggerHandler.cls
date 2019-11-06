@@ -34,7 +34,7 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     }
 
     private void copyBillingAddressFromAccount(Invoice__c newInvoice) {
-        if (Accounts.get(newInvoice.Account__c).BillingAddress != null) {
+        if (Accounts.containsKey(newInvoice.Account__c) && Accounts.get(newInvoice.Account__c).BillingAddress != null) {
             Address addr = Accounts.get(newInvoice.Account__c).BillingAddress;
             newInvoice.BillingStreet__c = String.isNotBlank(newInvoice.BillingStreet__c) ? newInvoice.BillingStreet__c : addr.getStreet();
             newInvoice.BillingPostalCode__c = String.isNotBlank(newInvoice.BillingPostalCode__c) ? newInvoice.BillingPostalCode__c : addr.getPostalCode();
