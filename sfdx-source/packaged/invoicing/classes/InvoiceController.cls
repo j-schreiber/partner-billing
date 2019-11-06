@@ -25,6 +25,10 @@ public with sharing class InvoiceController {
         Invoice inv = getInvoice(recordId);
         for (InvoiceLineItem__c toUpsert : lineItemsToUpsert) inv.addLineItemRecord(toUpsert);
         for (Id toDelete : lineItemsToDelete) inv.removeLineItemId(toDelete);
-        inv.commitAllChanges();
+        Invoice.CommitResult commitResults = inv.commitAllChanges();
+
+        for (Database.UpsertResult ur : commitResults.LineItemResults) {
+            if (!ur.isSuccess()) throw new AuraHandledException(JSON.serialize(ur.getErrors()));
+        }
     }
 }

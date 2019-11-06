@@ -36,7 +36,9 @@ public class InvoiceLineItem {
     */
     public InvoiceLineItem__c updateRecord(InvoiceLineItem__c newRecord) {
         for (String populatedField : newRecord.getPopulatedFieldsAsMap().keySet()) {
-            Record.put(populatedField, newRecord.get(populatedField));
+            if (Schema.SObjectType.InvoiceLineItem__c.fields.getMap().get(populatedField).getDescribe().isUpdateable()) {
+                Record.put(populatedField, newRecord.get(populatedField));
+            }
         }
         return Record;
     }

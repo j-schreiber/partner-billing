@@ -1,12 +1,12 @@
 import { LightningElement, api, track } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getInvoice from '@salesforce/apex/InvoiceController.getInvoice';
 import commitInvoiceLineItems from '@salesforce/apex/InvoiceController.commitInvoiceLineItems';
 
-//import INVOICE_OBJECT from '@salesforce/schema/Invoice__c';
-//import DATE_FIELD from '@salesforce/schema/Invoice__c.Date__c';
-
+import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
+import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_LineItemsUpdated';
 export default class InvoiceCardRecord extends LightningElement {
     @api recordId;
     @track hasError = false;
@@ -15,6 +15,11 @@ export default class InvoiceCardRecord extends LightningElement {
 
     dirtyLineItems = new Map();
     deletedLineItems = new Set();
+
+    LABELS = {
+        TOAST_TITLE_ERROR,
+        TOAST_TITLE_SUCCESS
+    }
 
     connectedCallback() {
         this.getLineItemData();
@@ -59,9 +64,11 @@ export default class InvoiceCardRecord extends LightningElement {
             this.dirtyLineItems = new Map();
             this.deletedLineItems = new Set();
             updateRecord({ fields: { Id: this.recordId } });
+            this.dispatchToast('success', TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
-        .catch( () => {
+        .catch( (error) => {
+            this.dispatchToast('error', TOAST_TITLE_ERROR, error.body.message);
             this.hasError = true;
             this.isWorking = false;
         });
@@ -119,4 +126,14 @@ export default class InvoiceCardRecord extends LightningElement {
             this.isWorking = false;
         })
     }
+
+    dispatchToast(toastVariant, toastTitle, toastMessage) {
+        let toast = new ShowToastEvent({
+            title : toastTitle,
+            message : toastMessage,
+            variant : toastVariant
+        });
+        this.dispatchEvent(toast);
+    }
+
 }

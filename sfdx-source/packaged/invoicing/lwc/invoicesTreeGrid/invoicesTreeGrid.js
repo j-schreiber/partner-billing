@@ -79,8 +79,6 @@ export default class InvoicesTreeGrid extends LightningElement {
 
         this.isWorking = true;
 
-        console.log('Update Invoices: ' + JSON.stringify(this.dirtyInvoices));
-
         updateInvoices({
             invoices: Object.values(this.dirtyInvoices)
         })
@@ -92,12 +90,10 @@ export default class InvoicesTreeGrid extends LightningElement {
             this.dispatchEvent(successToast);
             this.isWorking = false;
             this.dispatchEvent(new CustomEvent('stepcompleted'));
-            console.log('Success!');
         })
-        .catch((error) => {
+        .catch(() => {
             // error toast
             this.isWorking = false;
-            console.log('Error! ' + JSON.stringify(error));
         })
 
     }

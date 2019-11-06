@@ -38,7 +38,15 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
-        <value>Invoices update!</value>
+        <value>Invoices and Line Items updated!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_LineItemsUpdated</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Line Items successfully updated!</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_CustomerId</fullName>

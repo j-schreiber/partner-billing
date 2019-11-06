@@ -138,23 +138,44 @@ public virtual class Invoice {
     /** @Description
     *   Commits all changes made to the record or related records.
     */
-    public void commitAllChanges() {
+    public CommitResult commitAllChanges() {
 
-        Database.UpsertResult ur = Database.upsert(Record);
+        CommitResult cr = new CommitResult();
 
-        upsert Attachments;
+        cr.InvoiceResult = Database.upsert(Record, false);
 
-        Database.SaveResult[] existingSrs = Database.update(dirtyLineItemRecords.values());
+        cr.AttachmentResults = Database.upsert(Attachments, false);
+        
+        List<InvoiceLineItem__c> ilisToUpsert = new List<InvoiceLineItem__c>();
+        ilisToUpsert.addAll(dirtyLineItemRecords.values());
+        ilisToUpsert.addAll(newLineItemRecords);
+        cr.LineItemResults = Database.upsert(ilisToUpsert, false);
+        for (Id lineitemId : dirtyLineItemRecords.keySet()) LineItemMap.get(lineitemId).updateRecord(dirtyLineItemRecords.get(lineItemId));
+        for (InvoiceLineItem__c ili : newLineItemRecords) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
+        dirtyLineItemRecords.clear();
+        newLineItemRecords.clear();
+
+        /*
+        Database.SaveResult[] lineItemSaveResults = Database.update(dirtyLineItemRecords.values(), false);
         for (Id lineitemId : dirtyLineItemRecords.keySet()) LineItemMap.get(lineitemId).updateRecord(dirtyLineItemRecords.get(lineItemId));
         dirtyLineItemRecords.clear();
 
-        Database.SaveResult[] newSrs = Database.insert(newLineItemRecords);
+        lineItemSaveResults.addAll(Database.insert(newLineItemRecords, false));
         for (InvoiceLineItem__c ili : newLineItemRecords) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
         newLineItemRecords.clear();
-
-        Database.DeleteResult[] deleteDrs = Database.delete(new List<Id>(deleteLineItemIds));
+        */
+        cr.DeleteLineItemResults = Database.delete(new List<Id>(deleteLineItemIds));
         for (Id deletedId : deleteLineItemIds) LineItemMap.remove(deletedId);
         deleteLineItemIds.clear();
+
+        return cr;
+    }
+
+    public class CommitResult {
+        public Database.UpsertResult InvoiceResult;
+        public Database.UpsertResult[] AttachmentResults;
+        public Database.UpsertResult[] LineItemResults;
+        public Database.DeleteResult[] DeleteLineItemResults;
     }
 
 }
