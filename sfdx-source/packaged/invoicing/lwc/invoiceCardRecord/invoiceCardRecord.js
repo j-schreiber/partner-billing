@@ -1,4 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
+import { updateRecord } from 'lightning/uiRecordApi';
 
 import getInvoice from '@salesforce/apex/InvoiceController.getInvoice';
 import commitInvoiceLineItems from '@salesforce/apex/InvoiceController.commitInvoiceLineItems';
@@ -57,6 +58,7 @@ export default class InvoiceCardRecord extends LightningElement {
         .then( () => {
             this.dirtyLineItems = new Map();
             this.deletedLineItems = new Set();
+            updateRecord({ fields: { Id: this.recordId } });
             this.isWorking = false;
         })
         .catch( () => {

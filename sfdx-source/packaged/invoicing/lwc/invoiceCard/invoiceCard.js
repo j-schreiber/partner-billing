@@ -5,7 +5,6 @@ const PICK_VAL_ACTIVATED = 'Activated';
 const PICK_VAL_CANCELLED = 'Cancelled';
 
 export default class InvoiceCard extends LightningElement {
-    invoiceDecorator;
 
     @track record;
     @track internalLineItems = [];
@@ -18,10 +17,9 @@ export default class InvoiceCard extends LightningElement {
 
     @api
     get invoiceWrapper() {
-        return this.invoiceDecorator;
+        return null;
     }
     set invoiceWrapper(value) {
-        this.invoiceDecorator = value;
         this.TotalAmount = value.Record.TotalAmount__c;
         this.TotalGrossAmount = value.Record.TotalGrossAmount__c;
 
