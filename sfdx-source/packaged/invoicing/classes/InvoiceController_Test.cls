@@ -42,16 +42,14 @@ public class InvoiceController_Test {
     static void commitInvoiceLineItems_UpdateAndInsert_AllLineItemsUpserted() {
         // SETUP
         Invoice__c inv = [SELECT Id FROM Invoice__c LIMIT 1];
-        List<InvoiceLineItem__c> ilisToUpsert = new List<InvoiceLineItem__c>();
         InvoiceLineItem__c toUpdate = TestDataFactory.CreateInvoiceLineItem(new InvoiceLineItem__c(Invoice__c = inv.Id));
         insert toUpdate;
-
         InvoiceLineItem__c toInsert = TestDataFactory.CreateDefaultInvoiceLineItem();
 
+        // ACTION
+        List<InvoiceLineItem__c> ilisToUpsert = new List<InvoiceLineItem__c>();
         ilisToUpsert.add(toUpdate);
         ilisToUpsert.add(toInsert);
-
-        // ACTION
         InvoiceController.commitInvoiceLineItems(inv.Id, ilisToUpsert, new List<Id>());
 
         // VERIFY
@@ -62,7 +60,6 @@ public class InvoiceController_Test {
     static void commitInvoiceLineItems_OnlyDelete_AllLineItemsDeleted() {
         // SETUP
         Invoice__c inv = [SELECT Id FROM Invoice__c LIMIT 1];
-        List<InvoiceLineItem__c> ilisToUpsert = new List<InvoiceLineItem__c>();
         InvoiceLineItem__c toDelete = TestDataFactory.CreateInvoiceLineItem(new InvoiceLineItem__c(Invoice__c = inv.Id));
         insert toDelete;
 
