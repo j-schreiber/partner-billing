@@ -41,6 +41,14 @@
         <value>Invoices and Line Items updated!</value>
     </labels>
     <labels>
+        <fullName>Toast_Title_NoTimeEntriesSelected</fullName>
+        <categories>ui,toast,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>No Time Entries selected. Please select at least one entry to start!</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_LineItemsUpdated</fullName>
         <categories>ui,toast</categories>
         <language>en_US</language>

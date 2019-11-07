@@ -6,6 +6,7 @@ import createInvoices from '@salesforce/apex/BillingController.createInvoicesFro
 
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicingRunSuccess';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
+import TOAST_TITLE_WARN from '@salesforce/label/c.Toast_Title_NoTimeEntriesSelected';
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_FilterHeader';
 import STARTDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateStart';
 import ENDDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateEnd';
@@ -44,7 +45,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         STARTDATE_PICKER_LABEL,
         ENDDATE_PICKER_LABEL,
         TOAST_TITLE_SUCCESS,
-        TOAST_TITLE_ERROR
+        TOAST_TITLE_ERROR,
+        TOAST_TITLE_WARN
     }
 
     connectedCallback() {
@@ -91,12 +93,21 @@ export default class TimeEntriesTreeGrid extends LightningElement {
 
     startBillingCycle() {
 
+        if (this.template.querySelector('lightning-datatable').getSelectedRows().length === 0) {
+            let warnToast = new ShowToastEvent({
+                title : this.LABELS.TOAST_TITLE_WARN,
+                variant : 'warning'
+            });
+            this.dispatchEvent(warnToast);
+            return;
+        }
+
         this.isWorking = true;
 
         createInvoices({
             timeEntryIds: this.getSelectedIds(),
             options: this.selectedOptions,
-            filters: this.activeFilters,
+            filters: this.selectedFilters,
         })
         .then(() => {
             let successToast = new ShowToastEvent({
@@ -105,7 +116,7 @@ export default class TimeEntriesTreeGrid extends LightningElement {
             });
             this.dispatchEvent(successToast);
             this.isWorking = false;
-            this.refreshData(this.activeFilters);
+            this.refreshData(this.selectedFilters);
             this.dispatchEvent(new CustomEvent('stepcompleted'));
         })
         .catch(() => {
@@ -114,9 +125,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
     }
 
     getSelectedIds() {
-        let selectedRows = this.template.querySelector('lightning-datatable').getSelectedRows();
         let selectedIds = [];
-        selectedRows.forEach( (entry) => {selectedIds.push(entry.Id)} );
+        this.template.querySelector('lightning-datatable').getSelectedRows().forEach( (entry) => {selectedIds.push(entry.Id)} );
         return selectedIds;
     }
 

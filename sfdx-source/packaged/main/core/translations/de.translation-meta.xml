@@ -17,6 +17,10 @@
         <name>Toast_Title_LineItemsUpdated</name>
     </customLabels>
     <customLabels>
+        <label>Keine Stundeneinträge ausgewählt. Bitte wähle mindestens einen Eintrag aus, um fort zu fahren.</label>
+        <name>Toast_Title_NoTimeEntriesSelected</name>
+    </customLabels>
+    <customLabels>
         <label>Rechnung und Positionen erfolgreich aktualisiert!</label>
         <name>Toast_Title_InvoicesUpdated</name>
     </customLabels>
