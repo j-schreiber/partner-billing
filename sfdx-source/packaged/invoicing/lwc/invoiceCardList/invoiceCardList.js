@@ -25,13 +25,9 @@ export default class InvoiceCardList extends LightningElement {
         this.queryInvoiceData();
     }
 
-    cacheUpdatedInvoice(event) {
-        let changedRecord = event.detail;
-        this.dirtyInvoices[changedRecord.Id] = changedRecord;
-    }
+    /**                                         EVENT HANDLERS                                           */
 
     cacheUpdatedLineItem(event) {
-        //console.log('Getting upsert: ' + JSON.stringify(event));
         if (!this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.set(event.detail.extId, {});
         let record = this.dirtyLineItems.get(event.detail.extId);
         record[event.detail.field] = event.detail.newValue;
@@ -39,22 +35,33 @@ export default class InvoiceCardList extends LightningElement {
     }
 
     cacheDeletedLineItem(event) {
-        //console.log('Getting delete: ' + JSON.stringify(event.detail));
-        if (this.dirtyLineItems.has(event.detail)) this.dirtyLineItems.delete(event.detail);
+        if (this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.delete(event.detail.extId);
         if (event.detail.recordId && event.detail.recordId.length) this.deletedLineItems.add(event.detail.recordId);
     }
+
+    cacheNewLineItem(event) {
+        this.dirtyLineItems.set(event.detail.ExtId, event.detail.Record);
+    }
+
+    cacheUpdatedInvoice(event) {
+        let changedRecord = event.detail;
+        this.dirtyInvoices[changedRecord.Id] = changedRecord;
+    }
+
+
+    /**                                         APEX CALLS                                           */
 
     commitDirtyRecords() {
 
         this.isWorking = true;
 
         deleteInvoiceLineItems({
-            lineItemIds: this.lineItemIdsToDelete()
+            lineItemIds: this.deleteList
         })
         .then(() => {
             this.deletedLineItems = new Set();
             upsertInvoiceLineItems({
-                lineItems: this.lineItemsToUpsert()
+                lineItems: this.upsertList
             })
             .then(() => {
                 this.dirtyLineItems = new Map();
@@ -75,35 +82,6 @@ export default class InvoiceCardList extends LightningElement {
         });
     }
 
-    dispatchErrorToast(title, message) {
-        let errorToast = new ShowToastEvent({
-            title : title,
-            message : message,
-            variant : 'error'
-        });
-        this.dispatchEvent(errorToast);
-    }
-
-    lineItemIdsToDelete() {
-        let arr = [];
-        for (let item of this.deletedLineItems) { arr.push(item); }
-        return arr;
-    }
-
-    lineItemsToUpsert() {
-        let arr = [];
-        this.dirtyLineItems.forEach( (value) => { arr.push(value); });
-        return arr;
-    }
-
-    revertAllChanges() {
-        this.invoiceData = [];
-        this.dirtyInvoices = {};
-        this.dirtyLineItems = new Map();
-        this.deletedLineItems = new Set();
-        this.queryInvoiceData();
-    }
-
     queryInvoiceData() {
         this.isWorking = true;
         getInvoices({
@@ -117,4 +95,37 @@ export default class InvoiceCardList extends LightningElement {
             this.isWorking = false;
         })
     }
+
+
+    /**                                         HELPERS                                          */
+
+    get deleteList() {
+        let arr = [];
+        for (let item of this.deletedLineItems) { arr.push(item); }
+        return arr;
+    }
+
+    get upsertList() {
+        let arr = [];
+        this.dirtyLineItems.forEach( (value) => { arr.push(value); });
+        return arr;
+    }
+
+    revertAllChanges() {
+        this.invoiceData = [];
+        this.dirtyInvoices = {};
+        this.dirtyLineItems = new Map();
+        this.deletedLineItems = new Set();
+        this.queryInvoiceData();
+    }
+
+    dispatchErrorToast(title, message) {
+        let errorToast = new ShowToastEvent({
+            title : title,
+            message : message,
+            variant : 'error'
+        });
+        this.dispatchEvent(errorToast);
+    }
+
 }

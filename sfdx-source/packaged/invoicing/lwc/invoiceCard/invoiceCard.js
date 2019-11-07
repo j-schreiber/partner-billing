@@ -87,6 +87,10 @@ export default class InvoiceCard extends LightningElement {
     addLineItem() {
         var newItem = this.NewLineItem;
         this.internalLineItems.push(newItem);
+
+        this.dispatchEvent(
+            new CustomEvent('lineitemcreate', { detail : newItem })
+        );
     }
 
     get isActivated() {

@@ -44,7 +44,6 @@ export default class InvoiceCardRecord extends LightningElement {
         let record = this.dirtyLineItems.get(event.detail.extId);
         record[event.detail.field] = event.detail.newValue;
         record.Id = event.detail.recordId;
-        //console.log('Updated Record: ' + JSON.stringify(record));
     }
 
     addNewLineItem() {
