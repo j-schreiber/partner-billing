@@ -9,8 +9,8 @@ public with sharing class BillingController {
     *   time entry
     *
     *   @param  timeEntryIds    Time Entry Ids from selection to be invoiced
-    *   @param  options         Structured invoicing options
-    *   @param  filters         Active filters that were used to retrieve this time entries
+    *   @param  options         Structured invoicing options (collapseTimeEntries; overrideServicePeriod)
+    *   @param  filters         Active filters that were used to retrieve this time entries (endDate; startDate)
     *
     *   @return                 Created list of invoices from time entries (one per account)
     */
@@ -20,6 +20,11 @@ public with sharing class BillingController {
         System.debug('Ids: ' + timeEntryIds);
         System.debug('Filters: ' + filters);
         return new List<Invoice__c>();
+
+        // query all accounts for supplied time entry ids
+        // initialize new blank invoice per account
+        // add timesheet to time entries; cache new line items and updated time entries
+        // commit all in bulk (2 DML: time entries and new line items)
     }
 
     /** @Description

@@ -57,23 +57,11 @@ public class TimeEntry {
         public get { return Record.Date__c; }
     }
 
+    public static final string QUERY_STRING = 'SELECT Id,Name,StartTime__c,EndTime__c,Duration__c,Date__c,DailyRate__c,Account__c,Budget__c,Product__c,Status__c,Invoice__c,Description__c FROM TimeEntry__c';
+
     /** @Description    Create Decorator from original SObject record */
     public TimeEntry(TimeEntry__c originalRecord) {
         Record = originalRecord;
     }
 
-    /** @Description
-    *   Create an invoice line item decorator from this time entry that can be added
-    *   to an existing invoice
-    *
-    *   @return                 Invoice line item that has been created from internal record
-    */
-    public InvoiceLineItem getInvoiceLineItem() {
-        InvoiceLineItem__c lineItemRecord = new InvoiceLineItem__c(Price__c = Record.TotalAmount__c,
-                                                                   Quantity__c = Record.Duration__c / 8,
-                                                                   Description__c = Record.Description__c,
-                                                                   ServiceDate__c = Record.Date__c,
-                                                                   Product__c = Record.Product__c);
-        return new InvoiceLineItem(lineItemRecord);
-    }
 }

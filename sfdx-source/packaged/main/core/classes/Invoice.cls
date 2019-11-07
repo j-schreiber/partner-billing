@@ -60,6 +60,18 @@ public virtual class Invoice {
     /** @Description    All line items (with decorator object) for this invoice mapped by record id */
     public Map<Id, InvoiceLineItem> LineItemMap {public get; private set;}
 
+    /** @Description    All time entries (with decorator object) for this invoice mapped by record id */
+    public Map<Id, TimeEntry> TimeEntriesMap {
+        public get {
+            if (TimeEntriesMap == null) {
+                TimeEntriesMap = new Map<Id, TimeEntry>();
+                for (TimeEntry__c te : Record.TimeEntries__r) TimeEntriesMap.put(te.Id, new TimeEntry(te));
+            }
+            return TimeEntriesMap;
+        }
+        private set;
+    }
+
     /** @Description    New line item records that will be added to the invoice */
     private List<InvoiceLineItem__c> newLineItemRecords;
 
@@ -136,6 +148,33 @@ public virtual class Invoice {
     }
 
     /** @Description
+    *   Adds the new time entries to the internal timesheet, calculates line items and adds them
+    *   to internal cache. Time Entries are updated to invoice but not DML is performed.
+    *
+    *   @param  collapseEntries         True: collapse similar entries to one line item
+    *   @param  newTimeEntries          List of time entries that will be added to invoice's time sheet
+    *
+    *   @return                         The List of calculated invoice line items that were added to cache
+    */
+    public List<InvoiceLineItem__c> addTimeEntries(Boolean collapseEntries, List<TimeEntry__c> newTimeEntries) {
+        Map<String, InvoiceLineItem__c> newRecords = new Map<String, InvoiceLineItem__c>();
+
+        for (TimeEntry__c te : newTimeEntries) {
+
+            te.Invoice__c = Record.Id;
+            TimeEntriesMap.put(te.Id, new TimeEntry(te));
+
+            String key = collapseEntries ? te.DailyRate__c +'-'+ te.Product__c : te.Id;
+            if (!newRecords.containsKey(key)) newRecords.put(key, new InvoiceLineItem__c(Product__c=te.Product__c,Price__c=te.DailyRate__c,Quantity__c=0.00));
+            newRecords.get(key).Quantity__c += te.Duration__c / 8;
+
+        }
+
+        newLineItemRecords.addAll(newRecords.values());
+        return newRecords.values();
+    }
+
+    /** @Description
     *   Commits all changes made to the record or related records.
     */
     public CommitResult commitAllChanges() {
@@ -155,15 +194,6 @@ public virtual class Invoice {
         dirtyLineItemRecords.clear();
         newLineItemRecords.clear();
 
-        /*
-        Database.SaveResult[] lineItemSaveResults = Database.update(dirtyLineItemRecords.values(), false);
-        for (Id lineitemId : dirtyLineItemRecords.keySet()) LineItemMap.get(lineitemId).updateRecord(dirtyLineItemRecords.get(lineItemId));
-        dirtyLineItemRecords.clear();
-
-        lineItemSaveResults.addAll(Database.insert(newLineItemRecords, false));
-        for (InvoiceLineItem__c ili : newLineItemRecords) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
-        newLineItemRecords.clear();
-        */
         cr.DeleteLineItemResults = Database.delete(new List<Id>(deleteLineItemIds));
         for (Id deletedId : deleteLineItemIds) LineItemMap.remove(deletedId);
         deleteLineItemIds.clear();

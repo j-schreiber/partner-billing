@@ -16,6 +16,11 @@ public class Invoice_Test {
             );
         }
         insert ilis;
+
+        List<Product2> products = new List<Product2>();
+        products.add(TestDataFactory.CreateProduct(new Product2(Name = 'Test Product Consulting')));
+        products.add(TestDataFactory.CreateProduct(new Product2(Name = 'Test Product Dev')));
+        insert products;
     }
 
     @isTest
@@ -206,6 +211,101 @@ public class Invoice_Test {
         // VERIFY
         System.assertEquals(false, objUnderTest.LineItemMap.containsKey(toDeleteId), 'LineItemMap.containsKey(toDeleteId)');
         System.assertEquals(record.LineItems__r.size() - 1, objUnderTest.LineItems.size(), 'LineItems.size()');
+    }
+
+    @isTest
+    static void addTimeEntries_Collapse_CollapsableEntries_CombinedLineItemsCreated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+        Product2 consultingProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Consulting%' LIMIT 1];
+        Product2 devProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Dev%' LIMIT 1];
+        List<TimeEntry__c> collapsableEntries = new List<TimeEntry__c>();
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(12, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(13, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(14, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=650.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=650.00)));
+        insert collapsableEntries;
+        collapsableEntries = Database.Query(TimeEntry.QUERY_STRING);
+
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        List<InvoiceLineItem__c> newIlis = objUnderTest.addTimeEntries(true, collapsableEntries);
+
+        // VERIFY
+        System.assertEquals(2, newIlis.size(), 'newIlis.size()');
+        System.assertEquals(collapsableEntries.size(), objUnderTest.TimeEntriesMap.size(), 'objUnderTest.TimeEntryMap.size()');
+
+        Decimal consultingQuantity = 0;
+        Decimal devQuantity = 0;
+        for (TimeEntry__c te : collapsableEntries) {
+            if (te.Product__c == consultingProd.Id) consultingQuantity += (te.Duration__c / 8);
+            if (te.Product__c == devProd.Id) devQuantity += (te.Duration__c / 8);
+        }
+
+        System.assertEquals(1250.00, newIlis[0].Price__c, 'newIlis[0].Price__c');
+        System.assertEquals(consultingProd.Id, newIlis[0].Product__c, 'newIlis[0].Product__c');
+        System.assertEquals(consultingQuantity, newIlis[0].Quantity__c, 'newIlis[0].Quantity__c');
+
+        System.assertEquals(650.00, newIlis[1].Price__c, 'newIlis[1].Price__c');
+        System.assertEquals(devProd.Id, newIlis[1].Product__c, 'newIlis[1].Product__c');
+        System.assertEquals(devQuantity, newIlis[1].Quantity__c, 'newIlis[1].Quantity__c');
+    }
+
+    @isTest
+    static void addTimeEntries_NoCollapse_CollapsableEntries_DistinctLineItemsCreated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+        Product2 consultingProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Consulting%' LIMIT 1];
+        Product2 devProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Dev%' LIMIT 1];
+        List<TimeEntry__c> collapsableEntries = new List<TimeEntry__c>();
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(12, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(13, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(14, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=650.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=650.00)));
+        insert collapsableEntries;
+        collapsableEntries = Database.Query(TimeEntry.QUERY_STRING);
+
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        List<InvoiceLineItem__c> newIlis = objUnderTest.addTimeEntries(false, collapsableEntries);
+
+        // VERIFY
+        System.assertEquals(collapsableEntries.size(), newIlis.size(), 'newIlis.size()');
+        for (Integer i = 0; i < newIlis.size(); i++) {
+            System.assertEquals(collapsableEntries[i].Duration__c / 8, newIlis[i].Quantity__c, 'newIlis[i].Quantity__c');
+            System.assertEquals(collapsableEntries[i].DailyRate__c, newIlis[i].Price__c, 'newIlis[i].Price__c');
+            System.assertEquals(collapsableEntries[i].Product__c, newIlis[i].Product__c, 'newIlis[i].Product__c');
+        }
+    }
+
+    @isTest
+    static void addTimeEntries_Collapse_NonCollapsableEntries_DistinctLineItemsCreated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+        Product2 consultingProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Consulting%' LIMIT 1];
+        Product2 devProd = [SELECT Id FROM Product2 WHERE Name LIKE '%Dev%' LIMIT 1];
+        List<TimeEntry__c> collapsableEntries = new List<TimeEntry__c>();
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(12, 0, 0, 0),DailyRate__c=1250.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(13, 0, 0, 0),DailyRate__c=1350.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=consultingProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(14, 0, 0, 0),DailyRate__c=1450.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=650.00)));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c, Product__c=devProd.Id, Status__c='Approved', EndTime__c=Time.newInstance(11, 0, 0, 0),DailyRate__c=750.00)));
+        insert collapsableEntries;
+        collapsableEntries = Database.Query(TimeEntry.QUERY_STRING);
+
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        List<InvoiceLineItem__c> newIlis = objUnderTest.addTimeEntries(true, collapsableEntries);
+
+        // VERIFY
+        System.assertEquals(collapsableEntries.size(), newIlis.size(), 'newIlis.size()');
+        for (Integer i = 0; i < newIlis.size(); i++) {
+            System.assertEquals(collapsableEntries[i].Duration__c / 8, newIlis[i].Quantity__c, 'newIlis[i].Quantity__c');
+            System.assertEquals(collapsableEntries[i].DailyRate__c, newIlis[i].Price__c, 'newIlis[i].Price__c');
+            System.assertEquals(collapsableEntries[i].Product__c, newIlis[i].Product__c, 'newIlis[i].Product__c');
+        }
     }
 
     /**                             GETTER & SETTER

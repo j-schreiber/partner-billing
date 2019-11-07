@@ -5,9 +5,4 @@ public class TimeEntry_Test {
     static void init_ValidRecord_AllDefaultsInitialized() {
 
     }
-
-    @isTest
-    static void getInvoiceLineItem_FullTimeEntry_AllValuesCopied() {
-        
-    }
 }

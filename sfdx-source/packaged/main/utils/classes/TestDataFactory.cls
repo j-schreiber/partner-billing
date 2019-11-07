@@ -70,6 +70,12 @@ public class TestDataFactory {
                                           VATNumber__c = 'DE123456789');
     }
 
+    public static Product2 CreateDefaultProduct() {
+        return new Product2(Name = 'Test Product',
+                            IsActive = true,
+                            Family = 'Other');
+    }
+
     public static Account CreateAccount(Account template) {
         return (Account)mergeSObjects(template, CreateDefaultAccount());
     }
@@ -96,6 +102,10 @@ public class TestDataFactory {
 
     public static OrganizationProfile__c CreateOrganizationProfile(OrganizationProfile__c template) {
         return(OrganizationProfile__c)mergeSObjects(template, CreateDefaultOrganizationProfile());
+    }
+
+    public static Product2 CreateProduct(Product2 template) {
+        return (Product2)mergeSObjects(template, CreateDefaultProduct());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {
