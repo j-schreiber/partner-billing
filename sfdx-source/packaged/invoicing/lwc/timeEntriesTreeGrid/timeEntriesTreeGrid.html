@@ -19,44 +19,48 @@
 
             <div class="slds-p-around_medium slds-grid slds-grid_align-space">
                 <div class="slds-grid">
-                    <lightning-input
-                        class="slds-m-right_medium"
-                        type="date"
-                        name="startDateInput"
-                        label={LABELS.STARTDATE_PICKER_LABEL}
-                        onchange={handleStartDateChange}
-                        max={selectedFilters.endDate}
-                        value={selectedFilters.startDate}>
-                    </lightning-input>
-                    <lightning-input
-                        class="slds-m-right_medium"
-                        type="date"
-                        name="endDateInput"
-                        label={LABELS.ENDDATE_PICKER_LABEL}
-                        onchange={handleEndDateChange}
-                        min={selectedFilters.startDate}
-                        value={selectedFilters.endDate}>
-                    </lightning-input>
-                </div>
-                <div class="slds-size_1-of-5">
-                    <div class="slds-grid slds-grid_vertical">
-                        <lightning-input class="slds-m-around_xx-small" 
-                                label="Override Service Period"
-                                type="toggle"
-                                message-toggle-active="Filter"
-                                message-toggle-inactive="Time Entries"
-                                checked
-                                onchange={handleServicePeriodToggle}></lightning-input>
-                       
-                        <lightning-input class="slds-m-around_xx-small" 
-                                        label="Collapse Time Entries"
-                                        type="toggle"
-                                        message-toggle-active="Collapse"
-                                        message-toggle-inactive="Don't Collapse"
-                                        checked
-                                        onchange={handleCollapseToggle}></lightning-input>
+                    <div class="slds-box slds-grid slds-m-horizontal_small">
+                        <lightning-input
+                            class="slds-m-right_medium"
+                            type="date"
+                            name="startDateInput"
+                            label={LABELS.STARTDATE_PICKER_LABEL}
+                            onchange={handleStartDateChange}
+                            max={selectedFilters.endDate}
+                            value={selectedFilters.startDate}>
+                        </lightning-input>
+                        <lightning-input
+                            class="slds-m-right_medium"
+                            type="date"
+                            name="endDateInput"
+                            label={LABELS.ENDDATE_PICKER_LABEL}
+                            onchange={handleEndDateChange}
+                            min={selectedFilters.startDate}
+                            value={selectedFilters.endDate}>
+                        </lightning-input>
                     </div>
+                    <div class="slds-box slds-grid slds-m-horizontal_small">
+                        <lightning-input
+                            class="slds-m-right_medium" 
+                            label="Override Service Period"
+                            type="toggle"
+                            message-toggle-active="Filter"
+                            message-toggle-inactive="Time Entries"
+                            checked
+                            onchange={handleServicePeriodToggle}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Collapse Time Entries"
+                            type="toggle"
+                            message-toggle-active="Collapse"
+                            message-toggle-inactive="Don't Collapse"
+                            checked
+                            onchange={handleCollapseToggle}>
+                        </lightning-input>
+                    </div>
+                   
                 </div>
+
             </div>
     
         </lightning-card>

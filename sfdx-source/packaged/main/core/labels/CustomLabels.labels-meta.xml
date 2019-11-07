@@ -182,7 +182,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used as text in invoicing LWC</shortDescription>
-        <value>Select Service Period</value>
+        <value>Select service period and configure invoice generation</value>
     </labels>
     <labels>
         <fullName>Invoicing_Label_ServiceDateStart</fullName>
