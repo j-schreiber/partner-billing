@@ -57,7 +57,7 @@ public class TimeEntry {
         public get { return Record.Date__c; }
     }
 
-    public static final string QUERY_STRING = 'SELECT Id,Name,StartTime__c,EndTime__c,Duration__c,Date__c,DailyRate__c,Account__c,Budget__c,Product__c,Status__c,Invoice__c,Description__c FROM TimeEntry__c';
+    public static final string QUERY_STRING = 'SELECT Id,Name,StartTime__c,EndTime__c,Duration__c,Date__c,DailyRate__c,Account__c,Budget__c,Product__c,Status__c,Invoice__c,Description__c,Account__r.Name,Product__r.Name,TotalAmount__c FROM TimeEntry__c';
 
     /** @Description    Create Decorator from original SObject record */
     public TimeEntry(TimeEntry__c originalRecord) {
