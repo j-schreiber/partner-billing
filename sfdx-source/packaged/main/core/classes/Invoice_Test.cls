@@ -241,15 +241,18 @@ public class Invoice_Test {
         for (TimeEntry__c te : collapsableEntries) {
             if (te.Product__c == consultingProd.Id) consultingQuantity += (te.Duration__c / 8);
             if (te.Product__c == devProd.Id) devQuantity += (te.Duration__c / 8);
+            System.assertEquals(record.Id, te.Invoice__c, 'te.Invoice__c');
         }
 
         System.assertEquals(1250.00, newIlis[0].Price__c, 'newIlis[0].Price__c');
         System.assertEquals(consultingProd.Id, newIlis[0].Product__c, 'newIlis[0].Product__c');
         System.assertEquals(consultingQuantity, newIlis[0].Quantity__c, 'newIlis[0].Quantity__c');
+        System.assertEquals(record.Id, newIlis[0].Invoice__c, 'newIlis[0].Invoice__c');
 
         System.assertEquals(650.00, newIlis[1].Price__c, 'newIlis[1].Price__c');
         System.assertEquals(devProd.Id, newIlis[1].Product__c, 'newIlis[1].Product__c');
         System.assertEquals(devQuantity, newIlis[1].Quantity__c, 'newIlis[1].Quantity__c');
+        System.assertEquals(record.Id, newIlis[1].Invoice__c, 'newIlis[1].Invoice__c');
     }
 
     @isTest
@@ -306,6 +309,36 @@ public class Invoice_Test {
             System.assertEquals(collapsableEntries[i].DailyRate__c, newIlis[i].Price__c, 'newIlis[i].Price__c');
             System.assertEquals(collapsableEntries[i].Product__c, newIlis[i].Product__c, 'newIlis[i].Product__c');
         }
+    }
+
+    @isTest
+    static void getTimesheetServicePeriod_NoTimeSheet_Null() {
+        // SETUP
+        Invoice objUnderTest = new Invoice();
+        // ACTION
+        Invoice.ServicePeriod actual = objUnderTest.getTimeSheetServicePeriod();
+        // VERIFY
+        System.assertEquals(null, actual.startDate, 'ServicePeriod.startDate');
+        System.assertEquals(null, actual.endDate, 'ServicePeriod.endDate');
+    }
+
+    @isTest
+    static void getTimesheetServicePeriod_SingleTimeEntry_ServiceDateIsServicePeriod() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Account__c FROM Invoice__c LIMIT 1];
+        List<TimeEntry__c> collapsableEntries = new List<TimeEntry__c>();
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c,Invoice__c=record.Id,Date__c=Date.newInstance(2019,11,02))));
+        collapsableEntries.add(TestDataFactory.CreateTimeEntry(new TimeEntry__c(Account__c=record.Account__c,Invoice__c=record.Id,Date__c=Date.newInstance(2019,11,30))));
+        insert collapsableEntries;
+
+        Invoice objUnderTest = new Invoice(record.Id);
+
+        // ACTION
+        Invoice.ServicePeriod actual = objUnderTest.getTimeSheetServicePeriod();
+
+        // VERIFY
+        System.assertEquals(Date.newInstance(2019,11,02), actual.startDate, 'ServicePeriod.startDate');
+        System.assertEquals(Date.newInstance(2019,11,30), actual.endDate, 'ServicePeriod.endDate');
     }
 
     /**                             GETTER & SETTER

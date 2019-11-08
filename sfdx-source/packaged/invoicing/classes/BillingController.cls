@@ -14,17 +14,39 @@ public with sharing class BillingController {
     *
     *   @return                 Created list of invoices from time entries (one per account)
     */
-    @AuraEnabled(cacheable=true)
-    public static List<Invoice__c> createInvoicesFromTimeEntries(List<Id> timeEntryIds, Map<String, Object> options, Map<String, Object> filters) {
-        System.debug('Options: ' + options);
-        System.debug('Ids: ' + timeEntryIds);
-        System.debug('Filters: ' + filters);
-        return new List<Invoice__c>();
+    @AuraEnabled
+    public static List<Invoice> createInvoicesFromTimeEntries(List<Id> timeEntryIds, Map<String, Object> options, Map<String, Object> filters) {
 
-        // query all accounts for supplied time entry ids
-        // initialize new blank invoice per account
-        // add timesheet to time entries; cache new line items and updated time entries
-        // commit all in bulk (2 DML: time entries and new line items)
+        Map<Id, Invoice> newInvoices = new Map<Id, Invoice>();
+        List<InvoiceLineItem__c> newLineItemRecords = new List<InvoiceLineItem__c>();
+        List<Invoice__c> newInvoiceRecords = new List<Invoice__c>();
+        List<TimeEntry__c> dirtyTimeEntries = new List<TimeEntry__c>();
+
+        List<Account> accounts = [SELECT Id,(SELECT Id,DailyRate__c,Product__c,Duration__c FROM TimeEntries__r WHERE Id IN :timeEntryIds)
+                                FROM Account 
+                                WHERE Id IN (SELECT Account__c FROM TimeEntry__c WHERE Id IN :timeEntryIds)];
+
+        Boolean collapseEntries = (Boolean)options.get('collapseTimeEntries');
+        Boolean overrideServicePeriod = (Boolean)options.get('overrideServicePeriod');
+
+        for (Account a : accounts) {
+            Invoice inv = new Invoice();
+            inv.Record.Account__c = a.Id;
+            inv.Record.Date__c = System.today();
+            inv.Record.Status__c = 'Draft';
+            newInvoices.put(a.Id, inv);
+            newInvoiceRecords.add(inv.Record);
+        }
+        Database.insert(newInvoiceRecords);
+
+        for (Account a : accounts) { 
+            newLineItemRecords.addAll(newInvoices.get(a.Id).addTimeEntries(collapseEntries, a.TimeEntries__r));
+            dirtyTimeEntries.addAll(a.TimeEntries__r);
+        }
+        Database.insert(newLineItemRecords);   
+        Database.update(dirtyTimeEntries);  
+
+        return newInvoices.values();
     }
 
     /** @Description

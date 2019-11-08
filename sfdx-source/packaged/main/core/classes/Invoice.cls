@@ -165,13 +165,38 @@ public virtual class Invoice {
             TimeEntriesMap.put(te.Id, new TimeEntry(te));
 
             String key = collapseEntries ? te.DailyRate__c +'-'+ te.Product__c : te.Id;
-            if (!newRecords.containsKey(key)) newRecords.put(key, new InvoiceLineItem__c(Product__c=te.Product__c,Price__c=te.DailyRate__c,Quantity__c=0.00));
+            if (!newRecords.containsKey(key)) newRecords.put(key, new InvoiceLineItem__c(Product__c=te.Product__c,Price__c=te.DailyRate__c,Quantity__c=0.00,Invoice__c=Record.Id));
             newRecords.get(key).Quantity__c += te.Duration__c / 8;
 
         }
 
         newLineItemRecords.addAll(newRecords.values());
         return newRecords.values();
+    }
+
+    /** @Description
+    *   Uses internal time sheet to evaluate the service period Start Date
+    *   and End Date and returns as structured object
+    *
+    *   @return         Service period dates from all Time Entries
+    */
+    public ServicePeriod getTimeSheetServicePeriod() {
+        ServicePeriod result = new ServicePeriod();
+        for (TimeEntry te : TimeEntriesMap.values()) {
+            if (te.ServiceDate < result.startDate || result.StartDate == null) result.StartDate = te.ServiceDate;
+            if (te.ServiceDate > result.endDate || result.endDate == null) result.endDate = te.ServiceDate;
+        }
+        return result;
+    }
+
+    /** @Description
+    *   Writes a structured service period to internal record fields
+    *
+    *   @param  dates       Service period date values
+    */
+    public void setServicePeriod(ServicePeriod dates) {
+        Record.ServicePeriodFrom__c = dates.startDate == null ? System.today() : dates.startDate;
+        Record.ServicePeriodTo__c = dates.endDate == null ? System.today() : dates.endDate;
     }
 
     /** @Description
@@ -206,6 +231,11 @@ public virtual class Invoice {
         public Database.UpsertResult[] AttachmentResults;
         public Database.UpsertResult[] LineItemResults;
         public Database.DeleteResult[] DeleteLineItemResults;
+    }
+
+    public class ServicePeriod {
+        public Date startDate;
+        public Date endDate;
     }
 
 }
