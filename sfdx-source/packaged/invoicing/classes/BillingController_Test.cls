@@ -71,10 +71,74 @@ class BillingController_Test {
             System.assertEquals('Draft', inv.Record.Status__c, 'inv.Record.Status__c');
             System.assertNotEquals(null, inv.Record.Account__c, 'inv.Record.Account__c');
             System.assertEquals(3, inv.TimeEntriesMap.size(), 'inv.TimeEntriesMap.size()');
+            System.assertEquals(3, [SELECT COUNT() FROM InvoiceLineItem__c WHERE Invoice__c =:inv.Record.Id], 'COUNT() FROM InvoiceLineItem__c');
         }
 
         for (TimeEntry__c te : [SELECT Invoice__c FROM TimeEntry__c]) {
             System.assertNotEquals(null, te.Invoice__c, 'te.Invoice__c');
         }
     }
+
+    @isTest
+    static void createInvoicesFromTimeEntries_CollapseEntriesTrue_InvoiceWithCollapsedEntries() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        List<TimeEntry__c> tes = [SELECT Id FROM TimeEntry__c WHERE Account__c = :a.Id];
+        for (TimeEntry__c te : tes) {
+            te.Product__c = null;
+            te.DailyRate__c = 666;
+        }
+        update tes;
+        List<Id> timeEntryIds = new List<Id>(new Map<Id,TimeEntry__c>(tes).keySet());
+
+        Map<String, Object> options = new Map<String, Object>{'collapseTimeEntries' => true, 'overrideServicePeriod' => false};
+        Map<String, Object> filters = new Map<String, Object>{'startDate' => '2019-10-01', 'endDate' => '2019-10-31'};
+
+         // ACTION
+        List<Invoice> invoices = BillingController.createInvoicesFromTimeEntries(timeEntryIds, options, filters);
+
+        // VERIFY
+        System.assertEquals(1, invoices.size(), 'invoices.size()');
+        System.assertEquals(1, [SELECT COUNT() FROM InvoiceLineItem__c WHERE Invoice__c =:invoices[0].Record.Id], 'COUNT() FROM InvoiceLineItem__c');
+    }
+
+    @isTest
+    static void createInvoicesFromTimeEntries_OverrideServicePeriodTrue_ServicePeriodDateSetFromFilters() {
+        // SETUP
+        List<Id> timeEntryIds = new List<Id>(new Map<Id,TimeEntry__c>([SELECT Id FROM TimeEntry__c]).keySet());
+        Map<String, Object> options = new Map<String, Object>{'collapseTimeEntries' => true, 'overrideServicePeriod' => true};
+        Map<String, Object> filters = new Map<String, Object>{'startDate' => '2019-03-02', 'endDate' => '2019-05-31'};
+
+         // ACTION
+        List<Invoice> invoices = BillingController.createInvoicesFromTimeEntries(timeEntryIds, options, filters);
+
+        // VERIFY
+        System.assertEquals(BULK_NUMBER, invoices.size(), 'invoices.size()');
+        System.assertEquals(Date.newInstance(2019, 03, 02), invoices[0].Record.ServicePeriodFrom__c, 'invoices[0].Record.ServicePeriodFrom__c');
+        System.assertEquals(Date.newInstance(2019, 05, 31), invoices[0].Record.ServicePeriodTo__c, 'invoices[0].Record.ServicePeriodTo__c');
+    }
+
+    @isTest
+    static void createInvoicesFromTimeEntries_OverrideServicePeriodFalse_ServicePeriodDateCalculatedFromTimeEntries() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        List<TimeEntry__c> tes = [SELECT Id FROM TimeEntry__c WHERE Account__c = :a.Id];
+        tes[0].Date__c = Date.newInstance(2019,08,01);
+        tes[1].Date__c = Date.newInstance(2019,08,15);
+        tes[2].Date__c = Date.newInstance(2019,08,28);
+        update tes;
+        List<Id> timeEntryIds = new List<Id>(new Map<Id,TimeEntry__c>(tes).keySet());
+        
+        Map<String, Object> options = new Map<String, Object>{'collapseTimeEntries' => true, 'overrideServicePeriod' => false};
+        Map<String, Object> filters = new Map<String, Object>{'startDate' => '2019-09-01', 'endDate' => '2019-10-31'};
+
+         // ACTION
+        List<Invoice> invoices = BillingController.createInvoicesFromTimeEntries(timeEntryIds, options, filters);
+
+        // VERIFY
+        System.assertEquals(1, invoices.size(), 'invoices.size()');
+        System.assertEquals(Date.newInstance(2019,08,01), invoices[0].Record.ServicePeriodFrom__c, 'invoices[0].Record.ServicePeriodFrom__c');
+        System.assertEquals(Date.newInstance(2019,08,28), invoices[0].Record.ServicePeriodTo__c, 'invoices[0].Record.ServicePeriodTo__c');
+    }
+
 }

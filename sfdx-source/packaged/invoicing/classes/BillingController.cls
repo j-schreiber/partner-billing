@@ -22,12 +22,13 @@ public with sharing class BillingController {
         List<Invoice__c> newInvoiceRecords = new List<Invoice__c>();
         List<TimeEntry__c> dirtyTimeEntries = new List<TimeEntry__c>();
 
-        List<Account> accounts = [SELECT Id,(SELECT Id,DailyRate__c,Product__c,Duration__c FROM TimeEntries__r WHERE Id IN :timeEntryIds)
+        List<Account> accounts = [SELECT Id,(SELECT Id,DailyRate__c,Product__c,Duration__c,Date__c FROM TimeEntries__r WHERE Id IN :timeEntryIds)
                                 FROM Account 
                                 WHERE Id IN (SELECT Account__c FROM TimeEntry__c WHERE Id IN :timeEntryIds)];
 
         Boolean collapseEntries = (Boolean)options.get('collapseTimeEntries');
         Boolean overrideServicePeriod = (Boolean)options.get('overrideServicePeriod');
+        Invoice.ServicePeriod filterSP = new Invoice.ServicePeriod(filters);
 
         for (Account a : accounts) {
             Invoice inv = new Invoice();
@@ -44,7 +45,12 @@ public with sharing class BillingController {
             dirtyTimeEntries.addAll(a.TimeEntries__r);
         }
         Database.insert(newLineItemRecords);   
-        Database.update(dirtyTimeEntries);  
+        Database.update(dirtyTimeEntries);
+
+        for (Invoice inv : newInvoices.values()) {
+            Invoice.ServicePeriod timesheetSP = inv.getTimeSheetServicePeriod();
+            inv.setServicePeriod(overrideServicePeriod ? filterSP : timesheetSP);
+        }
 
         return newInvoices.values();
     }

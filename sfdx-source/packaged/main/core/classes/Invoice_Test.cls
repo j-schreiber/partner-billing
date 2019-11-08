@@ -341,6 +341,26 @@ public class Invoice_Test {
         System.assertEquals(Date.newInstance(2019,11,30), actual.endDate, 'ServicePeriod.endDate');
     }
 
+    @isTest
+    static void setServicePeriod_EmptyDates_OverwriteDatesWithStartEndOfCurrentMonth() {
+        // SETUP
+        Invoice objUnderTest = new Invoice();
+        Invoice.ServicePeriod sp = new Invoice.ServicePeriod();
+        
+        // ACTION
+        objUnderTest.setServicePeriod(sp);
+
+        // VERIFY
+        System.assertEquals(Date.newInstance(System.today().year(), System.today().month() + 1, 1).addDays(-1), objUnderTest.Record.ServicePeriodTo__c, 'Record.ServicePeriodTo__c');
+        System.assertEquals(Date.newInstance(System.today().year(), System.today().month(), 1), objUnderTest.Record.ServicePeriodFrom__c, 'Record.ServicePeriodFrom__c');
+    }
+
+    @isTest
+    static void setServicePeriod_ValidDates_SetDatesFromServicePeriod() {
+        
+    }
+
+
     /**                             GETTER & SETTER
     *   - calculated taxes based on invoice net/gross
     *

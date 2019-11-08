@@ -195,8 +195,8 @@ public virtual class Invoice {
     *   @param  dates       Service period date values
     */
     public void setServicePeriod(ServicePeriod dates) {
-        Record.ServicePeriodFrom__c = dates.startDate == null ? System.today() : dates.startDate;
-        Record.ServicePeriodTo__c = dates.endDate == null ? System.today() : dates.endDate;
+        Record.ServicePeriodFrom__c = dates.startDate == null ? Date.newInstance(System.today().year(), System.today().month(), 1) : dates.startDate;
+        Record.ServicePeriodTo__c = dates.endDate == null ? Date.newInstance(System.today().year(), System.today().month() + 1, 1).addDays(-1) : dates.endDate;
     }
 
     /** @Description
@@ -234,8 +234,19 @@ public virtual class Invoice {
     }
 
     public class ServicePeriod {
+
         public Date startDate;
         public Date endDate;
+
+        // initialize service period from filters
+        public ServicePeriod(Map<String, Object> filters) {
+            try {
+                startDate = Date.valueOf((String)filters.get('startDate'));
+                endDate = Date.valueOf((String)filters.get('endDate'));
+            } catch (Exception e) { }
+        }
+
+        public ServicePeriod() {}
     }
 
 }
