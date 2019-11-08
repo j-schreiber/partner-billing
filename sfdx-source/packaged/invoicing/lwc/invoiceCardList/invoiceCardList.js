@@ -2,16 +2,14 @@ import { LightningElement, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
-import updateInvoices from '@salesforce/apex/BillingController.updateInvoices';
-import upsertInvoiceLineItems from '@salesforce/apex/BillingController.upsertInvoiceLineItems';
-import deleteInvoiceLineItems from '@salesforce/apex/BillingController.deleteInvoiceLineItems';
+import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData';
 
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicesUpdated';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
 export default class InvoiceCardList extends LightningElement {
     @track invoiceData = [];
-    @track dirtyInvoices = {};
+    @track dirtyInvoices = new Map();
     @track dirtyLineItems = new Map();
     @track deletedLineItems = new Set();
     @track isWorking = false;
@@ -44,8 +42,10 @@ export default class InvoiceCardList extends LightningElement {
     }
 
     cacheUpdatedInvoice(event) {
-        let changedRecord = event.detail;
-        this.dirtyInvoices[changedRecord.Id] = changedRecord;
+        if (!this.dirtyInvoices.has(event.detail.recordId)) this.dirtyInvoices.set(event.detail.recordId, {});
+        let record = this.dirtyInvoices.get(event.detail.recordId);
+        record[event.detail.field] = event.detail.newValue;
+        record.Id = event.detail.recordId;
     }
 
 
@@ -55,31 +55,20 @@ export default class InvoiceCardList extends LightningElement {
 
         this.isWorking = true;
 
-        deleteInvoiceLineItems({
-            lineItemIds: this.deleteList
+        commitData({
+            invoices : this.invoiceUpdateList,
+            upsertLineItems : this.upsertList,
+            deleteLineItemIds : this.deleteList
         })
-        .then(() => {
-            this.deletedLineItems = new Set();
-            upsertInvoiceLineItems({
-                lineItems: this.upsertList
-            })
-            .then(() => {
-                this.dirtyLineItems = new Map();
-                updateInvoices({
-                    invoices: Object.values(this.dirtyInvoices)
-                }).then(() => {
-                    let successToast = new ShowToastEvent({
-                        title : this.LABELS.TOAST_TITLE_SUCCESS,
-                        variant : 'success'
-                    });
-                    this.dispatchEvent(successToast);
-                    this.isWorking = false;
-                });
-            });
+        .then( () => {
+            this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
+            this.isWorking = false;
         })
-        .catch(() => {
-            this.dispatchErrorToast('Deleting Line Items Failed');
-        });
+        .catch ( (error) => {
+            this.dispatchToast('error', this.LABELS.TOAST_TITLE_ERROR, error);
+            this.isWorking = false;
+        })
+        
     }
 
     queryInvoiceData() {
@@ -102,30 +91,39 @@ export default class InvoiceCardList extends LightningElement {
     get deleteList() {
         let arr = [];
         for (let item of this.deletedLineItems) { arr.push(item); }
+        //console.log('Sending delete ids: ' + JSON.stringify(arr));
         return arr;
     }
 
     get upsertList() {
         let arr = [];
         this.dirtyLineItems.forEach( (value) => { arr.push(value); });
+        //console.log('Sending new/modified line items: ' + JSON.stringify(arr));
+        return arr;
+    }
+
+    get invoiceUpdateList() {
+        let arr = [];
+        this.dirtyInvoices.forEach( (value) => { arr.push(value); });
+        //console.log('Sending invoices: ' + JSON.stringify(arr));
         return arr;
     }
 
     revertAllChanges() {
         this.invoiceData = [];
-        this.dirtyInvoices = {};
+        this.dirtyInvoices = new Map();
         this.dirtyLineItems = new Map();
         this.deletedLineItems = new Set();
         this.queryInvoiceData();
     }
 
-    dispatchErrorToast(title, message) {
-        let errorToast = new ShowToastEvent({
+    dispatchToast(type, title, message) {
+        let toast = new ShowToastEvent({
             title : title,
             message : message,
-            variant : 'error'
+            variant : type
         });
-        this.dispatchEvent(errorToast);
+        this.dispatchEvent(toast);
     }
 
 }

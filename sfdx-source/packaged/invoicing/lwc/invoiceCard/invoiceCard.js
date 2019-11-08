@@ -4,9 +4,17 @@ const PICK_VAL_DRAFT = 'Draft';
 const PICK_VAL_ACTIVATED = 'Activated';
 const PICK_VAL_CANCELLED = 'Cancelled';
 
+import DATE_FIELD from '@salesforce/schema/Invoice__c.Date__c';
+import PERIOD_STARTED_FIELD from '@salesforce/schema/Invoice__c.ServicePeriodFrom__c';
+import PERIOD_ENDED_FIELD from '@salesforce/schema/Invoice__c.ServicePeriodTo__c';
+import STATUS_FIELD from '@salesforce/schema/Invoice__c.Status__c';
+
 export default class InvoiceCard extends LightningElement {
 
     @track record;
+    oldRecord = {};
+    rowdata;
+
     @track internalLineItems = [];
     @track readonly = false;
 
@@ -18,9 +26,10 @@ export default class InvoiceCard extends LightningElement {
 
     @api
     get invoiceWrapper() {
-        return null;
+        return this.rowdata;
     }
     set invoiceWrapper(value) {
+        this.rowdata = value;
         this.TotalAmount = value.Record.TotalAmount__c;
         this.TotalGrossAmount = value.Record.TotalGrossAmount__c;
 
@@ -57,29 +66,29 @@ export default class InvoiceCard extends LightningElement {
 
     handleDateInput(event) {
         this.record.Date__c = event.detail.value;
-        this.dispatchUpdateEvent();
+        this.dispatchRecordChange(DATE_FIELD.fieldApiName);
     }
 
     handleServicePeriodFromInput(event) {
         this.record.ServicePeriodFrom__c = event.detail.value;
-        this.dispatchUpdateEvent();
+        this.dispatchRecordChange(PERIOD_STARTED_FIELD.fieldApiName);
     }
 
     handleServicePeriodToInput(event) {
         this.record.ServicePeriodTo__c = event.detail.value;
-        this.dispatchUpdateEvent();
+        this.dispatchRecordChange(PERIOD_ENDED_FIELD.fieldApiName);
     }
 
     handleActivateButtonClick() {
         this.isActivated ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_ACTIVATED;
         this.readonly = this.getIsReadOnly();
-        this.dispatchUpdateEvent();
+        this.dispatchRecordChange(STATUS_FIELD.fieldApiName);
     }
 
     handleCancelButtonClick() {
         this.isCancelled ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_CANCELLED;
         this.readonly = this.getIsReadOnly();
-        this.dispatchUpdateEvent();
+        this.dispatchRecordChange(STATUS_FIELD.fieldApiName);
     }
 
     recalculateSums(event) {
@@ -130,12 +139,6 @@ export default class InvoiceCard extends LightningElement {
         };
     }
 
-    dispatchUpdateEvent() {
-        this.dispatchEvent(
-            new CustomEvent('invoicechange', { detail : this.record })
-        );
-    }
-
     bubbleLineItemChange(event) {
         this.dispatchEvent(
             new CustomEvent('lineitemchange', { detail : event.detail })
@@ -163,5 +166,22 @@ export default class InvoiceCard extends LightningElement {
 
     nextLineItemId() {
         return this.record.Id +'-'+(this.incremetor++);
+    }
+
+    dispatchRecordChange(updatedField) {
+        if (this.oldRecord[updatedField] !== this.record[updatedField]) {
+            this.dispatchEvent(
+                new CustomEvent('recordchange', {
+                    detail : {
+                        recordId : this.rowdata.Record.Id,
+                        field : updatedField,
+                        originalValue : this.rowdata.Record[updatedField],
+                        oldValue : this.oldRecord[updatedField],
+                        newValue : this.record[updatedField]
+                    }
+                })
+            );
+        }
+        this.oldRecord[updatedField] = this.record[updatedField];
     }
 }

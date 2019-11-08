@@ -57,14 +57,6 @@ public with sharing class BillingController {
     }
 
     /** @Description
-    *   Method expects an organized list of time entries (only to the same account) and creates
-    *   an invoice for this account.
-    */
-    private static Invoice__c createInvoiceFromTimeEntries(Id accountId, List<TimeEntry__c> timeEntries) {
-        return new Invoice__c();
-    }
-
-    /** @Description
     *   Gets non-invoiced time entries for the specified filter criteria
     *
     *   @param  startDate       Minimum Date
@@ -97,6 +89,25 @@ public with sharing class BillingController {
             results.add(new Invoice(inv));
         }
         return results;
+    }
+
+    /** @Description
+    *   This method commits all data for the invoice-edit view panel. Marked line items
+    *   are deleted, new/modified line items are upserted and invoices are updated
+    *
+    *   @param  invoices            Dirty invoices to update
+    *   @param  upsertLineItems     Dirty invoice line items to update or insert
+    *   @param  deleteLineItemIds   Ids for line items to delete
+    */
+    @AuraEnabled
+    public static void commitInvoiceEditData(List<Invoice__c> invoices, List<InvoiceLineItem__c> upsertLineItems, List<Id> deleteLineItemIds) {
+        for (Invoice__c inv : invoices) System.debug('Updating: ' + inv);
+        for (InvoiceLineItem__c ili : upsertLineItems) System.debug('Upserting: ' + ili);
+        for (Id i : deleteLineItemIds) System.debug('Deleting: ' + i);
+
+        Database.update(invoices, true);
+        Database.upsert(upsertLineItems, false);
+        Database.delete(deleteLineItemIds, false);
     }
 
     /** @Description

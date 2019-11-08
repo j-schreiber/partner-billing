@@ -12,7 +12,7 @@
                 <div key={invoice.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
                     <c-invoice-card
                         invoice-wrapper={invoice}
-                        oninvoicechange={cacheUpdatedInvoice}
+                        onrecordchange={cacheUpdatedInvoice}
                         onlineitemcreate={cacheNewLineItem}
                         onlineitemdelete={cacheDeletedLineItem}
                         onlineitemchange={cacheUpdatedLineItem}>

@@ -146,4 +146,36 @@ class BillingController_Test {
         System.assertEquals(Date.newInstance(2019,08,28), inv.ServicePeriodTo__c, 'ServicePeriodTo__c');
     }
 
+    @isTest
+    static void commitInvoiceEditData_InvoiceData_InvoiceUpdated() {
+        // SETUP
+        List<Invoice__c> invoices = [SELECT Id FROM Invoice__c WHERE Status__c = 'Draft'];
+        System.assertEquals(BULK_NUMBER, invoices.size(), 'invoices.size()');
+        for (Invoice__c i : invoices) {
+            i.Date__c = Date.newInstance(2019, 05, 25);
+            i.ServicePeriodFrom__c = Date.newInstance(2019, 04, 01);
+            i.ServicePeriodTo__c = Date.newInstance(2019, 04, 30);
+        }
+
+        // ACTION
+        BillingController.commitInvoiceEditData(invoices, new List<InvoiceLineItem__c>(), new List<Id>());
+
+        // VERIFY
+        for (Invoice__c i : [SELECT Id,Date__c,ServicePeriodFrom__c,ServicePeriodTo__c FROM Invoice__c WHERE Id IN :invoices]) {
+            System.assertEquals(Date.newInstance(2019, 05, 25), i.Date__c, 'Date__c');
+            System.assertEquals(Date.newInstance(2019, 04, 01), i.ServicePeriodFrom__c, 'ServicePeriodFrom__c');
+            System.assertEquals(Date.newInstance(2019, 04, 30), i.ServicePeriodTo__c, 'ServicePeriodTo__c');
+        }
+    }
+
+    @isTest
+    static void commitInvoiceEditData_LineItemsToUpsert_LineItemsUpserted() {
+        
+    }
+
+    @isTest
+    static void commitInvoiceEditData_LineItemsToDelete_LineItemsDeleted() {
+        
+    }
+
 }
