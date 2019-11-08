@@ -8,6 +8,7 @@ export default class InvoiceCard extends LightningElement {
 
     @track record;
     @track internalLineItems = [];
+    @track readonly = false;
 
     @track TotalAmount = 0;
     @track TotalGrossAmount = 0;
@@ -71,11 +72,13 @@ export default class InvoiceCard extends LightningElement {
 
     handleActivateButtonClick() {
         this.isActivated ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_ACTIVATED;
+        this.readonly = this.getIsReadOnly();
         this.dispatchUpdateEvent();
     }
 
     handleCancelButtonClick() {
         this.isCancelled ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_CANCELLED;
+        this.readonly = this.getIsReadOnly();
         this.dispatchUpdateEvent();
     }
 
@@ -99,6 +102,11 @@ export default class InvoiceCard extends LightningElement {
 
     get isCancelled() {
         return this.record.Status__c === PICK_VAL_CANCELLED;
+    }
+
+    getIsReadOnly() {
+        let isReadOnly = this.record.Status__c !== PICK_VAL_DRAFT;
+        return isReadOnly;
     }
 
     get invoiceTitle() {

@@ -36,6 +36,7 @@
                         type="date"
                         variant="label-inline"
                         label="Invoice Date"
+                        disabled={readonly}
                         onchange={handleDateInput}>
                     </lightning-input>
                     <lightning-input
@@ -44,6 +45,7 @@
                         label="Service Period Start"
                         variant="label-inline"
                         max={record.ServicePeriodTo__c}
+                        disabled={readonly}
                         onchange={handleServicePeriodFromInput}>
                     </lightning-input>
                     <lightning-input 
@@ -52,6 +54,7 @@
                         label="Service Period End"
                         variant="label-inline"
                         min={record.ServicePeriodFrom__c}
+                        disabled={readonly}
                         onchange={handleServicePeriodToInput}>
                     </lightning-input>
                 </div>
@@ -98,12 +101,14 @@
 
             <lightning-button
                 label="Add Row"
+                disabled={readonly}
                 onclick={addLineItem}>
             </lightning-button>
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable
                 lineitems={internalLineItems}
+                is-disabled={readonly}
                 onrecalculate={recalculateSums}
                 onrecordchange={bubbleLineItemChange}
                 onrecorddelete={removeLineItem}>

@@ -18,6 +18,7 @@
             <template for:each={lineitems} for:item='lineitem'>
                 <c-invoice-line-item-datatable-row 
                     rowdata={lineitem}
+                    is-disabled={isDisabled}
                     key={lineitem.ExtId}
                     onrecorddelete={bubbleRecordDelete}
                     onrecalculate={recalculateSums}

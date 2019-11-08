@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class InvoiceLineItemDatatable extends LightningElement {
     @api lineitems = [];
+    @api isDisabled = false;
 
     @track internalAmount;
     @track internalGrossAmount;

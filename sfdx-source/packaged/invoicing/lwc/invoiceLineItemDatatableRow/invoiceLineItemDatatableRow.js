@@ -9,6 +9,8 @@ import DESCRIPTION_FIELD from '@salesforce/schema/InvoiceLineItem__c.Description
 
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     @api rowdata;
+    @api isDisabled = false;
+
     @track record;
     oldRecord = {};
 
@@ -27,10 +29,6 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
 
     disconnectedCallback() {
         this.dispatchRecalculate();
-    }
-
-    renderedCallback() {
-        //console.log('Row rendered!' + JSON.stringify(this.record));   
     }
 
     /**                         INTERNALLY UPDATE DATA                        */

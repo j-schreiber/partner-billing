@@ -4,6 +4,7 @@
             <lightning-input-field
                 field-name="Product__c"
                 variant="label-hidden"
+                disabled={isDisabled}
                 onchange={updateProduct}
                 value={record.Product__c}>
             </lightning-input-field>
@@ -18,6 +19,7 @@
             variant="label-hidden"
             onchange={updatePrice}
             onblur={sendPriceUpdate}
+            disabled={isDisabled}
             min="0"
             step="0.01">
         </lightning-input>
@@ -30,6 +32,7 @@
             variant="label-hidden"
             onchange={updateQuantity}
             onblur={sendQuantityUpdate}
+            disabled={isDisabled}
             min="0"
             step="0.0001">
         </lightning-input>
@@ -43,6 +46,7 @@
             variant="label-hidden"
             onchange={updateTax}
             onblur={sendTaxUpdate}
+            disabled={isDisabled}
             min="0"
             step="0.01">
         </lightning-input>
@@ -58,6 +62,7 @@
             min="0"
             onchange={updateDiscount}
             onblur={sendDiscountUpdate}
+            disabled={isDisabled}
             step="0.01">
         </lightning-input>
     </td>
@@ -82,6 +87,7 @@
             type="text"
             onchange={updateDescription}
             onblur={sendDescriptionUpdate}
+            disabled={isDisabled}
             variant="label-hidden">
         </lightning-input>
     </td>
@@ -89,6 +95,7 @@
         <lightning-button-icon
             icon-name="utility:delete"
             alternative-text="Delete"
+            disabled={isDisabled}
             onclick={dispatchRecordDelete}>
         </lightning-button-icon>
     </td>
