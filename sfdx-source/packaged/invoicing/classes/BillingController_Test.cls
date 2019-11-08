@@ -113,9 +113,14 @@ class BillingController_Test {
         List<Invoice> invoices = BillingController.createInvoicesFromTimeEntries(timeEntryIds, options, filters);
 
         // VERIFY
-        System.assertEquals(BULK_NUMBER, invoices.size(), 'invoices.size()');
-        System.assertEquals(Date.newInstance(2019, 03, 02), invoices[0].Record.ServicePeriodFrom__c, 'invoices[0].Record.ServicePeriodFrom__c');
-        System.assertEquals(Date.newInstance(2019, 05, 31), invoices[0].Record.ServicePeriodTo__c, 'invoices[0].Record.ServicePeriodTo__c');
+        List<Id> createdInvoiceIds = new List<Id>();
+        for (Invoice inv : invoices) createdInvoiceIds.add(inv.Record.Id);
+        System.assertEquals(BULK_NUMBER, createdInvoiceIds.size(), 'invoices.size()');
+
+        for (Invoice__c inv : [SELECT Id,ServicePeriodFrom__c,ServicePeriodTo__c FROM Invoice__c WHERE Id IN :createdInvoiceIds]) {
+            System.assertEquals(Date.newInstance(2019, 03, 02), inv.ServicePeriodFrom__c, 'ServicePeriodFrom__c');
+            System.assertEquals(Date.newInstance(2019, 05, 31), inv.ServicePeriodTo__c, 'ServicePeriodTo__c');
+        }
     }
 
     @isTest
@@ -136,9 +141,9 @@ class BillingController_Test {
         List<Invoice> invoices = BillingController.createInvoicesFromTimeEntries(timeEntryIds, options, filters);
 
         // VERIFY
-        System.assertEquals(1, invoices.size(), 'invoices.size()');
-        System.assertEquals(Date.newInstance(2019,08,01), invoices[0].Record.ServicePeriodFrom__c, 'invoices[0].Record.ServicePeriodFrom__c');
-        System.assertEquals(Date.newInstance(2019,08,28), invoices[0].Record.ServicePeriodTo__c, 'invoices[0].Record.ServicePeriodTo__c');
+        Invoice__c inv = [SELECT Id,ServicePeriodFrom__c,ServicePeriodTo__c FROM Invoice__c WHERE Id = :invoices[0].Record.Id];
+        System.assertEquals(Date.newInstance(2019,08,01), inv.ServicePeriodFrom__c, 'ServicePeriodFrom__c');
+        System.assertEquals(Date.newInstance(2019,08,28), inv.ServicePeriodTo__c, 'ServicePeriodTo__c');
     }
 
 }

@@ -51,6 +51,7 @@ public with sharing class BillingController {
             Invoice.ServicePeriod timesheetSP = inv.getTimeSheetServicePeriod();
             inv.setServicePeriod(overrideServicePeriod ? filterSP : timesheetSP);
         }
+        Database.update(newInvoiceRecords);
 
         return newInvoices.values();
     }

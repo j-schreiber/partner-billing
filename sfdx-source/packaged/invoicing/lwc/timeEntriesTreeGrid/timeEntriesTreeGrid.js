@@ -34,8 +34,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
     };
 
     selectedFilters = {
-        startDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString(),
-        endDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString(),
+        startDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0],
+        endDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0],
     }
 
     columns = COLUMN_DEFINITION;
