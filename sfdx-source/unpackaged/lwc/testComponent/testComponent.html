@@ -1,0 +1,26 @@
+<template>
+    <lightning-card>
+
+        <div class="slds-p-horizontal_medium">
+
+            <lightning-input
+                label="Test Input"
+                value={originalRecord.myField}
+                name="myField"
+                onchange={handleChange}
+                variant="label-inline">
+            </lightning-input>
+
+            <lightning-input
+                label="Second test Input"
+                value={originalRecord.mySecondField}
+                name="mySecondField"
+                onchange={handleChange}
+                variant="label-inline">
+            </lightning-input>
+
+        </div>
+        
+    </lightning-card>
+
+</template>
