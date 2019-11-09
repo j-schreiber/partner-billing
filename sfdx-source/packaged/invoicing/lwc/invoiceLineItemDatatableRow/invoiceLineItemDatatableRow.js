@@ -33,25 +33,25 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
 
     /**                         INTERNALLY UPDATE DATA                        */
     updatePrice(event) {
-        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
             this.record.Price__c = Number(event.detail.value);
         }
     }
 
     updateDiscount(event) {
-        if (!isNaN(event.detail.value) && event.detail.value >= 0 && event.detail.value <= 100) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
             this.record.Discount__c = Number(event.detail.value);
         }
     }
 
     updateTax(event) {
-        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
             this.record.Tax__c = Number(event.detail.value);
         }
     }
 
     updateQuantity(event) {
-        if (!isNaN(event.detail.value) && event.detail.value >= 0) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
             this.record.Quantity__c = Number(event.detail.value);
         }
     }

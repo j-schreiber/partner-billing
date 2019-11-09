@@ -61,6 +61,7 @@ export default class InvoiceCardList extends LightningElement {
             deleteLineItemIds : this.deleteList
         })
         .then( () => {
+            this.revertAllChanges();
             this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
