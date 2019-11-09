@@ -19,6 +19,17 @@
                 variant="label-inline">
             </lightning-input>
 
+            <lightning-record-edit-form object-api-name="InvoiceLineItem__c">
+                <div onchange={updateProduct}>
+                    <lightning-input-field
+                        field-name="Product__c"
+                        name="Product__c"
+                        variant="label-hidden"
+                        value={originalRecord.Product__c}>
+                    </lightning-input-field>
+                </div>
+            </lightning-record-edit-form>
+
         </div>
         
     </lightning-card>
