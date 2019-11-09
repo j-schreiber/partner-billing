@@ -33,29 +33,35 @@
                 <div class="slds-col slds-grid">
                     <lightning-input
                         value={record.Date__c}
+                        name="Date__c"
                         type="date"
                         variant="label-inline"
                         label="Invoice Date"
                         disabled={readonly}
-                        onchange={handleDateInput}>
+                        onblur={dispatchUpdateEvent}
+                        onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input
                         value={record.ServicePeriodFrom__c}
+                        name="ServicePeriodFrom__c"
                         type="date"
                         label="Service Period Start"
                         variant="label-inline"
                         max={record.ServicePeriodTo__c}
                         disabled={readonly}
-                        onchange={handleServicePeriodFromInput}>
+                        onblur={dispatchUpdateEvent}
+                        onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input 
                         value={record.ServicePeriodTo__c}
+                        name="ServicePeriodTo__c"
                         type="date"
                         label="Service Period End"
                         variant="label-inline"
                         min={record.ServicePeriodFrom__c}
                         disabled={readonly}
-                        onchange={handleServicePeriodToInput}>
+                        onblur={dispatchUpdateEvent}
+                        onchange={handleDataInput}>
                     </lightning-input>
                 </div>
                 <div class="slds-col slds-grid slds-grid_align-end">

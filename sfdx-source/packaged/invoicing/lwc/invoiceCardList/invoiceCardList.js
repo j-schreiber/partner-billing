@@ -30,6 +30,7 @@ export default class InvoiceCardList extends LightningElement {
         let record = this.dirtyLineItems.get(event.detail.extId);
         record[event.detail.field] = event.detail.newValue;
         record.Id = event.detail.recordId;
+        //console.log('Cached Line Item: ' + JSON.stringify(record));
     }
 
     cacheDeletedLineItem(event) {
@@ -46,6 +47,7 @@ export default class InvoiceCardList extends LightningElement {
         let record = this.dirtyInvoices.get(event.detail.recordId);
         record[event.detail.field] = event.detail.newValue;
         record.Id = event.detail.recordId;
+        //console.log('Cached Invoice: ' + JSON.stringify(record));
     }
 
 

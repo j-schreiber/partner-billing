@@ -1,24 +1,26 @@
 <template>
     <td>
         <lightning-record-edit-form object-api-name="InvoiceLineItem__c">
-            <lightning-input-field
-                field-name="Product__c"
-                variant="label-hidden"
-                disabled={isDisabled}
-                onchange={updateProduct}
-                value={record.Product__c}>
-            </lightning-input-field>
+            <div onchange={updateProduct}>
+                <lightning-input-field
+                    field-name="Product__c"
+                    name="Product__c"
+                    variant="label-hidden"
+                    disabled={isDisabled}
+                    value={record.Product__c}>
+                </lightning-input-field>
+            </div>
         </lightning-record-edit-form>
     </td> 
     <td>
         <lightning-input
             value={record.Price__c}
-            data-id="Price__c"
+            name="Price__c"
             type="number"
             formatter="currency"
             variant="label-hidden"
-            onchange={updatePrice}
-            onblur={sendPriceUpdate}
+            onchange={updateInternalData}
+            onblur={dispatchUpdateEvent}
             disabled={isDisabled}
             min="0"
             step="0.01">
@@ -27,11 +29,11 @@
     <td>
         <lightning-input
             value={record.Quantity__c}
-            data-id="Quantity__c"
+            name="Quantity__c"
             type="number"
             variant="label-hidden"
-            onchange={updateQuantity}
-            onblur={sendQuantityUpdate}
+            onchange={updateInternalData}
+            onblur={dispatchUpdateEvent}
             disabled={isDisabled}
             min="0"
             step="0.0001">
@@ -40,12 +42,12 @@
     <td>
         <lightning-input
             value={record.Tax__c}
-            data-id="Tax__c"
+            name="Tax__c"
             type="number"
             formatter="percent-fixed"
             variant="label-hidden"
-            onchange={updateTax}
-            onblur={sendTaxUpdate}
+            onchange={updateInternalData}
+            onblur={dispatchUpdateEvent}
             disabled={isDisabled}
             min="0"
             step="0.01">
@@ -54,14 +56,14 @@
     <td>
         <lightning-input
             value={record.Discount__c}
-            data-id="Discount__c"
+            name="Discount__c"
             type="number"
             formatter="percent-fixed"
             variant="label-hidden"
             max="100"
             min="0"
-            onchange={updateDiscount}
-            onblur={sendDiscountUpdate}
+            onchange={updateInternalData}
+            onblur={dispatchUpdateEvent}
             disabled={isDisabled}
             step="0.01">
         </lightning-input>
@@ -82,11 +84,11 @@
     </td>
     <td>
         <lightning-input
-            value={rowdata.Record.Description__c}
-            data-id="Description__c"
+            value={record.Description__c}
+            name="Description__c"
             type="text"
             onchange={updateDescription}
-            onblur={sendDescriptionUpdate}
+            onblur={dispatchUpdateEvent}
             disabled={isDisabled}
             variant="label-hidden">
         </lightning-input>

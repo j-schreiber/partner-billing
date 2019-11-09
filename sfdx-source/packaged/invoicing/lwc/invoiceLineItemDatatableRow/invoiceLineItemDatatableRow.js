@@ -1,17 +1,17 @@
-import { LightningElement, api, track } from 'lwc';
-
+import { LightningElement, api } from 'lwc';
+/*
 import PRICE_FIELD from '@salesforce/schema/InvoiceLineItem__c.Price__c';
 import QUANTITY_FIELD from '@salesforce/schema/InvoiceLineItem__c.Quantity__c';
-import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
 import TAX_FIELD from '@salesforce/schema/InvoiceLineItem__c.Tax__c';
 import DISCOUNT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Discount__c';
 import DESCRIPTION_FIELD from '@salesforce/schema/InvoiceLineItem__c.Description__c';
-
+*/
+import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     @api rowdata;
     @api isDisabled = false;
 
-    @track record;
+    record;
     oldRecord = {};
 
     /**                         LIFECYCLE HOOKS                             */
@@ -32,61 +32,39 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     }
 
     /**                         INTERNALLY UPDATE DATA                        */
-    updatePrice(event) {
-        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
-            this.record.Price__c = Number(event.detail.value);
-        }
-    }
-
-    updateDiscount(event) {
-        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
-            this.record.Discount__c = Number(event.detail.value);
-        }
-    }
-
-    updateTax(event) {
-        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
-            this.record.Tax__c = Number(event.detail.value);
-        }
-    }
-
-    updateQuantity(event) {
-        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
-            this.record.Quantity__c = Number(event.detail.value);
-        }
-    }
-
     updateDescription(event) {
-        this.record.Description__c = event.detail.value;
+        this.record[event.currentTarget.name] = event.detail.value;
+    }
+
+    updateInternalData(event) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
+            this.record[event.currentTarget.name] = Number(event.detail.value);
+        }
     }
 
     updateProduct(event) {
-        this.record.Product__c = (event.detail.value)[0];
+        this.record[PRODUCT_FIELD.fieldApiName] = (event.detail.value.length === 0) ? '' : (event.detail.value)[0];
         this.dispatchRecordChange(PRODUCT_FIELD.fieldApiName);
+        this.setModificationStyle(this.isModified(PRODUCT_FIELD.fieldApiName), event.currentTarget);
     }
 
     /**                         SEND UPDATES TO PARENT                           */
-    sendPriceUpdate() {
-        this.dispatchRecordChange(PRICE_FIELD.fieldApiName);
+
+    dispatchUpdateEvent(event) {
+        this.dispatchRecordChange(event.currentTarget.name);
+        this.setModificationStyle(this.isModified(event.currentTarget.name), event.currentTarget);
     }
 
-    sendDiscountUpdate() {
-        this.dispatchRecordChange(DISCOUNT_FIELD.fieldApiName);
+    isModified(fieldName) {
+        return this.record[fieldName] !== this.rowdata.Record[fieldName];
     }
 
-    sendTaxUpdate() {
-        this.dispatchRecordChange(TAX_FIELD.fieldApiName);
-    }
-
-    sendQuantityUpdate() {
-        this.dispatchRecordChange(QUANTITY_FIELD.fieldApiName);
-    }
-
-    sendDescriptionUpdate() {
-        this.dispatchRecordChange(DESCRIPTION_FIELD.fieldApiName);
+    setModificationStyle(isModified, DOMNode) {
+        isModified ? DOMNode.classList.add('dirty-field') : DOMNode.classList.remove('dirty-field');
     }
 
     /**                         ACTUAL EVENT DISPATCHERS                          */
+    
     dispatchRecordDelete() {
         this.dispatchEvent(
             new CustomEvent('recorddelete', { detail : this.rowdata.ExtId })

@@ -3,15 +3,15 @@ import { LightningElement, api, track } from 'lwc';
 const PICK_VAL_DRAFT = 'Draft';
 const PICK_VAL_ACTIVATED = 'Activated';
 const PICK_VAL_CANCELLED = 'Cancelled';
-
+/*
 import DATE_FIELD from '@salesforce/schema/Invoice__c.Date__c';
 import PERIOD_STARTED_FIELD from '@salesforce/schema/Invoice__c.ServicePeriodFrom__c';
-import PERIOD_ENDED_FIELD from '@salesforce/schema/Invoice__c.ServicePeriodTo__c';
+import PERIOD_ENDED_FIELD from '@salesforce/schema/Invoice__c.ServicePeriodTo__c'; */
 import STATUS_FIELD from '@salesforce/schema/Invoice__c.Status__c';
 
 export default class InvoiceCard extends LightningElement {
 
-    @track record;
+    record;
     oldRecord = {};
     rowdata;
 
@@ -47,6 +47,7 @@ export default class InvoiceCard extends LightningElement {
 
         value.LineItems.forEach(
             (item) => {
+                // clone the line item object from apex
                 let newItem = {
                     Record : {
                         Id : item.Record.Id,
@@ -55,28 +56,34 @@ export default class InvoiceCard extends LightningElement {
                         Tax__c : item.Record.Tax__c,
                         Quantity__c : item.Record.Quantity__c,
                         Product__c : item.Record.Product__c,
-                        Productname__c : item.Record.Productname__c
+                        Productname__c : item.Record.Productname__c,
+                        Description__c : item.Record.Description__c
                     },
                     ExtId : this.nextLineItemId()
                 }
+                // add to internal list, so we can modify
                 this.internalLineItems.push(newItem);
             }
         );
     }
 
-    handleDateInput(event) {
-        this.record.Date__c = event.detail.value;
-        this.dispatchRecordChange(DATE_FIELD.fieldApiName);
+
+    /**                             EVENT LISTENERS                              */
+
+    handleDataInput(event) {
+        if (event.currentTarget.checkValidity()) {
+            this.record[event.currentTarget.name] = event.detail.value;
+        }
     }
 
-    handleServicePeriodFromInput(event) {
-        this.record.ServicePeriodFrom__c = event.detail.value;
-        this.dispatchRecordChange(PERIOD_STARTED_FIELD.fieldApiName);
+    dispatchUpdateEvent(event) {
+        this.dispatchRecordChange(event.currentTarget.name);
+        this.setModificationStyle(this.isModified(event.currentTarget.name), event.currentTarget);
     }
 
-    handleServicePeriodToInput(event) {
-        this.record.ServicePeriodTo__c = event.detail.value;
-        this.dispatchRecordChange(PERIOD_ENDED_FIELD.fieldApiName);
+    recalculateSums(event) {
+        this.TotalAmount = event.detail.sumAmount;
+        this.TotalGrossAmount = event.detail.sumGrossAmount;
     }
 
     handleActivateButtonClick() {
@@ -91,9 +98,14 @@ export default class InvoiceCard extends LightningElement {
         this.dispatchRecordChange(STATUS_FIELD.fieldApiName);
     }
 
-    recalculateSums(event) {
-        this.TotalAmount = event.detail.sumAmount;
-        this.TotalGrossAmount = event.detail.sumGrossAmount;
+    /**                             HELPER METHODS                                */
+
+    isModified(fieldName) {
+        return this.record[fieldName] !== this.rowdata.Record[fieldName];
+    }
+
+    setModificationStyle(isModified, DOMNode) {
+        isModified ? DOMNode.classList.add('is-dirty') : DOMNode.classList.remove('is-dirty');
     }
 
     addLineItem() {
