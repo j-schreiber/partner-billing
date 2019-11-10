@@ -1,7 +1,6 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getRecord } from 'lightning/uiRecordApi';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
 import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInvoice';
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
@@ -10,9 +9,6 @@ import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
 import RENDER_TIMESHEET_FIELD from '@salesforce/schema/Invoice__c.PdfRenderTimesheet__c';
 
 import BUTTON_LABEL_SAVE from '@salesforce/label/c.Button_Label_SaveToAttachments';
-import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.InvoicePdf_Label_SelectOrgProfile';
-import OPTION_LABEL_RENDERLANG from '@salesforce/label/c.InvoicePdf_Label_SelectRenderLanguage';
-import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.InvoicePdf_Label_ActivateTimesheet';
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_PdfSaveSuccess';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
@@ -21,20 +17,16 @@ export default class InvoicePdfQuickAction extends LightningElement {
     @track isWorking = false;
 
     @track organizationProfiles;
-    @track availableLanguages;
-
-    @wire( getPicklistValues, { recordTypeId : '012000000000000AAA', fieldApiName : LANGUAGE_FIELD})
-    getLanguagePicklistValues ({data}) {
-        if (data) {
-            this.availableLanguages = Array.from(data.values);
-        }
-    }
+    @track invoice;
 
     @wire(getRecord, { recordId: '$invoiceId', fields: [LANGUAGE_FIELD, RENDER_TIMESHEET_FIELD] })
     setDataFromInvoice ({data}) {
         if (data) {
-            this.selectedLanguage = data.fields.PdfLanguage__c.value;
-            this.displayTimesheet = data.fields.PdfRenderTimesheet__c.value;
+            this.invoice = {
+                Id : data.id,
+                PdfLanguage__c : data.fields.PdfLanguage__c.value,
+                PdfRenderTimesheet__c : data.fields.PdfRenderTimesheet__c.value
+            }
         }
     }
 
@@ -45,13 +37,33 @@ export default class InvoicePdfQuickAction extends LightningElement {
     LABELS = {
         BUTTON_LABEL_SAVE,
         TOAST_TITLE_SUCCESS,
-        TOAST_TITLE_ERROR,
-        OPTION_LABEL_ORGPROFILE,
-        OPTION_LABEL_RENDERLANG,
-        OPTION_LABEL_TIMESHEET
+        TOAST_TITLE_ERROR
     }
 
     connectedCallback() {
+        this.isWorking = true;
+        this.getOrgProfiles();
+        this.isWorking = false;
+    }
+
+    get invoicePdfUrl() {
+        return '/apex/InvoicePdf?Id='+ this.invoiceId +
+            '&orgProfileId=' + this.selectedProfile +
+            '&lang=' + this.selectedLanguage +
+            '&displayTimesheet=' + this.displayTimesheet;
+    }
+
+    get loadingCompleted() {
+        return this.organizationProfiles && this.invoice;
+    }
+
+    handleOptionsChange(event) {
+        this.selectedProfile = event.detail.profile;
+        this.selectedLanguage = event.detail.language;
+        this.displayTimesheet = event.detail.timesheet;
+    }
+
+    getOrgProfiles() {
 
         getOrganizationProfiles({})
         .then( (data) => {
@@ -62,35 +74,11 @@ export default class InvoicePdfQuickAction extends LightningElement {
                     value : entry.Id
                 })
             });
-            this.organizationProfiles = profiles;
-
-            if (profiles && profiles.length >= 1) {
-                this.selectedProfile = profiles[0].value;
-            }
-            
+            this.organizationProfiles = profiles;            
         })
         .catch( () => {
             this.organizationProfiles = [];
         });
-    }
-
-    handleProfileSelection(event) {
-        this.selectedProfile = event.detail.value;
-    }
-
-    handleLanguageSelection(event) {
-        this.selectedLanguage = event.detail.value;
-    }
-
-    handleTimesheetToggle(event) {
-        this.displayTimesheet = event.detail.checked;
-    }
-
-    get invoicePdfUrl() {
-        return '/apex/InvoicePdf?Id='+ this.invoiceId +
-            '&orgProfileId=' + this.selectedProfile +
-            '&lang=' + this.selectedLanguage +
-            '&displayTimesheet=' + this.displayTimesheet;
     }
 
     savePdf() {

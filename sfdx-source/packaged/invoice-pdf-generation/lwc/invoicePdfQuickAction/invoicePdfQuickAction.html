@@ -4,43 +4,14 @@
     <div class="slds-grid slds-grid_vertical slds-grid_vertical-stretch">
         
         <!-- Control Elements to change the pdf's content -->
-        <div class="slds-col slds-grid slds-m-bottom_small slds-grid_align-center">
-            <div class="slds-col">
-                <lightning-combobox class="slds-m-around_small"
-                                    variant="label-hidden"
-                                    label={LABELS.OPTION_LABEL_ORGPROFILE}
-                                    options={organizationProfiles}
-                                    value={selectedProfile}
-                                    onchange={handleProfileSelection}>
-                </lightning-combobox>
-            </div>
-            <div class="slds-col">
-                <lightning-combobox class="slds-m-around_small"
-                                    variant="label-hidden"
-                                    label={LABELS.OPTION_LABEL_RENDERLANG}
-                                    options={availableLanguages}
-                                    value={selectedLanguage}
-                                    onchange={handleLanguageSelection}></lightning-combobox>
-            </div>
-            <div class="slds-col">
-                <template if:true={displayTimesheet}>
-                    <lightning-input class="slds-m-around_small" 
-                                     label={LABELS.OPTION_LABEL_TIMESHEET}
-                                     type="toggle"
-                                     message-toggle-active="Show"
-                                     message-toggle-inactive="Don't Show"
-                                     checked
-                                     onchange={handleTimesheetToggle}></lightning-input>
-                </template>
-                <template if:false={displayTimesheet}>
-                    <lightning-input class="slds-m-around_small"
-                                     label={LABELS.OPTION_LABEL_TIMESHEET}
-                                     type="toggle"
-                                     message-toggle-active="Show"
-                                     message-toggle-inactive="Don't Show"
-                                     onchange={handleTimesheetToggle}></lightning-input>
-                </template>
-            </div>
+        <div class="slds-col slds-m-bottom_small">
+            <template if:true={loadingCompleted}>
+                <c-pdf-generation-options
+                    invoice={invoice}
+                    onoptionchange={handleOptionsChange}
+                    org-profiles={organizationProfiles}>
+                </c-pdf-generation-options>
+            </template>
         </div>
 
         <!-- Pdf Renderer -->
