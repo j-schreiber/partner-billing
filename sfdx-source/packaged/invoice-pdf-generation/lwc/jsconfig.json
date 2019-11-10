@@ -2,6 +2,12 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "c/testComponent": [
+                "../../../unpackaged/lwc/testComponent/testComponent.js"
+            ],
+            "c/testInputComponent": [
+                "../../../unpackaged/lwc/testInputComponent/testInputComponent.js"
+            ],
             "c/invoicePdfQuickAction": [
                 "invoicePdfQuickAction/invoicePdfQuickAction.js"
             ],

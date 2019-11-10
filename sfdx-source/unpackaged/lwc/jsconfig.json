@@ -1,0 +1,56 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/testComponent": [
+                "testComponent/testComponent.js"
+            ],
+            "c/testInputComponent": [
+                "testInputComponent/testInputComponent.js"
+            ],
+            "c/invoicePdfQuickAction": [
+                "../../packaged/invoice-pdf-generation/lwc/invoicePdfQuickAction/invoicePdfQuickAction.js"
+            ],
+            "c/invoiceCard": [
+                "../../packaged/invoicing/lwc/invoiceCard/invoiceCard.js"
+            ],
+            "c/invoiceCardList": [
+                "../../packaged/invoicing/lwc/invoiceCardList/invoiceCardList.js"
+            ],
+            "c/invoiceCardRecord": [
+                "../../packaged/invoicing/lwc/invoiceCardRecord/invoiceCardRecord.js"
+            ],
+            "c/invoiceLineItemDatatable": [
+                "../../packaged/invoicing/lwc/invoiceLineItemDatatable/invoiceLineItemDatatable.js"
+            ],
+            "c/invoiceLineItemDatatableRow": [
+                "../../packaged/invoicing/lwc/invoiceLineItemDatatableRow/invoiceLineItemDatatableRow.js"
+            ],
+            "c/invoicesTreeGrid": [
+                "../../packaged/invoicing/lwc/invoicesTreeGrid/invoicesTreeGrid.js"
+            ],
+            "c/invoicesTreeGridItem": [
+                "../../packaged/invoicing/lwc/invoicesTreeGridItem/invoicesTreeGridItem.js"
+            ],
+            "c/timeEntriesBillingCanvas": [
+                "../../packaged/invoicing/lwc/timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
+            ],
+            "c/timeEntriesTreeGrid": [
+                "../../packaged/invoicing/lwc/timeEntriesTreeGrid/timeEntriesTreeGrid.js"
+            ],
+            "c/progressBar": [
+                "../../packaged/main/utils/lwc/progressBar/progressBar.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}
