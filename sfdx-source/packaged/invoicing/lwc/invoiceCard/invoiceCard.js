@@ -11,10 +11,10 @@ import STATUS_FIELD from '@salesforce/schema/Invoice__c.Status__c';
 
 export default class InvoiceCard extends LightningElement {
 
-    record;
     oldRecord = {};
     rowdata;
 
+    @track record;
     @track internalLineItems = [];
     @track readonly = false;
 
@@ -48,19 +48,7 @@ export default class InvoiceCard extends LightningElement {
         value.LineItems.forEach(
             (item) => {
                 // clone the line item object from apex
-                let newItem = {
-                    Record : {
-                        Id : item.Record.Id,
-                        Price__c : item.Record.Price__c,
-                        Discount__c : item.Record.Discount__c,
-                        Tax__c : item.Record.Tax__c,
-                        Quantity__c : item.Record.Quantity__c,
-                        Product__c : item.Record.Product__c,
-                        Productname__c : item.Record.Productname__c,
-                        Description__c : item.Record.Description__c
-                    },
-                    ExtId : this.nextLineItemId()
-                }
+                let newItem = this.cloneLineItem(item);
                 // add to internal list, so we can modify
                 this.internalLineItems.push(newItem);
             }
@@ -73,12 +61,9 @@ export default class InvoiceCard extends LightningElement {
     handleDataInput(event) {
         if (event.currentTarget.checkValidity()) {
             this.record[event.currentTarget.name] = event.detail.value;
+            this.dispatchRecordChange(event.currentTarget.name);
+            this.setModificationStyle(this.isModified(event.currentTarget.name), event.currentTarget);
         }
-    }
-
-    dispatchUpdateEvent(event) {
-        this.dispatchRecordChange(event.currentTarget.name);
-        this.setModificationStyle(this.isModified(event.currentTarget.name), event.currentTarget);
     }
 
     recalculateSums(event) {
@@ -88,13 +73,13 @@ export default class InvoiceCard extends LightningElement {
 
     handleActivateButtonClick() {
         this.isActivated ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_ACTIVATED;
-        this.readonly = this.getIsReadOnly();
+        this.readonly = this.isReadOnly;
         this.dispatchRecordChange(STATUS_FIELD.fieldApiName);
     }
 
     handleCancelButtonClick() {
         this.isCancelled ? this.record.Status__c = PICK_VAL_DRAFT : this.record.Status__c = PICK_VAL_CANCELLED;
-        this.readonly = this.getIsReadOnly();
+        this.readonly = this.isReadOnly;
         this.dispatchRecordChange(STATUS_FIELD.fieldApiName);
     }
 
@@ -109,7 +94,7 @@ export default class InvoiceCard extends LightningElement {
     }
 
     addLineItem() {
-        var newItem = this.NewLineItem;
+        var newItem = this.makeNewLineItem();
         this.internalLineItems.push(newItem);
 
         this.dispatchEvent(
@@ -117,28 +102,7 @@ export default class InvoiceCard extends LightningElement {
         );
     }
 
-    get isActivated() {
-        return this.record.Status__c === PICK_VAL_ACTIVATED;
-    }
-
-    get isCancelled() {
-        return this.record.Status__c === PICK_VAL_CANCELLED;
-    }
-
-    getIsReadOnly() {
-        let isReadOnly = this.record.Status__c !== PICK_VAL_DRAFT;
-        return isReadOnly;
-    }
-
-    get invoiceTitle() {
-        return this.record.Account__r.Name+ ' - ' + this.record.Name;
-    }
-
-    get TotalTaxes() {
-        return this.TotalGrossAmount - this.TotalAmount;
-    }
-
-    get NewLineItem() {
+    makeNewLineItem() {
         return {
             Record : {
                 Invoice__c : this.record.Id,
@@ -149,6 +113,29 @@ export default class InvoiceCard extends LightningElement {
             },
             ExtId : this.nextLineItemId()
         };
+    }
+
+    /**                             GETTERS                              */
+
+    get isActivated() {
+        return this.record.Status__c === PICK_VAL_ACTIVATED;
+    }
+
+    get isCancelled() {
+        return this.record.Status__c === PICK_VAL_CANCELLED;
+    }
+
+    get isReadOnly() {
+        let isReadOnly = this.record.Status__c !== PICK_VAL_DRAFT;
+        return isReadOnly;
+    }
+
+    get invoiceTitle() {
+        return this.record.Account__r.Name+ ' - ' + this.record.Name;
+    }
+
+    get TotalTaxes() {
+        return this.TotalGrossAmount - this.TotalAmount;
     }
 
     bubbleLineItemChange(event) {
@@ -195,5 +182,21 @@ export default class InvoiceCard extends LightningElement {
             );
         }
         this.oldRecord[updatedField] = this.record[updatedField];
+    }
+
+    cloneLineItem(originalLineItem) {
+        return {
+            Record : {
+                Id : originalLineItem.Record.Id,
+                Price__c : originalLineItem.Record.Price__c,
+                Discount__c : originalLineItem.Record.Discount__c,
+                Tax__c : originalLineItem.Record.Tax__c,
+                Quantity__c : originalLineItem.Record.Quantity__c,
+                Product__c : originalLineItem.Record.Product__c,
+                Productname__c : originalLineItem.Record.Productname__c,
+                Description__c : originalLineItem.Record.Description__c
+            },
+            ExtId : originalLineItem.ExtId && originalLineItem.ExtId.length > 0 ? originalLineItem.ExtId : this.nextLineItemId()
+        }
     }
 }

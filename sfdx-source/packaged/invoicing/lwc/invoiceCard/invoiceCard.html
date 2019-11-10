@@ -1,6 +1,24 @@
 <template>
 
     <lightning-card title={invoiceTitle}>
+        <!--
+        <lightning-button
+            class="slds-m-horizontal_large"
+            slot="actions"
+            label="Reset"
+            variant="neutral"
+            onclick={resetRecord}>
+        </lightning-button>
+        -->
+
+        <lightning-button
+            label="New Line Item"
+            icon-name="utility:add"
+            slot="actions"
+            class="slds-m-horizontal_large"
+            disabled={readonly}
+            onclick={addLineItem}>
+        </lightning-button>
 
         <lightning-button-group slot="actions">
             <lightning-button-stateful
@@ -38,7 +56,6 @@
                         variant="label-inline"
                         label="Invoice Date"
                         disabled={readonly}
-                        onblur={dispatchUpdateEvent}
                         onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input
@@ -49,7 +66,6 @@
                         variant="label-inline"
                         max={record.ServicePeriodTo__c}
                         disabled={readonly}
-                        onblur={dispatchUpdateEvent}
                         onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input 
@@ -60,7 +76,6 @@
                         variant="label-inline"
                         min={record.ServicePeriodFrom__c}
                         disabled={readonly}
-                        onblur={dispatchUpdateEvent}
                         onchange={handleDataInput}>
                     </lightning-input>
                 </div>
@@ -104,12 +119,6 @@
                     
                 </div>
             </div>
-
-            <lightning-button
-                label="Add Row"
-                disabled={readonly}
-                onclick={addLineItem}>
-            </lightning-button>
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable

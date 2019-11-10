@@ -1,17 +1,11 @@
-import { LightningElement, api } from 'lwc';
-/*
-import PRICE_FIELD from '@salesforce/schema/InvoiceLineItem__c.Price__c';
-import QUANTITY_FIELD from '@salesforce/schema/InvoiceLineItem__c.Quantity__c';
-import TAX_FIELD from '@salesforce/schema/InvoiceLineItem__c.Tax__c';
-import DISCOUNT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Discount__c';
-import DESCRIPTION_FIELD from '@salesforce/schema/InvoiceLineItem__c.Description__c';
-*/
+import { LightningElement, api, track } from 'lwc';
+
 import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     @api rowdata;
     @api isDisabled = false;
 
-    record;
+    @track record;
     oldRecord = {};
 
     /**                         LIFECYCLE HOOKS                             */

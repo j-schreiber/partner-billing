@@ -1,36 +1,31 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track } from 'lwc';
+
+import getInvoice from '@salesforce/apex/InvoiceController.getInvoice';
 
 export default class TestComponent extends LightningElement {
 
-    @track originalRecord = {
-        myField : 'Original Value',
-        mySecondField : '',
-        Product__c : ''
-    }
-    
-    newRecord = {};
-    oldRecord = {};
+    recordId = 'a061k000002cWnKAAU';
+    @track invoice;
+    @track hasError = false;
+    @track isWorking = true;
 
-    handleChange(event) {
-        console.log('Modified Field: ' + JSON.stringify(event.currentTarget.name));
-        this.newRecord[event.currentTarget.name] = event.detail.value;
-        this.dispatchUpdateEvent(event);
+    connectedCallback() {
+        this.getLineItemData();
     }
 
-    updateProduct(event) {
-        console.log('Modified Field: ' + JSON.stringify(event.currentTarget.name));
-        this.newRecord[event.currentTarget.name] = (event.detail.value.length === 0) ? '' : (event.detail.value)[0];
-        this.dispatchUpdateEvent(event);
-    }
-
-    isModified(fieldName) {
-        return this.newRecord[fieldName] !== this.originalRecord[fieldName];
-    }
-
-    dispatchUpdateEvent(event) {
-        //this.dispatchRecordChange(event.currentTarget.name);
-        if (this.isModified(event.currentTarget.name)) event.currentTarget.classList.add('dirty-field');
-        if (!this.isModified(event.currentTarget.name)) event.currentTarget.classList.remove('dirty-field');
+    getLineItemData() {
+        this.isWorking = true;
+        getInvoice({
+            recordId : this.recordId
+        })
+        .then((result) => {
+            this.invoice = result;
+            this.isWorking = false;
+        })
+        .catch(() => {
+            this.hasError = true;
+            this.isWorking = false;
+        })
     }
 
 }

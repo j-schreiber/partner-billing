@@ -1,37 +1,7 @@
 <template>
-    <lightning-card>
-
-        <div class="slds-p-horizontal_medium">
-
-            <lightning-input
-                label="Test Input"
-                value={originalRecord.myField}
-                name="myField"
-                onchange={handleChange}
-                variant="label-inline">
-            </lightning-input>
-
-            <lightning-input
-                label="Second test Input"
-                value={originalRecord.mySecondField}
-                name="mySecondField"
-                onchange={handleChange}
-                variant="label-inline">
-            </lightning-input>
-
-            <lightning-record-edit-form object-api-name="InvoiceLineItem__c">
-                <div onchange={updateProduct}>
-                    <lightning-input-field
-                        field-name="Product__c"
-                        name="Product__c"
-                        variant="label-hidden"
-                        value={originalRecord.Product__c}>
-                    </lightning-input-field>
-                </div>
-            </lightning-record-edit-form>
-
-        </div>
-        
-    </lightning-card>
-
+    <template if:true={invoice}>
+        <c-invoice-card
+            invoice-wrapper={invoice}>
+        </c-invoice-card>
+    </template>
 </template>
