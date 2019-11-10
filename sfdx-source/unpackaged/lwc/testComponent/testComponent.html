@@ -1,7 +1,21 @@
 <template>
-    <template if:true={invoice}>
-        <c-invoice-card
-            invoice-wrapper={invoice}>
-        </c-invoice-card>
-    </template>
+    <lightning-card>
+
+        <template if:true={loadCompleted}>
+
+            <template for:each={invoices} for:item='invoice'>
+                <p key={invoice.Record.Id}>
+                    {invoice.Record.Name}
+                </p>
+                <c-pdf-generation-options
+                    key={invoice.Record.Id}
+                    invoice={invoice.Record}
+                    onoptionchange={handleOptionsChange}
+                    org-profiles={organizationProfiles}>
+                </c-pdf-generation-options>
+            </template>
+
+        </template>
+
+    </lightning-card>
 </template>

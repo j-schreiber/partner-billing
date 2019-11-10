@@ -1,31 +1,60 @@
 import { LightningElement, track } from 'lwc';
 
-import getInvoice from '@salesforce/apex/InvoiceController.getInvoice';
+import getInvoices from '@salesforce/apex/BillingController.getInvoices';
+import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 
 export default class TestComponent extends LightningElement {
 
     recordId = 'a061k000002cWnKAAU';
-    @track invoice;
-    @track hasError = false;
+
+    @track invoices;
+    @track organizationProfiles;
     @track isWorking = true;
 
     connectedCallback() {
-        this.getLineItemData();
+        this.isWorking = true;
+        this.getInvoiceData();
+        this.getOrgProfiles();
+        this.isWorking = false;
     }
 
-    getLineItemData() {
-        this.isWorking = true;
-        getInvoice({
-            recordId : this.recordId
+    getInvoiceData() {
+        getInvoices({
+            status : 'Activated'
         })
         .then((result) => {
-            this.invoice = result;
-            this.isWorking = false;
+            this.invoices = result;
         })
         .catch(() => {
-            this.hasError = true;
-            this.isWorking = false;
+            this.invoices = [];
         })
     }
+
+    getOrgProfiles() {
+
+        getOrganizationProfiles({})
+        .then( (data) => {
+            let profiles = [];
+            data.forEach( (entry) => {
+                profiles.push({
+                    label : entry.Name,
+                    value : entry.Id
+                })
+            });
+            this.organizationProfiles = profiles;            
+        })
+        .catch( () => {
+            this.organizationProfiles = [];
+        });
+    }
+
+    handleOptionsChange(event) {
+        console.log(JSON.stringify(event.detail));
+    }
+
+    get loadCompleted() {
+        return this.invoices && this.organizationProfiles;
+    }
+    
 
 }
