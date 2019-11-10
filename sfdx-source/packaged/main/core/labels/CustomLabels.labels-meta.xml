@@ -185,11 +185,27 @@
         <value>A Time Entry can not be deleted, once it is invoiced!</value>
     </labels>
     <labels>
+        <fullName>Invoicing_Label_InvoicesReviewHeader</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Review Invoice Configuration</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_InvoicesPdfCreateHeader</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Create PDF Files for Invoices</value>
+    </labels>
+    <labels>
         <fullName>Invoicing_Label_FilterHeader</fullName>
         <categories>lwc,label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Used as text in invoicing LWC</shortDescription>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
         <value>Select service period and configure invoice generation</value>
     </labels>
     <labels>

@@ -73,8 +73,16 @@
         <name>ValidationError_CanNotDeleteInvoicedTimeEntry</name>
     </customLabels>
     <customLabels>
-        <label>Wähle Leistungszeitraum</label>
+        <label>Wähle Leistungszeitraum und konfiguriere die Rechnungserstellung</label>
         <name>Invoicing_Label_FilterHeader</name>
+    </customLabels>
+    <customLabels>
+        <label>Prüfe Rechnungen</label>
+        <name>Invoicing_Label_InvoicesReviewHeader</name>
+    </customLabels>
+    <customLabels>
+        <label>Erzeuge PDF Dateien für Rechnungen</label>
+        <name>Invoicing_Label_InvoicesPdfCreateHeader</name>
     </customLabels>
     <customLabels>
         <label>Beginn Leistungszeitraum</label>

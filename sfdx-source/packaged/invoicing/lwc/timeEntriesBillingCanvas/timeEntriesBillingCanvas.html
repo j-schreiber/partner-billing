@@ -33,6 +33,12 @@
                 <c-invoice-card-list onstepcompleted={increaseProcessStage}></c-invoice-card-list>
             </div>
         </template>
+
+        <template if:true={displayInvoicesPdfCreation}>
+            <div class="slds-m-vertical_small">
+                <c-invoice-pdf-gen-table onstepcompleted={increaseProcessStage}></c-invoice-pdf-gen-table>
+            </div>
+        </template>
     </div>
     
 </template>

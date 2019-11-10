@@ -6,6 +6,7 @@ import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData
 
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicesUpdated';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
+import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesReviewHeader';
 
 export default class InvoiceCardList extends LightningElement {
     @track invoiceData = [];
@@ -16,7 +17,8 @@ export default class InvoiceCardList extends LightningElement {
 
     LABELS = {
         TOAST_TITLE_SUCCESS,
-        TOAST_TITLE_ERROR
+        TOAST_TITLE_ERROR,
+        CARD_TITLE
     }
 
     connectedCallback() {

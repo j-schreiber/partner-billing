@@ -106,4 +106,20 @@ public with sharing class BillingController {
         Database.delete(deleteLineItemIds, false);
     }
 
+    /** @Description
+    *   Get all invoices that are Activated but do not have at least one attachment.
+    *
+    *   @param  status          Filtered status value for invoices
+    *
+    *   @return                 List of Invoices that match criteria
+    */
+    @AuraEnabled(cacheable=true)
+    public static List<Invoice> getInvoicesWithoutPdfs() {
+        List<Invoice> results = new List<Invoice>();
+        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = \'Activated\' ORDER BY Date__c')) {
+            if (inv.ContentDocumentLinks.isEmpty()) results.add(new Invoice(inv));
+        }
+        return results;
+    }
+
 }

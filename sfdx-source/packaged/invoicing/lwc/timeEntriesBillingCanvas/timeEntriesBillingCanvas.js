@@ -4,11 +4,6 @@ export default class TimeEntriesBillingCanvas extends LightningElement {
 
     @track processStage = 1;
 
-    updateTimeEntries(event) {
-        const timeEntriesGrid = this.template.querySelector('c-time-entries-tree-grid');
-        timeEntriesGrid.filters = event.detail;
-    }
-
     get processIndicatorStage() {
         return this.processStage.toString();
     }
@@ -19,6 +14,10 @@ export default class TimeEntriesBillingCanvas extends LightningElement {
 
     get displayInvoicesPreview() {
         return this.processStage === 2;
+    }
+
+    get displayInvoicesPdfCreation() {
+        return this.processStage === 3;
     }
 
     increaseProcessStage() {

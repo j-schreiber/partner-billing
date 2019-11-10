@@ -1,0 +1,25 @@
+<template>
+    <td>
+        {invoice.Record.Name}
+    </td>
+    <td>
+        <c-pdf-generation-options
+            invoice={invoice.Record}
+            onoptionchange={handleOptionsChange}
+            org-profiles={orgProfiles}>
+        </c-pdf-generation-options>
+    </td>
+    <td>
+        <lightning-button-stateful
+            label-when-off="Generate PDF"
+            label-when-on="View PDF"
+            data-id="activateButton"
+            icon-name-when-off="utility:insert_template"
+            icon-name-when-on="utility:display_text"
+            selected={hasPdf}
+            variant="success"
+            onclick={handlePdfCreate}>
+        </lightning-button-stateful>
+    </td>
+
+</template>

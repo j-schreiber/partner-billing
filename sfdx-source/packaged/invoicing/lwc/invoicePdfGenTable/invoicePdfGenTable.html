@@ -1,0 +1,30 @@
+<template>
+    
+    <lightning-card title={LABELS.CARD_TITLE}>
+
+        <lightning-button
+            slot="actions"
+            label="Create PDFs"
+            variant="brand"
+            onclick={createAllPdfs}>
+        </lightning-button>
+
+        <div class="slds-p-horizontal_medium">
+            <table>
+                <thead>
+
+                </thead>
+                <tbody>
+                    <template for:each={invoices} for:item='invoice'>
+                        <c-invoice-pdf-gen-table-row
+                            key={invoice.Record.Id}
+                            invoice={invoice}>
+                        </c-invoice-pdf-gen-table-row>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+    </lightning-card>
+    
+</template>

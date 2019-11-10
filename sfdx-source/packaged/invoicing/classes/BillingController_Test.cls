@@ -178,4 +178,60 @@ class BillingController_Test {
         
     }
 
+    @isTest
+    static void getInvoicesWithoutPdfs_NoPdfs_AllActivatedInvoices() {
+        // ACTION
+        List<Invoice> invs = BillingController.getInvoicesWithoutPdfs();
+        // VERIFY
+        System.assertEquals([SELECT COUNT() FROM Invoice__c WHERE Status__c='Activated'], invs.size(), 'invs.size()');
+    }
+
+    @isTest
+    static void getInvoicesWithoutPdfs_InvoicesHavePdfs_OnlyActivatedInvoicesWithoutPdfs() {
+        // SETUP
+        Invoice__c Record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion existingVersion = new ContentVersion(Title='Test',PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert existingVersion;
+        ContentDocument contentDoc = [SELECT Id FROM ContentDocument WHERE Title = 'Test' LIMIT 1];
+        insert new ContentDocumentLink(LinkedEntityId=Record.Id, ContentDocumentId=contentDoc.Id, ShareType='V');
+
+        // ACTION
+        List<Invoice> invs = BillingController.getInvoicesWithoutPdfs();
+        // VERIFY
+        System.assertEquals([SELECT COUNT() FROM Invoice__c WHERE Status__c='Activated' AND Id != :Record.Id], invs.size(), 'invs.size()');
+    }
+
+    @isTest
+    static void getNonInvoicedTimeEntries_NullDates_AllNonInvoicedEntries() {
+        // SETUP
+        List<TimeEntry__c> tesToUpdate = [SELECT Id,Description__c FROM TimeEntry__c];
+        for (TimeEntry__c te : tesToUpdate) {
+            te.Status__c = 'Approved';
+        }
+
+        // ACTION
+        List<TimeEntry> tes = BillingController.getNonInvoicedTimeEntries(null, null);
+        // VERIFY
+        System.assertEquals([SELECT COUNT() FROM TimeEntry__c WHERE IsInvoiced__c = false AND Status__c = 'Approved'], tes.size(), 'tes.size()');
+    }
+
+    @isTest
+    static void getNonInvoicedTimeEntries_ValidDates_AllNonInvoicedEntriesInTimePeriod() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        List<TimeEntry__c> tesToUpdate = [SELECT Id,Description__c FROM TimeEntry__c WHERE Account__c = :a.Id];
+        for (TimeEntry__c te : tesToUpdate) {
+            te.Date__c = Date.newInstance(2019, 09, 20);
+            te.Status__c = 'Approved';
+        }
+        update tesToUpdate;
+
+        // ACTION
+        List<TimeEntry> tes = BillingController.getNonInvoicedTimeEntries(Date.newInstance(2019, 09, 20), Date.newInstance(2019, 09, 20));
+
+        // VERIFY
+        System.assertEquals(tesToUpdate.size(), tes.size(), 'tes.size()');
+    }
+
 }
