@@ -51,7 +51,9 @@
                                 </apex:outputText>
                             </td>
                             <td class="text-align_center">
-                                <apex:outputField value="{! Invoice.Record.Date__c }" />
+                                <apex:outputText value="{0,date,dd.MM.yyyy}">
+                                    <apex:param value="{! Invoice.Record.Date__c }" />
+                                </apex:outputText>
                             </td>
                         </tr>
                     </tbody>
