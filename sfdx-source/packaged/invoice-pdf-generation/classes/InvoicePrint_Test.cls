@@ -157,17 +157,100 @@ public class InvoicePrint_Test {
     }
 
     @isTest
-    static void commitAllChanges_HasAttachment_AttachmentSaved() {
+    static void saveToContentAttachments_NoVersionExist_ContentCreatedAndLinked() {
         // SETUP
-        Invoice__c record = [SELECT Id FROM Invoice__c LIMIT 1];
-        InvoicePrint invObj = new InvoicePrint(record.Id);
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
         // ACTION
-        Blob pdfMock = Blob.valueOf('Teststring');
-        invObj.addFileToAttachments(pdfMock);
-        invObj.commitAllChanges();
+        ContentVersion createdVersion = objUnderTest.saveToContentAttachments(Page.InvoicePdf);
+
         // VERIFY
-        System.assertEquals(1, invObj.Attachments.size(), 'invObj.Attachments.size()');
-        System.assertEquals(1, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT()');
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocument], 'COUNT() FROM ContentDocument');
+        ContentDocument createdContentDoc = [SELECT Id,Description,FileType,Title FROM ContentDocument LIMIT 1];
+        System.assertEquals(objUnderTest.PdfTitle, createdContentDoc.Title, 'createdContentDoc.Title');
+        System.assertEquals('PDF', createdContentDoc.FileType, 'createdContentDoc.FileType');
+
+        System.assertEquals(1, [SELECT COUNT() FROM ContentVersion WHERE ContentDocumentId = :createdContentDoc.Id], 'COUNT() FROM ContentVersion');
+        System.assertEquals(objUnderTest.PdfTitle, createdVersion.Title, 'Version.Title');
+        System.assertEquals(true, createdVersion.IsLatest, 'Version.IsLatest');
+        System.assertEquals('1', createdVersion.VersionNumber, 'Version.VersionNumber');
+
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id], 'COUNT() FROM ContentDocumentLink');
+        ContentDocumentLink createdLink = [SELECT Id,ContentDocumentId,ShareType FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id];
+        System.assertEquals('V', createdLink.ShareType, 'Link.ShareType');
+        System.assertEquals(createdContentDoc.Id, createdLink.ContentDocumentId, 'Link.ContentDocumentId');
+    }
+
+    @isTest
+    static void saveToContentAttachments_VersionExist_NewVersionCreatedAndLinked() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion existingVersion = new ContentVersion(Title=objUnderTest.PdfTitle,PathOnClient=objUnderTest.PdfTitle+'.pdf', VersionData=pdfMock);
+        insert existingVersion;
+
+        // ACTION
+        ContentVersion createdVersion = objUnderTest.saveToContentAttachments(Page.InvoicePdf);
+
+        // VERIFY
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocument], 'COUNT() FROM ContentDocument');
+        ContentDocument createdContentDoc = [SELECT Id,Description,FileType,Title FROM ContentDocument LIMIT 1];
+        System.assertEquals(objUnderTest.PdfTitle, createdContentDoc.Title, 'createdContentDoc.Title');
+        System.assertEquals('PDF', createdContentDoc.FileType, 'createdContentDoc.FileType');
+
+        System.assertEquals(2, [SELECT COUNT() FROM ContentVersion WHERE ContentDocumentId = :createdContentDoc.Id], 'COUNT() FROM ContentVersion');
+        System.assertEquals(objUnderTest.PdfTitle, createdVersion.Title, 'Version.Title');
+        System.assertEquals(true, createdVersion.IsLatest, 'Version.IsLatest');
+        System.assertEquals('2', createdVersion.VersionNumber, 'Version.VersionNumber');
+
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id], 'COUNT() FROM ContentDocumentLink');
+        ContentDocumentLink createdLink = [SELECT Id,ContentDocumentId,ShareType FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id];
+        System.assertEquals('V', createdLink.ShareType, 'Link.ShareType');
+        System.assertEquals(createdContentDoc.Id, createdLink.ContentDocumentId, 'Link.ContentDocumentId');
+    }
+
+    @isTest
+    static void saveToContentAttachments_LinkExists_OnlyNewVersionCreated() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion existingVersion = new ContentVersion(Title=objUnderTest.PdfTitle,PathOnClient=objUnderTest.PdfTitle+'.pdf', VersionData=pdfMock);
+        insert existingVersion;
+        ContentDocument contentDoc = [SELECT Id FROM ContentDocument WHERE Title = :objUnderTest.PdfTitle LIMIT 1];
+        insert new ContentDocumentLink(LinkedEntityId=Record.Id, ContentDocumentId=contentDoc.Id, ShareType='V');
+
+        // ACTION
+        ContentVersion createdVersion = objUnderTest.saveToContentAttachments(Page.InvoicePdf);
+
+        // VERIFY
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id], 'COUNT() FROM ContentDocumentLink');
+        ContentDocumentLink createdLink = [SELECT Id,ContentDocumentId,ShareType FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id];
+        System.assertEquals('V', createdLink.ShareType, 'Link.ShareType');
+        System.assertEquals(contentDoc.Id, createdLink.ContentDocumentId, 'Link.ContentDocumentId');
+    }
+
+    @isTest
+    static void saveToContentAttachments_WithPageParameter_PdfCreateParamsInReasonForChange() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        PageReference invoicePdfPage = Page.InvoicePdf;
+        invoicePdfPage.getParameters().put('Id', Record.Id);
+        invoicePdfPage.getParameters().put('orgProfileId', 'testId');
+        invoicePdfPage.getParameters().put('lang', 'de_DE');
+        invoicePdfPage.getParameters().put('displayTimesheet', 'true');
+
+        // ACTION
+        ContentVersion createdVersion = objUnderTest.saveToContentAttachments(invoicePdfPage);
+
+        // VERIFY
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Language=de_DE'), 'contains(Language=de_DE)');
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Organization Profile Id=testId'), 'contains(Organization Profile=testId)');
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Display Timesheet=true'), 'contains(Display Timesheet=true)');
     }
 
 }

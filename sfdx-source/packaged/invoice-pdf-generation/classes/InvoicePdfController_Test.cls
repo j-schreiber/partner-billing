@@ -22,7 +22,8 @@ public class InvoicePdfController_Test {
         InvoicePdfController.savePdfToInvoice(record.Id, orgProfile.Id, '', null);
 
         // VERIFY
-        System.assertEquals(1, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT() FROM Attachment');
+        System.assertEquals(0, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT() FROM Attachment');
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id], 'COUNT() FROM ContentDocumentLink');
     }
 
     @isTest

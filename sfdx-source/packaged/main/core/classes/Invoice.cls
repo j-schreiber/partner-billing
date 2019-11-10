@@ -53,7 +53,6 @@ public virtual class Invoice {
                 'Account__r.Name,Account__r.CustomerId__c,ServicePeriodFrom__c,ServicePeriodTo__c,' +
                 'Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,'+
                 '(SELECT Id,Name,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__c,Product__r.Name,Productname__c,Discount__c,CurrencyIsoCode FROM LineItems__r ORDER BY Product__c,ServiceDate__c),'+
-                '(SELECT Id,Name FROM Attachments),'+
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
 
@@ -103,7 +102,7 @@ public virtual class Invoice {
     /** @Description    Initialize the object with the fully queried record */
     public Invoice(Invoice__c originalRecord) {
         Record = originalRecord;
-        Attachments = Record.Attachments;
+        Attachments = new List<Attachment>();
         newLineItemRecords = new List<InvoiceLineItem__c>();
         deleteLineItemIds = new Set<Id>();
         dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
@@ -207,8 +206,6 @@ public virtual class Invoice {
         CommitResult cr = new CommitResult();
 
         cr.InvoiceResult = Database.upsert(Record, false);
-
-        cr.AttachmentResults = Database.upsert(Attachments, false);
         
         List<InvoiceLineItem__c> ilisToUpsert = new List<InvoiceLineItem__c>();
         ilisToUpsert.addAll(dirtyLineItemRecords.values());
@@ -228,7 +225,6 @@ public virtual class Invoice {
 
     public class CommitResult {
         public Database.UpsertResult InvoiceResult;
-        public Database.UpsertResult[] AttachmentResults;
         public Database.UpsertResult[] LineItemResults;
         public Database.DeleteResult[] DeleteLineItemResults;
     }

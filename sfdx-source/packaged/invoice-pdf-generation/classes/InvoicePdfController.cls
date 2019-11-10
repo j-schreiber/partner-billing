@@ -16,9 +16,7 @@ public class InvoicePdfController {
     public static void savePdfToInvoice(Id invoiceId, Id orgProfileId, String renderLanguage, Boolean displayTimesheet) {
         InvoicePrint inv = new InvoicePrint(invoiceId);
         PageReference pdfFile = inv.createPdf(orgProfileId, renderLanguage, displayTimesheet);
-        Blob convertedPdf = Test.isRunningTest() ? Blob.valueOf(String.valueOf(pdfFile)) : pdfFile.getContentAsPdf();
-        inv.addFileToAttachments(convertedPdf);
-        inv.commitAllChanges();
+        inv.saveToContentAttachments(pdfFile);
     }
 
     /** @Description
