@@ -76,9 +76,9 @@ public with sharing class BillingController {
     }
 
     /** @Description
-    *   Retrieves all invoices for the specified filter certeria
+    *   Get Invoices filtered by a specific status
     *
-    *   @param  status          Filtered status value for invoices
+    *   @param  status          Requested status value
     *
     *   @return                 List of Invoices that match criteria
     */
@@ -101,43 +101,9 @@ public with sharing class BillingController {
     */
     @AuraEnabled
     public static void commitInvoiceEditData(List<Invoice__c> invoices, List<InvoiceLineItem__c> upsertLineItems, List<Id> deleteLineItemIds) {
-        for (Invoice__c inv : invoices) System.debug('Updating: ' + inv);
-        for (InvoiceLineItem__c ili : upsertLineItems) System.debug('Upserting: ' + ili);
-        for (Id i : deleteLineItemIds) System.debug('Deleting: ' + i);
-
         Database.update(invoices, true);
         Database.upsert(upsertLineItems, false);
         Database.delete(deleteLineItemIds, false);
     }
 
-    /** @Description
-    *   Updates invoice records
-    *
-    *   @param  invoices        Dirty invoices to update
-    */
-    @AuraEnabled
-    public static void updateInvoices(List<Invoice__c> invoices) {
-        for (Invoice__c inv : invoices) System.debug('Updating: ' + inv);
-    }
-
-    /** @Description
-    *   Upsert invoice line items records. This method updates existing and
-    *   inserts new records.
-    *
-    *   @param  lineItems       Dirty invoice line items to update
-    */
-    @AuraEnabled
-    public static void upsertInvoiceLineItems(List<InvoiceLineItem__c> lineItems) {
-        for (InvoiceLineItem__c ili : lineItems) System.debug('Upserting: ' + ili);
-    }
-
-    /** @Description
-    *   Delete line items in array
-    *
-    *   @param  lineItems       Dirty invoice line items to delete
-    */
-    @AuraEnabled
-    public static void deleteInvoiceLineItems(List<Id> lineItemIds) {
-        for (Id i : lineItemIds) System.debug('Deleting: ' + i);
-    }
 }
