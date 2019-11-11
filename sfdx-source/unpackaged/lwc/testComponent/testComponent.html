@@ -1,7 +1,3 @@
 <template>
-    <template for:each={invoices.data} for:item='invoice'>
-        <div key={invoice.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
-            <c-invoice-card invoice={invoice}></c-invoice-card>
-        </div>
-    </template>
+    <c-invoice-pdf-send-table></c-invoice-pdf-send-table>
 </template>

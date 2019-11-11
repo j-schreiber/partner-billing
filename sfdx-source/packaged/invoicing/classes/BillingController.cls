@@ -109,15 +109,27 @@ public with sharing class BillingController {
     /** @Description
     *   Get all invoices that are Activated but do not have at least one attachment.
     *
-    *   @param  status          Filtered status value for invoices
-    *
-    *   @return                 List of Invoices that match criteria
+    *   @return                 Active invoices without content documents
     */
     @AuraEnabled(cacheable=true)
     public static List<Invoice> getInvoicesWithoutPdfs() {
         List<Invoice> results = new List<Invoice>();
         for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = \'Activated\' ORDER BY Date__c')) {
             if (inv.ContentDocumentLinks.isEmpty()) results.add(new Invoice(inv));
+        }
+        return results;
+    }
+
+    /** @Description
+    *   Get all invoices that are Activated and do have at least one attachment.
+    *
+    *   @return                 Active invoices with content documents
+    */
+    @AuraEnabled(cacheable=true)
+    public static List<Invoice> getInvoicesWithPdfs() {
+        List<Invoice> results = new List<Invoice>();
+        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = \'Activated\' ORDER BY Date__c')) {
+            if (!inv.ContentDocumentLinks.isEmpty()) results.add(new Invoice(inv));
         }
         return results;
     }

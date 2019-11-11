@@ -39,6 +39,12 @@
                 <c-invoice-pdf-gen-table onstepcompleted={increaseProcessStage}></c-invoice-pdf-gen-table>
             </div>
         </template>
+
+        <template if:true={displayInvoicesPdfSend}>
+                <div class="slds-m-vertical_small">
+                    <c-invoice-pdf-send-table onstepcompleted={increaseProcessStage}></c-invoice-pdf-send-table>
+                </div>
+            </template>
     </div>
     
 </template>

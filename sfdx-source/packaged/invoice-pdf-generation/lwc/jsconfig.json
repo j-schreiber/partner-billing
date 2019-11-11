@@ -46,6 +46,12 @@
             ],
             "c/progressBar": [
                 "../../main/utils/lwc/progressBar/progressBar.js"
+            ],
+            "c/invoicePdfSendTable": [
+                "../../invoicing/lwc/invoicePdfSendTable/invoicePdfSendTable.js"
+            ],
+            "c/invoicePdfSendTableRow": [
+                "../../invoicing/lwc/invoicePdfSendTableRow/invoicePdfSendTableRow.js"
             ]
         },
         "experimentalDecorators": true

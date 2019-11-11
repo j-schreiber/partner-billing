@@ -28,7 +28,11 @@ export default class InvoiceCardList extends LightningElement {
         this.dirtyInvoices = new Map();
         this.dirtyLineItems = new Map();
         this.deletedLineItems = new Set();
-        this.template.querySelectorAll('c-invoice-card').forEach( (card) => { card.reset() });
+
+        this.template.querySelectorAll('c-invoice-card').forEach( (card) => {
+            if (!card.isLocked()) card.reset();
+        });
+
         return refreshApex(this.invoices);
     }
 

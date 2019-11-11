@@ -1,7 +1,7 @@
 import { LightningElement, track, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
-import { refreshApex } from '@salesforce/apex';
 
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesPdfCreateHeader';
 

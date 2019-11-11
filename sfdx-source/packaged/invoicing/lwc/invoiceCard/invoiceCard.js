@@ -61,6 +61,11 @@ export default class InvoiceCard extends LightningElement {
         return this.template.querySelector('c-invoice-line-item-datatable').getDeletedRows();
     }
 
+    @api
+    isLocked() {
+        return this.readonly;
+    }
+
     /**                             EVENT LISTENERS                              */
 
     handleDataInput(event) {

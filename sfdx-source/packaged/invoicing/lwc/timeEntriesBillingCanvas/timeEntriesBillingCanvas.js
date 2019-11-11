@@ -20,6 +20,10 @@ export default class TimeEntriesBillingCanvas extends LightningElement {
         return this.processStage === 3;
     }
 
+    get displayInvoicesPdfSend() {
+        return this.processStage === 4;
+    }
+
     increaseProcessStage() {
         if (this.processStage < 4) this.processStage++;
     }

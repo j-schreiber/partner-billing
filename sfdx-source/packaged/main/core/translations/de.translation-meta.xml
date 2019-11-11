@@ -85,6 +85,10 @@
         <name>Invoicing_Label_InvoicesPdfCreateHeader</name>
     </customLabels>
     <customLabels>
+        <label>Wähle Rechnungskontakte aus und versende Rechnungen</label>
+        <name>Invoicing_Label_InvoicesPdfSendTitle</name>
+    </customLabels>
+    <customLabels>
         <label>Beginn Leistungszeitraum</label>
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>

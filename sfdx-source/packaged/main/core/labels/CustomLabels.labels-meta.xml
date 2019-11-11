@@ -201,6 +201,14 @@
         <value>Create PDF Files for Invoices</value>
     </labels>
     <labels>
+        <fullName>Invoicing_Label_InvoicesPdfSendTitle</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Select Billing Contacts and send PDFs</value>
+    </labels>
+    <labels>
         <fullName>Invoicing_Label_FilterHeader</fullName>
         <categories>lwc,label</categories>
         <language>en_US</language>
