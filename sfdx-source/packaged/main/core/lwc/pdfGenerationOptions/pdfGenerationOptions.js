@@ -31,6 +31,8 @@ export default class pdfGenerationOptions extends LightningElement {
         }
     }
 
+    @api disabled = false;
+
     // private properties
     invoiceRecord;
     @track orgProfileOptions;

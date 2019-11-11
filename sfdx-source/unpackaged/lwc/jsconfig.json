@@ -27,23 +27,26 @@
             "c/invoiceLineItemDatatableRow": [
                 "../../packaged/invoicing/lwc/invoiceLineItemDatatableRow/invoiceLineItemDatatableRow.js"
             ],
-            "c/timeEntriesBillingCanvas": [
-                "../../packaged/invoicing/lwc/timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
-            ],
-            "c/timeEntriesTreeGrid": [
-                "../../packaged/invoicing/lwc/timeEntriesTreeGrid/timeEntriesTreeGrid.js"
-            ],
-            "c/progressBar": [
-                "../../packaged/main/utils/lwc/progressBar/progressBar.js"
-            ],
             "c/invoicePdfGenTable": [
                 "../../packaged/invoicing/lwc/invoicePdfGenTable/invoicePdfGenTable.js"
             ],
             "c/invoicePdfGenTableRow": [
                 "../../packaged/invoicing/lwc/invoicePdfGenTableRow/invoicePdfGenTableRow.js"
             ],
+            "c/timeEntriesBillingCanvas": [
+                "../../packaged/invoicing/lwc/timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
+            ],
+            "c/timeEntriesTreeGrid": [
+                "../../packaged/invoicing/lwc/timeEntriesTreeGrid/timeEntriesTreeGrid.js"
+            ],
+            "c/pdfGenerationOptions": [
+                "../../packaged/main/core/lwc/pdfGenerationOptions/pdfGenerationOptions.js"
+            ],
             "c/utilities": [
                 "../../packaged/main/core/lwc/utilities/utilities.js"
+            ],
+            "c/progressBar": [
+                "../../packaged/main/utils/lwc/progressBar/progressBar.js"
             ]
         }
     },

@@ -10,9 +10,15 @@
         </lightning-button>
 
         <div class="slds-p-horizontal_medium">
-            <table>
+            <table class="slds-table slds-table_bordered">
                 <thead>
-
+                    <tr>
+                        <th>Invoice Number</th>
+                        <th>Accountname</th>
+                        <th>Total Amount (Net)</th>
+                        <th>Total Amount (Gross)</th>
+                        <th colspan="2">Options</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <template for:each={invoices} for:item='invoice'>

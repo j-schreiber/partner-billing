@@ -24,7 +24,17 @@ export default class InvoicePdfGenTableRow extends LightningElement {
         this.displayTimesheet = event.detail.timesheet;
     }
 
-    handlePdfCreate() {
+    @api
+    createPdf() {
+        this.isWorking = true;
+        setTimeout( () => {
+            this.hasPdf = true;
+            this.isWorking = false
+        }, 1000);
+    }
+
+    @api
+    deletePdf() {
         this.hasPdf = !this.hasPdf;
     }
 

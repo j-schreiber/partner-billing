@@ -3,6 +3,7 @@
             <div class="slds-col">
                 <lightning-combobox 
                     class="slds-m-around_small"
+                    disabled={disabled}
                     variant="label-hidden"
                     label={LABELS.OPTION_LABEL_ORGPROFILE}
                     options={orgProfileOptions}
@@ -13,6 +14,7 @@
             <div class="slds-col">
                 <lightning-combobox
                     class="slds-m-around_small"
+                    disabled={disabled}
                     variant="label-hidden"
                     label={LABELS.OPTION_LABEL_LANGUAGE}
                     options={languageOptions}
@@ -22,7 +24,8 @@
             </div>
             <div class="slds-col">
                 <lightning-input
-                    class="slds-m-around_small" 
+                    class="slds-m-around_small"
+                    disabled={disabled}
                     label={LABELS.OPTION_LABEL_TIMESHEET}
                     type="toggle"
                     message-toggle-active="Show"
