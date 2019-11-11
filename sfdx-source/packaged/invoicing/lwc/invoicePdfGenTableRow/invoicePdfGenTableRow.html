@@ -22,14 +22,14 @@
     <td>
         <c-pdf-generation-options
             invoice={invoice.Record}
-            disabled={pdfContentVersionRecord}
+            disabled={pdfRecordId}
             onoptionchange={handleOptionsChange}
             org-profiles={orgProfiles}>
         </c-pdf-generation-options>
     </td>
     <td>
         <div class="slds-is-relative slds-align_absolute-center">
-            <template if:false={pdfContentVersionRecord}>
+            <template if:false={pdfRecordId}>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
                     label="Generate PDF"
@@ -42,7 +42,7 @@
             <template if:true={isWorking}>
                 <lightning-spinner alternative-text="Creating PDF ..." size="small"></lightning-spinner>
             </template>
-            <template if:true={pdfContentVersionRecord}>
+            <template if:true={pdfRecordId}>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
                     label="View"

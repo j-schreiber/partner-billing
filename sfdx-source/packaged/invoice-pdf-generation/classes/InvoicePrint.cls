@@ -115,19 +115,6 @@ public class InvoicePrint extends Invoice {
     }
 
     /** @Description
-    *   Saves a Blob (presumably a PDF file) to the internal attachments of the invoice.
-    *   This method only caches the file and does not commit the attachments.
-    *
-    *   @param  fileToSave  File that will be saved as attachment
-    */
-    public void addFileToAttachments(Blob fileToSave) {
-        Attachment att = new Attachment(Body = fileToSave,
-                                        Name = PdfTitle + '.pdf',
-                                        ParentId = Record.Id);
-        Attachments.add(att);        
-    }
-
-    /** @Description
     *   Saves a Blob (presumably a PDF file) to the Salesforce CRM Content and creates a link
     *   for the content with this invoice. Subsequent calls to this method do not create new
     *   content files but only update the existing with a new version (based on title)

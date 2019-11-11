@@ -11,10 +11,19 @@ import apexDeletePdf from '@salesforce/apex/InvoicePdfController.deletePdf';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
 export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElement) {
-    @api invoice;
 
-    @track pdfContentVersionRecord;
+    @api
+    get invoice() {
+        return this.internalInvoice;
+    }
+    set invoice(value) {
+        this.internalInvoice = value;
+        if (value.Attachments.length > 0) this.pdfRecordId = value.Attachments[0].Id;
+    }
+
+    @track internalInvoice;
     @track isWorking = false;
+    @track pdfRecordId;
     invoicePdfOptions = {};
 
     LABELS = {
@@ -42,7 +51,7 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
                 pageName: 'filePreview'
             },
             state : {
-                recordIds: this.pdfContentVersionRecord.ContentDocumentId
+                recordIds: this.pdfRecordId
             }
         });
     }
@@ -59,7 +68,7 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
             displayTimesheet: this.invoicePdfOptions.timesheet
         })
         .then( (data) => {
-            this.pdfContentVersionRecord = data;
+            this.pdfRecordId = data.ContentDocumentId;
             this.isWorking = false;
         })
         .catch( (error) => {
@@ -79,10 +88,10 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
         this.isWorking = true;
 
         apexDeletePdf({
-            pdfId : this.pdfContentVersionRecord.ContentDocumentId
+            pdfId : this.pdfRecordId
         })
         .then(() => {
-            this.pdfContentVersionRecord = null;
+            this.pdfRecordId = null;
             this.isWorking = false;
         })
         .catch(() => {

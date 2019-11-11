@@ -20,7 +20,8 @@ public virtual class Invoice {
     }
 
     /** @Description    Attachments for this invoice */
-    public List<Attachment> Attachments;
+    @AuraEnabled
+    public List<ContentDocument> Attachments;
 
     /** @Description    Calculated total taxes */
     public Decimal TotalTaxes {
@@ -53,7 +54,7 @@ public virtual class Invoice {
                 'Account__r.Name,Account__r.CustomerId__c,ServicePeriodFrom__c,ServicePeriodTo__c,' +
                 'Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,'+
                 '(SELECT Id,Name,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__c,Product__r.Name,Productname__c,Discount__c,CurrencyIsoCode FROM LineItems__r ORDER BY Product__c,ServiceDate__c),'+
-                '(SELECT Id FROM ContentDocumentLinks),'+
+                '(SELECT Id,ContentDocumentId,ContentDocument.Title FROM ContentDocumentLinks),'+
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
 
@@ -88,7 +89,7 @@ public virtual class Invoice {
         newLineItemRecords = new List<InvoiceLineItem__c>();
         dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
         deleteLineItemIds = new Set<Id>();
-        Attachments = new List<Attachment>();
+        Attachments = new List<ContentDocument>();
     }
 
     /** @Description    Initialize the object by invoice id */
@@ -103,7 +104,7 @@ public virtual class Invoice {
     /** @Description    Initialize the object with the fully queried record */
     public Invoice(Invoice__c originalRecord) {
         Record = originalRecord;
-        Attachments = new List<Attachment>();
+        Attachments = new List<ContentDocument>();
         newLineItemRecords = new List<InvoiceLineItem__c>();
         deleteLineItemIds = new Set<Id>();
         dirtyLineItemRecords = new Map<Id, InvoiceLineItem__c>();
@@ -112,6 +113,9 @@ public virtual class Invoice {
         LineItemMap = new Map<Id, InvoiceLineItem>();
         if (originalRecord.LineItems__r != null) {
             for (InvoiceLineItem__c ili : originalRecord.LineItems__r) LineItemMap.put(ili.Id, new InvoiceLineItem(ili));
+        }
+        if (originalRecord.ContentDocumentLinks != null) {
+            for (ContentDocumentLink cdl : originalRecord.ContentDocumentLinks) Attachments.add(cdl.ContentDocument);
         }
     }
 

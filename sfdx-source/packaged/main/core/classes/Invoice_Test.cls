@@ -68,13 +68,32 @@ public class Invoice_Test {
     }
 
     @isTest
+    static void init_WithDocument_AttachmentsInitialized() {
+        // SETUP
+        Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
+
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion newVersion = new ContentVersion(Title='Test', PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert newVersion;
+        newVersion = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :newVersion.Id];
+        insert new ContentDocumentLink(ContentDocumentId=newVersion.ContentDocumentId, LinkedEntityId=record.Id, ShareType='V');
+
+        // ACTION
+        Invoice objUnderTest = new Invoice(record.Id);
+        
+        // VERIFY
+        System.assertEquals(1, objUnderTest.Attachments.size(), 'Attachments.size()');
+        System.assertEquals(newVersion.ContentDocumentId, objUnderTest.Attachments.get(0).Id, 'Attachments.get(0).Id');
+    }
+
+    @isTest
     static void init_InvalidId_EmptyInvoiceInitialized() {
         // ACTION
         Invoice actualObj = new Invoice('abc');
         // VERIFY
         System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
         System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
-        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(new List<ContentDocument>(), actualObj.Attachments, 'Invoice.Attachments');
         System.assertEquals(0.0, actualObj.TotalTaxes, 'Invoice.TotalTaxes');
         System.assertEquals(0.0, actualObj.TotalTaxesPercentage, 'Invoice.TotalTaxesPercentage');
     }
@@ -88,7 +107,7 @@ public class Invoice_Test {
         // VERIFY
         System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
         System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
-        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(new List<ContentDocument>(), actualObj.Attachments, 'Invoice.Attachments');
     }
 
     @isTest
@@ -98,7 +117,7 @@ public class Invoice_Test {
         // VERIFY
         System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
         System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
-        System.assertEquals(new List<Attachment>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(new List<ContentDocument>(), actualObj.Attachments, 'Invoice.Attachments');
     }
 
     @isTest
