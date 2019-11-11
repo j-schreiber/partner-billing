@@ -1,14 +1,7 @@
 <template>
     <template for:each={invoices.data} for:item='invoice'>
         <div key={invoice.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
-            <c-invoice-card
-                invoice-wrapper={invoice}
-                onrecordchange={cacheUpdatedInvoice}
-                onlineitemcreate={cacheNewLineItem}
-                onlineitemdelete={cacheDeletedLineItem}
-                onlineitemreset={cacheLineItemReset}
-                onlineitemchange={cacheLineItemUpdate}>
-            </c-invoice-card>
+            <c-invoice-card invoice={invoice}></c-invoice-card>
         </div>
     </template>
 </template>

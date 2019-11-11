@@ -11,9 +11,6 @@ import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesReviewHeader
 
 export default class InvoiceCardList extends LightningElement {
 
-    @track dirtyInvoices = new Map();
-    @track dirtyLineItems = new Map();
-    @track deletedLineItems = new Set();
     @track isWorking = false;
 
     LABELS = {
@@ -26,29 +23,6 @@ export default class InvoiceCardList extends LightningElement {
     invoices;
 
     /**                                         EVENT HANDLERS                                           */
-
-    cacheLineItemUpdate(event) {
-        if (!this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.set(event.detail.extId, {});
-        let record = this.dirtyLineItems.get(event.detail.extId);
-        record[event.detail.field] = event.detail.newValue;
-        record.Id = event.detail.recordId;
-    }
-
-    cacheDeletedLineItem(event) {
-        if (this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.delete(event.detail.extId);
-        if (event.detail.recordId && event.detail.recordId.length) this.deletedLineItems.add(event.detail.recordId);
-    }
-
-    cacheNewLineItem(event) {
-        this.dirtyLineItems.set(event.detail.ExtId, event.detail.Record);
-    }
-
-    cacheUpdatedInvoice(event) {
-        if (!this.dirtyInvoices.has(event.detail.recordId)) this.dirtyInvoices.set(event.detail.recordId, {});
-        let record = this.dirtyInvoices.get(event.detail.recordId);
-        record[event.detail.field] = event.detail.newValue;
-        record.Id = event.detail.recordId;
-    }
 
     refreshData() {
         this.dirtyInvoices = new Map();
@@ -66,9 +40,9 @@ export default class InvoiceCardList extends LightningElement {
         this.isWorking = true;
 
         commitData({
-            invoices : this.invoiceUpdateList,
-            upsertLineItems : this.upsertList,
-            deleteLineItemIds : this.deleteList
+            invoices : this.getUpdatedInvoiceRecords(),
+            upsertLineItems : this.getUpdatedAndNewLineItemRecords(),
+            deleteLineItemIds : this.getDeletedLineItemRecordIds()
         })
         .then( () => {
             this.refreshData();
@@ -76,7 +50,7 @@ export default class InvoiceCardList extends LightningElement {
             this.isWorking = false;
         })
         .catch ( (error) => {
-            this.dispatchToast('error', this.LABELS.TOAST_TITLE_ERROR, error);
+            this.dispatchToast('error', this.LABELS.TOAST_TITLE_ERROR, error.body.message);
             this.isWorking = false;
         })
         
@@ -84,27 +58,37 @@ export default class InvoiceCardList extends LightningElement {
 
     /**                                         HELPERS                                          */
 
-    get deleteList() {
+    getUpdatedAndNewLineItemRecords() {
         let arr = [];
-        for (let item of this.deletedLineItems) { arr.push(item); }
-        //console.log('Sending delete ids: ' + JSON.stringify(arr));
+        this.template.querySelectorAll('c-invoice-card').forEach ( (card) => {
+            card.getModifiedLineItems().forEach( (lineItem) => arr.push(lineItem));
+        })
         return arr;
     }
 
-    get upsertList() {
+    getDeletedLineItemRecordIds() {
         let arr = [];
-        this.dirtyLineItems.forEach( (value) => { arr.push(value); });
-        //console.log('Sending new/modified line items: ' + JSON.stringify(arr));
+        this.template.querySelectorAll('c-invoice-card').forEach ( (card) => {
+            card.getDeletedLineItems().forEach( (id) => arr.push(id));
+        })
         return arr;
     }
 
-    get invoiceUpdateList() {
+    getUpdatedInvoiceRecords() {
         let arr = [];
-        this.dirtyInvoices.forEach( (value) => { arr.push(value); });
-        //console.log('Sending invoices: ' + JSON.stringify(arr));
+        this.template.querySelectorAll('c-invoice-card').forEach ( (card) => {
+            let modifiedInv = card.getModifiedFields();
+            if (modifiedInv && Object.keys(modifiedInv).length > 0) arr.push(modifiedInv);
+        })
         return arr;
     }
-
+    /*
+    printCache() {
+        console.log('Invoice modifications: ' + JSON.stringify(this.getUpdatedInvoiceRecords()));
+        console.log('All modified Line Items: ' + JSON.stringify(this.getUpdatedAndNewLineItemRecords()));
+        console.log('Deleted Line Item Ids: ' + JSON.stringify(this.getDeletedLineItemRecordIds()));
+    }
+    */
     dispatchToast(type, title, message) {
         let toast = new ShowToastEvent({
             title : title,

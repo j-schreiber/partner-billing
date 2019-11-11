@@ -120,8 +120,8 @@
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable
-                line-items={rowdata.LineItems}
                 invoice-id={rowdata.Record.Id}
+                line-items={rowdata.LineItems}
                 is-disabled={readonly}
                 onrecalculate={recalculateSums}>
             </c-invoice-line-item-datatable>

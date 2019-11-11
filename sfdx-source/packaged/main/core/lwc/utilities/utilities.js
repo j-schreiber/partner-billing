@@ -38,4 +38,10 @@ const cloneInvoiceLineItemRecord = (value) => {
     return {};
 }
 
-export { getOrgProfiles, cloneInvoiceRecord, cloneInvoiceLineItemRecord };
+const getMapValuesAsList = (mapInput) => {
+    let arr = [];
+    mapInput.forEach( (value) => { arr.push(value); });
+    return arr;
+}
+
+export { getOrgProfiles, cloneInvoiceRecord, cloneInvoiceLineItemRecord, getMapValuesAsList };

@@ -1,7 +1,5 @@
 <template>
 
-    <lightning-button label="Print Cache" onclick={printModified}></lightning-button>
-
     <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
 
         <thead>
@@ -17,18 +15,16 @@
         </thead>
         <tbody>
             <!-- render all line items as table rows -->
-            <template if:true={hasData}>
-                <template for:each={lineItemsList} for:item='lineitem'>
-                    <c-invoice-line-item-datatable-row 
-                        line-item={lineitem}
-                        is-disabled={isDisabled}
-                        key={lineitem.ExtId}
-                        onrecalculate={recalculateSums}
-                        onrecorddelete={cacheRowDelete}
-                        onrecordchange={cacheRowChange}
-                        onrecordreset={resetRow}>
-                    </c-invoice-line-item-datatable-row>
-                </template>
+            <template for:each={lineItemsList} for:item='lineitem'>
+                <c-invoice-line-item-datatable-row 
+                    line-item={lineitem}
+                    is-disabled={isDisabled}
+                    key={lineitem.ExtId}
+                    onrecalculate={recalculateSums}
+                    onrecorddelete={cacheRowDelete}
+                    onrecordchange={cacheRowChange}
+                    onrecordreset={resetRow}>
+                </c-invoice-line-item-datatable-row>
             </template>
             
         </tbody>

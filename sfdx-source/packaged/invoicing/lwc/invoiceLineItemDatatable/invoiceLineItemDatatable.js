@@ -1,4 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
+import { getMapValuesAsList } from 'c/utilities';
 
 export default class InvoiceLineItemDatatable extends LightningElement {
 
@@ -11,7 +12,7 @@ export default class InvoiceLineItemDatatable extends LightningElement {
     set lineItems(value) {
         this.originalLineItems = value;
         this.internalLineItems = this.getLineItemMapByExtId(value);
-        this.lineItemsList = this.getInternalLineItemsAsList();
+        this.lineItemsList = getMapValuesAsList(this.internalLineItems);
     }
     originalLineItems;
 
@@ -27,6 +28,57 @@ export default class InvoiceLineItemDatatable extends LightningElement {
     deletedRowRecordIds = new Set();
     incremetor = 0;
 
+    /**                                     PUBLIC COMPONENT API                                     */
+
+    @api 
+    addRow() {
+        var newItem = this.makeNewLineItem();
+        this.internalLineItems.set(newItem.ExtId, newItem);
+        this.modifiedRowRecords.set(newItem.ExtId, newItem.Record);
+        this.lineItemsList = getMapValuesAsList(this.internalLineItems);
+    }
+
+    @api
+    getModifiedRows() {
+        let arr = [];
+        this.modifiedRowRecords.forEach( (value) => { arr.push(value); });
+        return arr;
+    }
+
+    @api
+    getDeletedRows() {
+        let arr = [];
+        this.deletedRowRecordIds.forEach( (value) => { arr.push(value); });
+        return arr;
+    }
+
+    @api 
+    get SumAmount() {
+        let sum = 0;
+        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.Amount});
+        return sum;
+    }
+
+    @api 
+    get SumGrossAmount() {
+        let sum = 0;
+        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.GrossAmount});
+        return sum;
+    }
+
+    @api
+    reset() {
+        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach ( (row) => row.reset() );
+        this.incremetor = 0;
+        this.internalLineItems = this.getLineItemMapByExtId(this.originalLineItems);
+        this.lineItemsList = getMapValuesAsList(this.internalLineItems);
+        this.modifiedRowRecords = new Map();
+        this.deletedRowRecordIds = new Set();
+    }
+
+
+    /**                                     INTERNAL FUNCTIONS                                 */
+
     cacheRowChange(event) {
         if (!this.modifiedRowRecords.has(event.detail.extId)) this.modifiedRowRecords.set(event.detail.extId, {});
         let record = this.modifiedRowRecords.get(event.detail.extId);
@@ -38,10 +90,10 @@ export default class InvoiceLineItemDatatable extends LightningElement {
         if (this.modifiedRowRecords.has(event.detail)) this.modifiedRowRecords.delete(event.detail);
 
         let recordId = this.internalLineItems.get(event.detail).Record.Id;
-        if (recordId && recordId.length > 0) this.deletedRowRecordIds.add(this.internalLineItems.get(event.detail).Record.Id);
+        if (recordId && recordId.length > 0) this.deletedRowRecordIds.add(recordId);
 
         this.internalLineItems.delete(event.detail);
-        this.lineItemsList = this.getInternalLineItemsAsList();
+        this.lineItemsList = getMapValuesAsList(this.internalLineItems);
     }
 
     resetRow(event) {
@@ -63,65 +115,8 @@ export default class InvoiceLineItemDatatable extends LightningElement {
         );
     }
 
-    printModified() {
-        let mod = this.modifiedRecords;
-        let del = this.deletedRecords;
-    }
-
-    @api addRow() {
-        var newItem = this.makeNewLineItem();
-        this.internalLineItems.set(newItem.ExtId, newItem);
-        this.modifiedRowRecords.set(newItem.ExtId, newItem.Record);
-        this.lineItemsList = this.getInternalLineItemsAsList();
-    }
-
-    @api
-    get modifiedRecords() {
-        let arr = [];
-        this.modifiedRowRecords.forEach( (value) => { arr.push(value); });
-        console.log('Sending new/modified line items: ' + JSON.stringify(arr));
-        return arr;
-    }
-
-    get deletedRecords() {
-        let arr = [];
-        for (let item of this.deletedRowRecordIds) { arr.push(item); }
-        console.log('Sending delete ids: ' + JSON.stringify(arr));
-        return arr;
-    }
-
-    @api 
-    get SumAmount() {
-        let sum = 0;
-        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.Amount});
-        return sum;
-    }
-
-    @api 
-    get SumGrossAmount() {
-        let sum = 0;
-        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach( (item) => {sum += item.GrossAmount});
-        return sum;
-    }
-
     get hasData() {
         return this.lineItemsList.length > 0;
-    }
-
-    @api
-    reset() {
-        this.template.querySelectorAll('c-invoice-line-item-datatable-row').forEach ( (row) => row.reset() );
-        this.incremetor = 0;
-        this.internalLineItems = this.getLineItemMapByExtId(this.originalLineItems);
-        this.lineItemsList = this.getInternalLineItemsAsList();
-        this.modifiedRowRecords = new Map();
-        this.deletedRowRecordIds = new Set();
-    }
-
-    getInternalLineItemsAsList() {
-        let arr = [];
-        this.internalLineItems.forEach( (value) => { arr.push(value); });
-        return arr;
     }
 
     makeNewLineItem() {
