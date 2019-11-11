@@ -1,3 +1,7 @@
 th {
     text-align: center;
 }
+
+.spinner-container {
+    height: 200px;
+}
