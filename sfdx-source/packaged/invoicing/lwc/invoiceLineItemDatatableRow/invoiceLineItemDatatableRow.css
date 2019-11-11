@@ -2,7 +2,7 @@
     display: table-row;
 }
 
-.dirty-field {
+.is-dirty {
     border: solid orange 3px;
     border-radius: 6px;
 }

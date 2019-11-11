@@ -64,7 +64,7 @@ public with sharing class BillingController {
     *
     *   @return                 List of Time Entries
     */
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<TimeEntry> getNonInvoicedTimeEntries(Date startDate, Date endDate) {
         List<TimeEntry> results = new List<TimeEntry>();
         for (TimeEntry__c te : [SELECT Id,Name,Account__r.Name,Date__c,StartTime__c,EndTime__c,Duration__c,DailyRate__c,TotalAmount__c,Product__r.Name
@@ -82,7 +82,7 @@ public with sharing class BillingController {
     *
     *   @return                 List of Invoices that match criteria
     */
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Invoice> getInvoices(String status) {
         List<Invoice> results = new List<Invoice>();
         for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Status__c = :status ORDER BY Date__c')) {

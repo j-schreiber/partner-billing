@@ -1,5 +1,6 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
 import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData';
@@ -9,7 +10,7 @@ import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesReviewHeader';
 
 export default class InvoiceCardList extends LightningElement {
-    @track invoiceData = [];
+
     @track dirtyInvoices = new Map();
     @track dirtyLineItems = new Map();
     @track deletedLineItems = new Set();
@@ -21,18 +22,16 @@ export default class InvoiceCardList extends LightningElement {
         CARD_TITLE
     }
 
-    connectedCallback() {
-        this.queryInvoiceData();
-    }
+    @wire(getInvoices, { status: 'Draft' })
+    invoices;
 
     /**                                         EVENT HANDLERS                                           */
 
-    cacheUpdatedLineItem(event) {
+    cacheLineItemUpdate(event) {
         if (!this.dirtyLineItems.has(event.detail.extId)) this.dirtyLineItems.set(event.detail.extId, {});
         let record = this.dirtyLineItems.get(event.detail.extId);
         record[event.detail.field] = event.detail.newValue;
         record.Id = event.detail.recordId;
-        //console.log('Cached Line Item: ' + JSON.stringify(record));
     }
 
     cacheDeletedLineItem(event) {
@@ -49,7 +48,14 @@ export default class InvoiceCardList extends LightningElement {
         let record = this.dirtyInvoices.get(event.detail.recordId);
         record[event.detail.field] = event.detail.newValue;
         record.Id = event.detail.recordId;
-        //console.log('Cached Invoice: ' + JSON.stringify(record));
+    }
+
+    refreshData() {
+        this.dirtyInvoices = new Map();
+        this.dirtyLineItems = new Map();
+        this.deletedLineItems = new Set();
+        this.template.querySelectorAll('c-invoice-card').forEach( (card) => { card.reset() });
+        return refreshApex(this.invoices);
     }
 
 
@@ -65,7 +71,7 @@ export default class InvoiceCardList extends LightningElement {
             deleteLineItemIds : this.deleteList
         })
         .then( () => {
-            this.revertAllChanges();
+            this.refreshData();
             this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
@@ -75,21 +81,6 @@ export default class InvoiceCardList extends LightningElement {
         })
         
     }
-
-    queryInvoiceData() {
-        this.isWorking = true;
-        getInvoices({
-            status: 'Draft'
-        })
-        .then((result) => {
-            this.invoiceData = result;
-            this.isWorking = false;
-        })
-        .catch(() => {
-            this.isWorking = false;
-        })
-    }
-
 
     /**                                         HELPERS                                          */
 
@@ -112,14 +103,6 @@ export default class InvoiceCardList extends LightningElement {
         this.dirtyInvoices.forEach( (value) => { arr.push(value); });
         //console.log('Sending invoices: ' + JSON.stringify(arr));
         return arr;
-    }
-
-    revertAllChanges() {
-        this.invoiceData = [];
-        this.dirtyInvoices = new Map();
-        this.dirtyLineItems = new Map();
-        this.deletedLineItems = new Set();
-        this.queryInvoiceData();
     }
 
     dispatchToast(type, title, message) {

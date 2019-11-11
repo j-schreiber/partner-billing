@@ -1,7 +1,7 @@
 <template>
     <td>
         <lightning-record-edit-form object-api-name="InvoiceLineItem__c">
-            <div onchange={updateProduct}>
+            <div onchange={updateProduct} class="input-field-container">
                 <lightning-input-field
                     field-name="Product__c"
                     name="Product__c"
@@ -20,7 +20,7 @@
             formatter="currency"
             variant="label-hidden"
             onchange={updateInternalData}
-            onblur={dispatchUpdateEvent}
+            onblur={handleFieldUpdate}
             disabled={isDisabled}
             min="0"
             step="0.01">
@@ -33,7 +33,7 @@
             type="number"
             variant="label-hidden"
             onchange={updateInternalData}
-            onblur={dispatchUpdateEvent}
+            onblur={handleFieldUpdate}
             disabled={isDisabled}
             min="0"
             step="0.0001">
@@ -47,7 +47,7 @@
             formatter="percent-fixed"
             variant="label-hidden"
             onchange={updateInternalData}
-            onblur={dispatchUpdateEvent}
+            onblur={handleFieldUpdate}
             disabled={isDisabled}
             min="0"
             step="0.01">
@@ -63,7 +63,7 @@
             max="100"
             min="0"
             onchange={updateInternalData}
-            onblur={dispatchUpdateEvent}
+            onblur={handleFieldUpdate}
             disabled={isDisabled}
             step="0.01">
         </lightning-input>
@@ -88,13 +88,21 @@
             name="Description__c"
             type="text"
             onchange={updateDescription}
-            onblur={dispatchUpdateEvent}
+            onblur={handleFieldUpdate}
             disabled={isDisabled}
             variant="label-hidden">
         </lightning-input>
     </td>
     <td>
         <lightning-button-icon
+            class="slds-m-horizontal_xx-small"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text="Reset"
+            onclick={reset}>
+        </lightning-button-icon>
+        <lightning-button-icon
+            class="slds-m-horizontal_xx-small"
             icon-name="utility:delete"
             alternative-text="Delete"
             disabled={isDisabled}

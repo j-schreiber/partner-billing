@@ -37,11 +37,12 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
 
     viewPdf() {
         this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
+            type: 'standard__namedPage',
             attributes: {
-                recordId: this.pdfContentVersionRecord.Id,
-                objectApiName: 'ContentVersion',
-                actionName: 'view'
+                pageName: 'filePreview'
+            },
+            state : {
+                recordIds: this.pdfContentVersionRecord.ContentDocumentId
             }
         });
     }

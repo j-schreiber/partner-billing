@@ -1,5 +1,6 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
 import createInvoices from '@salesforce/apex/BillingController.createInvoicesFromTimeEntries';
@@ -25,7 +26,6 @@ const COLUMN_DEFINITION = [
 
 export default class TimeEntriesTreeGrid extends LightningElement {
 
-    @track gridData = [];
     @track isWorking = false;
 
     selectedOptions = {
@@ -33,10 +33,11 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         overrideServicePeriod : true
     };
 
-    selectedFilters = {
-        startDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0],
-        endDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0],
-    }
+    @track filterStartDate = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0];
+    @track filterEndDate = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0];
+
+    @wire(getTimeEntries, { startDate : '$filterStartDate', endDate : '$filterEndDate'})
+    timeEntries;
 
     columns = COLUMN_DEFINITION;
 
@@ -49,20 +50,18 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         TOAST_TITLE_WARN
     }
 
-    connectedCallback() {
-        this.refreshData(this.selectedFilters);
-    }
-
     handleStartDateChange(event) {
-        this.selectedFilters.startDate = event.detail.value;
+        this.filterStartDate = event.detail.value;
     }
 
     handleEndDateChange(event) {
-        this.selectedFilters.endDate = event.detail.value;
+        this.filterEndDate = event.detail.value;
     }
 
-    handleSearchButtonClick() {
-        this.refreshData(this.selectedFilters);
+    refreshData() {
+        this.isWorking = true;
+        refreshApex(this.timeEntries);
+        this.isWorking = false;
     }
 
     handleCollapseToggle(event) {
@@ -71,24 +70,6 @@ export default class TimeEntriesTreeGrid extends LightningElement {
 
     handleServicePeriodToggle(event) {
         this.selectedOptions.overrideServicePeriod = event.detail.checked
-    }
-
-    refreshData(filters) {
-
-        this.isWorking = true;
-
-        getTimeEntries({
-            startDate : filters.startDate,
-            endDate : filters.endDate
-        })
-        .then( (result) => {
-            this.gridData = result;
-            this.isWorking = false;
-        })
-        .catch( () => {
-            this.gridDate = [];
-            this.isWorking = false;
-        });
     }
 
     startBillingCycle() {
@@ -107,7 +88,7 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         createInvoices({
             timeEntryIds: this.getSelectedIds(),
             options: this.selectedOptions,
-            filters: this.selectedFilters,
+            filters: { startDate : this.filterStartDate, endDate : this.filterEndDate},
         })
         .then(() => {
             let successToast = new ShowToastEvent({
@@ -115,8 +96,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
                 variant : 'success'
             });
             this.dispatchEvent(successToast);
+            refreshApex(this.timeEntries);
             this.isWorking = false;
-            this.refreshData(this.selectedFilters);
             this.dispatchEvent(new CustomEvent('stepcompleted'));
         })
         .catch(() => {

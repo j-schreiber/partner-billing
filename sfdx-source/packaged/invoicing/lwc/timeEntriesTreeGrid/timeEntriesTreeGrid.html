@@ -2,13 +2,14 @@
 
     <div class="slds-m-bottom_medium">
         <lightning-card title={LABELS.CARD_TITLE}>
-            <lightning-button 
-                class="slds-m-around_medium" 
-                label="Refresh Time Entries" 
-                variant="neutral"
-                slot="actions" 
-                onclick={handleSearchButtonClick}>
-            </lightning-button>
+
+            <lightning-button-icon
+                class="slds-m-horizontal_medium"
+                slot="actions"
+                icon-name="utility:refresh"
+                alternative-text="Refresh Data"
+                onclick={refreshData}>
+            </lightning-button-icon>
 
             <lightning-button
                 slot="actions"
@@ -26,8 +27,8 @@
                             name="startDateInput"
                             label={LABELS.STARTDATE_PICKER_LABEL}
                             onchange={handleStartDateChange}
-                            max={selectedFilters.endDate}
-                            value={selectedFilters.startDate}>
+                            max={filterEndDate}
+                            value={filterStartDate}>
                         </lightning-input>
                         <lightning-input
                             class="slds-m-right_medium"
@@ -35,8 +36,8 @@
                             name="endDateInput"
                             label={LABELS.ENDDATE_PICKER_LABEL}
                             onchange={handleEndDateChange}
-                            min={selectedFilters.startDate}
-                            value={selectedFilters.endDate}>
+                            min={filterStartDate}
+                            value={filterEndDate}>
                         </lightning-input>
                     </div>
                     <div class="slds-box slds-grid slds-m-horizontal_small">
@@ -71,7 +72,7 @@
             
             <div class="slds-p-horizontal_medium slds-is-relative">
                 <div>
-                    <lightning-datatable columns={columns} data={gridData} key-field="Id"></lightning-datatable>
+                    <lightning-datatable columns={columns} data={timeEntries.data} key-field="Id"></lightning-datatable>
                 </div>
                 <template if:true={isWorking}>
                     <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>

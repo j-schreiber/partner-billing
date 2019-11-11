@@ -19,7 +19,6 @@ export default class InvoicePdfGenTable extends LightningElement {
         this.isWorking = true;
         refreshApex(this.invoices);
         this.isWorking = false;
-
     }
 
     createAllPdfs() {

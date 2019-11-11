@@ -1,21 +1,19 @@
 <template>
 
     <lightning-card title={invoiceTitle}>
-        <!--
-        <lightning-button
-            class="slds-m-horizontal_large"
-            slot="actions"
-            label="Reset"
-            variant="neutral"
-            onclick={resetRecord}>
-        </lightning-button>
-        -->
 
+        <lightning-button-icon
+            class="slds-m-horizontal_medium"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text="Refresh Data"
+            onclick={reset}>
+        </lightning-button-icon>
         <lightning-button
             label="New Line Item"
             icon-name="utility:add"
             slot="actions"
-            class="slds-m-horizontal_large"
+            class="slds-m-right_large"
             disabled={readonly}
             onclick={addLineItem}>
         </lightning-button>
@@ -122,11 +120,10 @@
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable
-                lineitems={internalLineItems}
+                line-items={rowdata.LineItems}
+                invoice-id={rowdata.Record.Id}
                 is-disabled={readonly}
-                onrecalculate={recalculateSums}
-                onrecordchange={bubbleLineItemChange}
-                onrecorddelete={removeLineItem}>
+                onrecalculate={recalculateSums}>
             </c-invoice-line-item-datatable>
 
         </div>

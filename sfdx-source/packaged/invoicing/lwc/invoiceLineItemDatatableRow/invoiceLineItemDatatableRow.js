@@ -1,28 +1,36 @@
 import { LightningElement, api, track } from 'lwc';
+import { cloneInvoiceLineItemRecord } from 'c/utilities';
 
 import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
 export default class InvoiceLineItemDatatableRow extends LightningElement {
-    @api rowdata;
+    rowdata;
     @api isDisabled = false;
 
     @track record;
     oldRecord = {};
+    hasRendered = false;
+
+    @api
+    get lineItem() {
+        return this.rowdata;
+    }
+    set lineItem(value) {
+        this.rowdata = value;
+        this.record = cloneInvoiceLineItemRecord(value);
+    }
 
     /**                         LIFECYCLE HOOKS                             */
-    connectedCallback() {
-        this.record = {
-            Id : this.rowdata.Record.Id,
-            Price__c : this.rowdata.Record.Price__c,
-            Product__c : this.rowdata.Record.Product__c,
-            Tax__c : this.rowdata.Record.Tax__c,
-            Quantity__c : this.rowdata.Record.Quantity__c,
-            Discount__c : this.rowdata.Record.Discount__c,
-            Description__c : this.rowdata.Record.Description__c
-        }
-    }
 
     disconnectedCallback() {
         this.dispatchRecalculate();
+    }
+
+    renderedCallback() {
+        if (this.rowdata.IsNew && !this.hasRendered) {
+            this.template.querySelectorAll('lightning-input').forEach( (input) => { input.classList.add('is-dirty'); });
+            this.template.querySelectorAll('div.input-field-container').forEach( (input) => { input.classList.add('is-dirty'); });
+            this.hasRendered = true;
+        }
     }
 
     /**                         INTERNALLY UPDATE DATA                        */
@@ -38,23 +46,23 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
 
     updateProduct(event) {
         this.record[PRODUCT_FIELD.fieldApiName] = (event.detail.value.length === 0) ? '' : (event.detail.value)[0];
-        this.dispatchRecordChange(PRODUCT_FIELD.fieldApiName);
+        this.evaluateRecordChange(PRODUCT_FIELD.fieldApiName);
         this.setModificationStyle(this.isModified(PRODUCT_FIELD.fieldApiName), event.currentTarget);
     }
 
     /**                         SEND UPDATES TO PARENT                           */
 
-    dispatchUpdateEvent(event) {
-        this.dispatchRecordChange(event.currentTarget.name);
+    handleFieldUpdate(event) {
+        this.evaluateRecordChange(event.currentTarget.name);
         this.setModificationStyle(this.isModified(event.currentTarget.name), event.currentTarget);
     }
 
     isModified(fieldName) {
-        return this.record[fieldName] !== this.rowdata.Record[fieldName];
+        return (this.record[fieldName] !== this.rowdata.Record[fieldName]) || this.rowdata.IsNew;
     }
 
     setModificationStyle(isModified, DOMNode) {
-        isModified ? DOMNode.classList.add('dirty-field') : DOMNode.classList.remove('dirty-field');
+        isModified ? DOMNode.classList.add('is-dirty') : DOMNode.classList.remove('is-dirty');
     }
 
     /**                         ACTUAL EVENT DISPATCHERS                          */
@@ -65,27 +73,37 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         );
     }
 
+    dispatchRecordReset() {
+        this.dispatchEvent(
+            new CustomEvent('recordreset', { detail : this.rowdata.ExtId })
+        );
+    }
+
     dispatchRecalculate() {
         this.dispatchEvent(new CustomEvent('recalculate'));
     }
 
-    dispatchRecordChange(updatedField) {
+    evaluateRecordChange(updatedField) {
         if (this.oldRecord[updatedField] !== this.record[updatedField]) {
-            this.dispatchEvent(
-                new CustomEvent('recordchange', {
-                    detail : {
-                        extId : this.rowdata.ExtId,
-                        recordId : this.rowdata.Record.Id,
-                        field : updatedField,
-                        originalValue : this.rowdata.Record[updatedField],
-                        oldValue : this.oldRecord[updatedField],
-                        newValue : this.record[updatedField]
-                    }
-                })
-            );
+            this.dispatchRecordChange(updatedField);
             this.dispatchRecalculate();
         }
         this.oldRecord[updatedField] = this.record[updatedField];
+    }
+
+    dispatchRecordChange(updatedField) {
+        this.dispatchEvent(
+            new CustomEvent('recordchange', {
+                detail : {
+                    extId : this.rowdata.ExtId,
+                    recordId : this.rowdata.Record.Id,
+                    field : updatedField,
+                    originalValue : this.rowdata.Record[updatedField],
+                    oldValue : this.oldRecord[updatedField],
+                    newValue : this.record[updatedField]
+                }
+            })
+        );
     }
 
     @api
@@ -96,5 +114,20 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     @api
     get GrossAmount() {
         return (this.Amount * (1 + this.record.Tax__c / 100));
+    }
+
+    @api
+    reset() {
+        this.oldRecord = {};
+        if (this.rowdata.IsNew) {
+            this.record = {Price__c : 0, Tax__c : 0, Discount__c : 0, Quantity__c : 0, Product__c : '', Description__c : ''};
+            Object.keys(this.record).forEach ( (key) => this.dispatchRecordChange(key));
+        } else {
+            this.record = cloneInvoiceLineItemRecord(this.rowdata);
+            this.dispatchRecordReset();
+            this.template.querySelectorAll('lightning-input').forEach ((input) => { input.classList.remove('is-dirty'); } );
+            this.template.querySelectorAll('div.input-field-container').forEach( (input) => { input.classList.remove('is-dirty'); });
+        }
+        this.dispatchRecalculate();
     }
 }
