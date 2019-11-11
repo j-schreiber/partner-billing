@@ -22,28 +22,35 @@
     <td>
         <c-pdf-generation-options
             invoice={invoice.Record}
-            disabled={hasPdf}
+            disabled={pdfContentVersionRecord}
             onoptionchange={handleOptionsChange}
             org-profiles={orgProfiles}>
         </c-pdf-generation-options>
     </td>
     <td>
         <div class="slds-is-relative slds-align_absolute-center">
-            <lightning-button-stateful
-                class="slds-m-horizontal_xx-small"
-                label-when-off="Generate PDF"
-                label-when-on="View"
-                icon-name-when-off="utility:insert_template"
-                icon-name-when-on="utility:display_text"
-                selected={hasPdf}
-                disabled={isWorking}
-                variant="success"
-                onclick={createPdf}>
-            </lightning-button-stateful>
+            <template if:false={pdfContentVersionRecord}>
+                <lightning-button
+                    class="slds-m-horizontal_xx-small"
+                    label="Generate PDF"
+                    icon-name="utility:insert_template"
+                    variant="success"
+                    disabled={isWorking}
+                    onclick={createPdf}>
+                </lightning-button>
+            </template>
             <template if:true={isWorking}>
                 <lightning-spinner alternative-text="Creating PDF ..." size="small"></lightning-spinner>
             </template>
-            <template if:true={hasPdf}>
+            <template if:true={pdfContentVersionRecord}>
+                <lightning-button
+                    class="slds-m-horizontal_xx-small"
+                    label="View"
+                    icon-name="utility:display_text"
+                    variant="success"
+                    disabled={isWorking}
+                    onclick={viewPdf}>
+                </lightning-button>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
                     label="Delete"

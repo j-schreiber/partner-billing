@@ -37,8 +37,8 @@ export default class pdfGenerationOptions extends LightningElement {
     invoiceRecord;
     @track orgProfileOptions;
     @track languageOptions;
-    selectedProfileOption;
-    selectedLanguageOption;
+    selectedProfileOption = '';
+    selectedLanguageOption = '';
     renderTimesheetOption = true;
 
     LABELS = {

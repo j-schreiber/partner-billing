@@ -13,10 +13,21 @@ public class InvoicePdfController {
     *   @param  displayTimesheet    Option to display the invoice's timesheet
     */
     @AuraEnabled
-    public static void savePdfToInvoice(Id invoiceId, Id orgProfileId, String renderLanguage, Boolean displayTimesheet) {
+    public static ContentVersion savePdfToInvoice(Id invoiceId, String orgProfileId, String renderLanguage, Boolean displayTimesheet) {
         InvoicePrint inv = new InvoicePrint(invoiceId);
         PageReference pdfFile = inv.createPdf(orgProfileId, renderLanguage, displayTimesheet);
-        inv.saveToContentAttachments(pdfFile);
+        return inv.saveToContentAttachments(pdfFile);
+    }
+
+    /** @Description
+    *   Deletes the requested content version. This also deletes the original content template, if
+    *   the version was the only version left.
+    *
+    *   @param  pdfId               The record id of the content version to delete
+    */
+    @AuraEnabled
+    public static void deletePdf(String pdfId) {
+        Database.delete(pdfId);
     }
 
     /** @Description
@@ -24,7 +35,7 @@ public class InvoicePdfController {
     *
     *   @return                 All Organization Profiles, default profile first
     */
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<OrganizationProfile__c> getOrganizationProfiles() {
         return [SELECT Id,Name,IsDefault__c
                 FROM OrganizationProfile__c ORDER BY IsDefault__c DESC];

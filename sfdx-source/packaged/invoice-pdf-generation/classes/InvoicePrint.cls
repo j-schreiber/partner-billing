@@ -71,9 +71,9 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId) {
+    public PageReference createPdf(String orgProfileId) {
         PageReference invoicePdfPage = createPdf();
-        invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
+        if (String.isNotBlank(orgProfileId)) invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
         return invoicePdfPage;
     }
 
@@ -86,10 +86,12 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId, String lang) {
+    public PageReference createPdf(String orgProfileId, String lang) {
         PageReference invoicePdfPage = createPdf(orgProfileId);
-        invoicePdfPage.getParameters().put('lang', lang);
-        Record.PdfLanguage__c = lang;
+        if (String.isNotBlank(lang)) {
+            invoicePdfPage.getParameters().put('lang', lang);
+            Record.PdfLanguage__c = lang;
+        }
         return invoicePdfPage;
     }
 
@@ -103,10 +105,12 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId, String lang, Boolean timesheet) {
+    public PageReference createPdf(String orgProfileId, String lang, Boolean timesheet) {
         PageReference invoicePdfPage = createPdf(orgProfileId, lang);
-        invoicePdfPage.getParameters().put('displayTimesheet', String.valueOf(timesheet));
-        Record.PdfRenderTimesheet__c = timesheet;
+        if (timesheet != null) {
+            invoicePdfPage.getParameters().put('displayTimesheet', String.valueOf(timesheet));
+            Record.PdfRenderTimesheet__c = timesheet;
+        }
         return invoicePdfPage;
     }
 
