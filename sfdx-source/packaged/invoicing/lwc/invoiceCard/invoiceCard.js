@@ -1,6 +1,10 @@
 import { LightningElement, api, track } from 'lwc';
 import { cloneInvoiceRecord } from 'c/utilities';
 
+import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_Save';
+import BUTTON_LABEL_NEWITEM from '@salesforce/label/c.UI_Button_Label_NewLineItem';
+import BUTTON_TEXT_REFRESH from '@salesforce/label/c.UI_Button_Label_ResetAll';
+
 const PICK_VAL_DRAFT = 'Draft';
 const PICK_VAL_ACTIVATED = 'Activated';
 const PICK_VAL_CANCELLED = 'Cancelled';
@@ -25,6 +29,12 @@ export default class InvoiceCard extends LightningElement {
         this.TotalAmount = value.Record.TotalAmount__c;
         this.TotalGrossAmount = value.Record.TotalGrossAmount__c;
         this.record = cloneInvoiceRecord(this.rowdata);
+    }
+
+    LABELS = {
+        BUTTON_LABEL_SAVE,
+        BUTTON_LABEL_NEWITEM,
+        BUTTON_TEXT_REFRESH
     }
 
     /**                             PUBLIC COMPONENT API                         */
@@ -64,6 +74,11 @@ export default class InvoiceCard extends LightningElement {
     @api
     isLocked() {
         return this.readonly;
+    }
+
+    @api
+    saveChanges() {
+        
     }
 
     /**                             EVENT LISTENERS                              */

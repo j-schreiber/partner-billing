@@ -96,4 +96,32 @@
         <label>Ende Leistungszeitraum</label>
         <name>Invoicing_Label_ServiceDateEnd</name>
     </customLabels>
+    <customLabels>
+        <label>Wähle Mailtemplate</label>
+        <name>UI_Placeholder_SelectMailTemplate</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Rechnungskontakt</label>
+        <name>UI_Placeholder_SelectBillingContact</name>
+    </customLabels>
+    <customLabels>
+        <label>Speichern</label>
+        <name>UI_Button_Label_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>Alle Speichern</label>
+        <name>UI_Button_Label_SaveAll</name>
+    </customLabels>
+    <customLabels>
+        <label>Neue Position</label>
+        <name>UI_Button_Label_NewLineItem</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen zurücksetzen</label>
+        <name>UI_Button_Label_ResetAll</name>
+    </customLabels>
+    <customLabels>
+        <label>Löschen</label>
+        <name>UI_Button_Label_Delete</name>
+    </customLabels>
 </Translations>

@@ -113,28 +113,84 @@
         <value>VAT Charge</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_SelectOrgProfile</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
+        <fullName>UI_Button_Label_Save</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_SaveAll</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_NewLineItem</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons that add new line items (mostly for invoices)</shortDescription>
+        <value>New Line Item</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_ResetAll</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that refresh data</shortDescription>
+        <value>Reset All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_Delete</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that delete data</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectOrgProfile</fullName>
+        <categories>ui,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
         <value>Select Organization Profile</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_SelectRenderLanguage</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
+        <fullName>UI_Label_SelectRenderLanguage</fullName>
+        <categories>ui,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
         <value>Select Render Language</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_ActivateTimesheet</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
+        <fullName>UI_Label_ActivateTimesheet</fullName>
+        <categories>ui,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
         <value>Timesheet</value>
+    </labels>
+    <labels>
+        <fullName>UI_Placeholder_SelectBillingContact</fullName>
+        <categories>ui,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for billing contact selection</shortDescription>
+        <value>Select Billing Contact</value>
+    </labels>
+    <labels>
+        <fullName>UI_Placeholder_SelectMailTemplate</fullName>
+        <categories>ui,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for mail template selection</shortDescription>
+        <value>Select Mail Template</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_TextTemplate_ServicePeriod</fullName>

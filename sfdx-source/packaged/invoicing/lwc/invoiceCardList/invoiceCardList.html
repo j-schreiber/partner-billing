@@ -6,12 +6,12 @@
             class="slds-m-horizontal_medium"
             slot="actions"
             icon-name="utility:refresh"
-            alternative-text="Refresh Data"
+            alternative-text={LABELS.BUTTON_TEXT_REFRESH}
             onclick={refreshData}>
         </lightning-button-icon>
 
         <lightning-button
-            label="Commit All"
+            label={LABELS.BUTTON_LABEL_SAVE_ALL}
             variant="brand"
             slot="actions"
             onclick={commitDirtyRecords}>

@@ -6,12 +6,12 @@
             class="slds-m-horizontal_medium"
             slot="actions"
             icon-name="utility:refresh"
-            alternative-text="Refresh Data"
+            alternative-text={LABELS.BUTTON_TEXT_REFRESH}
             disabled={readonly}
             onclick={reset}>
         </lightning-button-icon>
         <lightning-button
-            label="New Line Item"
+            label={LABELS.BUTTON_LABEL_NEWITEM}
             icon-name="utility:add"
             slot="actions"
             class="slds-m-right_large"
@@ -41,6 +41,14 @@
                 onclick={handleCancelButtonClick}>
             </lightning-button-stateful>
         </lightning-button-group>
+
+        <lightning-button
+            class="slds-m-left_medium"
+            slot="actions"
+            label={LABELS.BUTTON_LABEL_SAVE}
+            variant="brand"
+            onclick={saveChanges}>
+        </lightning-button>
 
         <!-- card body -->
         <div class="slds-p-horizontal_medium">

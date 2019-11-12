@@ -1,5 +1,8 @@
 import { LightningElement, api, track } from 'lwc';
 import { cloneInvoiceLineItemRecord } from 'c/utilities';
+
+import BUTTON_TEXT_RESET from '@salesforce/label/c.UI_Button_Label_ResetAll';
+import BUTTON_TEXT_DELETE from '@salesforce/label/c.UI_Button_Label_Delete';
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     rowdata;
     @api isDisabled = false;
@@ -15,6 +18,11 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     set lineItem(value) {
         this.rowdata = value;
         this.record = cloneInvoiceLineItemRecord(value);
+    }
+
+    LABELS = {
+        BUTTON_TEXT_RESET,
+        BUTTON_TEXT_DELETE
     }
 
     /**                         LIFECYCLE HOOKS                             */

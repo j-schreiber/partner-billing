@@ -8,6 +8,8 @@ import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicesUpdated';
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesReviewHeader';
+import BUTTON_LABEL_SAVE_ALL from '@salesforce/label/c.UI_Button_Label_SaveAll';
+import BUTTON_TEXT_REFRESH from '@salesforce/label/c.UI_Button_Label_ResetAll';
 
 export default class InvoiceCardList extends LightningElement {
 
@@ -16,7 +18,9 @@ export default class InvoiceCardList extends LightningElement {
     LABELS = {
         TOAST_TITLE_SUCCESS,
         TOAST_TITLE_ERROR,
-        CARD_TITLE
+        CARD_TITLE,
+        BUTTON_LABEL_SAVE_ALL,
+        BUTTON_TEXT_REFRESH
     }
 
     @wire(getInvoices, { status: 'Draft' })
