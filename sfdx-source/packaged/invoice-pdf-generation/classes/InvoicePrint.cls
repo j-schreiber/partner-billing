@@ -51,6 +51,10 @@ public class InvoicePrint extends Invoice {
         super(recordId);
     }
 
+    public InvoicePrint(Invoice__c sObjRecord) {
+        super(sObjRecord);
+    }
+
     /** @Description
     *   Creates a PDF from the InvoicePDF visualforce page and returns the Blob. Method
     *   does not set the organization profile and uses visualforce page's default behavior.
