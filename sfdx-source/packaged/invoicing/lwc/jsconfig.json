@@ -32,6 +32,12 @@
             "c/invoicePdfGenTableRow": [
                 "invoicePdfGenTableRow/invoicePdfGenTableRow.js"
             ],
+            "c/invoicePdfSendTable": [
+                "invoicePdfSendTable/invoicePdfSendTable.js"
+            ],
+            "c/invoicePdfSendTableRow": [
+                "invoicePdfSendTableRow/invoicePdfSendTableRow.js"
+            ],
             "c/timeEntriesBillingCanvas": [
                 "timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
             ],
@@ -46,12 +52,6 @@
             ],
             "c/progressBar": [
                 "../../main/utils/lwc/progressBar/progressBar.js"
-            ],
-            "c/invoicePdfSendTable": [
-                "invoicePdfSendTable/invoicePdfSendTable.js"
-            ],
-            "c/invoicePdfSendTableRow": [
-                "invoicePdfSendTableRow/invoicePdfSendTableRow.js"
             ]
         },
         "experimentalDecorators": true

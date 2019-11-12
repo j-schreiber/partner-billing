@@ -33,6 +33,12 @@
             "c/invoicePdfGenTableRow": [
                 "../../packaged/invoicing/lwc/invoicePdfGenTableRow/invoicePdfGenTableRow.js"
             ],
+            "c/invoicePdfSendTable": [
+                "../../packaged/invoicing/lwc/invoicePdfSendTable/invoicePdfSendTable.js"
+            ],
+            "c/invoicePdfSendTableRow": [
+                "../../packaged/invoicing/lwc/invoicePdfSendTableRow/invoicePdfSendTableRow.js"
+            ],
             "c/timeEntriesBillingCanvas": [
                 "../../packaged/invoicing/lwc/timeEntriesBillingCanvas/timeEntriesBillingCanvas.js"
             ],
@@ -47,12 +53,6 @@
             ],
             "c/progressBar": [
                 "../../packaged/main/utils/lwc/progressBar/progressBar.js"
-            ],
-            "c/invoicePdfSendTable": [
-                "../../packaged/invoicing/lwc/invoicePdfSendTable/invoicePdfSendTable.js"
-            ],
-            "c/invoicePdfSendTableRow": [
-                "../../packaged/invoicing/lwc/invoicePdfSendTableRow/invoicePdfSendTableRow.js"
             ]
         }
     },
