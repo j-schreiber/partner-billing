@@ -1,0 +1,98 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef1"
+            },
+            "Salutation": "Mr",
+            "LastName": "Adama",
+            "FirstName": "William",
+            "Title": "Admiral",
+            "Email": "w.adama@example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef2"
+            },
+            "Salutation": "Mr",
+            "LastName": "Adama",
+            "FirstName": "Lee",
+            "Title": "Captain",
+            "Email": "l.adama@example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef3"
+            },
+            "Salutation": "Ms",
+            "LastName": "Roslin",
+            "FirstName": "Laura",
+            "Title": "President",
+            "Email": "l.roslin@example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef4"
+            },
+            "Salutation": "Ms",
+            "LastName": "Six",
+            "FirstName": "Number",
+            "Email": "six@example.com",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef5"
+            },
+            "Salutation": "Ms",
+            "LastName": "Thrace",
+            "FirstName": "Kara",
+            "Title": "Captain",
+            "Email": "starbuck@example.com",
+            "AccountId": "@AccountRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef6"
+            },
+            "Salutation": "Mr",
+            "LastName": "Agathon",
+            "FirstName": "Karl",
+            "Title": "Captain",
+            "Email": "k.agathon@example.com",
+            "AccountId": "@AccountRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef7"
+            },
+            "Salutation": "Mr",
+            "LastName": "Baltar",
+            "FirstName": "Gaius",
+            "Email": "g.baltar@example.com",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef8"
+            },
+            "Salutation": "Ms",
+            "LastName": "Valerii",
+            "FirstName": "Sharon",
+            "Title": "Lieutenant",
+            "Email": "boomer@example.com",
+            "AccountId": "@AccountRef2"
+        }
+    ]
+}

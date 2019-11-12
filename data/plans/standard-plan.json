@@ -30,6 +30,12 @@
         "files": ["../BusinessAccounts.json"]
     },
     {
+        "sobject": "Contact",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": ["../Contacts.json"]
+    },
+    {
         "sobject": "Budget__c",
         "saveRefs": true,
         "resolveRefs": true,
