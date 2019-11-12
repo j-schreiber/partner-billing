@@ -1,7 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
 import { cloneInvoiceLineItemRecord } from 'c/utilities';
-
-import PRODUCT_FIELD from '@salesforce/schema/InvoiceLineItem__c.Product__c';
 export default class InvoiceLineItemDatatableRow extends LightningElement {
     rowdata;
     @api isDisabled = false;
@@ -33,6 +31,33 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
         }
     }
 
+    /**                                     COMPONENT PUBLIC API                                  */
+
+    @api
+    get Amount() {
+        return (this.record.Price__c * this.record.Quantity__c * (1 - this.record.Discount__c / 100));
+    }
+
+    @api
+    get GrossAmount() {
+        return (this.Amount * (1 + this.record.Tax__c / 100));
+    }
+
+    @api
+    reset() {
+        this.oldRecord = {};
+        if (this.rowdata.IsNew) {
+            this.record = {Price__c : 0, Tax__c : 0, Discount__c : 0, Quantity__c : 0, Product__c : '', Description__c : ''};
+            Object.keys(this.record).forEach ( (key) => this.dispatchRecordChange(key));
+        } else {
+            this.record = cloneInvoiceLineItemRecord(this.rowdata);
+            this.dispatchRecordReset();
+            this.template.querySelectorAll('lightning-input').forEach ((input) => { input.classList.remove('is-dirty'); } );
+            this.template.querySelectorAll('div.input-field-container').forEach( (input) => { input.classList.remove('is-dirty'); });
+        }
+        this.dispatchRecalculate();
+    }
+
     /**                         INTERNALLY UPDATE DATA                        */
     updateDescription(event) {
         this.record[event.currentTarget.name] = event.detail.value;
@@ -45,9 +70,9 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     }
 
     updateProduct(event) {
-        this.record[PRODUCT_FIELD.fieldApiName] = (event.detail.value.length === 0) ? '' : (event.detail.value)[0];
-        this.evaluateRecordChange(PRODUCT_FIELD.fieldApiName);
-        this.setModificationStyle(this.isModified(PRODUCT_FIELD.fieldApiName), event.currentTarget);
+        this.record[event.currentTarget.name] = (event.detail && event.detail.value.length === 0) ? '' : (event.detail.value)[0];
+        this.evaluateRecordChange(event.currentTarget.name);
+        this.setModificationStyle(this.isModified(event.currentTarget.name), this.template.querySelector('div.input-field-container'));
     }
 
     /**                         SEND UPDATES TO PARENT                           */
@@ -58,7 +83,7 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     }
 
     isModified(fieldName) {
-        return (this.record[fieldName] !== this.rowdata.Record[fieldName]) || this.rowdata.IsNew;
+        return ((this.record[fieldName] !== this.rowdata.Record[fieldName]) && !(this.record[fieldName] === "" && !this.rowdata.Record[fieldName])) || this.rowdata.IsNew;
     }
 
     setModificationStyle(isModified, DOMNode) {
@@ -104,30 +129,5 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
                 }
             })
         );
-    }
-
-    @api
-    get Amount() {
-        return (this.record.Price__c * this.record.Quantity__c * (1 - this.record.Discount__c / 100));
-    }
-
-    @api
-    get GrossAmount() {
-        return (this.Amount * (1 + this.record.Tax__c / 100));
-    }
-
-    @api
-    reset() {
-        this.oldRecord = {};
-        if (this.rowdata.IsNew) {
-            this.record = {Price__c : 0, Tax__c : 0, Discount__c : 0, Quantity__c : 0, Product__c : '', Description__c : ''};
-            Object.keys(this.record).forEach ( (key) => this.dispatchRecordChange(key));
-        } else {
-            this.record = cloneInvoiceLineItemRecord(this.rowdata);
-            this.dispatchRecordReset();
-            this.template.querySelectorAll('lightning-input').forEach ((input) => { input.classList.remove('is-dirty'); } );
-            this.template.querySelectorAll('div.input-field-container').forEach( (input) => { input.classList.remove('is-dirty'); });
-        }
-        this.dispatchRecalculate();
     }
 }

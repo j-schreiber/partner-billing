@@ -11,10 +11,10 @@ import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_LineItemsUpdate
 export default class InvoiceCardRecord extends LightningElement {
     @api recordId;
 
-    @wire(getInvoice, { recordId : '$recordId' })
+    @wire(getInvoice, { invoiceId : '$recordId' })
     invoice;
 
-    @track isWorking = true;
+    @track isWorking = false;
 
     LABELS = {
         TOAST_TITLE_ERROR,
@@ -34,19 +34,19 @@ export default class InvoiceCardRecord extends LightningElement {
         })
         .then( () => {
             updateRecord({ fields: { Id: this.recordId } });
+            refreshApex(this.invoice);
             this.dispatchToast('success', TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
         .catch( (error) => {
             this.dispatchToast('error', TOAST_TITLE_ERROR, error.body.message);
-            this.hasError = true;
             this.isWorking = false;
         });
     }
 
     @api
     reset() {
-        refreshApex(this.wiredInvoice);
+        refreshApex(this.invoice);
         this.template.querySelector('c-invoice-line-item-datatable').reset();
     }
 
@@ -65,6 +65,10 @@ export default class InvoiceCardRecord extends LightningElement {
             variant : toastVariant
         });
         this.dispatchEvent(toast);
+    }
+
+    get Error() {
+        return this.invoice.error.body.message;
     }
 
 }

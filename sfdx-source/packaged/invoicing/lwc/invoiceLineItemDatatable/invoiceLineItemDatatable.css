@@ -1,11 +1,7 @@
-.cell-max-width_x-large {
-    min-width: 300px;
-}
-
 .cell-width_small {
-    width: 4cm;
+    min-width: 3cm;
 }
 
 .cell-width_medium {
-    width: 7cm;
+    min-width: 6cm;
 }

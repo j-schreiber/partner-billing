@@ -33,6 +33,12 @@
                     line-items={invoice.data.LineItems}>
                 </c-invoice-line-item-datatable>
             </template>
+            <template if:true={invoice.error}>
+                {Error}
+            </template>
+            <template if:true={isWorking}>
+                <lightning-spinner alternative-text="Updating Line Items ..." size="large"></lightning-spinner>
+            </template>
         </div>
 
     </lightning-card>

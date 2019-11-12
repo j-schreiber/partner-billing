@@ -1,8 +1,9 @@
 <template>
     <td>
         <lightning-record-edit-form object-api-name="InvoiceLineItem__c">
-            <div onchange={updateProduct} class="input-field-container">
+            <div class="input-field-container">
                 <lightning-input-field
+                    onchange={updateProduct}
                     field-name="Product__c"
                     name="Product__c"
                     variant="label-hidden"
