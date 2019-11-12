@@ -48,11 +48,20 @@
             "c/pdfGenerationOptions": [
                 "../../packaged/main/core/lwc/pdfGenerationOptions/pdfGenerationOptions.js"
             ],
+            "c/pdfSendOptions": [
+                "../../packaged/main/core/lwc/pdfSendOptions/pdfSendOptions.js"
+            ],
             "c/utilities": [
                 "../../packaged/main/core/lwc/utilities/utilities.js"
             ],
             "c/progressBar": [
                 "../../packaged/main/utils/lwc/progressBar/progressBar.js"
+            ],
+            "c/lookup": [
+                "../../packaged/main/utils/lwc/lookup/lookup.js"
+            ],
+            "c/billingContactLookup": [
+                "../../packaged/main/utils/lwc/billingContactLookup/billingContactLookup.js"
             ]
         }
     },

@@ -6,26 +6,18 @@
         {invoice.Record.Account__r.Name}
     </td>
     <td>
-        <div class="slds-is-relative slds-align_absolute-center">
-            <template if:false={pdfIsValid}>
-                Error Text!
-            </template>
-            <template if:true={pdfIsValid}>
-                <lightning-button
-                    class="slds-m-horizontal_xx-small"
-                    label="View"
-                    icon-name="utility:display_text"
-                    variant="success"
-                    onclick={viewPdf}>
-                </lightning-button>
-            </template>
-        </div>
+        <c-pdf-send-options
+            pdf-id={pdfRecordId}
+            invoice={invoice}>
+        </c-pdf-send-options>
     </td>
     <td>
-        <lightning-input
-            variant="label-hidden"
-            type="search"
-            placeholder="Select Billing Contact">
-        </lightning-input>
+        <lightning-button
+            class="slds-m-horizontal_medium"
+            label="Send"
+            icon-name="utility:send"
+            variant="success"
+            onclick={sendPdf}>
+        </lightning-button>
     </td>
 </template>

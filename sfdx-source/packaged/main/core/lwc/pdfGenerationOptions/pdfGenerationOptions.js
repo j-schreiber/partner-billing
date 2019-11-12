@@ -1,9 +1,9 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
-import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.InvoicePdf_Label_SelectOrgProfile';
-import OPTION_LABEL_LANGUAGE from '@salesforce/label/c.InvoicePdf_Label_SelectRenderLanguage';
-import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.InvoicePdf_Label_ActivateTimesheet';
+import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.UI_Label_SelectOrgProfile';
+import OPTION_LABEL_LANGUAGE from '@salesforce/label/c.UI_Label_SelectRenderLanguage';
+import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.UI_Label_ActivateTimesheet';
 
 import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
 

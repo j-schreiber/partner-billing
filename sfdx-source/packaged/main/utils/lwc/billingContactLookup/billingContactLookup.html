@@ -1,0 +1,10 @@
+<!-- Credits to https://github.com/pozil/sfdc-ui-lookup-lwc -->
+<template>
+    <c-lookup
+        placeholder={LABELS.PLACEHOLDER_SEARCH_CONTACT}
+        onsearch={handleSearch}>
+    </c-lookup>
+
+    Search Term: {searchTerm}
+    Selected Id: {selectedId}
+</template>    

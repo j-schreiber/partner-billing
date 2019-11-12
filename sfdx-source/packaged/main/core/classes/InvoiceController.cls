@@ -8,9 +8,9 @@ public with sharing class InvoiceController {
     *
     *   @return             Initialized invoice decorator
     */
-    @AuraEnabled
-    public static Invoice getInvoice(Id recordId){
-        return new Invoice(recordId);
+    @AuraEnabled(cacheable=true)
+    public static Invoice getInvoice(Id invoiceId){
+        return new Invoice(invoiceId);
     }
 
     /** @Description
@@ -31,4 +31,5 @@ public with sharing class InvoiceController {
             if (!ur.isSuccess()) throw new AuraHandledException(JSON.serialize(ur.getErrors()));
         }
     }
+    
 }

@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-grid">
+        <lightning-button
+            class="slds-m-horizontal_medium"
+            label="View"
+            icon-name="utility:display_text"
+            variant="neutral"
+            onclick={viewPdf}>
+        </lightning-button>
+        <lightning-combobox
+            class="slds-m-horizontal_xx-small"
+            placeholder={LABELS.PLACEHOLDER_MAIL_TEMPLATE}
+            disabled={disabled}
+            variant="label-hidden"
+            label={LABELS.OPTION_LABEL_ORGPROFILE}
+            options={mailTemplateOptions}
+            onchange={handleTemplateSelection}>
+        </lightning-combobox>
+        <lightning-record-edit-form object-api-name="Invoice__c">
+            <div class="input-field-container">
+                <lightning-input-field
+                    onchange={handleContactSearchInput}
+                    field-name="Contact__c"
+                    name="Contact__c"
+                    variant="label-hidden"
+                    placeholder={LABELS.PLACEHOLDER_BILLING_CONTACT}>
+                </lightning-input-field>
+            </div>
+        </lightning-record-edit-form>
+    </div>
+
+</template>

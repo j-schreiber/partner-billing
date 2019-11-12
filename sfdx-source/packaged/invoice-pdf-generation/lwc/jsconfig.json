@@ -47,11 +47,20 @@
             "c/pdfGenerationOptions": [
                 "../../main/core/lwc/pdfGenerationOptions/pdfGenerationOptions.js"
             ],
+            "c/pdfSendOptions": [
+                "../../main/core/lwc/pdfSendOptions/pdfSendOptions.js"
+            ],
             "c/utilities": [
                 "../../main/core/lwc/utilities/utilities.js"
             ],
             "c/progressBar": [
                 "../../main/utils/lwc/progressBar/progressBar.js"
+            ],
+            "c/lookup": [
+                "../../main/utils/lwc/lookup/lookup.js"
+            ],
+            "c/billingContactLookup": [
+                "../../main/utils/lwc/billingContactLookup/billingContactLookup.js"
             ]
         },
         "experimentalDecorators": true

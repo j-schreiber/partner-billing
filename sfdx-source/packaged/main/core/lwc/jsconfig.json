@@ -48,11 +48,20 @@
             "c/pdfGenerationOptions": [
                 "pdfGenerationOptions/pdfGenerationOptions.js"
             ],
+            "c/pdfSendOptions": [
+                "pdfSendOptions/pdfSendOptions.js"
+            ],
             "c/utilities": [
                 "utilities/utilities.js"
             ],
             "c/progressBar": [
                 "../../utils/lwc/progressBar/progressBar.js"
+            ],
+            "c/lookup": [
+                "../../utils/lwc/lookup/lookup.js"
+            ],
+            "c/billingContactLookup": [
+                "../../utils/lwc/billingContactLookup/billingContactLookup.js"
             ]
         }
     },

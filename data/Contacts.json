@@ -10,7 +10,8 @@
             "FirstName": "William",
             "Title": "Admiral",
             "Email": "w.adama@example.com",
-            "AccountId": "@AccountRef1"
+            "AccountId": "@AccountRef1",
+            "IsBillingContact__c": true
         },
         {
             "attributes": {
@@ -22,7 +23,8 @@
             "FirstName": "Lee",
             "Title": "Captain",
             "Email": "l.adama@example.com",
-            "AccountId": "@AccountRef1"
+            "AccountId": "@AccountRef1",
+            "IsBillingContact__c": false
         },
         {
             "attributes": {
@@ -34,7 +36,8 @@
             "FirstName": "Laura",
             "Title": "President",
             "Email": "l.roslin@example.com",
-            "AccountId": "@AccountRef1"
+            "AccountId": "@AccountRef1",
+            "IsBillingContact__c": true
         },
         {
             "attributes": {
@@ -45,7 +48,8 @@
             "LastName": "Six",
             "FirstName": "Number",
             "Email": "six@example.com",
-            "AccountId": "@AccountRef1"
+            "AccountId": "@AccountRef1",
+            "IsBillingContact__c": false
         },
         {
             "attributes": {
@@ -57,7 +61,8 @@
             "FirstName": "Kara",
             "Title": "Captain",
             "Email": "starbuck@example.com",
-            "AccountId": "@AccountRef2"
+            "AccountId": "@AccountRef2",
+            "IsBillingContact__c": true
         },
         {
             "attributes": {
@@ -69,7 +74,8 @@
             "FirstName": "Karl",
             "Title": "Captain",
             "Email": "k.agathon@example.com",
-            "AccountId": "@AccountRef2"
+            "AccountId": "@AccountRef2",
+            "IsBillingContact__c": true
         },
         {
             "attributes": {
@@ -80,7 +86,8 @@
             "LastName": "Baltar",
             "FirstName": "Gaius",
             "Email": "g.baltar@example.com",
-            "AccountId": "@AccountRef3"
+            "AccountId": "@AccountRef3",
+            "IsBillingContact__c": true
         },
         {
             "attributes": {
@@ -92,7 +99,8 @@
             "FirstName": "Sharon",
             "Title": "Lieutenant",
             "Email": "boomer@example.com",
-            "AccountId": "@AccountRef2"
+            "AccountId": "@AccountRef2",
+            "IsBillingContact__c": false
         }
     ]
 }

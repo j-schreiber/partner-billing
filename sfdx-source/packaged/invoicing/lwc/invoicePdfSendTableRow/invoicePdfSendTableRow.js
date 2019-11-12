@@ -1,7 +1,6 @@
 import { LightningElement, track, api } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
 
-export default class InvoicePdfSendTableRow extends NavigationMixin(LightningElement) {
+export default class InvoicePdfSendTableRow extends LightningElement {
     
     @api
     get invoice() {
@@ -18,15 +17,4 @@ export default class InvoicePdfSendTableRow extends NavigationMixin(LightningEle
 
     pdfRecordId;
 
-    viewPdf() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__namedPage',
-            attributes: {
-                pageName: 'filePreview'
-            },
-            state : {
-                recordIds: this.pdfRecordId
-            }
-        });
-    }
 }
