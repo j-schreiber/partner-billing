@@ -22,7 +22,10 @@ public class LWCUtilityController_Test {
     
     @isTest
     static void getMailTemplates_ZeroTemplates_EmptyList() {
-
+        // ACTION
+        List<EmailTemplate> templates = LWCUtilityController.getMailTemplates();
+        // VERIFY
+        System.assertEquals(0, templates.size(), 'size()');
     }
 
     @isTest

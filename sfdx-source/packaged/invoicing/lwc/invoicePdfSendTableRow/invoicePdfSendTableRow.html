@@ -6,20 +6,20 @@
         {invoice.Record.Account__r.Name}
     </td>
     <td>
-        <c-pdf-send-options
-            pdf-id={pdfRecordId}
-            onoptionschange={handleOptionsChange}
-            invoice={invoice}>
-        </c-pdf-send-options>
-    </td>
-    <td>
-        <lightning-button
-            class="slds-m-horizontal_medium"
-            label="Send"
-            icon-name="utility:send"
-            variant="success"
-            disabled={selectionIncomplete}
-            onclick={sendPdf}>
-        </lightning-button>
+        <div class="slds-grid slds-grid_align-center">
+            <c-pdf-send-options
+                pdf-id={pdfRecordId}
+                onoptionschange={handleOptionsChange}
+                invoice={invoice}>
+            </c-pdf-send-options>
+            <lightning-button
+                class="slds-m-left_large"
+                label="Send"
+                icon-name="utility:send"
+                variant="success"
+                disabled={selectionIncomplete}
+                onclick={sendPdf}>
+            </lightning-button>
+        </div>
     </td>
 </template>

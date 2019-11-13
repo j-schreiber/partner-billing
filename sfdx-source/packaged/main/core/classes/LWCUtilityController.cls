@@ -11,7 +11,7 @@ public with sharing class LWCUtilityController {
     */
     @AuraEnabled(cacheable=true)
     public static List<EmailTemplate> getMailTemplates(){
-        return [SELECT Id,Name,DeveloperName FROM EmailTemplate WHERE Folder.DeveloperName = 'BillingCommunicationTemplates'];
+        return [SELECT Id,Name,DeveloperName FROM EmailTemplate WHERE Folder.DeveloperName = 'Billing_Communication_Templates'];
     }
 
     /** @Description
