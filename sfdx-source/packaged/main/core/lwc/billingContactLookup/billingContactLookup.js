@@ -12,7 +12,6 @@ export default class BillingContactLookup extends LightningElement {
     }
 
     @track searchTerm;
-    @track selectedId;
     @track hasRendered = false;
     searchResultCache;
 
@@ -41,14 +40,35 @@ export default class BillingContactLookup extends LightningElement {
         if (this.template.querySelector('c-lookup')) this.template.querySelector('c-lookup').setSearchResults(searchResults);
     }
 
-    handleSearch(event) {
-        console.log('Search event: ' + JSON.stringify(event.detail));
+    /**                                 PUBLIC COMPONENT API                                     */
+    @api
+    reset() {
+        this.template.querySelector('c-lookup').selection = [];
+        this.template.querySelector('c-lookup').setSearchResults(this.searchResultCache);
+    }
 
+    @api
+    getSelectedContact() {
+        if (this.template.querySelector('c-lookup').getSelection().length >= 1) {
+            return this.template.querySelector('c-lookup').getSelection()[0];
+        }
+        return undefined;
+    }
+
+
+    /**                                 INTERNAL FUNCTIONS                                       */
+
+    handleSearch(event) {
         if (this.searchTerm === event.detail.searchTerm) {
             this.template.querySelector('c-lookup').setSearchResults(this.searchResultCache);
         }
-        
         this.searchTerm = event.detail.searchTerm;
+    }
+
+    handleSelectionChange(event) {
+        event.stopPropagation();
+        let cont = this.getSelectedContact();
+        this.dispatchEvent(new CustomEvent('selectionchange', { detail : cont }));
     }
 
 }

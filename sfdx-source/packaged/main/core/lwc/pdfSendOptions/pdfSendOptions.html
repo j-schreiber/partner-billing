@@ -1,7 +1,7 @@
 <template>
     <div class="slds-grid">
         <lightning-button
-            class="slds-m-horizontal_medium"
+            class="slds-m-horizontal_large"
             label="View"
             icon-name="utility:display_text"
             variant="neutral"
@@ -17,8 +17,16 @@
             onchange={handleTemplateSelection}>
         </lightning-combobox>
         <c-billing-contact-lookup
+            onselectionchange={handleSelectionChange}
             account-id={invoice.Record.Account__c}>
         </c-billing-contact-lookup>
+        <lightning-button-icon
+            class="slds-m-horizontal_xx-small"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text={LABELS.BUTTON_TEXT_RESET}
+            onclick={reset}>
+        </lightning-button-icon>
     </div>
 
 </template>

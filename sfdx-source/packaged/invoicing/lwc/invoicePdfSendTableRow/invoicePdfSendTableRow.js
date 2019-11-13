@@ -14,7 +14,16 @@ export default class InvoicePdfSendTableRow extends LightningElement {
 
     @track pdfIsValid = false;
     @track internalInvoice;
+    @track selectedOptions;
 
     pdfRecordId;
+
+    handleOptionsChange(event) {
+        this.selectedOptions = event.detail;
+    }
+
+    get selectionIncomplete() {
+        return !(this.selectedOptions && this.selectedOptions.contactId && this.selectedOptions.templateId);
+    }
 
 }

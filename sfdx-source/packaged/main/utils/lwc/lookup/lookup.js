@@ -57,6 +57,14 @@ export default class Lookup extends LightningElement {
         return this.customKey;
     }
 
+    @api
+    reset() {
+        this.selection = [];
+        // Notify parent components that selection has changed
+        this.dispatchEvent(new CustomEvent('selectionchange'));
+        this.cleanSearchTerm = '';
+    }
+
     // INTERNAL FUNCTIONS
 
     updateSearchTerm(newSearchTerm) {

@@ -5,6 +5,7 @@ import getMailTemplates from '@salesforce/apex/LWCUtilityController.getMailTempl
 
 import PLACEHOLDER_BILLING_CONTACT from '@salesforce/label/c.UI_Placeholder_SelectBillingContact';
 import PLACEHOLDER_MAIL_TEMPLATE from '@salesforce/label/c.UI_Placeholder_SelectMailTemplate';
+import BUTTON_TEXT_RESET from '@salesforce/label/c.UI_Button_Label_ResetAll';
 
 export default class pdfSendOptions extends NavigationMixin(LightningElement) {
     @api invoice;
@@ -12,7 +13,8 @@ export default class pdfSendOptions extends NavigationMixin(LightningElement) {
 
     LABELS = {
         PLACEHOLDER_BILLING_CONTACT,
-        PLACEHOLDER_MAIL_TEMPLATE
+        PLACEHOLDER_MAIL_TEMPLATE,
+        BUTTON_TEXT_RESET
     }
 
     @wire(getMailTemplates, {})
@@ -32,10 +34,20 @@ export default class pdfSendOptions extends NavigationMixin(LightningElement) {
     
     @api
     getOptions() {
+        let contId = this.selectedContact ? this.selectedContact.id : undefined;
         return {
             templateId : this.selectedTemplate,
-            contactId : this.selectedContact
+            contactId : contId
         }
+    }
+
+    @api
+    reset() {
+        this.template.querySelector('c-billing-contact-lookup').reset();
+        this.template.querySelector('lightning-combobox').value = '';
+        this.selectedTemplate = undefined;
+        this.selectedContact = undefined;
+        this.dispatchChangeEvent();
     }
 
     /**                                     EVENT HANDLERS                                            */
@@ -54,9 +66,18 @@ export default class pdfSendOptions extends NavigationMixin(LightningElement) {
 
     handleTemplateSelection(event) {
         this.selectedTemplate = event.detail.value;
+        this.dispatchChangeEvent();
     }
 
-    handleContactSearchInput(event) {
-        this.selectedContact = event.detail.value;
+    handleSelectionChange(event) {
+        event.stopPropagation();
+        this.selectedContact = event.detail;
+        this.dispatchChangeEvent();
+    }
+
+    /**                                     HELPERS                                      */
+    
+    dispatchChangeEvent() {
+        this.dispatchEvent(new CustomEvent('optionschange', { detail : this.getOptions() }));
     }
 }

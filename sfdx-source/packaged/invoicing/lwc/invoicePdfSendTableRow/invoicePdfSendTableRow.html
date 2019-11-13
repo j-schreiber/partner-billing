@@ -8,6 +8,7 @@
     <td>
         <c-pdf-send-options
             pdf-id={pdfRecordId}
+            onoptionschange={handleOptionsChange}
             invoice={invoice}>
         </c-pdf-send-options>
     </td>
@@ -17,6 +18,7 @@
             label="Send"
             icon-name="utility:send"
             variant="success"
+            disabled={selectionIncomplete}
             onclick={sendPdf}>
         </lightning-button>
     </td>
