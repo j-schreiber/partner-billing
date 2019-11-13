@@ -14,6 +14,7 @@ export default class BillingContactLookup extends LightningElement {
     @track searchTerm;
     @track selectedId;
     @track hasRendered = false;
+    searchResultCache;
 
     renderedCallback() {
         if (!this.hasRendered) {
@@ -25,10 +26,8 @@ export default class BillingContactLookup extends LightningElement {
     @wire(findBillingContacts, { searchTerm : '$searchTerm', accId : '$accountId' } )
     convertSearchResult (value) {
         let searchResults = [];
-        console.log('Retrieved: ' + JSON.stringify(value));
         if (value.data) {
             value.data.forEach( (item) => { 
-                console.log(JSON.stringify(item));
                 searchResults.push({
                     id : item.Id,
                     sObjectType : item.Contact,
@@ -38,10 +37,17 @@ export default class BillingContactLookup extends LightningElement {
                 });
             });
         }
+        this.searchResultCache = searchResults;
         if (this.template.querySelector('c-lookup')) this.template.querySelector('c-lookup').setSearchResults(searchResults);
     }
 
     handleSearch(event) {
+        console.log('Search event: ' + JSON.stringify(event.detail));
+
+        if (this.searchTerm === event.detail.searchTerm) {
+            this.template.querySelector('c-lookup').setSearchResults(this.searchResultCache);
+        }
+        
         this.searchTerm = event.detail.searchTerm;
     }
 

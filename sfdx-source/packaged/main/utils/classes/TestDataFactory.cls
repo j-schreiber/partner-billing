@@ -13,6 +13,11 @@ public class TestDataFactory {
                            AccountSource = 'Testing');
     }
 
+    public static Contact CreateDefaultContact() {
+        return new Contact(LastName = 'Tester',
+                           FirstName = 'Test');
+    }
+
     public static Budget__c CreateDefaultBudget() {
         return new Budget__c(Name = 'Test Budget 2019',
                              Limit__c = 10000,
@@ -78,6 +83,10 @@ public class TestDataFactory {
 
     public static Account CreateAccount(Account template) {
         return (Account)mergeSObjects(template, CreateDefaultAccount());
+    }
+
+    public static Contact CreateContact(Contact template) {
+        return (Contact)mergeSObjects(template, CreateDefaultContact());
     }
 
     public static Budget__c CreateBudget(Budget__c template) {

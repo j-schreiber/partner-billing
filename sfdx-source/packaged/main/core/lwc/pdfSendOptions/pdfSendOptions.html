@@ -16,17 +16,9 @@
             options={mailTemplateOptions}
             onchange={handleTemplateSelection}>
         </lightning-combobox>
-        <lightning-record-edit-form object-api-name="Invoice__c">
-            <div class="input-field-container">
-                <lightning-input-field
-                    onchange={handleContactSearchInput}
-                    field-name="Contact__c"
-                    name="Contact__c"
-                    variant="label-hidden"
-                    placeholder={LABELS.PLACEHOLDER_BILLING_CONTACT}>
-                </lightning-input-field>
-            </div>
-        </lightning-record-edit-form>
+        <c-billing-contact-lookup
+            account-id={invoice.Record.Account__c}>
+        </c-billing-contact-lookup>
     </div>
 
 </template>

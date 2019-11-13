@@ -23,7 +23,7 @@ public with sharing class LWCUtilityController {
     @AuraEnabled(cacheable=true)
     public static List<Contact> findBillingContacts(String searchTerm, String accId){
 
-        if (searchTerm == '*' || String.isBlank(searchTerm)) {
+        if (searchTerm == '*' || String.isBlank(searchTerm) || searchTerm.length() == 1) {
             return [SELECT Id,Name,Account.Name,Account.BillingCity FROM Contact WHERE IsBillingContact__c = true AND AccountId = :accId];
         }
         
@@ -33,7 +33,7 @@ public with sharing class LWCUtilityController {
             IN ALL FIELDS
             RETURNING
                 Contact(Id, Name, Account.Name, Account.BillingCity WHERE (IsBillingContact__c = true) AND (AccountId = :accId))
-            LIMIT : 5
+            LIMIT 5
         ];
 
         if (!searchResults.isEmpty()) {

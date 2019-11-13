@@ -1,6 +1,6 @@
 import { LightningElement, track, api } from 'lwc';
 
-const MINIMAL_SEARCH_TERM_LENGTH = 2; // Min number of chars required to search
+const MINIMAL_SEARCH_TERM_LENGTH = 0; // Min number of chars required to search
 const SEARCH_DELAY = 300; // Wait 300 ms after user stops typing then, peform search
 
 /** Code copied from: https://github.com/pozil/sfdc-ui-lookup-lwc 
@@ -15,6 +15,9 @@ export default class Lookup extends LightningElement {
     @api errors = [];
     @api scrollAfterNItems;
     @api customKey;
+
+    /** @Description Formats the label. Allows to display the label inline or hide it. */
+    @api variant = 'standard'
 
     @track searchTerm = '';
     @track searchResults = [];
@@ -85,13 +88,7 @@ export default class Lookup extends LightningElement {
         this.searchThrottlingTimeout = setTimeout(() => {
             // Send search event if search term is long enougth
             if (this.cleanSearchTerm.length >= MINIMAL_SEARCH_TERM_LENGTH) {
-                const searchEvent = new CustomEvent('search', {
-                    detail: {
-                        searchTerm: this.cleanSearchTerm,
-                        selectedIds: this.selection.map(element => element.id)
-                    }
-                });
-                this.dispatchEvent(searchEvent);
+                this.dispatchSearchEvent(this.cleanSearchTerm, this.selection.map(element => element.id));
             }
             this.searchThrottlingTimeout = null;
         }, SEARCH_DELAY);
@@ -185,6 +182,18 @@ export default class Lookup extends LightningElement {
         this.selection = [];
         // Notify parent components that selection has changed
         this.dispatchEvent(new CustomEvent('selectionchange'));
+        this.cleanSearchTerm = '';
+        this.dispatchSearchEvent('', []);
+    }
+
+    dispatchSearchEvent(searchTerm, selectedIds) {
+        const searchEvent = new CustomEvent('search', {
+            detail: {
+                searchTerm: searchTerm,
+                selectedIds: selectedIds
+            }
+        });
+        this.dispatchEvent(searchEvent);
     }
 
     // STYLE EXPRESSIONS
@@ -288,5 +297,9 @@ export default class Lookup extends LightningElement {
 
     get isExpanded() {
         return this.hasResults();
+    }
+
+    get displayLabel() {
+        return this.variant !== 'label-hidden';
     }
 }
