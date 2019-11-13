@@ -22,12 +22,17 @@ public with sharing class LWCUtilityController {
     */
     @AuraEnabled(cacheable=true)
     public static List<Contact> findBillingContacts(String searchTerm, String accId){
+
+        if (searchTerm == '*' || String.isBlank(searchTerm)) {
+            return [SELECT Id,Name,Account.Name,Account.BillingCity FROM Contact WHERE IsBillingContact__c = true AND AccountId = :accId];
+        }
+        
         List<Contact> results = new List<Contact>();
         List<List<SObject>> searchResults = [
             FIND :searchTerm
             IN ALL FIELDS
             RETURNING
-                Contact(Id, Name, Account.Name, Account.BillingCity WHERE IsBillingContact__c = true AND AccountId = :accId)
+                Contact(Id, Name, Account.Name, Account.BillingCity WHERE (IsBillingContact__c = true) AND (AccountId = :accId))
             LIMIT : 5
         ];
 

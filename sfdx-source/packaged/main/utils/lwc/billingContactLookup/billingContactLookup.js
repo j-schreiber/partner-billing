@@ -13,12 +13,22 @@ export default class BillingContactLookup extends LightningElement {
 
     @track searchTerm;
     @track selectedId;
+    @track hasRendered = false;
+
+    renderedCallback() {
+        if (!this.hasRendered) {
+            this.searchTerm = '*';
+            this.hasRendered = true;
+        }
+    }
 
     @wire(findBillingContacts, { searchTerm : '$searchTerm', accId : '$accountId' } )
     convertSearchResult (value) {
-        let searchResults = []
+        let searchResults = [];
+        console.log('Retrieved: ' + JSON.stringify(value));
         if (value.data) {
             value.data.forEach( (item) => { 
+                console.log(JSON.stringify(item));
                 searchResults.push({
                     id : item.Id,
                     sObjectType : item.Contact,
@@ -33,10 +43,6 @@ export default class BillingContactLookup extends LightningElement {
 
     handleSearch(event) {
         this.searchTerm = event.detail.searchTerm;
-    }
-
-    initSearchResults() {
-        this.searchTerm = '';
     }
 
 }

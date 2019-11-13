@@ -24,16 +24,6 @@ export default class Lookup extends LightningElement {
     blurTimeout;
     searchThrottlingTimeout;
 
-    connectedCallback() {
-        const searchEvent = new CustomEvent('search', {
-            detail: {
-                searchTerm: '',
-                selectedIds: this.selection.map(element => element.id)
-            }
-        });
-        this.dispatchEvent(searchEvent);
-    }
-
     // EXPOSED FUNCTIONS
 
     @api
