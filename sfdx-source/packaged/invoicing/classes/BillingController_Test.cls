@@ -179,6 +179,33 @@ class BillingController_Test {
     }
 
     @isTest
+    static void getInvoicesWithPdfs_NoInvoiceWithDocument_EmptyList() {
+        // ACTION
+        List<Invoice> invs = BillingController.getInvoicesWithPdfs();
+        // VERIFY
+        System.assertEquals(0, invs.size(), 'invs.size()');
+    }
+
+    @isTest
+    static void getInvoicesWithPdfs_ActivatedInvoiceWithDocument_OnlyInvoicesWithDocsReturned() {
+        // SETUP
+        Invoice__c inv = [SELECT Id FROM Invoice__c WHERE Status__c = 'Activated' LIMIT 1];
+
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion newVersion = new ContentVersion(Title='Test', PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert newVersion;
+        newVersion = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :newVersion.Id];
+        insert new ContentDocumentLink(LinkedEntityId = inv.Id, ContentDocumentId = newVersion.ContentDocumentId, ShareType='V');
+
+        // ACTION
+        List<Invoice> invs = BillingController.getInvoicesWithPdfs();
+
+        // VERIFY
+        System.assertEquals(1, invs.size(), 'invs.size()');
+        System.assertEquals(inv.Id, invs[0].Record.Id, 'Record.Id');
+    }
+
+    @isTest
     static void getInvoicesWithoutPdfs_NoPdfs_AllActivatedInvoices() {
         // ACTION
         List<Invoice> invs = BillingController.getInvoicesWithoutPdfs();
@@ -259,6 +286,33 @@ class BillingController_Test {
         System.assertEquals(et.Id, ems[0].EmailTemplateId, 'ems.EmailTemplateId');
         System.assertEquals(u.Email, ems[0].FromAddress, 'ems.FromAddress');
         System.assertEquals(true, ems[0].HasAttachment, 'ems.HasAttachment');
+    }
+
+    @isTest
+    static void sendDocumentToContact_ContactWithBlankEmail_AuraHandledExceptionThrown() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c inv = [SELECT Id FROM Invoice__c WHERE Account__c = :a.Id LIMIT 1];
+        EmailTemplate et = [SELECT Id FROM EmailTemplate LIMIT 1];
+
+        Contact c = TestDataFactory.CreateContact(new Contact(AccountId = a.Id));
+        insert c;
+
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion docVer = new ContentVersion(Title='Test',PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert docVer;
+        ContentDocument doc = [SELECT Id FROM ContentDocument LIMIT 1];
+
+        User u = [SELECT Id,Email,Name FROM User WHERE Id = :UserInfo.getUserId()];
+
+        // ACTION
+        try {
+            List<EmailMessage> ems = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
+            System.assert(false, 'Should have thrown AuraHandledException!');
+        } catch (Exception e) {
+            System.assertEquals('System.AuraHandledException', e.getTypeName());
+            System.assert(e.getMessage().contains('INVALID_EMAIL_ADDRESS'), 'contains(INVALID_EMAIL_ADDRESS): ' + e.getMessage());
+        }
     }
 
 }

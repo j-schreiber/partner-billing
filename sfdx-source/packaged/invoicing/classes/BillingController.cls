@@ -163,7 +163,10 @@ public with sharing class BillingController {
 
         List<Messaging.SendEmailResult> sers = Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{Message}, false);
         if (!sers[0].isSuccess()) {
-            throw new AuraHandledException(convertSendEmailErrorsToString(sers[0].getErrors()));
+            String errMsg = convertSendEmailErrorsToString(sers[0].getErrors());
+            AuraHandledException auraExp = new AuraHandledException(errMsg);
+            auraExp.setMessage(errMsg);
+            throw auraExp;
         }
 
         return [SELECT Id,EmailTemplateId,FromAddress,HasAttachment,MessageDate,RelatedTo.Name FROM EmailMessage WHERE RelatedToId = :invoiceId];

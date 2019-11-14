@@ -22,6 +22,8 @@ public class LWCUtilityController_Test {
     
     @isTest
     static void getMailTemplates_ZeroTemplates_EmptyList() {
+        // SETUP
+        delete [SELECT Id FROM EmailTemplate];
         // ACTION
         List<EmailTemplate> templates = LWCUtilityController.getMailTemplates();
         // VERIFY
@@ -30,7 +32,10 @@ public class LWCUtilityController_Test {
 
     @isTest
     static void getMailTemplates_TemplatesInFolder_AllTemplatesReturned() {
-        
+        // ACTION
+        List<EmailTemplate> templates = LWCUtilityController.getMailTemplates();
+        // VERIFY
+        System.assertEquals([SELECT COUNT() FROM EmailTemplate], templates.size(), 'size()');
     }
 
     @isTest
@@ -73,5 +78,14 @@ public class LWCUtilityController_Test {
         // VERIFY
         List<List<SObject>> expectedContacts = [FIND 'Albert' IN ALL FIELDS RETURNING Contact(Id WHERE IsBillingContact__c = true AND AccountId = :a.Id)];
         System.assertEquals(expectedContacts[0].size(), searchResults.size(), 'searchResults.size()');
+    }
+
+    @isTest
+    static void getSenderAddresses_Default_UserReturnedFirst() {
+        // ACTION
+        List<SenderAddress> addrs = LWCUtilityController.getSenderAddresses();
+        // VERIFY
+        System.assertEquals(1 + [SELECT COUNT() FROM OrgWideEmailAddress], addrs.size(), 'size()');
+        System.assertEquals(UserInfo.getUserId(), addrs[0].SenderId, '[0]SenderId');
     }
 }
