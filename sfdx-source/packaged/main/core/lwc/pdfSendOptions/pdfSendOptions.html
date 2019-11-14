@@ -8,12 +8,23 @@
             onclick={viewPdf}>
         </lightning-button>
         <lightning-combobox
-            class="slds-m-horizontal_xx-small"
+            class="slds-m-horizontal_xx-small sender-selection-input"
+            placeholder={LABELS.PLACEHOLDER_SENDER_ADDRESS}
+            disabled={disabled}
+            variant="label-hidden"
+            label={LABELS.LABEL_SENDER_ADDRESS}
+            options={senderAddressOptions}
+            value={selectedSenderAddress}
+            onchange={handleAddressSelection}>
+        </lightning-combobox>
+        <lightning-combobox
+            class="slds-m-horizontal_xx-small template-selection-input"
             placeholder={LABELS.PLACEHOLDER_MAIL_TEMPLATE}
             disabled={disabled}
             variant="label-hidden"
-            label={LABELS.OPTION_LABEL_ORGPROFILE}
+            label={LABELS.LABEL_MAIL_TEMPLATE}
             options={mailTemplateOptions}
+            value={selectedTemplate}
             onchange={handleTemplateSelection}>
         </lightning-combobox>
         <c-billing-contact-lookup

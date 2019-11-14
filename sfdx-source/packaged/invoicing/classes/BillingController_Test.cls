@@ -234,4 +234,31 @@ class BillingController_Test {
         System.assertEquals(tesToUpdate.size(), tes.size(), 'tes.size()');
     }
 
+    @isTest
+    static void sendDocumentToContact_AllValidInput_EmailWithAttachmentSend() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c inv = [SELECT Id FROM Invoice__c WHERE Account__c = :a.Id LIMIT 1];
+        EmailTemplate et = [SELECT Id FROM EmailTemplate LIMIT 1];
+
+        Contact c = TestDataFactory.CreateContact(new Contact(AccountId = a.Id, Email='test@example.de'));
+        insert c;
+
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion docVer = new ContentVersion(Title='Test',PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert docVer;
+        ContentDocument doc = [SELECT Id FROM ContentDocument LIMIT 1];
+
+        User u = [SELECT Id,Email,Name FROM User WHERE Id = :UserInfo.getUserId()];
+
+        // ACTION
+        List<EmailMessage> ems = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
+
+        // VERIFY
+        System.assertEquals(1, ems.size(), 'ems.size()');
+        System.assertEquals(et.Id, ems[0].EmailTemplateId, 'ems.EmailTemplateId');
+        System.assertEquals(u.Email, ems[0].FromAddress, 'ems.FromAddress');
+        System.assertEquals(true, ems[0].HasAttachment, 'ems.HasAttachment');
+    }
+
 }

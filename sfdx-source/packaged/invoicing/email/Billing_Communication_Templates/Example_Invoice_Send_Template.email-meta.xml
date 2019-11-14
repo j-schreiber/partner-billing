@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Example Invoice Send Template</name>
+    <style>none</style>
+    <subject>Your Invoice from {!Invoice__c.Date__c}: {!Invoice__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+    <textOnly>
+        Dear Sirs and Madams,
+
+        please find your invoice for service period {!Invoice__c.ServicePeriodFrom__c} to {!Invoice__c.ServicePeriodTo__c} attached.
+
+        Best,
+        {!User.Name}
+    </textOnly>
+</EmailTemplate>

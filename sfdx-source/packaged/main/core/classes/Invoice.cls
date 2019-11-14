@@ -53,8 +53,9 @@ public virtual class Invoice {
         'SELECT Id,Name,Date__c,Status__c,TotalAmount__c,TotalGrossAmount__c,BillingStreet__c,BillingCity__c,BillingPostalCode__c,BillingCountry__c,BillingState__c,PdfLanguage__c,PdfRenderTimesheet__c,' +
                 'Account__r.Name,Account__r.CustomerId__c,ServicePeriodFrom__c,ServicePeriodTo__c,' +
                 'Account__r.Owner.Name,Account__r.Owner.Phone,Account__r.Owner.Email,'+
-                '(SELECT Id,Name,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__c,Product__r.Name,Productname__c,Discount__c,CurrencyIsoCode FROM LineItems__r ORDER BY Product__c,ServiceDate__c),'+
+                '(SELECT Id,Name,Amount__c,GrossAmount__c,Description__c,Price__c,Quantity__c,ServiceDate__c,Tax__c,Unit__c,Product__c,Product__r.Name,Productname__c,Discount__c,CurrencyIsoCode,Invoice__c FROM LineItems__r ORDER BY Product__c,ServiceDate__c),'+
                 '(SELECT Id,ContentDocumentId,ContentDocument.Title FROM ContentDocumentLinks),'+
+                '(SELECT Id,Subject FROM Tasks),'+
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
 

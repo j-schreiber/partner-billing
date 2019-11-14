@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Standard Rechnung (DE)</name>
+    <style>none</style>
+    <subject>Rechnung vom {!Invoice__c.Date__c}: {!Invoice__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+    <textOnly>
+        Sehr geehrte Damen und Herren,
+
+        im Anhang erhalten Sie die aktuelle Rechnung für den Leistungszeitraum vom {!Invoice__c.ServicePeriodFrom__c} bis {!Invoice__c.ServicePeriodTo__c}.
+
+        Beste Grüße,
+        {!User.Name}
+    </textOnly>
+</EmailTemplate>

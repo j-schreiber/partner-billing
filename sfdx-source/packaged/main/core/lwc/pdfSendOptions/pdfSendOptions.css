@@ -1,3 +1,7 @@
-lightning-combobox {
-    min-width: 70mm;
+.template-selection-input {
+    min-width: 60mm;
+}
+
+.sender-selection-input {
+    min-width: 50mm;
 }

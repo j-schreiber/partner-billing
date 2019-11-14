@@ -147,7 +147,7 @@
     <compactLayoutAssignment>CUSTOM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Invoices for Accounts</description>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>

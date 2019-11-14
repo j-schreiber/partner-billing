@@ -134,4 +134,48 @@ public with sharing class BillingController {
         return results;
     }
 
+    /** @Description
+    *   Send the latest version of the selected document to the selected contact using the
+    *   selected mail template. The document is attached to the email using standard configuration
+    *
+    *   @param  contactId   Mail recipient (Contact)
+    *   @param  templateId  Template to use (EmailTemplate)
+    *   @param  documentId  Document (ContentDocument) that will be attached
+    *   @param  invoiceId   The invoice record
+    *   @param  sender      Selected sender (User or OrgWideEmailAddress)
+    *
+    *   @return             All Emails that are found for the Invoice
+    */
+    @AuraEnabled
+    public static List<EmailMessage> sendDocumentToContact(String contactId, String templateId, String documentId, String invoiceId, SenderAddress sender) {
+
+        ContentVersion cv = [SELECT Id FROM ContentVersion WHERE ContentDocumentId = :documentId AND IsLatest = true];
+
+        Messaging.SingleEmailMessage Message = new Messaging.SingleEmailMessage();
+        Message.setTemplateId(templateId);
+        Message.setTargetObjectId(contactId);
+        Message.setTreatTargetObjectAsRecipient(true);
+        Message.setWhatId(invoiceId);
+        Message.setEntityAttachments(new List<Id>{cv.Id});
+        if (sender.Type == SenderAddress.TYPE_ORG_WIDE_ADDRESS) {
+            Message.setOrgWideEmailAddressId(sender.senderId);
+        }
+
+        List<Messaging.SendEmailResult> sers = Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{Message}, false);
+        if (!sers[0].isSuccess()) {
+            throw new AuraHandledException(convertSendEmailErrorsToString(sers[0].getErrors()));
+        }
+
+        return [SELECT Id,EmailTemplateId,FromAddress,HasAttachment,MessageDate,RelatedTo.Name FROM EmailMessage WHERE RelatedToId = :invoiceId];
+    }
+
+    private static String convertSendEmailErrorsToString(List<Messaging.SendEmailError> serrs) {
+        String t = '';
+        for (Messaging.SendEmailError serr : serrs) {
+            t = t + 'Status Code: '+ serr.getStatusCode() + '\n';
+            t = t + 'Details: '+ serr.getMessage() + '\n';
+        }
+        return t;
+    }
+
 }

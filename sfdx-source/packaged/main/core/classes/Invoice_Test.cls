@@ -139,7 +139,7 @@ public class Invoice_Test {
     static void addLineItemRecord_ExistingLineItem_NotAddedToPersistentLineItems() {
         // SETUP
         Invoice__c record = [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c LIMIT 1];
-        InvoiceLineItem__c lineItemToUpdate = [SELECT Id,Price__c,Quantity__c FROM InvoiceLineItem__c WHERE Invoice__c = :record.Id LIMIT 1];
+        InvoiceLineItem__c lineItemToUpdate = [SELECT Id,Price__c,Quantity__c,Invoice__c FROM InvoiceLineItem__c WHERE Invoice__c = :record.Id LIMIT 1];
         Decimal originalQuantity = lineItemToUpdate.Quantity__c;
         Invoice objUnderTest = new Invoice(record.Id);
 

@@ -15,6 +15,23 @@ public with sharing class LWCUtilityController {
     }
 
     /** @Description
+    *   Retrieves all configured organization wide sender addresses and the current user sender address. 
+    *   This method also includes non-confirmed addresses, so handle with care.
+    *   
+    *   @return             All org wide emails existing in this organization
+    */
+    @AuraEnabled(cacheable=true)
+    public static List<SenderAddress> getSenderAddresses() {
+        List<SenderAddress> addrs = new List<SenderAddress>();
+        User currentUser = [SELECT Id,Name,Email FROM User WHERE Id = :UserInfo.getUserId()];
+        addrs.add(new SenderAddress(currentUser));
+        for (OrgWideEmailAddress owea : [SELECT Id,DisplayName,Address FROM OrgWideEmailAddress]) {
+            addrs.add(new SenderAddress(owea));
+        }
+        return addrs;
+    }
+
+    /** @Description
     *   Searches Contacts for the search term. Performs SOSL.
     *
     *   @param searchTerm       Search term to look for
@@ -24,7 +41,7 @@ public with sharing class LWCUtilityController {
     public static List<Contact> findBillingContacts(String searchTerm, String accId){
 
         if (searchTerm == '*' || String.isBlank(searchTerm) || searchTerm.length() == 1) {
-            return [SELECT Id,Name,Account.Name,Account.BillingCity FROM Contact WHERE IsBillingContact__c = true AND AccountId = :accId];
+            return [SELECT Id,Name,Email,Account.Name,Account.BillingCity FROM Contact WHERE IsBillingContact__c = true AND AccountId = :accId];
         }
         
         List<Contact> results = new List<Contact>();
@@ -32,7 +49,7 @@ public with sharing class LWCUtilityController {
             FIND :searchTerm
             IN ALL FIELDS
             RETURNING
-                Contact(Id, Name, Account.Name, Account.BillingCity WHERE (IsBillingContact__c = true) AND (AccountId = :accId))
+                Contact(Id,Name,Email,Account.Name,Account.BillingCity WHERE (IsBillingContact__c = true) AND (AccountId = :accId))
             LIMIT 5
         ];
 
