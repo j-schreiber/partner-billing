@@ -100,7 +100,9 @@ export default class InvoiceLineItemDatatable extends LightningElement {
         if (this.modifiedRowRecords.has(event.detail)) this.modifiedRowRecords.delete(event.detail);
     }
 
-    recalculateSums() {
+    recalculateSums(event) {
+        event.stopPropagation();
+        
         this.internalAmount = this.SumAmount;
         this.internalGrossAmount = this.SumGrossAmount;
 

@@ -155,6 +155,7 @@ class BillingController_Test {
             i.Date__c = Date.newInstance(2019, 05, 25);
             i.ServicePeriodFrom__c = Date.newInstance(2019, 04, 01);
             i.ServicePeriodTo__c = Date.newInstance(2019, 04, 30);
+            i.Status__c = 'Activated';
         }
 
         // ACTION
@@ -169,13 +170,63 @@ class BillingController_Test {
     }
 
     @isTest
+    static void commitInvoiceEditData_InvalidInvoiceData_AuraHandledException() {
+        // SETUP
+        List<Invoice__c> invoices = new List<Invoice__c>();
+        invoices.add(new Invoice__c());
+
+        // ACTION
+        try {
+            BillingController.commitInvoiceEditData(invoices, new List<InvoiceLineItem__c>(), new List<Id>());
+            System.assert(false, 'Should have thrown AuraHandledException!');
+        } catch (Exception e) {
+            System.assertEquals('System.AuraHandledException', e.getTypeName(), 'getTypeName()');
+            System.assert(e.getMessage().contains('MISSING_ARGUMENT'), 'getMessage().contains(MISSING_ARGUMENT)');
+        }
+    }
+
+    @isTest
     static void commitInvoiceEditData_LineItemsToUpsert_LineItemsUpserted() {
-        
+        // SETUP
+        List<Invoice__c> invoices = [SELECT Id FROM Invoice__c WHERE Status__c = 'Draft'];
+        System.assertEquals(BULK_NUMBER, invoices.size(), 'invoices.size()');
+
+        List<InvoiceLineItem__c> ilis = new List<InvoiceLineItem__c>();
+        for (Invoice__c inv : invoices) {
+            ilis.add(TestDataFactory.CreateInvoiceLineItem(new InvoiceLineItem__c(Invoice__c = inv.Id)));
+        }
+
+        // ACTION
+        BillingController.commitInvoiceEditData(new List<Invoice__c>(), ilis, new List<Id>());
+
+        // VERIFY
+        for (Invoice__c i : [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c WHERE Id IN :invoices]) {
+            System.assertEquals(1, i.LineItems__r.size(), 'LineItems__r.size()');
+        }
     }
 
     @isTest
     static void commitInvoiceEditData_LineItemsToDelete_LineItemsDeleted() {
-        
+        // SETUP
+        List<Invoice__c> invoices = [SELECT Id FROM Invoice__c WHERE Status__c = 'Draft'];
+        System.assertEquals(BULK_NUMBER, invoices.size(), 'invoices.size()');
+
+        List<InvoiceLineItem__c> ilis = new List<InvoiceLineItem__c>();
+        for (Invoice__c inv : invoices) {
+            ilis.add(TestDataFactory.CreateInvoiceLineItem(new InvoiceLineItem__c(Invoice__c = inv.Id)));
+        }
+        insert ilis;
+
+        List<Id> liIdsToDelete = new List<Id>();
+        for (InvoiceLineItem__c ili : ilis) liIdsToDelete.add(ili.Id);
+
+        // ACTION
+        BillingController.commitInvoiceEditData(new List<Invoice__c>(), new List<InvoiceLineItem__c>(), liIdsToDelete);
+
+        // VERIFY
+        for (Invoice__c i : [SELECT Id,(SELECT Id FROM LineItems__r) FROM Invoice__c WHERE Id IN :invoices]) {
+            System.assertEquals(0, i.LineItems__r.size(), 'LineItems__r.size()');
+        }
     }
 
     @isTest
@@ -279,13 +330,10 @@ class BillingController_Test {
         User u = [SELECT Id,Email,Name FROM User WHERE Id = :UserInfo.getUserId()];
 
         // ACTION
-        List<EmailMessage> ems = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
+        List<Task> tasks = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
 
         // VERIFY
-        System.assertEquals(1, ems.size(), 'ems.size()');
-        System.assertEquals(et.Id, ems[0].EmailTemplateId, 'ems.EmailTemplateId');
-        System.assertEquals(u.Email, ems[0].FromAddress, 'ems.FromAddress');
-        System.assertEquals(true, ems[0].HasAttachment, 'ems.HasAttachment');
+        System.assertEquals(1, tasks.size(), 'tasks.size()');
     }
 
     @isTest
@@ -307,7 +355,7 @@ class BillingController_Test {
 
         // ACTION
         try {
-            List<EmailMessage> ems = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
+            List<Task> tasks = BillingController.sendDocumentToContact(c.Id, et.Id, doc.Id, inv.Id, new SenderAddress(u));
             System.assert(false, 'Should have thrown AuraHandledException!');
         } catch (Exception e) {
             System.assertEquals('System.AuraHandledException', e.getTypeName());

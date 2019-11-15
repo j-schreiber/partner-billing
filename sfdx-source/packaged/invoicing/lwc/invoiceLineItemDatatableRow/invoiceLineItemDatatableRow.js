@@ -78,9 +78,9 @@ export default class InvoiceLineItemDatatableRow extends LightningElement {
     }
 
     updateProduct(event) {
-        this.record[event.currentTarget.name] = (event.detail && event.detail.value.length === 0) ? '' : (event.detail.value)[0];
-        this.evaluateRecordChange(event.currentTarget.name);
-        this.setModificationStyle(this.isModified(event.currentTarget.name), this.template.querySelector('div.input-field-container'));
+        this.record[event.currentTarget.fieldName] = (event.detail && event.detail.value.length === 0) ? '' : (event.detail.value)[0];
+        this.evaluateRecordChange(event.currentTarget.fieldName);
+        this.setModificationStyle(this.isModified(event.currentTarget.fieldName), this.template.querySelector('div.input-field-container'));
     }
 
     /**                         SEND UPDATES TO PARENT                           */

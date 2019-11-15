@@ -101,9 +101,31 @@ public with sharing class BillingController {
     */
     @AuraEnabled
     public static void commitInvoiceEditData(List<Invoice__c> invoices, List<InvoiceLineItem__c> upsertLineItems, List<Id> deleteLineItemIds) {
-        Database.update(invoices, true);
-        Database.upsert(upsertLineItems, false);
-        Database.delete(deleteLineItemIds, false);
+
+        System.debug(invoices);
+        System.debug(upsertLineItems);
+        System.debug(deleteLineItemIds);
+
+        Database.SaveResult[] invoiceSrs = Database.update(invoices, false);
+        Database.UpsertResult[] ilisUrs = Database.upsert(upsertLineItems, false);
+        Database.DeleteResult[] ilisDrs = Database.delete(deleteLineItemIds, false);
+
+        List<String> errors = new List<String>();
+        for (Database.SaveResult sr : invoiceSrs) {
+            if (!sr.isSuccess()) errors.addAll(extractDatabaseErrorsAsStringList(sr.getErrors()));
+        }
+        for (Database.UpsertResult ur : ilisUrs) {
+            if (!ur.isSuccess()) errors.addAll(extractDatabaseErrorsAsStringList(ur.getErrors())); 
+        }
+        for (Database.DeleteResult dr : ilisDrs) {
+            if (!dr.isSuccess()) errors.addAll(extractDatabaseErrorsAsStringList(dr.getErrors())); 
+        }
+        if (!errors.isEmpty()) {
+            String errMsg = String.join(errors, '\\n');
+            AuraHandledException auraExp = new AuraHandledException(errMsg);
+            auraExp.setMessage(errMsg);
+            throw auraExp; 
+        }
     }
 
     /** @Description
@@ -144,10 +166,10 @@ public with sharing class BillingController {
     *   @param  invoiceId   The invoice record
     *   @param  sender      Selected sender (User or OrgWideEmailAddress)
     *
-    *   @return             All Emails that are found for the Invoice
+    *   @return             All Emails that are attached to the invoice.
     */
     @AuraEnabled
-    public static List<EmailMessage> sendDocumentToContact(String contactId, String templateId, String documentId, String invoiceId, SenderAddress sender) {
+    public static List<Task> sendDocumentToContact(String contactId, String templateId, String documentId, String invoiceId, SenderAddress sender) {
 
         ContentVersion cv = [SELECT Id FROM ContentVersion WHERE ContentDocumentId = :documentId AND IsLatest = true];
 
@@ -169,8 +191,10 @@ public with sharing class BillingController {
             throw auraExp;
         }
 
-        return [SELECT Id,EmailTemplateId,FromAddress,HasAttachment,MessageDate,RelatedTo.Name FROM EmailMessage WHERE RelatedToId = :invoiceId];
+        return [SELECT Id,Subject FROM Task WHERE WhatId = :invoiceId];
     }
+
+    /**                                         PRIVATE ZONE                                 */
 
     private static String convertSendEmailErrorsToString(List<Messaging.SendEmailError> serrs) {
         String t = '';
@@ -179,6 +203,12 @@ public with sharing class BillingController {
             t = t + 'Details: '+ serr.getMessage() + '\n';
         }
         return t;
+    }
+
+    private static List<String> extractDatabaseErrorsAsStringList(Database.Error[] dbErrs) {
+        List<String> errs = new List<String>();
+        for (Database.Error err : dbErrs) errs.add(err.getStatusCode() + ': ' + err.getMessage());
+        return errs;
     }
 
 }

@@ -7,7 +7,7 @@
             slot="actions"
             icon-name="utility:refresh"
             alternative-text={LABELS.BUTTON_TEXT_REFRESH}
-            disabled={readonly}
+            disabled={readOnly}
             onclick={reset}>
         </lightning-button-icon>
         <lightning-button
@@ -15,7 +15,7 @@
             icon-name="utility:add"
             slot="actions"
             class="slds-m-right_large"
-            disabled={readonly}
+            disabled={readOnly}
             onclick={addLineItem}>
         </lightning-button>
 
@@ -44,6 +44,7 @@
 
         <lightning-button
             class="slds-m-left_medium"
+            data-id="saveButton"
             slot="actions"
             label={LABELS.BUTTON_LABEL_SAVE}
             variant="brand"
@@ -58,31 +59,34 @@
                 <div class="slds-col slds-grid">
                     <lightning-input
                         value={record.Date__c}
+                        data-id="inputDate"
                         name="Date__c"
                         type="date"
                         variant="label-inline"
                         label="Invoice Date"
-                        disabled={readonly}
+                        disabled={readOnly}
                         onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input
                         value={record.ServicePeriodFrom__c}
+                        data-id="inputServicePeriodFrom"
                         name="ServicePeriodFrom__c"
                         type="date"
                         label="Service Period Start"
                         variant="label-inline"
                         max={record.ServicePeriodTo__c}
-                        disabled={readonly}
+                        disabled={readOnly}
                         onchange={handleDataInput}>
                     </lightning-input>
                     <lightning-input 
                         value={record.ServicePeriodTo__c}
+                        data-id="inputServicePeriodTo"
                         name="ServicePeriodTo__c"
                         type="date"
                         label="Service Period End"
                         variant="label-inline"
                         min={record.ServicePeriodFrom__c}
-                        disabled={readonly}
+                        disabled={readOnly}
                         onchange={handleDataInput}>
                     </lightning-input>
                 </div>
@@ -131,7 +135,7 @@
             <c-invoice-line-item-datatable
                 invoice-id={rowdata.Record.Id}
                 line-items={rowdata.LineItems}
-                is-disabled={readonly}
+                is-disabled={readOnly}
                 onrecalculate={recalculateSums}>
             </c-invoice-line-item-datatable>
 

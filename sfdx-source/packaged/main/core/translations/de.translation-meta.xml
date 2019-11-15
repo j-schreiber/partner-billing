@@ -105,6 +105,10 @@
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>
     <customLabels>
+        <label>Änderungen gespeichert!</label>
+        <name>Toast_Title_DataSaved</name>
+    </customLabels>
+    <customLabels>
         <label>Versand der E-Mail gescheitert!</label>
         <name>Toast_Title_EmailSendFailure</name>
     </customLabels>
@@ -203,6 +207,10 @@
     <customLabels>
         <label>- Absender auswählen -</label>
         <name>UI_Placeholder_SelectSender</name>
+    </customLabels>
+    <customLabels>
+        <label>Keine Änderungen gefunden!</label>
+        <name>UI_Toast_Title_NoChanges</name>
     </customLabels>
     <customLabels>
         <label>Ein Zeitaufwand kann nicht mehr gelöscht werden, sobald er abgerechnet wurde.</label>

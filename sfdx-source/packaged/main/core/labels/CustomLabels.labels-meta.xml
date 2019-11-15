@@ -201,6 +201,14 @@
         <value>Service Period Start</value>
     </labels>
     <labels>
+        <fullName>Toast_Title_DataSaved</fullName>
+        <categories>ui,toast,title,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as generic title of successfull save toast</shortDescription>
+        <value>Changes successfully saved!</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_EmailSendFailure</fullName>
         <categories>ui,toast,title,error</categories>
         <language>en_US</language>
@@ -399,6 +407,14 @@
         <protected>false</protected>
         <shortDescription>Used as placeholder in PDF sending UI for sender address selection</shortDescription>
         <value>- Select Sender -</value>
+    </labels>
+    <labels>
+        <fullName>UI_Toast_Title_NoChanges</fullName>
+        <categories>ui,toast,title,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>No changes to commit!</value>
     </labels>
     <labels>
         <fullName>ValidationError_CanNotDeleteInvoicedTimeEntry</fullName>
