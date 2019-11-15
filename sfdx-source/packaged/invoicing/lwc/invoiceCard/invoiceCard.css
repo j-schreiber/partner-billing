@@ -24,3 +24,10 @@
     border-radius: 6px;
     padding: 0px 0px 0px 5px;
 }
+
+.summary-table-container {
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 0.75rem;
+    background-color: lightgray;
+}

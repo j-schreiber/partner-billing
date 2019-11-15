@@ -67,32 +67,37 @@
                         <lightning-input
                             value={record.Date__c}
                             data-id="inputDate"
+                            variant="label-inline"
                             name="Date__c"
                             type="date"
                             label="Invoice Date"
                             disabled={readOnly}
                             onchange={handleDataInput}>
                         </lightning-input>
-                        <lightning-input
-                            value={record.ServicePeriodFrom__c}
-                            data-id="inputServicePeriodFrom"
-                            name="ServicePeriodFrom__c"
-                            type="date"
-                            label="Service Period Start"
-                            max={record.ServicePeriodTo__c}
-                            disabled={readOnly}
-                            onchange={handleDataInput}>
-                        </lightning-input>
-                        <lightning-input 
-                            value={record.ServicePeriodTo__c}
-                            data-id="inputServicePeriodTo"
-                            name="ServicePeriodTo__c"
-                            type="date"
-                            label="Service Period End"
-                            min={record.ServicePeriodFrom__c}
-                            disabled={readOnly}
-                            onchange={handleDataInput}>
-                        </lightning-input>
+                        <div class="slds-grid">
+                            <lightning-input
+                                class="slds-m-horizontal_xx-small"
+                                value={record.ServicePeriodFrom__c}
+                                data-id="inputServicePeriodFrom"
+                                name="ServicePeriodFrom__c"
+                                type="date"
+                                label="Service Period Start"
+                                max={record.ServicePeriodTo__c}
+                                disabled={readOnly}
+                                onchange={handleDataInput}>
+                            </lightning-input>
+                            <lightning-input
+                                class="slds-m-horizontal_xx-small"
+                                value={record.ServicePeriodTo__c}
+                                data-id="inputServicePeriodTo"
+                                name="ServicePeriodTo__c"
+                                type="date"
+                                label="Service Period End"
+                                min={record.ServicePeriodFrom__c}
+                                disabled={readOnly}
+                                onchange={handleDataInput}>
+                            </lightning-input>
+                        </div>
                     </div>
                     <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
                         <lightning-input-address
@@ -111,41 +116,43 @@
                             country={address.country}>
                         </lightning-input-address>
                     </div>
-                    <div class="slds-size_4-of-12 slds-p-left_medium">
-                        <table class="summary-table">
-                            <tbody>
-                                <tr>
-                                    <td class="slds-form-element__label">Total Amount (Net)</td>
-                                    <td>
-                                        <lightning-formatted-number
-                                            value={TotalAmount}
-                                            format-style="currency"
-                                            currency-code={record.CurrencyIsoCode}>
-                                        </lightning-formatted-number>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="slds-form-element__label">Total VAT</td>
-                                    <td>
-                                        <lightning-formatted-number
-                                            value={TotalTaxes}
-                                            format-style="currency"
-                                            currency-code={record.CurrencyIsoCode}>
-                                        </lightning-formatted-number>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="slds-form-element__label">Total Amount (Gross)</td>
-                                    <td>
-                                        <lightning-formatted-number
-                                            value={TotalGrossAmount}
-                                            format-style="currency"
-                                            currency-code={record.CurrencyIsoCode}>
-                                        </lightning-formatted-number>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="slds-size_4-of-12 slds-p-left_medium slds-grid slds-grid_vertical-align-end">
+                        <div class="summary-table-container">
+                            <table class="summary-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total Amount (Net)</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalAmount}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total VAT</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalTaxes}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total Amount (Gross)</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalGrossAmount}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
