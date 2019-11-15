@@ -49,6 +49,10 @@ export default class TestComponent extends LightningElement {
     get Invoice() {
         return this.invoices.data[0];
     }
+
+    get boxMessage() {
+        return 'Meine tolle Nachricht, die gezeigt werden muss!';
+    }
     
 
 }

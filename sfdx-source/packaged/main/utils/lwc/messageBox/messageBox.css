@@ -1,0 +1,24 @@
+.box-theme_error {
+    background: #ffe3e3;
+    border: solid #c23934;
+}
+
+.box-theme_warning {
+    background: #ffedd7;
+    border: solid #ff9e2c;
+}
+
+.box-theme_success {
+    background: #baffe0;
+    border: solid #04844b;
+}
+
+.box-theme_default {
+    background: #f3f2f2;
+    border: solid #706e6b;
+}
+
+.message-box {
+    border-width: 3px;
+    border-radius: .75rem;
+}
