@@ -18,13 +18,20 @@
         </lightning-button>
 
         <div class="slds-is-relative">
-            <template for:each={invoices.data} for:item='inv'>
-                <div key={inv.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
-                    <c-invoice-card invoice={inv}></c-invoice-card>
-                </div>
+            <template if:true={invoices.data}>
+                <template for:each={invoices.data} for:item='inv'>
+                    <div key={inv.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
+                        <c-invoice-card invoice={inv}></c-invoice-card>
+                    </div>
+                </template>
+                <template if:true={isWorking}>
+                    <lightning-spinner alternative-text="Retrieving Invoices ..." size="large"></lightning-spinner>
+                </template>
             </template>
-            <template if:true={isWorking}>
-                <lightning-spinner alternative-text="Retrieving Invoices ..." size="large"></lightning-spinner>
+            <template if:true={invoices.error}>
+                <div class="slds-p-horizontal_medium">
+                    <c-message-box variant="error" message={wireErrors}></c-message-box>
+                </div>
             </template>
         </div>
 

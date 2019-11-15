@@ -49,4 +49,22 @@ const getMapValuesAsList = (mapInput) => {
     return arr;
 }
 
-export { getOrgProfiles, cloneInvoiceRecord, cloneInvoiceLineItemRecord, getMapValuesAsList };
+const getErrorsAsString = (errorInput) => {
+    let error = '';
+    if (errorInput && errorInput.body) {
+        if (Array.isArray(errorInput.body)) {
+            error = errorInput.body.map(e => e.message).join(', ');
+        } else if (typeof errorInput.body.message === 'string') {
+            error = errorInput.body.message;
+        }
+    }
+    return error;
+}
+
+export { 
+    getOrgProfiles,
+    cloneInvoiceRecord,
+    cloneInvoiceLineItemRecord,
+    getMapValuesAsList,
+    getErrorsAsString
+};

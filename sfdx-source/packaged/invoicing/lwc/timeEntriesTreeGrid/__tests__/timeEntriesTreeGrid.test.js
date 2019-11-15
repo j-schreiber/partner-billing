@@ -1,19 +1,9 @@
-// lwcComponentName.test.js
 import { createElement } from 'lwc';
 import treeGrid from 'c/timeEntriesTreeGrid';
+import { registerApexTestWireAdapter } from '@salesforce/sfdx-lwc-jest';
+import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
 
-import getNonInvoicedTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
-
-// create plain mocks for apex without functionality
-jest.mock(
-    '@salesforce/apex/BillingController.getNonInvoicedTimeEntries',
-    () => {
-        return {
-            default: jest.fn()
-        };
-    },
-    { virtual: true }
-);
+const getTimeEntriesAdapter = registerApexTestWireAdapter(getTimeEntries);
 
 // import mock data
 const APPROVED_TIME_ENTRIES = require('./data/approved-time-entries.json');
@@ -28,57 +18,84 @@ describe('c-time-entries-tree-grid', () => {
         jest.clearAllMocks();
     });
     
-    /* Helper function to wait until the microtask queue is empty. This is needed for promise
-       timing when calling imperative Apex. */
-    function flushPromises() {
-        // eslint-disable-next-line no-undef
-        return new Promise(resolve => setImmediate(resolve));
-    }
-    
-    test('connect time entries table: retrieve method called with filters', () => {
+    test('retrieve data from wire: init with default filters', () => {
 
-        // mock non-invoiced query with test data
-        getNonInvoicedTimeEntries.mockResolvedValue(APPROVED_TIME_ENTRIES);
-        
         // create time entries tree grid and add to DOM
         const element = createElement('c-time-entries-tree-grid', {
             is: treeGrid
         });
         document.body.appendChild(element);
 
-        // set filters and refresh data
-        element.filters = { startDate: '2019-01-01', endDate: '2019-02-28' };
-        element.refreshData();
+        const WIRE_PARAM = {
+            startDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0],          // start of last month, format: 2019-11-01
+            endDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0]                // end of last month, format 2019-11-30
+        }
+        return Promise.resolve().then(() => {
+            expect(getTimeEntriesAdapter.getLastConfig()).toEqual(WIRE_PARAM);
+        });
 
-        return flushPromises().then(() => {
-            // apex was called
-            expect(getNonInvoicedTimeEntries).toHaveBeenCalledTimes(1);
-            expect(getNonInvoicedTimeEntries).toHaveBeenCalledWith({ startDate: '2019-01-01', endDate: '2019-02-28' });
+    });
+    test('retrieve data from wire: manually set filters', () => {
+
+        // create time entries tree grid and add to DOM
+        const element = createElement('c-time-entries-tree-grid', {
+            is: treeGrid
+        });
+        document.body.appendChild(element);
+
+        let startDateInput = element.shadowRoot.querySelector('lightning-input[data-id="startDateInput"]');
+        let endDateInput = element.shadowRoot.querySelector('lightning-input[data-id="endDateInput"]');
+        
+        startDateInput.value = '2019-03-01';
+        endDateInput.value = '2019-03-31';
+        startDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : startDateInput.value }}));
+        endDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : endDateInput.value }}));
+
+        return Promise.resolve().then(() => {
+            expect(getTimeEntriesAdapter.getLastConfig()).toEqual(
+                { startDate : '2019-03-01', endDate : '2019-03-31' }
+            );
         });
 
     });
 
-    test('update filters: retrieve method called with updated filters', () => {
+    test('retrieve data from wire: success', () => {
 
-        // mock non-invoiced query with test data
-        getNonInvoicedTimeEntries.mockResolvedValue(APPROVED_TIME_ENTRIES);
-        
         // create time entries tree grid and add to DOM
         const element = createElement('c-time-entries-tree-grid', {
             is: treeGrid
         });
-        element.filters = { startDate: '2019-01-01', endDate: '2019-02-28' };
         document.body.appendChild(element);
 
-        // update filters and cause refresh data
-        element.filters = { startDate: '2019-03-01', endDate: '2019-03-31' };
-        element.refreshData();
+        getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
 
-        return flushPromises().then(() => {
-            expect(getNonInvoicedTimeEntries).toHaveBeenCalledTimes(1);
-            expect(getNonInvoicedTimeEntries).toHaveBeenCalledWith({ startDate: '2019-03-01', endDate: '2019-03-31' });
+        return Promise.resolve().then(() => {
+            let dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            expect(dataTable.data).toEqual(APPROVED_TIME_ENTRIES);
+
+            let errBox = element.shadowRoot.querySelector('c-message-box');
+            expect(errBox).toBeNull();
         });
 
+    });
+
+    test('retrieve data from wire: error', () => {
+
+        const element = createElement('c-time-entries-tree-grid', {
+            is: treeGrid
+        });
+        document.body.appendChild(element);
+
+        getTimeEntriesAdapter.error();
+
+        return Promise.resolve().then(() => {
+            let dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            expect(dataTable).toBeNull();
+
+            let errBox = element.shadowRoot.querySelector('c-message-box');
+            expect(errBox).not.toBeNull();
+            expect(errBox.variant).toBe('error');
+        });
     });
 
 });

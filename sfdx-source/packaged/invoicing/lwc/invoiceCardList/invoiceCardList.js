@@ -1,6 +1,7 @@
 import { LightningElement, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
+import { getErrorsAsString } from 'c/utilities';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
 import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData';
@@ -104,6 +105,13 @@ export default class InvoiceCardList extends LightningElement {
             variant : type
         });
         this.dispatchEvent(toast);
+    }
+
+    get wireErrors() {
+        if (this.invoices.error) {
+            return getErrorsAsString(this.invoices.error);
+        }
+        return '';
     }
 
 }

@@ -49,5 +49,6 @@ public class TimeEntry_Test {
         System.assertEquals(te.TotalAmount__c, objUnderTest.TotalAmount, 'TotalAmount');
         System.assertEquals(te.DailyRate__c, objUnderTest.DailyRate, 'DailyRate');
         System.assertEquals(te.Date__c, objUnderTest.ServiceDate, 'ServiceDate');
+        System.assertEquals(te.Description__c, objUnderTest.Description, 'Description');
     }
 }

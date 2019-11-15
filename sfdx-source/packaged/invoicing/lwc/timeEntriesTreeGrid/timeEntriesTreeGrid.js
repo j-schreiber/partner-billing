@@ -1,6 +1,7 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
+import { getErrorsAsString } from 'c/utilities';
 
 import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
 import createInvoices from '@salesforce/apex/BillingController.createInvoicesFromTimeEntries';
@@ -14,14 +15,15 @@ import ENDDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDat
 
 const COLUMN_DEFINITION = [
     { type: "text", fieldName: "AccountName", label: "Accountname" },
-    { type: "text", fieldName: "ProductName", label: "Product" },
-    { type: "text", fieldName: "Name", label: "Number" },
+    { type: "text", fieldName: "Name", label: "Number", initialWidth: 140 },
     { type: "date", fieldName: "ServiceDate", label: "Date" },
-    { type: "date", fieldName: "StartTime", label: "Start Time", typeAttributes: { hour: "2-digit", minute: "2-digit" } },
-    { type: "date", fieldName: "EndTime", label: "End Time", typeAttributes: { hour: "2-digit", minute: "2-digit" } },
-    { type: "text", fieldName: "Duration", label: "Duration" },
+    { type: "date", fieldName: "StartTime", label: "Start Time", typeAttributes: { hour: "2-digit", minute: "2-digit" }, initialWidth : 100 },
+    { type: "date", fieldName: "EndTime", label: "End Time", typeAttributes: { hour: "2-digit", minute: "2-digit" }, initialWidth : 100 },
+    { type: "text", fieldName: "Duration", label: "Duration", initialWidth : 100 },
     { type: "currency", fieldName: "DailyRate", label: "Daily Rate" },
-    { type: "currency", fieldName: "TotalAmount", label: "Total Amount" }
+    { type: "currency", fieldName: "TotalAmount", label: "Total Amount" },
+    { type: "text", fieldName: "ProductName", label: "Product", initialWidth : 140 },
+    { type: "text", fieldName: "Description", label: "Description", initialWidth : 300 },
 ];
 
 export default class TimeEntriesTreeGrid extends LightningElement {
@@ -48,6 +50,15 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         TOAST_TITLE_SUCCESS,
         TOAST_TITLE_ERROR,
         TOAST_TITLE_WARN
+    }
+
+    /**                                     PUBLIC COMPONENT API                                     */
+
+    @api
+    get getSelectedIds() {
+        let selectedIds = [];
+        this.template.querySelector('lightning-datatable').getSelectedRows().forEach( (entry) => {selectedIds.push(entry.Id)} );
+        return selectedIds;
     }
 
     handleStartDateChange(event) {
@@ -105,10 +116,11 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         });
     }
 
-    getSelectedIds() {
-        let selectedIds = [];
-        this.template.querySelector('lightning-datatable').getSelectedRows().forEach( (entry) => {selectedIds.push(entry.Id)} );
-        return selectedIds;
+    get wireErrors() {
+        if (this.timeEntries.error) {
+            return getErrorsAsString(this.timeEntries.error);
+        }
+        return '';
     }
 
 }

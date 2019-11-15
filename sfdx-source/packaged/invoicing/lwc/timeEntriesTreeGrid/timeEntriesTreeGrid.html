@@ -24,7 +24,7 @@
                         <lightning-input
                             class="slds-m-right_medium"
                             type="date"
-                            name="startDateInput"
+                            data-id="startDateInput"
                             label={LABELS.STARTDATE_PICKER_LABEL}
                             onchange={handleStartDateChange}
                             max={filterEndDate}
@@ -33,7 +33,7 @@
                         <lightning-input
                             class="slds-m-right_medium"
                             type="date"
-                            name="endDateInput"
+                            data-id="endDateInput"
                             label={LABELS.ENDDATE_PICKER_LABEL}
                             onchange={handleEndDateChange}
                             min={filterStartDate}
@@ -71,9 +71,12 @@
         <lightning-card>
             
             <div class="slds-p-horizontal_medium slds-is-relative">
-                <div>
+                <template if:true={timeEntries.error}>
+                    <c-message-box variant="error" message={wireErrors}></c-message-box>
+                </template>
+                <template if:true={timeEntries.data}>
                     <lightning-datatable columns={columns} data={timeEntries.data} key-field="Id"></lightning-datatable>
-                </div>
+                </template>
                 <template if:true={isWorking}>
                     <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
                 </template>

@@ -57,6 +57,6 @@
         "sobject": "TimeEntry__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../TimeEntries.json", "../ApprovedTimeEntries.json"]
+        "files": ["../TimeEntries.json", "../TimeEntries_NonInvoiced.json"]
     }
 ]

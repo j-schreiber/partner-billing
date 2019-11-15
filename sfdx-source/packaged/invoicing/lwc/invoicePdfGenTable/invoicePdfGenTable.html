@@ -40,6 +40,9 @@
                     </tbody>
                 </table>
             </template>
+            <template if:true={invoices.error}>
+                <c-message-box variant="error" message={wireErrors}></c-message-box>
+            </template>
             <template if:true={isWorking}>
                 <div class="spinner-container">
                     <lightning-spinner alternative-text="Fetching Data ..." size="large"></lightning-spinner>

@@ -1,5 +1,6 @@
 import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
+import { getErrorsAsString } from 'c/utilities';
 
 import getInvoices from '@salesforce/apex/BillingController.getInvoices';
 
@@ -22,6 +23,13 @@ export default class InvoicePdfGenTable extends LightningElement {
 
     createAllPdfs() {
         
+    }
+
+    get wireErrors() {
+        if (this.invoices.error) {
+            return getErrorsAsString(this.invoices.error);
+        }
+        return '';
     }
 
 }
