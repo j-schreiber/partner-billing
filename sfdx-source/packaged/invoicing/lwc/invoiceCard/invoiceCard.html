@@ -63,41 +63,55 @@
             <!-- the invoice body -->
             <div class="slds-m-bottom_large slds-grid slds-grid_vertical">
                 <div class="slds-col slds-grid">
-                    <lightning-input
-                        value={record.Date__c}
-                        data-id="inputDate"
-                        name="Date__c"
-                        type="date"
-                        variant="label-inline"
-                        label="Invoice Date"
-                        disabled={readOnly}
-                        onchange={handleDataInput}>
-                    </lightning-input>
-                    <lightning-input
-                        value={record.ServicePeriodFrom__c}
-                        data-id="inputServicePeriodFrom"
-                        name="ServicePeriodFrom__c"
-                        type="date"
-                        label="Service Period Start"
-                        variant="label-inline"
-                        max={record.ServicePeriodTo__c}
-                        disabled={readOnly}
-                        onchange={handleDataInput}>
-                    </lightning-input>
-                    <lightning-input 
-                        value={record.ServicePeriodTo__c}
-                        data-id="inputServicePeriodTo"
-                        name="ServicePeriodTo__c"
-                        type="date"
-                        label="Service Period End"
-                        variant="label-inline"
-                        min={record.ServicePeriodFrom__c}
-                        disabled={readOnly}
-                        onchange={handleDataInput}>
-                    </lightning-input>
-                </div>
-                <div class="slds-col slds-grid slds-grid_align-end">
-                    <div class="slds-size_3-of-12">
+                    <div class="slds-col slds-size_4-of-12 slds-p-right_medium">
+                        <lightning-input
+                            value={record.Date__c}
+                            data-id="inputDate"
+                            name="Date__c"
+                            type="date"
+                            label="Invoice Date"
+                            disabled={readOnly}
+                            onchange={handleDataInput}>
+                        </lightning-input>
+                        <lightning-input
+                            value={record.ServicePeriodFrom__c}
+                            data-id="inputServicePeriodFrom"
+                            name="ServicePeriodFrom__c"
+                            type="date"
+                            label="Service Period Start"
+                            max={record.ServicePeriodTo__c}
+                            disabled={readOnly}
+                            onchange={handleDataInput}>
+                        </lightning-input>
+                        <lightning-input 
+                            value={record.ServicePeriodTo__c}
+                            data-id="inputServicePeriodTo"
+                            name="ServicePeriodTo__c"
+                            type="date"
+                            label="Service Period End"
+                            min={record.ServicePeriodFrom__c}
+                            disabled={readOnly}
+                            onchange={handleDataInput}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+                        <lightning-input-address
+                            variant="label-hidden"
+                            street-label="Street"
+                            city-label="City"
+                            country-label="Country"
+                            province-label="Province"
+                            postal-code-label="Postal Code"
+                            onchange={addressChange}
+                            street={address.street}
+                            city={address.city}
+                            disabled={readOnly}
+                            postal-code={address.postalCode}
+                            province={address.province}
+                            country={address.country}>
+                        </lightning-input-address>
+                    </div>
+                    <div class="slds-size_4-of-12 slds-p-left_medium">
                         <table class="summary-table">
                             <tbody>
                                 <tr>
@@ -133,14 +147,18 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="slds-col slds-grid slds-grid_align-end">
+                    
                     
                 </div>
             </div>
             
             <!-- the line item table -->
             <c-invoice-line-item-datatable
-                invoice-id={rowdata.Record.Id}
-                line-items={rowdata.LineItems}
+                invoice-id={invoiceId}
+                line-items={lineItems}
                 is-disabled={readOnly}
                 onrecalculate={recalculateSums}>
             </c-invoice-line-item-datatable>

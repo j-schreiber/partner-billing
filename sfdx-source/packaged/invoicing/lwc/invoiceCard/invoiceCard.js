@@ -58,6 +58,7 @@ export default class InvoiceCard extends LightningElement {
 
         this.template.querySelectorAll('lightning-input').forEach( (input) => { input.classList.remove('is-dirty'); });
         this.template.querySelector('c-invoice-line-item-datatable').reset();
+        this.template.querySelector('lightning-input-address').classList.remove('is-dirty');
     }
 
     @api
@@ -161,6 +162,22 @@ export default class InvoiceCard extends LightningElement {
         this.template.querySelector('c-invoice-line-item-datatable').addRow();
     }
 
+    addressChange(event) {
+
+        this.record.BillingStreet__c = event.detail.street;
+        this.record.BillingPostalCode__c = event.detail.postalCode;
+        this.record.BillingCity__c = event.detail.city;
+        this.record.BillingState__c = event.detail.province;
+        this.record.BillingCountry__c = event.detail.country;
+
+        let isModified = ['BillingStreet__c','BillingPostalCode__c','BillingCity__c','BillingState__c','BillingCountry__c'].reduce(
+            (modifiedSoFar, field) => { 
+                return modifiedSoFar || this.fieldIsModified(field);
+            }, false
+        );
+        this.setModificationStyle(isModified, event.currentTarget);
+    }
+
     /**                             HELPER METHODS                                */
 
     fieldIsModified(fieldName) {
@@ -195,11 +212,30 @@ export default class InvoiceCard extends LightningElement {
     }
 
     get invoiceTitle() {
-        return this.record.Account__r.Name+ ' - ' + this.record.Name;
+        return this.record.Account__r ? this.record.Account__r.Name+ ' - ' + this.record.Name : '';
     }
 
     get TotalTaxes() {
         return this.TotalGrossAmount - this.TotalAmount;
+    }
+
+    get invoiceId() {
+        return this.rowdata ? this.rowdata.Record.Id : '';
+    }
+
+    get lineItems() {
+        return this.rowdata ? this.rowdata.LineItems : [];
+    }
+
+    get address() {
+        let addr = {
+            street : this.record.BillingStreet__c,
+            postalCode : this.record.BillingPostalCode__c,
+            city : this.record.BillingCity__c,
+            province : this.record.BillingState__c,
+            country : this.record.BillingCountry__c
+        };
+        return addr;
     }
 
 }

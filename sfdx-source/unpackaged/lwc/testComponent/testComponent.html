@@ -1,3 +1,5 @@
 <template>
-    <c-invoice-card-list></c-invoice-card-list>
+    <template if:true={invoices.data}>
+        <c-invoice-card invoice={Invoice}></c-invoice-card>
+    </template>
 </template>

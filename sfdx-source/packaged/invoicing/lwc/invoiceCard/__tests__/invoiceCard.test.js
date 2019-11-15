@@ -67,6 +67,20 @@ describe('c-invoice-card', () => {
 
     });
 
+    test('render invoice card no invoice data: all defaults set', () => {
+        
+        const element = createElement('c-invoice-card', {
+            is: invoiceCard
+        });
+        document.body.appendChild(element);
+
+        expect(element.getModifiedFields()).toStrictEqual({});
+        expect(element.getModifiedLineItems()).toStrictEqual([]);
+        expect(element.getDeletedLineItems()).toStrictEqual([]);
+        expect(element.isLocked()).toBe(false);
+
+    });
+
     test('activate button clicked: all input elements read-only', () => {
 
         const element = createElement('c-invoice-card', {
@@ -84,6 +98,7 @@ describe('c-invoice-card', () => {
         // DOM updates
         return flushPromises().then(() => {
             element.shadowRoot.querySelectorAll('lightning-input').forEach ( (input) => expect(input.disabled).toBe(true));
+            element.shadowRoot.querySelectorAll('lightning-input-address').forEach ( (input) => expect(input.disabled).toBe(true));
             let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
             expect(dataTable.isDisabled).toBe(true);
         });
@@ -107,6 +122,7 @@ describe('c-invoice-card', () => {
         // DOM updates
         return flushPromises().then(() => {
             element.shadowRoot.querySelectorAll('lightning-input').forEach ( (input) => expect(input.disabled).toBe(true));
+            element.shadowRoot.querySelectorAll('lightning-input-address').forEach ( (input) => expect(input.disabled).toBe(true));
             let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
             expect(dataTable.isDisabled).toBe(true);
         });

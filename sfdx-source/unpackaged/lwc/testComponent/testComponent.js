@@ -45,6 +45,10 @@ export default class TestComponent extends LightningElement {
     get loadCompleted() {
         return this.invoices && this.organizationProfiles;
     }
+
+    get Invoice() {
+        return this.invoices.data[0];
+    }
     
 
 }
