@@ -43,13 +43,19 @@
         </lightning-button-group>
 
         <lightning-button
+            slot="actions"
             class="slds-m-left_medium"
             data-id="saveButton"
-            slot="actions"
             label={LABELS.BUTTON_LABEL_SAVE}
             variant="brand"
+            disabled={isWorking}
             onclick={saveChanges}>
         </lightning-button>
+
+        <template if:true={isWorking}>
+            <lightning-spinner alternative-text="Saving ..." size="medium"></lightning-spinner>
+        </template>
+
 
         <!-- card body -->
         <div class="slds-p-horizontal_medium">

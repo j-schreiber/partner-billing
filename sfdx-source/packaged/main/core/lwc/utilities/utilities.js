@@ -19,7 +19,12 @@ const cloneInvoiceRecord = (value) => {
         Status__c : value.Record.Status__c,
         Name : value.Record.Name,
         TotalAmount__c : value.Record.TotalAmount__c,
-        TotalGrossAmount__c : value.Record.TotalGrossAmount__c
+        TotalGrossAmount__c : value.Record.TotalGrossAmount__c,
+        BillingStreet__c : value.Record.BillingStreet__c,
+        BillingPostalCode__c : value.Record.BillingPostalCode__c,
+        BillingCity__c : value.Record.BillingCity__c,
+        BillingState__c : value.Record.BillingState__c,
+        BillingCountry__c : value.Record.BillingCountry__c
     }
 }
 

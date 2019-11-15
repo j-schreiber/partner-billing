@@ -3,6 +3,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { cloneInvoiceRecord } from 'c/utilities';
 
 import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData';
+import refreshInvoices from '@salesforce/apex/BillingController.refreshInvoices';
 
 import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_Save';
 import BUTTON_LABEL_NEWITEM from '@salesforce/label/c.UI_Button_Label_NewLineItem';
@@ -22,6 +23,7 @@ export default class InvoiceCard extends LightningElement {
 
     @track record = {};
     @track readOnly = false;
+    @track isWorking = false;
 
     @track TotalAmount = 0;
     @track TotalGrossAmount = 0;
@@ -102,19 +104,27 @@ export default class InvoiceCard extends LightningElement {
             return;
         }
 
+        this.isWorking = true;
+
         let invoiceList = [];
         let mods = this.getModifiedFields();
         if (Object.keys(mods).length > 0) invoiceList.push(mods);
 
-        this.isWorking = true;
         commitData({
             invoices : invoiceList,
             upsertLineItems : this.getModifiedLineItems(),
             deleteLineItemIds : this.getDeletedLineItems()
         })
         .then( () => {
+            return refreshInvoices({
+                invoiceIds : [this.record.Id]
+            });
+        })
+        .then( (crispNewData) => {
+            let recordMap = JSON.parse(JSON.stringify(crispNewData));
+            this.rowdata = recordMap[this.rowdata.Record.Id];
+            this.reset();
             this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
-            this.dispatchEvent(new CustomEvent('save'));
             this.isWorking = false;
         })
         .catch ( (error) => {

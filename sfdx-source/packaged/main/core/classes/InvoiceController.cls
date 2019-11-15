@@ -4,7 +4,7 @@ public with sharing class InvoiceController {
     *   Used for record page context to fully initialize an invoice
     *   based on record id. If the record id is invalid, an empty invoice is returned
     *
-    *   @param  recordId    The record id, presumably from page context
+    *   @param  invoiceId    The record id, presumably from page context
     *
     *   @return             Initialized invoice decorator
     */

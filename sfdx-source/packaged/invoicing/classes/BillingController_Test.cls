@@ -363,4 +363,18 @@ class BillingController_Test {
         }
     }
 
+    @isTest
+    static void refreshInvoices_ValidIds_RequestDataRetrieved() {
+        // SETUP
+        List<Id> ids = new List<Id>();
+        for (Invoice__c i : [SELECT Id FROM Invoice__c LIMIT 2]) ids.add(i.Id);
+
+        // ACTION
+        Map<Id, Invoice> actualInvoices = BillingController.refreshInvoices(ids);
+
+        // VERIFY
+        System.assertEquals(2, actualInvoices.size(), 'size()');
+        System.assertEquals(new Set<Id>(ids), actualInvoices.keySet(), 'keySet()');
+    }
+
 }

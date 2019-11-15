@@ -102,10 +102,6 @@ public with sharing class BillingController {
     @AuraEnabled
     public static void commitInvoiceEditData(List<Invoice__c> invoices, List<InvoiceLineItem__c> upsertLineItems, List<Id> deleteLineItemIds) {
 
-        System.debug(invoices);
-        System.debug(upsertLineItems);
-        System.debug(deleteLineItemIds);
-
         Database.SaveResult[] invoiceSrs = Database.update(invoices, false);
         Database.UpsertResult[] ilisUrs = Database.upsert(upsertLineItems, false);
         Database.DeleteResult[] ilisDrs = Database.delete(deleteLineItemIds, false);
@@ -126,6 +122,23 @@ public with sharing class BillingController {
             auraExp.setMessage(errMsg);
             throw auraExp; 
         }
+    }
+
+    /** @Description
+    *   Retrieves invoices by their record ids. Always returns the fully loaded invoice
+    *   and disables cache, so the client controller always receives the newest data.
+    *
+    *   @param  invoiceIds          Ids of invoices that will be refreshed
+    *
+    *   @return                     Reloaded invoices
+    */
+    @AuraEnabled
+    public static Map<Id, Invoice> refreshInvoices(List<String> invoiceIds) {
+        Map<Id, Invoice> results = new Map<Id, Invoice>();
+        for (Invoice__c inv : Database.query(Invoice.QUERY_STRING + ' WHERE Id IN :invoiceIds')) {
+            results.put(inv.Id, new Invoice(inv));
+        }
+        return results;
     }
 
     /** @Description
