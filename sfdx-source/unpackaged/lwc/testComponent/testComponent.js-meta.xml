@@ -3,8 +3,9 @@
     <apiVersion>47.0</apiVersion>
     <masterLabel>Test Component</masterLabel>
     <description>Test Container to easily see experimental code in action.</description>
-    <isExposed>false</isExposed>
+    <isExposed>true</isExposed>
     <targets>
         <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
     </targets>
 </LightningComponentBundle>
