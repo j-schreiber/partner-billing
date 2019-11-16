@@ -1,6 +1,6 @@
 import { LightningElement, track } from 'lwc';
 
-export default class TimeEntriesBillingCanvas extends LightningElement {
+export default class invoicingCanvas extends LightningElement {
 
     @track processStage = 1;
 
