@@ -29,6 +29,7 @@ const COLUMN_DEFINITION = [
 export default class TimeEntriesTreeGrid extends LightningElement {
 
     @track isWorking = false;
+    @track hasSelection = false;
 
     selectedOptions = {
         collapseTimeEntries : true,
@@ -55,7 +56,7 @@ export default class TimeEntriesTreeGrid extends LightningElement {
     /**                                     PUBLIC COMPONENT API                                     */
 
     @api
-    get getSelectedIds() {
+    getSelectedIds() {
         let selectedIds = [];
         this.template.querySelector('lightning-datatable').getSelectedRows().forEach( (entry) => {selectedIds.push(entry.Id)} );
         return selectedIds;
@@ -83,14 +84,10 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         this.selectedOptions.overrideServicePeriod = event.detail.checked
     }
 
-    startBillingCycle() {
+    invoiceSelectedTimeEntries() {
 
         if (this.template.querySelector('lightning-datatable').getSelectedRows().length === 0) {
-            let warnToast = new ShowToastEvent({
-                title : this.LABELS.TOAST_TITLE_WARN,
-                variant : 'warning'
-            });
-            this.dispatchEvent(warnToast);
+            this.dispatchToast('warning', this.LABELS.TOAST_TITLE_WARN);
             return;
         }
 
@@ -102,18 +99,23 @@ export default class TimeEntriesTreeGrid extends LightningElement {
             filters: { startDate : this.filterStartDate, endDate : this.filterEndDate},
         })
         .then(() => {
-            let successToast = new ShowToastEvent({
-                title : this.LABELS.TOAST_TITLE_SUCCESS,
-                variant : 'success'
-            });
-            this.dispatchEvent(successToast);
             refreshApex(this.timeEntries);
             this.isWorking = false;
+            this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.dispatchEvent(new CustomEvent('stepcompleted'));
         })
         .catch(() => {
             this.isWorking = false;
         });
+    }
+
+    dispatchToast(type, title, message) {
+        let toast = new ShowToastEvent({
+            title : title,
+            message : message,
+            variant : type
+        });
+        this.dispatchEvent(toast);
     }
 
     get wireErrors() {

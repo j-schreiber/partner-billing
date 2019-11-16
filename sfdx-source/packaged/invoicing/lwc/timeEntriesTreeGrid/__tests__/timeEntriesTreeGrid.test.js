@@ -1,9 +1,21 @@
 import { createElement } from 'lwc';
 import treeGrid from 'c/timeEntriesTreeGrid';
 import { registerApexTestWireAdapter } from '@salesforce/sfdx-lwc-jest';
+
 import getTimeEntries from '@salesforce/apex/BillingController.getNonInvoicedTimeEntries';
+import createInvoices from '@salesforce/apex/BillingController.createInvoicesFromTimeEntries';
 
 const getTimeEntriesAdapter = registerApexTestWireAdapter(getTimeEntries);
+
+jest.mock(
+    '@salesforce/apex/BillingController.createInvoicesFromTimeEntries',
+    () => {
+        return {
+            default: jest.fn()
+        };
+    },
+    { virtual: true }
+);
 
 // import mock data
 const APPROVED_TIME_ENTRIES = require('./data/approved-time-entries.json');
@@ -17,7 +29,7 @@ describe('c-time-entries-tree-grid', () => {
         }
         jest.clearAllMocks();
     });
-    
+
     test('retrieve data from wire: init with default filters', () => {
 
         // create time entries tree grid and add to DOM
@@ -72,6 +84,7 @@ describe('c-time-entries-tree-grid', () => {
         return Promise.resolve().then(() => {
             let dataTable = element.shadowRoot.querySelector('lightning-datatable');
             expect(dataTable.data).toEqual(APPROVED_TIME_ENTRIES);
+            expect(dataTable.data.length).toBe(APPROVED_TIME_ENTRIES.length);
 
             let errBox = element.shadowRoot.querySelector('c-message-box');
             expect(errBox).toBeNull();
@@ -95,6 +108,25 @@ describe('c-time-entries-tree-grid', () => {
             let errBox = element.shadowRoot.querySelector('c-message-box');
             expect(errBox).not.toBeNull();
             expect(errBox.variant).toBe('error');
+        });
+    });
+
+    test('invoice selected time entries: apex called with parameters', () => {
+
+        // to properly test this, we either need to mock the data-table or re-implement selection logic
+
+        createInvoices.mockResolvedValue();
+
+        const element = createElement('c-time-entries-tree-grid', {
+            is: treeGrid
+        });
+        document.body.appendChild(element);
+
+        getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
+
+        return Promise.resolve().then(() => {
+            // mock user input by programmatically selecting rows
+            element.shadowRoot.querySelector('lightning-datatable').selectedRows = ['a', 'c'];
         });
     });
 
