@@ -20,6 +20,33 @@ jest.mock(
 // import mock data
 const APPROVED_TIME_ENTRIES = require('./data/approved-time-entries.json');
 
+const MOCK_SELECTED_ROWS = [
+    {
+        AccountName:"Colonial One",
+        DailyRate:1250,
+        Duration:"5.25 h",
+        EndTime:63000000,
+        Id:"a092a000001mjv4AAA",
+        Name:"20191116-000020",
+        ProductName:"Flight Maneuver Training: Beginner",
+        ServiceDate:"2019-10-09",
+        StartTime:44100000,
+        TotalAmount:820.31
+    },
+    {
+        AccountName:"Colonial One",
+        DailyRate:1500,
+        Duration:"5.25 h",
+        EndTime:63000000,
+        Id:"a092a000001mjv5AAA",
+        Name:"20191116-000020",
+        ProductName:"Flight Maneuver Training: Advanced",
+        ServiceDate:"2019-10-09",
+        StartTime:44100000,
+        TotalAmount: 1000
+    }
+];
+
 describe('c-time-entries-tree-grid', () => {
     
     // reset DOM after each test
@@ -47,6 +74,7 @@ describe('c-time-entries-tree-grid', () => {
         });
 
     });
+    
     test('retrieve data from wire: manually set filters', () => {
 
         // create time entries tree grid and add to DOM
@@ -111,23 +139,83 @@ describe('c-time-entries-tree-grid', () => {
         });
     });
 
-    test('invoice selected time entries: apex called with parameters', () => {
+    describe('invoice time entries', () => {
 
-        // to properly test this, we either need to mock the data-table or re-implement selection logic
+        beforeEach(() => { reset(); })
 
-        createInvoices.mockResolvedValue();
+        test('has selection: apex called with selected ids', async () => {
 
-        const element = createElement('c-time-entries-tree-grid', {
-            is: treeGrid
-        });
-        document.body.appendChild(element);
+            createInvoices.mockResolvedValue();
+    
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+            
+            getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
+    
+            // after DOM re-render
+            await Promise.resolve();
 
-        getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
-
-        return Promise.resolve().then(() => {
             // mock user input by programmatically selecting rows
-            element.shadowRoot.querySelector('lightning-datatable').selectedRows = ['a', 'c'];
+            let dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            dataTable.getSelectedRows = jest.fn(() => { return MOCK_SELECTED_ROWS; });
+            let invButton = element.shadowRoot.querySelector('lightning-button[data-id="invoiceButton"]');
+            invButton.click();
+
+            expect(createInvoices).toHaveBeenCalledWith({
+                filters: {
+                    endDate: "2019-10-31",
+                    startDate: "2019-10-01"
+                },
+                options: {
+                    collapseTimeEntries: true,
+                    overrideServicePeriod: true
+                },
+                timeEntryIds: [
+                    "a092a000001mjv4AAA",
+                    "a092a000001mjv5AAA"
+                ]
+            });
+            
+        });
+
+        test('has no selection: apex not called', async () => {
+
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+            getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
+
+            // wait for DOM re-render, so data table actually exists
+            await flushPromises();
+
+            // mock "no selection" for data table
+            let dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            dataTable.getSelectedRows = jest.fn(() => { return []; });
+
+            // click invoicing brand button
+            let invButton = element.shadowRoot.querySelector('lightning-button[data-id="invoiceButton"]');
+            invButton.click();
+            
+            expect(createInvoices).not.toHaveBeenCalled();
+        
         });
     });
 
 });
+
+function reset() {
+    while (document.body.firstChild) {
+        document.body.removeChild(document.body.firstChild);
+    }
+    jest.clearAllMocks();
+}
+
+// Helper function to wait until the microtask queue is empty. This is needed for promise
+// timing when calling imperative Apex.
+function flushPromises() {
+    // eslint-disable-next-line no-undef
+    return new Promise(resolve => setImmediate(resolve));
+}
