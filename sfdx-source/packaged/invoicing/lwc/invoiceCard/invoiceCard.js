@@ -52,10 +52,11 @@ export default class InvoiceCard extends LightningElement {
 
     @api
     reset() {
-        this.record = cloneInvoiceRecord(this.rowdata);
-        this.TotalAmount = this.rowdata.Record.TotalAmount__c;
-        this.TotalGrossAmount = this.rowdata.Record.TotalGrossAmount__c;
-
+        if (!this.isLocked()) {
+            this.record = cloneInvoiceRecord(this.rowdata);
+            this.TotalAmount = this.rowdata.Record.TotalAmount__c;
+            this.TotalGrossAmount = this.rowdata.Record.TotalGrossAmount__c;
+        }
         this.template.querySelectorAll('lightning-input').forEach( (input) => { input.classList.remove('is-dirty'); });
         this.template.querySelector('c-invoice-line-item-datatable').reset();
         this.template.querySelector('lightning-input-address').classList.remove('is-dirty');
@@ -98,7 +99,7 @@ export default class InvoiceCard extends LightningElement {
     }
 
     @api
-    saveChanges() {
+    save() {
 
         if (!this.isModified()) {
             this.dispatchToast('warning', this.LABELS.TOAST_TITLE_WARNING);
