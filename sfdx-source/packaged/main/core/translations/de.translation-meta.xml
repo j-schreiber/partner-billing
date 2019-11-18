@@ -113,6 +113,14 @@
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>
     <customLabels>
+        <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
+        <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
+    </customLabels>
+    <customLabels>
+        <label>Die Rechnung kann nicht entfernt werden!</label>
+        <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
+    </customLabels>
+    <customLabels>
         <label>Änderungen gespeichert!</label>
         <name>Toast_Title_DataSaved</name>
     </customLabels>
@@ -219,10 +227,6 @@
     <customLabels>
         <label>Keine Änderungen gefunden!</label>
         <name>UI_Toast_Title_NoChanges</name>
-    </customLabels>
-    <customLabels>
-        <label>Ein Zeitaufwand kann nicht mehr gelöscht werden, sobald er abgerechnet wurde.</label>
-        <name>ValidationError_CanNotDeleteInvoicedTimeEntry</name>
     </customLabels>
     <customTabs>
         <label><!-- Invoicing --></label>

@@ -1,17 +1,40 @@
 public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
 
-    private Map<Id, Account> Accounts;
+    private List<TimeEntry__c> TimeEntriesToUpdate = new List<TimeEntry__c>();
 
-    public InvoiceTriggerHandler() {
-        if (!Trigger.isExecuting) return;
-
-        // extract account ids from invoice and load accounts
-        Set<Id> AccountIds = new Set<Id>();
-        if (Trigger.new != null) {
-            for (Invoice__c inv : (List<Invoice__c>)Trigger.new) AccountIds.add(inv.Account__c);
+    /** @Description    All time entries (time sheets), mapped by invoice id. Lazy init. */
+    private Map<Id, List<TimeEntry__c>> TimeEntries {
+        private get {
+            if (TimeEntries == null) {
+                TimeEntries = new Map<Id, List<TimeEntry__c>>();
+                if (Trigger.isUpdate) {
+                    for (Invoice__c inv : [SELECT Id,(SELECT Id FROM TimeEntries__r) FROM Invoice__c WHERE Id IN :Trigger.oldMap.keySet()]) {
+                        TimeEntries.put(inv.Id, inv.TimeEntries__r);
+                    }
+                }
+            }
+            return TimeEntries;
         }
-        Accounts = new Map<Id, Account>([SELECT Id,Name,BillingAddress FROM Account WHERE Id IN :AccountIds]);
+        private set;
     }
+
+    /** @Description    All related parent accounts to invoices. Lazy init. */
+    private Map<Id, Account> Accounts {
+        private get {
+            if (Accounts == null) {
+                // extract account ids from invoice and load accounts
+                Set<Id> AccountIds = new Set<Id>();
+                if (Trigger.new != null) {
+                    for (Invoice__c inv : (List<Invoice__c>)Trigger.new) AccountIds.add(inv.Account__c);
+                }
+                Accounts = new Map<Id, Account>([SELECT Id,Name,BillingAddress FROM Account WHERE Id IN :AccountIds]);
+            }
+            return Accounts;
+        }
+        private set;
+    }
+
+    public InvoiceTriggerHandler() { }
 
     /** @Description
     *   Implementation of ITriggerHandler interface. Entry point to execute all trigger logic.
@@ -22,7 +45,9 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         if (!Trigger.isExecuting) return;
         switch on Trigger.OperationType {
             when BEFORE_INSERT { for (SObject so : Trigger.new) beforeInsert((Invoice__c)so); }
+            when AFTER_UPDATE { for (SObject so : Trigger.new) afterUpdate((Invoice__c)so, (Invoice__c)(Trigger.oldMap.get(so.Id))); }
         }
+        commitRelatedRecords();
     }
 
     /** @Description
@@ -33,6 +58,20 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         copyBillingAddressFromAccount(newSo);
     }
 
+    /** @Description
+    *   All functionality that runs in after update scope. Order of execution is defined here.
+    */
+    public void afterUpdate(Invoice__c newSo, Invoice__c oldSo) {
+        removeTimesheetFromCancelledInvoice(newSo);
+    }
+
+    /** @Description
+    *   Commit all related records that have been cached
+    */
+    public void commitRelatedRecords() {
+        Database.update(TimeEntriesToUpdate, true);
+    }
+
     private void copyBillingAddressFromAccount(Invoice__c newInvoice) {
         if (Accounts.containsKey(newInvoice.Account__c) && Accounts.get(newInvoice.Account__c).BillingAddress != null) {
             Address addr = Accounts.get(newInvoice.Account__c).BillingAddress;
@@ -41,6 +80,15 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
             newInvoice.BillingCity__c = String.isNotBlank(newInvoice.BillingCity__c) ? newInvoice.BillingCity__c : addr.getCity();
             newInvoice.BillingCountry__c = String.isNotBlank(newInvoice.BillingCountry__c) ? newInvoice.BillingCountry__c : addr.getCountry();
             newInvoice.BillingState__c = String.isNotBlank(newInvoice.BillingState__c) ? newInvoice.BillingState__c : addr.getState();
+        }
+    }
+
+    private void removeTimesheetFromCancelledInvoice(Invoice__c inv) {
+        if (inv.Status__c == Constants.INVOICE_STATUS_CANCELLED) {
+            for (TimeEntry__c te : TimeEntries.get(inv.Id)) {
+                te.Invoice__c = null;
+            }
+            TimeEntriesToUpdate.addAll(TimeEntries.get(inv.Id));
         }
     }
 }

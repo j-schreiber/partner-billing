@@ -217,6 +217,22 @@
         <value>Nothing more to do here. No more Invoices in Status &quot;Draft&quot; found.</value>
     </labels>
     <labels>
+        <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validation message for time entries that are about to be deleted</shortDescription>
+        <value>Can not delete this record, once it is invoiced!</value>
+    </labels>
+    <labels>
+        <fullName>Message_TimeEntryValidation_CanNotRemoveInvoice</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validation message for time entries, where Invoice is about to removed</shortDescription>
+        <value>Invoice can not be removed, once it is set.</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_DataSaved</fullName>
         <categories>ui,toast,title,success</categories>
         <language>en_US</language>
@@ -431,13 +447,5 @@
         <protected>false</protected>
         <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
         <value>No changes to commit!</value>
-    </labels>
-    <labels>
-        <fullName>ValidationError_CanNotDeleteInvoicedTimeEntry</fullName>
-        <categories>trigger,error</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Displayed for time entry records that are in deletion but are invoiced</shortDescription>
-        <value>A Time Entry can not be deleted, once it is invoiced!</value>
     </labels>
 </CustomLabels>
