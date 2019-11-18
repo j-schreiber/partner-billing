@@ -62,10 +62,6 @@
     </layouts>
     <nameFieldLabel>Nummer</nameFieldLabel>
     <validationRules>
-        <errorMessage>Rechnung kann nicht mehr entfernt werden, sobald der Zeitaufwand abgerechnet wurde.</errorMessage>
-        <name>Can_Not_Remove_InvoiceLookup</name>
-    </validationRules>
-    <validationRules>
         <errorMessage>Nachdem der Zeitaufwand abgerechnet wurde, können die folgenden Felder nicht mehr bearbeitet werden: Tagessatz, Startzeit, Endzeit, Produkt und Datum</errorMessage>
         <name>Can_Not_Update_Invoiced_TimeEntry</name>
     </validationRules>
