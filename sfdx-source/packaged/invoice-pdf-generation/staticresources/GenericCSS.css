@@ -91,11 +91,15 @@
 .ayc-align_right {
     justify-content: right;
     display: flex;
+    margin-right: 0;
+    margin-left: auto;
 }
 
 .ayc-align_left {
     justify-content: left;
     display: flex;
+    margin-right: auto;
+    margin-left: 0;
 }
 
 .ayc-align_center {

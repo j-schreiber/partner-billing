@@ -30,19 +30,19 @@
         <!-- Invoice Header -->
         <div class="letter-body">
 
-            <div class="ayc-p-vertical_large">
+            <div class="ayc-p-vertical_large invoice-header">
                 <table class="ayc-size_12of12">
                     <thead>
                         <tr>
-                            <th class="text-align_center">{!$Label.InvoicePdf_Label_CustomerId}</th>
+                            <th class="text-align_left">{!$Label.InvoicePdf_Label_CustomerId}</th>
                             <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceId}</th>
                             <th class="text-align_center">{!$Label.InvoicePdf_Label_ServicePeriod}</th>
-                            <th class="text-align_center">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
+                            <th class="text-align_right">{!$Label.InvoicePdf_Label_InvoiceDate}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-align_center">{!Invoice.Record.Account__r.CustomerId__c}</td>
+                            <td class="text-align_left">{!Invoice.Record.Account__r.CustomerId__c}</td>
                             <td class="text-align_center">{!Invoice.Record.Name}</td>
                             <td class="text-align_center">
                                 <apex:outputText value="{! $Label.InvoicePdf_TextTemplate_ServicePeriod}">
@@ -50,7 +50,7 @@
                                     <apex:param value="{! Invoice.Record.ServicePeriodTo__c }" />
                                 </apex:outputText>
                             </td>
-                            <td class="text-align_center">
+                            <td class="text-align_right">
                                 <apex:outputText value="{0,date,dd.MM.yyyy}">
                                     <apex:param value="{! Invoice.Record.Date__c }" />
                                 </apex:outputText>
@@ -70,7 +70,7 @@
             </div>
 
             <!-- generated table of line items -->
-            <div class="ayc-p-vertical_medium line-item-container">
+            <div class="ayc-p-vertical_medium">
                 <c:InvoicePdfLineItemTable Invoice="{! Invoice }" />
             </div>
 
