@@ -17,10 +17,10 @@
             onclick={commitDirtyRecords}>
         </lightning-button>
 
-        <div class="slds-is-relative">
+        <div class="slds-is-relative slds-p-horizontal_medium">
             <template if:true={invoices.data}>
                 <template for:each={invoices.data} for:item='inv'>
-                    <div key={inv.Record.Id} class="slds-box slds-box_xx-small slds-m-around_medium">
+                    <div key={inv.Record.Id} class="slds-box slds-box_xx-small slds-m-vertical_medium">
                         <c-invoice-card invoice={inv}></c-invoice-card>
                     </div>
                 </template>
@@ -28,8 +28,13 @@
                     <lightning-spinner alternative-text="Retrieving Invoices ..." size="large"></lightning-spinner>
                 </template>
             </template>
+            <template if:true={hasNoRecords}>
+                <div class="slds-m-vertical_medium">
+                    <c-message-box variant="success" message={LABELS.MESSAGE_NO_RECORDS}></c-message-box>
+                </div>
+            </template>
             <template if:true={invoices.error}>
-                <div class="slds-p-horizontal_medium">
+                <div class="slds-m-vertical_medium">
                     <c-message-box variant="error" message={wireErrors}></c-message-box>
                 </div>
             </template>

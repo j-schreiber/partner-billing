@@ -11,6 +11,7 @@ import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_InvoicesReviewHeader';
 import BUTTON_LABEL_SAVE_ALL from '@salesforce/label/c.UI_Button_Label_SaveAll';
 import BUTTON_TEXT_REFRESH from '@salesforce/label/c.UI_Button_Label_ResetAll';
+import MESSAGE_NO_RECORDS from '@salesforce/label/c.Message_Invoicing_DraftInvoicesCompleted';
 
 export default class InvoiceCardList extends LightningElement {
 
@@ -21,7 +22,8 @@ export default class InvoiceCardList extends LightningElement {
         TOAST_TITLE_ERROR,
         CARD_TITLE,
         BUTTON_LABEL_SAVE_ALL,
-        BUTTON_TEXT_REFRESH
+        BUTTON_TEXT_REFRESH,
+        MESSAGE_NO_RECORDS
     }
 
     @wire(getInvoices, { status: 'Draft' })
@@ -112,6 +114,10 @@ export default class InvoiceCardList extends LightningElement {
             return getErrorsAsString(this.invoices.error);
         }
         return '';
+    }
+
+    get hasNoRecords() {
+        return (this.invoices.data && this.invoices.data.length === 0);
     }
 
 }
