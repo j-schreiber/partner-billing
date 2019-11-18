@@ -33,6 +33,7 @@ export default class InvoiceCardRecord extends LightningElement {
             lineItemsToDelete : this.getDeletedLineItems()
         })
         .then( () => {
+            this.template.querySelector('c-invoice-line-item-datatable').reset();
             updateRecord({ fields: { Id: this.recordId } });
             refreshApex(this.invoice);
             this.dispatchToast('success', TOAST_TITLE_SUCCESS);
@@ -50,10 +51,12 @@ export default class InvoiceCardRecord extends LightningElement {
         this.template.querySelector('c-invoice-line-item-datatable').reset();
     }
 
+    @api
     getModifiedLineItems() {
         return this.template.querySelector('c-invoice-line-item-datatable').getModifiedRows();
     }
 
+    @api
     getDeletedLineItems() {
         return this.template.querySelector('c-invoice-line-item-datatable').getDeletedRows();
     }
