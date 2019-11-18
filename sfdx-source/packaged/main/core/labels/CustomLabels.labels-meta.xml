@@ -201,6 +201,22 @@
         <value>Service Period Start</value>
     </labels>
     <labels>
+        <fullName>Message_Generic_NoRecordsFound</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General warning display, if a query did not find any results</shortDescription>
+        <value>The entered filter criteria did not find any records. Please change your filters and try again.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
+        <categories>ui,text,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as success message after all draft invoices have been worked</shortDescription>
+        <value>Nothing more to do here. No more Invoices in Status &quot;Draft&quot; found.</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_DataSaved</fullName>
         <categories>ui,toast,title,success</categories>
         <language>en_US</language>

@@ -105,6 +105,14 @@
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>
     <customLabels>
+        <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
+        <name>Message_Generic_NoRecordsFound</name>
+    </customLabels>
+    <customLabels>
+        <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
+        <name>Message_Invoicing_DraftInvoicesCompleted</name>
+    </customLabels>
+    <customLabels>
         <label>Änderungen gespeichert!</label>
         <name>Toast_Title_DataSaved</name>
     </customLabels>
@@ -222,7 +230,7 @@
     </customTabs>
     <customTabs>
         <label><!-- Testing --></label>
-        <name>Testing</name>
+        <name>Testing_Flexipage</name>
     </customTabs>
     <quickActions>
         <label><!-- LogACall --></label>

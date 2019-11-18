@@ -19,6 +19,7 @@ jest.mock(
 
 // import mock data
 const APPROVED_TIME_ENTRIES = require('./data/approved-time-entries.json');
+const EMPTY_LIST = require('./data/empty-list.json');
 
 const MOCK_SELECTED_ROWS = [
     {
@@ -50,94 +51,115 @@ const MOCK_SELECTED_ROWS = [
 describe('c-time-entries-tree-grid', () => {
     
     // reset DOM after each test
-    afterEach(() => {
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-        jest.clearAllMocks();
-    });
+    afterEach(() => { reset(); });
 
-    test('retrieve data from wire: init with default filters', () => {
+    describe('retrieve wired time entries', () => {
 
-        // create time entries tree grid and add to DOM
-        const element = createElement('c-time-entries-tree-grid', {
-            is: treeGrid
-        });
-        document.body.appendChild(element);
+        afterEach(() => { reset(); });
 
-        const WIRE_PARAM = {
-            startDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0],          // start of last month, format: 2019-11-01
-            endDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0]                // end of last month, format 2019-11-30
-        }
-        return Promise.resolve().then(() => {
-            expect(getTimeEntriesAdapter.getLastConfig()).toEqual(WIRE_PARAM);
-        });
+        test('wire params: initial filters', async () => {
 
-    });
+            // create time entries tree grid and add to DOM
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
     
-    test('retrieve data from wire: manually set filters', () => {
+            const WIRE_PARAM = {
+                startDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0],          // start of last month, format: 2019-11-01
+                endDate : new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0]                // end of last month, format 2019-11-30
+            }
 
-        // create time entries tree grid and add to DOM
-        const element = createElement('c-time-entries-tree-grid', {
-            is: treeGrid
+            await Promise.resolve();
+            
+            expect(getTimeEntriesAdapter.getLastConfig()).toEqual(WIRE_PARAM);
+    
         });
-        document.body.appendChild(element);
-
-        let startDateInput = element.shadowRoot.querySelector('lightning-input[data-id="startDateInput"]');
-        let endDateInput = element.shadowRoot.querySelector('lightning-input[data-id="endDateInput"]');
         
-        startDateInput.value = '2019-03-01';
-        endDateInput.value = '2019-03-31';
-        startDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : startDateInput.value }}));
-        endDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : endDateInput.value }}));
+        test('wire params: manual filters', async () => {
+    
+            // create time entries tree grid and add to DOM
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+    
+            let startDateInput = element.shadowRoot.querySelector('lightning-input[data-id="startDateInput"]');
+            let endDateInput = element.shadowRoot.querySelector('lightning-input[data-id="endDateInput"]');
+            
+            startDateInput.value = '2019-03-01';
+            endDateInput.value = '2019-03-31';
+            startDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : startDateInput.value }}));
+            endDateInput.dispatchEvent(new CustomEvent('change', { detail : { value : endDateInput.value }}));
+    
+            await Promise.resolve();
 
-        return Promise.resolve().then(() => {
-            expect(getTimeEntriesAdapter.getLastConfig()).toEqual(
-                { startDate : '2019-03-01', endDate : '2019-03-31' }
-            );
+            expect(getTimeEntriesAdapter.getLastConfig()).toEqual({ startDate: '2019-03-01', endDate: '2019-03-31' });
+    
         });
 
-    });
+        test('wire response: success with data', async () => {
 
-    test('retrieve data from wire: success', () => {
+            // create time entries tree grid and add to DOM
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+    
+            getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
+    
+            await Promise.resolve();
 
-        // create time entries tree grid and add to DOM
-        const element = createElement('c-time-entries-tree-grid', {
-            is: treeGrid
-        });
-        document.body.appendChild(element);
-
-        getTimeEntriesAdapter.emit(APPROVED_TIME_ENTRIES);
-
-        return Promise.resolve().then(() => {
             let dataTable = element.shadowRoot.querySelector('lightning-datatable');
             expect(dataTable.data).toEqual(APPROVED_TIME_ENTRIES);
             expect(dataTable.data.length).toBe(APPROVED_TIME_ENTRIES.length);
-
             let errBox = element.shadowRoot.querySelector('c-message-box');
             expect(errBox).toBeNull();
+    
         });
 
-    });
+        test('wire response: success without data', async () => {
 
-    test('retrieve data from wire: error', () => {
+            // create time entries tree grid and add to DOM
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+    
+            getTimeEntriesAdapter.emit(EMPTY_LIST);
+    
+            await Promise.resolve();
+            
+            let dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            expect(dataTable.data).toEqual(EMPTY_LIST);
+            expect(dataTable.data.length).toBe(0);
 
-        const element = createElement('c-time-entries-tree-grid', {
-            is: treeGrid
+            let msgBoxes = element.shadowRoot.querySelectorAll('c-message-box');
+            expect(msgBoxes.length).toBe(1);
+            expect(msgBoxes[0].variant).toBe('warning');
+    
         });
-        document.body.appendChild(element);
 
-        getTimeEntriesAdapter.error();
+        test('retrieve data from wire: error', async () => {
 
-        return Promise.resolve().then(() => {
+            const element = createElement('c-time-entries-tree-grid', {
+                is: treeGrid
+            });
+            document.body.appendChild(element);
+    
+            getTimeEntriesAdapter.error();
+    
+            await Promise.resolve();
+            
             let dataTable = element.shadowRoot.querySelector('lightning-datatable');
             expect(dataTable).toBeNull();
-
             let errBox = element.shadowRoot.querySelector('c-message-box');
             expect(errBox).not.toBeNull();
             expect(errBox.variant).toBe('error');
         });
+
     });
+
 
     describe('invoice time entries', () => {
 

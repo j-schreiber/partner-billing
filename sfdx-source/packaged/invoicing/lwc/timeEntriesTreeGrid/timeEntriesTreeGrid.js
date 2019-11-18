@@ -10,6 +10,7 @@ import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_InvoicingRunSuc
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 import TOAST_TITLE_WARN from '@salesforce/label/c.Toast_Title_NoTimeEntriesSelected';
 import CARD_TITLE from '@salesforce/label/c.Invoicing_Label_FilterHeader';
+import MESSAGE_NO_RECORDS from '@salesforce/label/c.Message_Generic_NoRecordsFound';
 import STARTDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateStart';
 import ENDDATE_PICKER_LABEL from '@salesforce/label/c.Invoicing_Label_ServiceDateEnd';
 
@@ -50,7 +51,8 @@ export default class TimeEntriesTreeGrid extends LightningElement {
         ENDDATE_PICKER_LABEL,
         TOAST_TITLE_SUCCESS,
         TOAST_TITLE_ERROR,
-        TOAST_TITLE_WARN
+        TOAST_TITLE_WARN,
+        MESSAGE_NO_RECORDS
     }
 
     /**                                     PUBLIC COMPONENT API                                     */
@@ -123,6 +125,10 @@ export default class TimeEntriesTreeGrid extends LightningElement {
             return getErrorsAsString(this.timeEntries.error);
         }
         return '';
+    }
+
+    get hasNoRecords() {
+        return (this.timeEntries.data && this.timeEntries.data.length === 0);
     }
 
 }

@@ -75,6 +75,11 @@
                 <template if:true={timeEntries.error}>
                     <c-message-box variant="error" message={wireErrors}></c-message-box>
                 </template>
+                <template if:true={hasNoRecords}>
+                    <div class="slds-m-vertical_medium">
+                        <c-message-box variant="warning" message={LABELS.MESSAGE_NO_RECORDS}></c-message-box>
+                    </div>
+                </template>
                 <template if:true={timeEntries.data}>
                     <lightning-datatable columns={columns} data={timeEntries.data} key-field="Id"></lightning-datatable>
                 </template>
