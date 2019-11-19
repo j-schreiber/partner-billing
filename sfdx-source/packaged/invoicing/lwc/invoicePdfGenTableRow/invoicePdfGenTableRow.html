@@ -1,0 +1,67 @@
+<template>
+    <td>
+        {invoice.Record.Name}
+    </td>
+    <td>
+        {invoice.Record.Account__r.Name}
+    </td>
+    <td>
+        <lightning-formatted-number
+            value={invoice.Record.TotalAmount__c}
+            format-style="currency"
+            currency-code={invoice.Record.CurrencyIsoCode}>
+        </lightning-formatted-number>
+    </td>
+    <td>
+        <lightning-formatted-number
+            value={invoice.Record.TotalGrossAmount__c}
+            format-style="currency"
+            currency-code={invoice.Record.CurrencyIsoCode}>
+        </lightning-formatted-number>
+    </td>
+    <td>
+        <c-pdf-generation-options
+            invoice={invoice.Record}
+            disabled={pdfRecordId}
+            onoptionchange={handleOptionsChange}
+            org-profiles={orgProfiles}>
+        </c-pdf-generation-options>
+    </td>
+    <td>
+        <div class="slds-is-relative slds-align_absolute-center">
+            <template if:false={pdfRecordId}>
+                <lightning-button
+                    class="slds-m-horizontal_xx-small"
+                    label="Generate PDF"
+                    icon-name="utility:insert_template"
+                    variant="success"
+                    disabled={isWorking}
+                    onclick={createPdf}>
+                </lightning-button>
+            </template>
+            <template if:true={isWorking}>
+                <lightning-spinner alternative-text="Creating PDF ..." size="small"></lightning-spinner>
+            </template>
+            <template if:true={pdfRecordId}>
+                <lightning-button
+                    class="slds-m-horizontal_xx-small"
+                    label="View"
+                    icon-name="utility:display_text"
+                    variant="success"
+                    disabled={isWorking}
+                    onclick={viewPdf}>
+                </lightning-button>
+                <lightning-button
+                    class="slds-m-horizontal_xx-small"
+                    label="Delete"
+                    icon-name="utility:delete"
+                    variant="destructive"
+                    disabled={isWorking}
+                    onclick={deletePdf}>
+                </lightning-button>
+            </template>
+        </div>
+
+    </td>
+
+</template>

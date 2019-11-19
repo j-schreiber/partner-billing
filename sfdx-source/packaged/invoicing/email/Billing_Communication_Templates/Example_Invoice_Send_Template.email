@@ -1,0 +1,8 @@
+<p>
+    Dear Sirs and Madams,<br/>
+    <br/>
+    please find your invoice for service period {!Invoice__c.ServicePeriodFrom__c} to {!Invoice__c.ServicePeriodTo__c} attached.<br/>
+    <br/>
+    Best,<br/>
+    {!User.Name}
+<p>

@@ -11,6 +11,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+            <value>
                 <fullName>Draft</fullName>
                 <default>true</default>
                 <label>Draft</label>
@@ -19,11 +24,6 @@
                 <fullName>Activated</fullName>
                 <default>false</default>
                 <label>Activated</label>
-            </value>
-            <value>
-                <fullName>Cancelled</fullName>
-                <default>false</default>
-                <label>Cancelled</label>
             </value>
         </valueSetDefinition>
     </valueSet>

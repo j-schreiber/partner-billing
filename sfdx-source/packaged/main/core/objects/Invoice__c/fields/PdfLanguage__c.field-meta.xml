@@ -2,8 +2,8 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PdfLanguage__c</fullName>
     <externalId>false</externalId>
-    <label>Language (PDF)</label>
     <inlineHelpText>Set the languge of the rendered PDF</inlineHelpText>
+    <label>Language (PDF)</label>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -12,19 +12,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <label>German (Germany)</label>
-                <default>true</default>
                 <fullName>de_DE</fullName>
+                <default>true</default>
+                <label>German (Germany)</label>
             </value>
             <value>
-                <label>English (Germany)</label>
-                <default>false</default>
                 <fullName>en_DE</fullName>
+                <default>false</default>
+                <label>English (Germany)</label>
             </value>
             <value>
-                <label>English (USA)</label>
-                <default>false</default>
                 <fullName>en_US</fullName>
+                <default>false</default>
+                <label>English (USA)</label>
             </value>
         </valueSetDefinition>
     </valueSet>

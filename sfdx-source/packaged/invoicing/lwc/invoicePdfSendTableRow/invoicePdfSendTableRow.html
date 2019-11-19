@@ -1,0 +1,41 @@
+<template>
+    <td>
+        {invoice.Record.Name}
+    </td>
+    <td>
+        {invoice.Record.Account__r.Name}
+    </td>
+    <td>
+        <div class="slds-grid slds-grid_align-center">
+
+            <c-pdf-send-options
+                pdf-id={pdfRecordId}
+                onoptionschange={handleOptionsChange}
+                invoice={invoice}>
+            </c-pdf-send-options>
+            
+        </div>
+    </td>
+    <td>
+        <div class="slds-grid slds-grid_align-center slds-is-relative">
+            <lightning-button
+                label="Send"
+                icon-name="utility:send"
+                variant="success"
+                disabled={sendButtonDisabled}
+                onclick={sendPdf}>
+            </lightning-button>
+            <template if:true={isWorking}>
+                <lightning-spinner size="small" alternative-text="Sending Emails .."></lightning-spinner>
+            </template>
+            <template if:true={hasEmailMessages}>
+                <lightning-button
+                    class="slds-m-left_small"
+                    label={numberOfEmailMessages}
+                    icon-name="utility:new_window"
+                    onclick={openTasksRelatedList}>
+                </lightning-button>
+            </template>
+        </div>
+    </td>
+</template>

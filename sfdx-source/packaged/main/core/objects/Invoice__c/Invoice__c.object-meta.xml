@@ -146,7 +146,8 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>CUSTOM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <description>Invoices for Accounts</description>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>

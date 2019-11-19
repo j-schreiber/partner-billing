@@ -1,3 +1,11 @@
 {
-    "extends": "@salesforce/eslint-config-lwc/recommended"
+    "extends": "@salesforce/eslint-config-lwc/recommended",
+    "rules": {
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTernary": true
+            }
+        ]
+    }
 }

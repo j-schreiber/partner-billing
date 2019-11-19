@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Discount_between_0_and_100</fullName>
+    <active>true</active>
+    <description>Discount must be positive value between 0 and 100</description>
+    <errorConditionFormula>Discount__c &lt; 0 || Discount__c &gt; 100</errorConditionFormula>
+    <errorDisplayField>Discount__c</errorDisplayField>
+    <errorMessage>Must be positive number between 0 and 100</errorMessage>
+</ValidationRule>

@@ -30,6 +30,12 @@
         "files": ["../BusinessAccounts.json"]
     },
     {
+        "sobject": "Contact",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": ["../Contacts.json"]
+    },
+    {
         "sobject": "Budget__c",
         "saveRefs": true,
         "resolveRefs": true,
@@ -51,6 +57,6 @@
         "sobject": "TimeEntry__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../TimeEntries.json"]
+        "files": ["../TimeEntries.json", "../TimeEntries_NonInvoiced.json"]
     }
 ]

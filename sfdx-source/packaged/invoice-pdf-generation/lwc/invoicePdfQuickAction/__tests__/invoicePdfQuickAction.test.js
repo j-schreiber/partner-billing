@@ -1,4 +1,3 @@
-// lwcComponentName.test.js
 import { createElement } from 'lwc';
 import invoicePdf from 'c/invoicePdfQuickAction';
 

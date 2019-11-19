@@ -38,16 +38,12 @@
                 <field>Unit__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Amount__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>GrossAmount__c</field>
+                <behavior>Edit</behavior>
+                <field>Tax__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Tax__c</field>
+                <field>Discount__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -58,6 +54,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Product__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Amount__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>GrossAmount__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

@@ -2,9 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Amount__c</fullName>
     <externalId>false</externalId>
-    <formula>Price__c * Quantity__c</formula>
+    <formula>Price__c * Quantity__c * (1-Discount__c)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <description>Calculated "Net" amount, that is without taxes</description>
+    <description>Calculated "Net" amount, including taxes and considering discounts</description>
     <inlineHelpText>Net Amount (without taxes)</inlineHelpText>
     <label>Amount (Net)</label>
     <precision>18</precision>

@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-grid">
+        <lightning-button
+            class="slds-m-horizontal_large"
+            label="View"
+            icon-name="utility:display_text"
+            variant="neutral"
+            onclick={viewPdf}>
+        </lightning-button>
+        <lightning-combobox
+            class="slds-m-horizontal_xx-small sender-selection-input"
+            placeholder={LABELS.PLACEHOLDER_SENDER_ADDRESS}
+            disabled={disabled}
+            variant="label-hidden"
+            label={LABELS.LABEL_SENDER_ADDRESS}
+            options={senderAddressOptions}
+            value={selectedSenderAddress}
+            onchange={handleAddressSelection}>
+        </lightning-combobox>
+        <lightning-combobox
+            class="slds-m-horizontal_xx-small template-selection-input"
+            placeholder={LABELS.PLACEHOLDER_MAIL_TEMPLATE}
+            disabled={disabled}
+            variant="label-hidden"
+            label={LABELS.LABEL_MAIL_TEMPLATE}
+            options={mailTemplateOptions}
+            value={selectedTemplate}
+            onchange={handleTemplateSelection}>
+        </lightning-combobox>
+        <c-billing-contact-lookup
+            onselectionchange={handleSelectionChange}
+            account-id={invoice.Record.Account__c}>
+        </c-billing-contact-lookup>
+        <lightning-button-icon
+            class="slds-m-horizontal_xx-small"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text={LABELS.BUTTON_TEXT_RESET}
+            onclick={reset}>
+        </lightning-button-icon>
+    </div>
+
+</template>

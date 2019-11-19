@@ -1,0 +1,46 @@
+<template>
+
+    <lightning-card>
+        <lightning-button-icon
+            class="slds-m-horizontal_medium"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text="Refresh Data"
+            disabled={readonly}
+            onclick={reset}>
+        </lightning-button-icon>
+        <lightning-button
+            label="New Line Item"
+            icon-name="utility:add"
+            slot="actions"
+            class="slds-m-right_large"
+            disabled={readonly}
+            onclick={addLineItem}>
+        </lightning-button>
+        <lightning-button
+            slot="actions"
+            label="Commit Changes"
+            data-id="commitChanges"
+            variant="brand"
+            onclick={commitLineItems}>
+        </lightning-button>
+
+        <!-- the line item table -->
+        <div class="slds-p-horizontal_medium slds-is-relative">
+            <template if:true={invoice.data}>
+                <c-invoice-line-item-datatable
+                    invoice-id={recordId}
+                    line-items={invoice.data.LineItems}>
+                </c-invoice-line-item-datatable>
+            </template>
+            <template if:true={invoice.error}>
+                {Error}
+            </template>
+            <template if:true={isWorking}>
+                <lightning-spinner alternative-text="Updating Line Items ..." size="large"></lightning-spinner>
+            </template>
+        </div>
+
+    </lightning-card>
+
+</template>

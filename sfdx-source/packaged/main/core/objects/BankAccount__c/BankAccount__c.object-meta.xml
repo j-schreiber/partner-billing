@@ -153,6 +153,7 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
+    <description>Credit information of a bank account that are linked to a organization profile.</description>
     <label>Bank Account</label>
     <nameField>
         <label>Account Name</label>

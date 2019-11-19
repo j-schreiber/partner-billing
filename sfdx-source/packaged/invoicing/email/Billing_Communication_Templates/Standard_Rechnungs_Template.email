@@ -1,0 +1,8 @@
+<p>
+    Sehr geehrte Damen und Herren,<br/>
+    <br/>
+    im Anhang erhalten Sie die aktuelle Rechnung für den Leistungszeitraum vom {!Invoice__c.ServicePeriodFrom__c} bis {!Invoice__c.ServicePeriodTo__c}.<br/>
+    <br/>
+    Beste Grüße,<br/>
+    {!User.Name}
+<p>

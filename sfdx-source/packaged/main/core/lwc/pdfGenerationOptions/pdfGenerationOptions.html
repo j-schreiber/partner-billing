@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+            <div class="slds-col">
+                <lightning-combobox 
+                    class="slds-m-around_small"
+                    disabled={disabled}
+                    variant="label-hidden"
+                    label={LABELS.OPTION_LABEL_ORGPROFILE}
+                    options={orgProfileOptions}
+                    value={selectedProfileOption}
+                    onchange={handleProfileSelection}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-combobox
+                    class="slds-m-around_small"
+                    disabled={disabled}
+                    variant="label-hidden"
+                    label={LABELS.OPTION_LABEL_LANGUAGE}
+                    options={languageOptions}
+                    value={selectedLanguageOption}
+                    onchange={handleLanguageSelection}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-input
+                    class="slds-m-around_small"
+                    disabled={disabled}
+                    label={LABELS.OPTION_LABEL_TIMESHEET}
+                    type="toggle"
+                    message-toggle-active="Show"
+                    message-toggle-inactive="Don't Show"
+                    checked={renderTimesheetOption}
+                    onchange={handleTimesheetToggle}>
+                </lightning-input>
+            </div>
+        </div>
+</template>

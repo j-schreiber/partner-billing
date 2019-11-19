@@ -13,7 +13,7 @@ public class InvoicePrint extends Invoice {
     public String PdfTitle {
         public get {
             PdfTitle = Record.PdfLanguage__c + '_' + Record.Name + '_' +
-                Record.Account__r.Name + '_' + (Attachments.size() + 1);
+                Record.Account__r.Name;
             return PdfTitle;
         }
         private set;
@@ -28,8 +28,31 @@ public class InvoicePrint extends Invoice {
         private set;
     }
 
+    /** @Description    The ContentDocument record where the PDF Content Versions are stored */
+    public ContentDocument PdfDocument {
+        public get {
+            if (PdfDocument == null) {
+                List<ContentDocument> docs = [SELECT Id FROM ContentDocument WHERE Title = :PdfTitle];
+                if (!docs.isEmpty()) PdfDocument = docs[0];
+            }
+            return PdfDocument;
+        }
+        public set;
+    }
+
+    public static final Map<String, RenderProperty> PdfRenderProperties = new Map<String, RenderProperty> {
+        'Id' => new RenderProperty('Id', false),
+        'orgProfileId' => new RenderProperty('Organization Profile Id', true),
+        'lang' => new RenderProperty('Language', true),
+        'displayTimesheet' => new RenderProperty('Display Timesheet', true)
+    };
+
     public InvoicePrint(String recordId) {
         super(recordId);
+    }
+
+    public InvoicePrint(Invoice__c sObjRecord) {
+        super(sObjRecord);
     }
 
     /** @Description
@@ -52,9 +75,9 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId) {
+    public PageReference createPdf(String orgProfileId) {
         PageReference invoicePdfPage = createPdf();
-        invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
+        if (String.isNotBlank(orgProfileId)) invoicePdfPage.getParameters().put('orgProfileId', orgProfileId);
         return invoicePdfPage;
     }
 
@@ -67,10 +90,12 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId, String lang) {
+    public PageReference createPdf(String orgProfileId, String lang) {
         PageReference invoicePdfPage = createPdf(orgProfileId);
-        invoicePdfPage.getParameters().put('lang', lang);
-        Record.PdfLanguage__c = lang;
+        if (String.isNotBlank(lang)) {
+            invoicePdfPage.getParameters().put('lang', lang);
+            Record.PdfLanguage__c = lang;
+        }
         return invoicePdfPage;
     }
 
@@ -84,26 +109,63 @@ public class InvoicePrint extends Invoice {
     *
     *   @return                 Initialized visualforce PDF renderer page
     */
-    public PageReference createPdf(Id orgProfileId, String lang, Boolean timesheet) {
+    public PageReference createPdf(String orgProfileId, String lang, Boolean timesheet) {
         PageReference invoicePdfPage = createPdf(orgProfileId, lang);
-        invoicePdfPage.getParameters().put('displayTimesheet', String.valueOf(timesheet));
-        Record.PdfRenderTimesheet__c = timesheet;
+        if (timesheet != null) {
+            invoicePdfPage.getParameters().put('displayTimesheet', String.valueOf(timesheet));
+            Record.PdfRenderTimesheet__c = timesheet;
+        }
         return invoicePdfPage;
     }
 
     /** @Description
-    *   Saves a Blob (presumably a PDF file) to the internal attachments of the invoice.
-    *   This method only caches the file and does not commit the attachments.
+    *   Saves a Blob (presumably a PDF file) to the Salesforce CRM Content and creates a link
+    *   for the content with this invoice. Subsequent calls to this method do not create new
+    *   content files but only update the existing with a new version (based on title)
     *
     *   @param  fileToSave  File that will be saved as attachment
     */
-    public void addFileToAttachments(Blob fileToSave) {
-        Attachment att = new Attachment(Body = fileToSave,
-                                        Name = PdfTitle + '.pdf',
-                                        ParentId = Record.Id);
-        Attachments.add(att);        
+    public ContentVersion saveToContentAttachments(PageReference pageRefToConvert) {
+        ContentVersion newVersion = getNewContentVersion(pageRefToConvert);
+        insert newVersion;
+        newVersion = [SELECT Id,ContentDocumentId,IsLatest,Title,FileExtension,VersionNumber,ReasonForChange FROM ContentVersion WHERE Id = :newVersion.Id];
+        Database.SaveResult linkSr = Database.insert(new ContentDocumentLink(LinkedEntityId=Record.Id, ContentDocumentId=PdfDocument.Id, ShareType='V'), false);
+        return newVersion;
     }
 
     /**                                 PRIVATE AREA                                 */
+
+    private ContentVersion getNewContentVersion(PageReference pageRefToConvert) {
+        Blob convertedPdf = Test.isRunningTest() ? Blob.valueOf(String.valueOf(pageRefToConvert)) : pageRefToConvert.getContentAsPdf();
+        ContentVersion ver = new ContentVersion(
+            Title=PdfTitle,
+            PathOnClient=PdfTitle+'.pdf',
+            VersionData=convertedPdf,
+            ReasonForChange=getReasonForChangeFromPageParameters(pageRefToConvert)
+        );
+        if (PdfDocument != null) ver.ContentDocumentId = PdfDocument.Id;
+        return ver;
+    }
+
+    private String getReasonForChangeFromPageParameters(PageReference pageRefToConvert) {
+        List<String> params = new List<String>();
+        for (String param : pageRefToConvert.getParameters().keySet()) {
+            if (PdfRenderProperties.containsKey(param) && PdfRenderProperties.get(param).Visible) {
+                params.add(PdfRenderProperties.get(param).DisplayName + '=' + pageRefToConvert.getParameters().get(param));
+            } 
+        }
+        return 'Rendered new PDF Version with: ' + String.join(params, ',');
+    }
+
+    public class RenderProperty {
+
+        String DisplayName;
+        Boolean Visible;
+
+        public RenderProperty(String name, Boolean isVis) {
+            DisplayName = name;
+            Visible = isVis;
+        }
+    }
 
 }

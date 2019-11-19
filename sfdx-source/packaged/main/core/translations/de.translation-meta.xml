@@ -1,40 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customApplications>
+        <label><!-- Enterprise Resource Planning --></label>
+        <name>Enterprise_Resource_Planning</name>
+    </customApplications>
+    <customLabels>
+        <label>E-Mail(s) konnten nicht zugestellt werden. Bitte prüfe die Fehlermeldungen.</label>
+        <name>Apex_Error_EmailSendFailed</name>
+    </customLabels>
     <customLabels>
         <label>PDF als Anhang speichern</label>
         <name>Button_Label_SaveToAttachments</name>
     </customLabels>
     <customLabels>
-        <label>PDF erfolgreich gespeichert!</label>
-        <name>Toast_Title_PdfSaveSuccess</name>
-    </customLabels>
-    <customLabels>
-        <label>Bei der Verarbeitung ist ein Fehler aufgetreten!</label>
-        <name>Toast_Title_GenericError</name>
+        <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
+        <name>InvoicePdf_Label_ActivateTimesheet</name>
     </customLabels>
     <customLabels>
         <label>Kundennummer</label>
         <name>InvoicePdf_Label_CustomerId</name>
     </customLabels>
     <customLabels>
-        <label>Rechnungsnummer</label>
-        <name>InvoicePdf_Label_InvoiceId</name>
-    </customLabels>
-    <customLabels>
         <label>Rechnungsdatum</label>
         <name>InvoicePdf_Label_InvoiceDate</name>
     </customLabels>
     <customLabels>
-        <label>Gesamt (Netto)</label>
-        <name>InvoicePdf_Label_TotalNetAmount</name>
+        <label>Rechnungsnummer</label>
+        <name>InvoicePdf_Label_InvoiceId</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
+        <name>InvoicePdf_Label_SelectOrgProfile</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
+        <name>InvoicePdf_Label_SelectRenderLanguage</name>
+    </customLabels>
+    <customLabels>
+        <label>Leistungszeitraum</label>
+        <name>InvoicePdf_Label_ServicePeriod</name>
     </customLabels>
     <customLabels>
         <label>Gesamt (Brutto)</label>
         <name>InvoicePdf_Label_TotalGrossAmount</name>
     </customLabels>
     <customLabels>
+        <label>Gesamt (Netto)</label>
+        <name>InvoicePdf_Label_TotalNetAmount</name>
+    </customLabels>
+    <customLabels>
         <label>Umsatzsteuer</label>
         <name>InvoicePdf_Label_TotalTaxes</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Rechnungskontakt</label>
+        <name>InvoicePdf_Placeholder_SelectBillingContact</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Mailtemplate</label>
+        <name>InvoicePdf_Placeholder_SelectMailTemplate</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Used in pdf rendering VP as template to render service period --></label>
+        <name>InvoicePdf_TextTemplate_ServicePeriod</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine ausführliche Aufstellung der abgerechneten Stunden mit detaillierter Aufgabenbeschreibung entnehmen Sie bitte dem angehängten Timesheet.</label>
+        <name>InvoicePdf_Text_DetailsInTimesheet</name>
     </customLabels>
     <customLabels>
         <label>Sehr geehrte Damen und Herren</label>
@@ -45,15 +77,215 @@
         <name>InvoicePdf_Text_Introduction</name>
     </customLabels>
     <customLabels>
-        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum auf das unten stehende Konto. Bei Zahlung als Referenz bitte Rechnungsnummer angeben.</label>
+        <label>Zahlbar innerhalb 30 Tage ab Rechnungsdatum auf das unten stehende Konto. Bitte geben Sie bei Zahlung als Referenz die Rechnungsnummer an.</label>
         <name>InvoicePdf_Text_TermsAndConditions</name>
     </customLabels>
     <customLabels>
-        <label>Eine ausführliche Aufstellung der abgerechneten Stunden mit detaillierter Aufgabenbeschreibung entnehmen Sie bitte dem angehängten Timesheet.</label>
-        <name>InvoicePdf_Text_DetailsInTimesheet</name>
+        <label>Wähle Leistungszeitraum und konfiguriere die Rechnungserstellung</label>
+        <name>Invoicing_Label_FilterHeader</name>
     </customLabels>
     <customLabels>
-        <label>Ein Zeitaufwand kann nicht mehr gelöscht werden, sobald er abgerechnet wurde.</label>
-        <name>ValidationError_CanNotDeleteInvoicedTimeEntry</name>
+        <label>Erzeuge PDF Dateien für Rechnungen</label>
+        <name>Invoicing_Label_InvoicesPdfCreateHeader</name>
     </customLabels>
+    <customLabels>
+        <label>Wähle Rechnungskontakte aus und versende Rechnungen</label>
+        <name>Invoicing_Label_InvoicesPdfSendTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Prüfe Rechnungen</label>
+        <name>Invoicing_Label_InvoicesReviewHeader</name>
+    </customLabels>
+    <customLabels>
+        <label>Ende Leistungszeitraum</label>
+        <name>Invoicing_Label_ServiceDateEnd</name>
+    </customLabels>
+    <customLabels>
+        <label>Beginn Leistungszeitraum</label>
+        <name>Invoicing_Label_ServiceDateStart</name>
+    </customLabels>
+    <customLabels>
+        <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
+        <name>Message_Generic_NoRecordsFound</name>
+    </customLabels>
+    <customLabels>
+        <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
+        <name>Message_Invoicing_DraftInvoicesCompleted</name>
+    </customLabels>
+    <customLabels>
+        <label>Es gibt aktuell keine Rechnungen, die für die PDF Erzeugung bereit sind. Eine Rechnung muss &quot;Aktiviert&quot; sein, um hier zu erscheinen.</label>
+        <name>Message_Invoicing_NoActivatedInvoices</name>
+    </customLabels>
+    <customLabels>
+        <label>Es gibt derzeit keine Rechnungen, die für diesen Schritt verfügbar sind. Rechnungen müssen &quot;Aktiviert&quot; sein und mindestens ein PDF erzeugt haben, um hier zu erscheinen. Erzeuge einige PDFs und komm dann wieder!</label>
+        <name>Message_Invoicing_NoPdfSendInvoices</name>
+    </customLabels>
+    <customLabels>
+        <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
+        <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
+    </customLabels>
+    <customLabels>
+        <label>Die Rechnung kann nicht entfernt werden!</label>
+        <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen gespeichert!</label>
+        <name>Toast_Title_DataSaved</name>
+    </customLabels>
+    <customLabels>
+        <label>Versand der E-Mail gescheitert!</label>
+        <name>Toast_Title_EmailSendFailure</name>
+    </customLabels>
+    <customLabels>
+        <label>E-Mail erfolgreich gesendet!</label>
+        <name>Toast_Title_EmailSendSuccess</name>
+    </customLabels>
+    <customLabels>
+        <label>Bei der Verarbeitung ist ein Fehler aufgetreten!</label>
+        <name>Toast_Title_GenericError</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnung und Positionen erfolgreich aktualisiert!</label>
+        <name>Toast_Title_InvoicesUpdated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Used in Aura / LWC UI as title of toast --></label>
+        <name>Toast_Title_InvoicingRunSuccess</name>
+    </customLabels>
+    <customLabels>
+        <label>Rechnungspositionen erfolgreich aktualisiert!</label>
+        <name>Toast_Title_LineItemsUpdated</name>
+    </customLabels>
+    <customLabels>
+        <label>Keine Stundeneinträge ausgewählt. Bitte wähle mindestens einen Eintrag aus, um fort zu fahren.</label>
+        <name>Toast_Title_NoTimeEntriesSelected</name>
+    </customLabels>
+    <customLabels>
+        <label>PDF erfolgreich gespeichert!</label>
+        <name>Toast_Title_PdfSaveSuccess</name>
+    </customLabels>
+    <customLabels>
+        <label>Löschen</label>
+        <name>UI_Button_Label_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Neue Position</label>
+        <name>UI_Button_Label_NewLineItem</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen zurücksetzen</label>
+        <name>UI_Button_Label_Refresh</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen zurücksetzen</label>
+        <name>UI_Button_Label_ResetAll</name>
+    </customLabels>
+    <customLabels>
+        <label>Speichern</label>
+        <name>UI_Button_Label_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>Alle Speichern</label>
+        <name>UI_Button_Label_SaveAll</name>
+    </customLabels>
+    <customLabels>
+        <label>Alle Speichern</label>
+        <name>UI_Button_Label_SaveAllButton</name>
+    </customLabels>
+    <customLabels>
+        <label>Speichern</label>
+        <name>UI_Button_Label_SaveButton</name>
+    </customLabels>
+    <customLabels>
+        <label>Aktiviere Timesheet</label>
+        <name>UI_Label_ActivateTimesheet</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Rechnungskontakt</label>
+        <name>UI_Label_SelectBillingContact</name>
+    </customLabels>
+    <customLabels>
+        <label>Mailtemplate auswählen</label>
+        <name>UI_Label_SelectMailTemplate</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Organisations-Profil</label>
+        <name>UI_Label_SelectOrgProfile</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Sprache</label>
+        <name>UI_Label_SelectRenderLanguage</name>
+    </customLabels>
+    <customLabels>
+        <label>Absender auswählen</label>
+        <name>UI_Label_SelectSenderAddress</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle Rechnungskontakt</label>
+        <name>UI_Placeholder_SelectBillingContact</name>
+    </customLabels>
+    <customLabels>
+        <label>- Mailtemplate auswählen -</label>
+        <name>UI_Placeholder_SelectMailTemplate</name>
+    </customLabels>
+    <customLabels>
+        <label>- Absender auswählen -</label>
+        <name>UI_Placeholder_SelectSender</name>
+    </customLabels>
+    <customLabels>
+        <label>Keine Änderungen gefunden!</label>
+        <name>UI_Toast_Title_NoChanges</name>
+    </customLabels>
+    <customTabs>
+        <label><!-- Invoicing --></label>
+        <name>Invoicing</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Testing --></label>
+        <name>Testing_Flexipage</name>
+    </customTabs>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewAccount --></label>
+        <name>NewAccount</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewCase --></label>
+        <name>NewCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewContact --></label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewEvent --></label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewGroup --></label>
+        <name>NewGroup</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewLead --></label>
+        <name>NewLead</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewNote --></label>
+        <name>NewNote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewOpportunity --></label>
+        <name>NewOpportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewTask --></label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
 </Translations>

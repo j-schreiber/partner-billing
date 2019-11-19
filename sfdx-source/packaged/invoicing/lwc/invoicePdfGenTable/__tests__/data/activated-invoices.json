@@ -1,0 +1,1580 @@
+[
+  {
+    "Attachments": [],
+    "hasLineItems": true,
+    "LineItems": [
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSoIAM",
+          "Name": "00000000",
+          "Amount__c": 780.63,
+          "GrossAmount__c": 928.94,
+          "Price__c": 1249,
+          "Quantity__c": 0.625,
+          "ServiceDate__c": "2019-06-01",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSrIAM",
+          "Name": "00000003",
+          "Amount__c": 624.5,
+          "GrossAmount__c": 743.16,
+          "Price__c": 1249,
+          "Quantity__c": 0.5,
+          "ServiceDate__c": "2019-06-27",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSpIAM",
+          "Name": "00000001",
+          "Amount__c": 750,
+          "GrossAmount__c": 892.5,
+          "Price__c": 750,
+          "Quantity__c": 1,
+          "ServiceDate__c": "2019-06-02",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSqIAM",
+          "Name": "00000002",
+          "Amount__c": 750,
+          "GrossAmount__c": 892.5,
+          "Price__c": 750,
+          "Quantity__c": 1,
+          "ServiceDate__c": "2019-06-15",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      }
+    ],
+    "Record": {
+      "Id": "a06R000000JrA8RIAV",
+      "Name": "2019-11-000000",
+      "Date__c": "2019-07-01",
+      "Status__c": "Activated",
+      "TotalAmount__c": 2905.13,
+      "TotalGrossAmount__c": 3457.1,
+      "BillingStreet__c": "Rechnungsstraße 1",
+      "BillingCity__c": "Augsburg",
+      "BillingPostalCode__c": "86159",
+      "BillingCountry__c": "Deutschland",
+      "BillingState__c": "Bayern",
+      "PdfLanguage__c": "de_DE",
+      "PdfRenderTimesheet__c": true,
+      "Account__c": "001R000001PZyu6IAD",
+      "ServicePeriodFrom__c": "2019-06-01",
+      "ServicePeriodTo__c": "2019-06-30",
+      "TimeEntries__r": [
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a09R000000AApLTIA1",
+          "Name": "20191118-000005",
+          "Date__c": "2019-06-01",
+          "StartTime__c": 25200000,
+          "EndTime__c": 43200000,
+          "Duration__c": 5,
+          "Status__c": "Approved",
+          "TotalAmount__c": 780.63,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a09R000000AApLVIA1",
+          "Name": "20191118-000007",
+          "Date__c": "2019-06-02",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a09R000000AApLWIA1",
+          "Name": "20191118-000008",
+          "Date__c": "2019-06-15",
+          "StartTime__c": 28800000,
+          "EndTime__c": 57600000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a09R000000AApLUIA1",
+          "Name": "20191118-000006",
+          "Date__c": "2019-06-27",
+          "StartTime__c": 25200000,
+          "EndTime__c": 39600000,
+          "Duration__c": 4,
+          "Status__c": "Approved",
+          "TotalAmount__c": 624.5,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+        }
+      ],
+      "LineItems__r": [
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSoIAM",
+          "Name": "00000000",
+          "Amount__c": 780.63,
+          "GrossAmount__c": 928.94,
+          "Price__c": 1249,
+          "Quantity__c": 0.625,
+          "ServiceDate__c": "2019-06-01",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSrIAM",
+          "Name": "00000003",
+          "Amount__c": 624.5,
+          "GrossAmount__c": 743.16,
+          "Price__c": 1249,
+          "Quantity__c": 0.5,
+          "ServiceDate__c": "2019-06-27",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSpIAM",
+          "Name": "00000001",
+          "Amount__c": 750,
+          "GrossAmount__c": 892.5,
+          "Price__c": 750,
+          "Quantity__c": 1,
+          "ServiceDate__c": "2019-06-02",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8RIAV",
+          "Id": "a05R0000005iNSqIAM",
+          "Name": "00000002",
+          "Amount__c": 750,
+          "GrossAmount__c": 892.5,
+          "Price__c": 750,
+          "Quantity__c": 1,
+          "ServiceDate__c": "2019-06-15",
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      ],
+      "Account__r": {
+        "Name": "Starship Galactica Ltd.",
+        "CustomerId__c": "1000",
+        "OwnerId": "005R0000004O15xIAC",
+        "Id": "001R000001PZyu6IAD",
+        "Owner": {
+          "Name": "User User",
+          "Email": "business@lietzau-consulting.de",
+          "Id": "005R0000004O15xIAC"
+        }
+      }
+    }
+  },
+  {
+    "Attachments": [],
+    "hasLineItems": true,
+    "LineItems": [
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNSuIAM",
+          "Name": "00000006",
+          "Amount__c": 5037.5,
+          "GrossAmount__c": 5037.5,
+          "Description__c": "We did this and that. Also something where no product is available, so this is the custom and very detailed description.",
+          "Price__c": 650,
+          "Quantity__c": 7.75,
+          "Tax__c": 0,
+          "Productname__c": "We did this and that. Also somethin...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR"
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNStIAM",
+          "Name": "00000005",
+          "Amount__c": 1873.5,
+          "GrossAmount__c": 2229.47,
+          "Description__c": "See referenced time sheet for details",
+          "Price__c": 1249,
+          "Quantity__c": 1.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNSsIAM",
+          "Name": "00000004",
+          "Amount__c": 4875,
+          "GrossAmount__c": 5801.25,
+          "Description__c": "See referenced time sheet for details",
+          "Price__c": 750,
+          "Quantity__c": 6.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      }
+    ],
+    "Record": {
+      "Id": "a06R000000JrA8SIAV",
+      "Name": "2019-11-000001",
+      "Date__c": "2019-07-31",
+      "Status__c": "Activated",
+      "TotalAmount__c": 11786,
+      "TotalGrossAmount__c": 13068.22,
+      "BillingStreet__c": "Allersberger Str. 8-10",
+      "BillingCity__c": "Nürnberg",
+      "BillingPostalCode__c": "90461",
+      "BillingCountry__c": "Germany",
+      "PdfLanguage__c": "de_DE",
+      "PdfRenderTimesheet__c": true,
+      "Account__c": "001R000001PZyu6IAD",
+      "ServicePeriodFrom__c": "2019-07-01",
+      "ServicePeriodTo__c": "2019-07-31",
+      "TimeEntries__r": [
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLXIA1",
+          "Name": "20191118-000009",
+          "Date__c": "2019-07-01",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLeIAL",
+          "Name": "20191118-000016",
+          "Date__c": "2019-07-01",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 1249,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLYIA1",
+          "Name": "20191118-000010",
+          "Date__c": "2019-07-02",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLZIA1",
+          "Name": "20191118-000011",
+          "Date__c": "2019-07-03",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLaIAL",
+          "Name": "20191118-000012",
+          "Date__c": "2019-07-05",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLbIAL",
+          "Name": "20191118-000013",
+          "Date__c": "2019-07-08",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLcIAL",
+          "Name": "20191118-000014",
+          "Date__c": "2019-07-09",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLdIAL",
+          "Name": "20191118-000015",
+          "Date__c": "2019-07-10",
+          "StartTime__c": 25200000,
+          "EndTime__c": 54000000,
+          "Duration__c": 8,
+          "Status__c": "Approved",
+          "TotalAmount__c": 750,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a09R000000AApLfIAL",
+          "Name": "20191118-000017",
+          "Date__c": "2019-07-15",
+          "StartTime__c": 25200000,
+          "EndTime__c": 39600000,
+          "Duration__c": 4,
+          "Status__c": "Approved",
+          "TotalAmount__c": 624.5,
+          "Description__c": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At"
+        }
+      ],
+      "LineItems__r": [
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNSuIAM",
+          "Name": "00000006",
+          "Amount__c": 5037.5,
+          "GrossAmount__c": 5037.5,
+          "Description__c": "We did this and that. Also something where no product is available, so this is the custom and very detailed description.",
+          "Price__c": 650,
+          "Quantity__c": 7.75,
+          "Tax__c": 0,
+          "Productname__c": "We did this and that. Also somethin...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR"
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNStIAM",
+          "Name": "00000005",
+          "Amount__c": 1873.5,
+          "GrossAmount__c": 2229.47,
+          "Description__c": "See referenced time sheet for details",
+          "Price__c": 1249,
+          "Quantity__c": 1.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX0IAI",
+          "Productname__c": "Hull and Support-Systems Maintenanc...",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Hull and Support-Systems Maintenance",
+            "Id": "01tR0000005qnX0IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8SIAV",
+          "Id": "a05R0000005iNSsIAM",
+          "Name": "00000004",
+          "Amount__c": 4875,
+          "GrossAmount__c": 5801.25,
+          "Description__c": "See referenced time sheet for details",
+          "Price__c": 750,
+          "Quantity__c": 6.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      ],
+      "Account__r": {
+        "Name": "Starship Galactica Ltd.",
+        "CustomerId__c": "1000",
+        "OwnerId": "005R0000004O15xIAC",
+        "Id": "001R000001PZyu6IAD",
+        "Owner": {
+          "Name": "User User",
+          "Email": "business@lietzau-consulting.de",
+          "Id": "005R0000004O15xIAC"
+        }
+      }
+    }
+  },
+  {
+    "Attachments": [],
+    "hasLineItems": true,
+    "LineItems": [
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTEIA2",
+          "Name": "00000026",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTDIA2",
+          "Name": "00000025",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSvIAM",
+          "Name": "00000007",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTBIA2",
+          "Name": "00000023",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTAIA2",
+          "Name": "00000022",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT9IAM",
+          "Name": "00000021",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT8IAM",
+          "Name": "00000020",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT7IAM",
+          "Name": "00000019",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT6IAM",
+          "Name": "00000018",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT5IAM",
+          "Name": "00000017",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT4IAM",
+          "Name": "00000016",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT3IAM",
+          "Name": "00000015",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT2IAM",
+          "Name": "00000014",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT1IAM",
+          "Name": "00000013",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT0IAM",
+          "Name": "00000012",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSzIAM",
+          "Name": "00000011",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSyIAM",
+          "Name": "00000010",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSxIAM",
+          "Name": "00000009",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSwIAM",
+          "Name": "00000008",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTFIA2",
+          "Name": "00000027",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTGIA2",
+          "Name": "00000028",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTHIA2",
+          "Name": "00000029",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTIIA2",
+          "Name": "00000030",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTJIA2",
+          "Name": "00000031",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTKIA2",
+          "Name": "00000032",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTLIA2",
+          "Name": "00000033",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      },
+      {
+        "Record": {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTCIA2",
+          "Name": "00000024",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      }
+    ],
+    "Record": {
+      "Id": "a06R000000JrA8TIAV",
+      "Name": "2019-11-000002",
+      "Date__c": "2019-08-31",
+      "Status__c": "Activated",
+      "TotalAmount__c": 8775,
+      "TotalGrossAmount__c": 10442.25,
+      "BillingStreet__c": "Allersberger Str. 8-10",
+      "BillingCity__c": "Nürnberg",
+      "BillingPostalCode__c": "90461",
+      "BillingCountry__c": "Germany",
+      "PdfLanguage__c": "de_DE",
+      "PdfRenderTimesheet__c": true,
+      "Account__c": "001R000001PZyu6IAD",
+      "ServicePeriodFrom__c": "2019-08-01",
+      "ServicePeriodTo__c": "2019-08-31",
+      "TimeEntries__r": [
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a09R000000AApLOIA1",
+          "Name": "20191118-000000",
+          "Date__c": "2019-08-30",
+          "StartTime__c": 28800000,
+          "EndTime__c": 50400000,
+          "Duration__c": 6,
+          "Status__c": "Approved",
+          "TotalAmount__c": 1050
+        }
+      ],
+      "LineItems__r": [
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTEIA2",
+          "Name": "00000026",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTDIA2",
+          "Name": "00000025",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSvIAM",
+          "Name": "00000007",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTBIA2",
+          "Name": "00000023",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTAIA2",
+          "Name": "00000022",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT9IAM",
+          "Name": "00000021",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT8IAM",
+          "Name": "00000020",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT7IAM",
+          "Name": "00000019",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT6IAM",
+          "Name": "00000018",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT5IAM",
+          "Name": "00000017",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT4IAM",
+          "Name": "00000016",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT3IAM",
+          "Name": "00000015",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT2IAM",
+          "Name": "00000014",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT1IAM",
+          "Name": "00000013",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNT0IAM",
+          "Name": "00000012",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSzIAM",
+          "Name": "00000011",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSyIAM",
+          "Name": "00000010",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSxIAM",
+          "Name": "00000009",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNSwIAM",
+          "Name": "00000008",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTFIA2",
+          "Name": "00000027",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTGIA2",
+          "Name": "00000028",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTHIA2",
+          "Name": "00000029",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTIIA2",
+          "Name": "00000030",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTJIA2",
+          "Name": "00000031",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTKIA2",
+          "Name": "00000032",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTLIA2",
+          "Name": "00000033",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        },
+        {
+          "Invoice__c": "a06R000000JrA8TIAV",
+          "Id": "a05R0000005iNTCIA2",
+          "Name": "00000024",
+          "Amount__c": 325,
+          "GrossAmount__c": 386.75,
+          "Price__c": 650,
+          "Quantity__c": 0.5,
+          "Tax__c": 19,
+          "Product__c": "01tR0000005qnX1IAI",
+          "Productname__c": "Battle-Damage Ship Repair",
+          "Discount__c": 0,
+          "CurrencyIsoCode": "EUR",
+          "Product__r": {
+            "Name": "Battle-Damage Ship Repair",
+            "Id": "01tR0000005qnX1IAI"
+          }
+        }
+      ],
+      "Account__r": {
+        "Name": "Starship Galactica Ltd.",
+        "CustomerId__c": "1000",
+        "OwnerId": "005R0000004O15xIAC",
+        "Id": "001R000001PZyu6IAD",
+        "Owner": {
+          "Name": "User User",
+          "Email": "business@lietzau-consulting.de",
+          "Id": "005R0000004O15xIAC"
+        }
+      }
+    }
+  }
+]

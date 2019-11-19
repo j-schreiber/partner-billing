@@ -1,0 +1,94 @@
+<template>
+
+    <div class="slds-m-bottom_medium">
+        <lightning-card title={LABELS.CARD_TITLE}>
+
+            <lightning-button-icon
+                class="slds-m-horizontal_medium"
+                slot="actions"
+                icon-name="utility:refresh"
+                alternative-text="Refresh Data"
+                onclick={refreshData}>
+            </lightning-button-icon>
+
+            <lightning-button
+                slot="actions"
+                data-id="invoiceButton"
+                label="Create Invoices for Selected"
+                variant="brand"
+                onclick={invoiceSelectedTimeEntries}>
+            </lightning-button>
+
+            <div class="slds-p-around_medium slds-grid slds-grid_align-space">
+                <div class="slds-grid">
+                    <div class="slds-box slds-grid slds-m-horizontal_small">
+                        <lightning-input
+                            class="slds-m-right_medium"
+                            type="date"
+                            data-id="startDateInput"
+                            label={LABELS.STARTDATE_PICKER_LABEL}
+                            onchange={handleStartDateChange}
+                            max={filterEndDate}
+                            value={filterStartDate}>
+                        </lightning-input>
+                        <lightning-input
+                            class="slds-m-right_medium"
+                            type="date"
+                            data-id="endDateInput"
+                            label={LABELS.ENDDATE_PICKER_LABEL}
+                            onchange={handleEndDateChange}
+                            min={filterStartDate}
+                            value={filterEndDate}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-box slds-grid slds-m-horizontal_small">
+                        <lightning-input
+                            class="slds-m-right_medium" 
+                            label="Override Service Period"
+                            type="toggle"
+                            message-toggle-active="Filter"
+                            message-toggle-inactive="Time Entries"
+                            checked
+                            onchange={handleServicePeriodToggle}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Collapse Time Entries"
+                            type="toggle"
+                            message-toggle-active="Collapse"
+                            message-toggle-inactive="Don't Collapse"
+                            checked
+                            onchange={handleCollapseToggle}>
+                        </lightning-input>
+                    </div>
+                   
+                </div>
+
+            </div>
+    
+        </lightning-card>
+    </div>
+    
+    <div>
+        <lightning-card>
+            
+            <div class="slds-p-horizontal_medium slds-is-relative">
+                <template if:true={timeEntries.error}>
+                    <c-message-box variant="error" message={wireErrors}></c-message-box>
+                </template>
+                <template if:true={hasNoRecords}>
+                    <div class="slds-m-vertical_medium">
+                        <c-message-box variant="warning" message={LABELS.MESSAGE_NO_RECORDS}></c-message-box>
+                    </div>
+                </template>
+                <template if:true={timeEntries.data}>
+                    <lightning-datatable columns={columns} data={timeEntries.data} key-field="Id"></lightning-datatable>
+                </template>
+                <template if:true={isWorking}>
+                    <lightning-spinner alternative-text="Crunching Numbers ..." size="large"></lightning-spinner>
+                </template>
+            </div>
+
+        </lightning-card>
+    </div>
+    
+</template>

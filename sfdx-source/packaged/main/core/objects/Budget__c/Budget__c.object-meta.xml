@@ -146,7 +146,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Create and track individually controlled budgets for customers (i.e. for projects or individual time frames)</description>
+    <description>Individually controlled budgets for customers (i.e. for projects or specific time periods)</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>

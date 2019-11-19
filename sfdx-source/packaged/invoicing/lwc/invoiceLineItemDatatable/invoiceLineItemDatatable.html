@@ -1,0 +1,32 @@
+<template>
+
+    <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+
+        <thead>
+            <th class="cell-width_medium">Product</th>
+            <th class="cell-width_small">Price</th>
+            <th class="cell-width_small">Quantity</th>
+            <th class="cell-width_small">Tax</th>
+            <th class="cell-width_small">Discount</th>
+            <th>Amount (Net)</th>
+            <th>Amount (Gross)</th>
+            <th class="cell-width_medium">Description</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <!-- render all line items as table rows -->
+            <template for:each={lineItemsList} for:item='lineitem'>
+                <c-invoice-line-item-datatable-row 
+                    line-item={lineitem}
+                    is-disabled={isDisabled}
+                    key={lineitem.ExtId}
+                    onrecalculate={recalculateSums}
+                    onrecorddelete={cacheRowDelete}
+                    onrecordchange={cacheRowChange}
+                    onrecordreset={resetRow}>
+                </c-invoice-line-item-datatable-row>
+            </template>
+            
+        </tbody>
+    </table>
+</template>

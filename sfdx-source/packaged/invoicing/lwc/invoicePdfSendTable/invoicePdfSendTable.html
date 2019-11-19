@@ -1,0 +1,54 @@
+<template>
+
+    <lightning-card title={LABELS.CARD_TITLE}>
+
+        <lightning-button-icon
+            class="slds-m-horizontal_medium"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text="Refresh Data"
+            onclick={refresh}>
+        </lightning-button-icon>
+
+        <lightning-button
+            slot="actions"
+            label="Send PDFs"
+            variant="brand"
+            onclick={sendAllPdfs}>
+        </lightning-button>
+
+        <div class="slds-p-horizontal_medium slds-is-relative">
+            <template if:true={hasNoRecords}>
+                <div class="slds-m-vertical_medium">
+                    <c-message-box variant="warning" message={LABELS.MESSAGE_NO_RECORDS}></c-message-box>
+                </div>
+            </template>
+            <template if:true={invoices.data}>
+                <table class="slds-table slds-table_bordered">
+                    <thead>
+                        <tr>
+                            <th>Invoice Number</th>
+                            <th>Accountname</th>
+                            <th colspan="2">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={invoices.data} for:item='inv'>
+                            <c-invoice-pdf-send-table-row
+                                key={inv.Record.Id}
+                                invoice={inv}>
+                            </c-invoice-pdf-send-table-row>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:true={isWorking}>
+                <div class="spinner-container">
+                    <lightning-spinner alternative-text="Fetching Data ..." size="large"></lightning-spinner>
+                </div>
+            </template>
+        </div>
+
+    </lightning-card>
+
+</template>

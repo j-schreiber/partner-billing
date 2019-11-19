@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>Apex_Error_EmailSendFailed</fullName>
+        <categories>apex,label,errors</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as error message when email send failed</shortDescription>
+        <value>Email(s) could not be delivered. Please review error details.</value>
+    </labels>
+    <labels>
         <fullName>Button_Label_SaveToAttachments</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
@@ -9,20 +17,12 @@
         <value>Save PDF to Attachments</value>
     </labels>
     <labels>
-        <fullName>Toast_Title_GenericError</fullName>
-        <categories>ui,toast</categories>
+        <fullName>InvoicePdf_Label_ActivateTimesheet</fullName>
+        <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
-        <value>An error occured during processing!</value>
-    </labels>
-    <labels>
-        <fullName>Toast_Title_PdfSaveSuccess</fullName>
-        <categories>ui,toast</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
-        <value>PDF successfully saved!</value>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Timesheet</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_CustomerId</fullName>
@@ -33,14 +33,6 @@
         <value>Customer Number</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_InvoiceId</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Invoice Number</value>
-    </labels>
-    <labels>
         <fullName>InvoicePdf_Label_InvoiceDate</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
@@ -49,28 +41,12 @@
         <value>Invoice Date</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_TotalNetAmount</fullName>
+        <fullName>InvoicePdf_Label_InvoiceId</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Total Net</value>
-    </labels>
-    <labels>
-        <fullName>InvoicePdf_Label_TotalGrossAmount</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Total Gross</value>
-    </labels>
-    <labels>
-        <fullName>InvoicePdf_Label_TotalTaxes</fullName>
-        <categories>visualforce,label,invoice-pdf</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>VAT Charge</value>
+        <value>Invoice Number</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Label_SelectOrgProfile</fullName>
@@ -89,12 +65,68 @@
         <value>Select Render Language</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Label_ActivateTimesheet</fullName>
+        <fullName>InvoicePdf_Label_ServicePeriod</fullName>
+        <categories>visualforce,label,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as generic table header</shortDescription>
+        <value>Service Period</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalGrossAmount</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
-        <value>Timesheet</value>
+        <value>Total Gross</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalNetAmount</fullName>
+        <categories>visualforce,label,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Total Net</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Label_TotalTaxes</fullName>
+        <categories>visualforce,label,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>VAT Charge</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Placeholder_SelectBillingContact</fullName>
+        <categories>ui,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for billing contact selection</shortDescription>
+        <value>Select Billing Contact</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Placeholder_SelectMailTemplate</fullName>
+        <categories>ui,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for mail template selection</shortDescription>
+        <value>Select Mail Template</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_TextTemplate_ServicePeriod</fullName>
+        <categories>visualforce,text-template,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in pdf rendering VP as template to render service period</shortDescription>
+        <value>{0,date,dd.MM.yyyy} - {1,date,dd.MM.yyyy}</value>
+    </labels>
+    <labels>
+        <fullName>InvoicePdf_Text_DetailsInTimesheet</fullName>
+        <categories>visualforce,text,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in pdf rendering page when timesheet is added</shortDescription>
+        <value>See the attached timesheet for a detailed composition of all billed hours and task description.</value>
     </labels>
     <labels>
         <fullName>InvoicePdf_Text_Greeting</fullName>
@@ -121,19 +153,315 @@
         <value>Payment is due within 30 days from Invoice Date to the below printed bank account. Please use Invoice Number for reference.</value>
     </labels>
     <labels>
-        <fullName>InvoicePdf_Text_DetailsInTimesheet</fullName>
-        <categories>visualforce,text,invoice-pdf</categories>
+        <fullName>Invoicing_Label_FilterHeader</fullName>
+        <categories>lwc,label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Used in pdf rendering page when timesheet is added</shortDescription>
-        <value>See the attached timesheet for a detailed composition of all billed hours and task description.</value>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Select service period and configure invoice generation</value>
     </labels>
     <labels>
-        <fullName>ValidationError_CanNotDeleteInvoicedTimeEntry</fullName>
-        <categories>trigger,error</categories>
+        <fullName>Invoicing_Label_InvoicesPdfCreateHeader</fullName>
+        <categories>lwc,label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Displayed for time entry records that are in deletion but are invoiced</shortDescription>
-        <value>A Time Entry can not be deleted, once it is invoiced!</value>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Create PDF Files for Invoices</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_InvoicesPdfSendTitle</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Select Billing Contacts and send PDFs</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_InvoicesReviewHeader</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as card title in invoicing LWC</shortDescription>
+        <value>Review Invoice Configuration</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_ServiceDateEnd</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as date picker label in invoicing LWC</shortDescription>
+        <value>Service Period End</value>
+    </labels>
+    <labels>
+        <fullName>Invoicing_Label_ServiceDateStart</fullName>
+        <categories>lwc,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as date picker label in invoicing LWC</shortDescription>
+        <value>Service Period Start</value>
+    </labels>
+    <labels>
+        <fullName>Message_Generic_NoRecordsFound</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General warning display, if a query did not find any results</shortDescription>
+        <value>The entered filter criteria did not find any records. Please change your filters and try again.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
+        <categories>ui,text,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as success message after all draft invoices have been worked</shortDescription>
+        <value>Nothing more to do here. No more Invoices in Status &quot;Draft&quot; found.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invoicing_NoActivatedInvoices</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message box warning for invoice PDF generation</shortDescription>
+        <value>There are currently no invoices ready for PDF generation. An invoice must be &quot;Activated&quot; to appear hear.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invoicing_NoPdfSendInvoices</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message box warning text for PDF send step</shortDescription>
+        <value>There are currently no invoices ready for this step. Invoices must be &quot;Activated&quot; and have at least one generated PDF to appear here. Create some PDFs and come back!</value>
+    </labels>
+    <labels>
+        <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validation message for time entries that are about to be deleted</shortDescription>
+        <value>Can not delete this record, once it is invoiced!</value>
+    </labels>
+    <labels>
+        <fullName>Message_TimeEntryValidation_CanNotRemoveInvoice</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validation message for time entries, where Invoice is about to removed</shortDescription>
+        <value>Invoice can not be removed, once it is set.</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_DataSaved</fullName>
+        <categories>ui,toast,title,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as generic title of successfull save toast</shortDescription>
+        <value>Changes successfully saved!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_EmailSendFailure</fullName>
+        <categories>ui,toast,title,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Sending Email failed!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_EmailSendSuccess</fullName>
+        <categories>ui,toast,title,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Email successfully send!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_GenericError</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>An error occured during processing!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_InvoicesUpdated</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Invoices and Line Items updated!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_InvoicingRunSuccess</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Invoices successfully generated!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_LineItemsUpdated</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>Line Items successfully updated!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_NoTimeEntriesSelected</fullName>
+        <categories>ui,toast,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>No Time Entries selected. Please select at least one entry to start!</value>
+    </labels>
+    <labels>
+        <fullName>Toast_Title_PdfSaveSuccess</fullName>
+        <categories>ui,toast</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>PDF successfully saved!</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_Delete</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that delete data</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_NewLineItem</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons that add new line items (mostly for invoices)</shortDescription>
+        <value>New Line Item</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_Refresh</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that refresh data</shortDescription>
+        <value>Reset All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_ResetAll</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that refresh data</shortDescription>
+        <value>Reset All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_Save</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_SaveAll</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_SaveAllButton</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save All Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Button_Label_SaveButton</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for commit buttons that save to database</shortDescription>
+        <value>Save Changes</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_ActivateTimesheet</fullName>
+        <categories>ui,label,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Timesheet</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectBillingContact</fullName>
+        <categories>ui,label,placeholder-text,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in bill run component as field label and placeholder</shortDescription>
+        <value>Select Billing Contact</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectMailTemplate</fullName>
+        <categories>ui,label,placeholder-text,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in bill run component as field label and placeholder</shortDescription>
+        <value>Select Mail Template</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectOrgProfile</fullName>
+        <categories>ui,label,invoice-pdf</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Select Organization Profile</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectRenderLanguage</fullName>
+        <categories>ui,label,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in visualforce page (pdf rendering) as field label</shortDescription>
+        <value>Select Render Language</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_SelectSenderAddress</fullName>
+        <categories>ui,label,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in bill run component as field label and placeholder</shortDescription>
+        <value>Select Sender</value>
+    </labels>
+    <labels>
+        <fullName>UI_Placeholder_SelectBillingContact</fullName>
+        <categories>ui,placeholder,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for billing contact selection</shortDescription>
+        <value>Select Billing Contact</value>
+    </labels>
+    <labels>
+        <fullName>UI_Placeholder_SelectMailTemplate</fullName>
+        <categories>ui,placeholder,bill-run</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for mail template selection</shortDescription>
+        <value>- Select Mail Template -</value>
+    </labels>
+    <labels>
+        <fullName>UI_Placeholder_SelectSender</fullName>
+        <categories>ui,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as placeholder in PDF sending UI for sender address selection</shortDescription>
+        <value>- Select Sender -</value>
+    </labels>
+    <labels>
+        <fullName>UI_Toast_Title_NoChanges</fullName>
+        <categories>ui,toast,title,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Aura / LWC UI as title of toast</shortDescription>
+        <value>No changes to commit!</value>
     </labels>
 </CustomLabels>

@@ -13,6 +13,11 @@ public class TestDataFactory {
                            AccountSource = 'Testing');
     }
 
+    public static Contact CreateDefaultContact() {
+        return new Contact(LastName = 'Tester',
+                           FirstName = 'Test');
+    }
+
     public static Budget__c CreateDefaultBudget() {
         return new Budget__c(Name = 'Test Budget 2019',
                              Limit__c = 10000,
@@ -43,6 +48,7 @@ public class TestDataFactory {
                                       Price__c = 1333.37,
                                       Quantity__c = 1.00,
                                       Tax__c = 19,
+                                      Discount__c = 0,
                                       Unit__c = 'Each',
                                       ServiceDate__c = Date.newInstance(2019, 10, 20));
     }
@@ -69,8 +75,18 @@ public class TestDataFactory {
                                           VATNumber__c = 'DE123456789');
     }
 
+    public static Product2 CreateDefaultProduct() {
+        return new Product2(Name = 'Test Product',
+                            IsActive = true,
+                            Family = 'Other');
+    }
+
     public static Account CreateAccount(Account template) {
         return (Account)mergeSObjects(template, CreateDefaultAccount());
+    }
+
+    public static Contact CreateContact(Contact template) {
+        return (Contact)mergeSObjects(template, CreateDefaultContact());
     }
 
     public static Budget__c CreateBudget(Budget__c template) {
@@ -95,6 +111,10 @@ public class TestDataFactory {
 
     public static OrganizationProfile__c CreateOrganizationProfile(OrganizationProfile__c template) {
         return(OrganizationProfile__c)mergeSObjects(template, CreateDefaultOrganizationProfile());
+    }
+
+    public static Product2 CreateProduct(Product2 template) {
+        return (Product2)mergeSObjects(template, CreateDefaultProduct());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

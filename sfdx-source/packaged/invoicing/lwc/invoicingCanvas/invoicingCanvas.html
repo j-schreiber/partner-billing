@@ -1,0 +1,50 @@
+<template>
+
+    <!-- Navigation and process indicator -->
+    <div>
+        <lightning-card>
+            <div class="slds-p-horizontal_medium slds-grid slds-grid_align-spread">
+                <lightning-button label="Previous" icon-name="utility:chevronleft" icon-position="left" onclick={decreaseProcessStage}></lightning-button>
+
+                <div class="slds-col slds-size_8-of-12 slds-p-vertical_x-small">
+                    <lightning-progress-indicator current-step={processIndicatorStage} type="base" variant="base">
+                        <lightning-progress-step label="Select Time Entries" value="1"></lightning-progress-step>
+                        <lightning-progress-step label="Check Invoices" value="2"></lightning-progress-step>
+                        <lightning-progress-step label="Generate PDFs" value="3"></lightning-progress-step>
+                        <lightning-progress-step label="Send PDFs" value="4"></lightning-progress-step>
+                    </lightning-progress-indicator>
+                </div>
+               
+                <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={increaseProcessStage}></lightning-button>
+            </div>
+        </lightning-card>
+    </div>
+
+    <!-- conditionally rendered content based on process status -->
+    <div>
+        <template if:true={displayTimeEntrySelection}>
+            <div class="slds-m-vertical_small">
+                <c-time-entries-tree-grid></c-time-entries-tree-grid>
+            </div>
+        </template>
+
+        <template if:true={displayInvoicesPreview}>
+            <div class="slds-m-vertical_small">
+                <c-invoice-card-list onstepcompleted={increaseProcessStage}></c-invoice-card-list>
+            </div>
+        </template>
+
+        <template if:true={displayInvoicesPdfCreation}>
+            <div class="slds-m-vertical_small">
+                <c-invoice-pdf-gen-table onstepcompleted={increaseProcessStage}></c-invoice-pdf-gen-table>
+            </div>
+        </template>
+
+        <template if:true={displayInvoicesPdfSend}>
+            <div class="slds-m-vertical_small">
+                <c-invoice-pdf-send-table onstepcompleted={increaseProcessStage}></c-invoice-pdf-send-table>
+            </div>
+        </template>
+    </div>
+    
+</template>

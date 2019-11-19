@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Productname__c</fullName>
     <externalId>false</externalId>
-    <formula>LEFT(BLANKVALUE(Product__r.Name, Description__c), 50) + IF(LEN(BLANKVALUE(Product__r.Name, Description__c)) > 50, '...', '')</formula>
+    <formula>LEFT(BLANKVALUE(Product__r.Name, Description__c), 35) + IF(LEN(BLANKVALUE(Product__r.Name, Description__c)) > 35, '...', '')</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <description>Evaluates the Product Name from Lookup to display as Text in Visualforce. If the lookup is empty, returns the description instead.</description>
     <label>Name</label>

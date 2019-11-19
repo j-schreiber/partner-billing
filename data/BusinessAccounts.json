@@ -5,10 +5,10 @@
                 "type": "Account",
                 "referenceId": "AccountRef1"
             },
-            "Name": "Aycomba GmbH",
-            "BillingStreet": "Leopoldstraße 1",
-            "BillingPostalCode": "80336",
-            "BillingCity": "München",
+            "Name": "Starship Galactica Ltd.",
+            "BillingStreet": "Allersberger Str. 8-10",
+            "BillingPostalCode": "90461",
+            "BillingCity": "Nürnberg",
             "BillingCountryCode": "DE",
             "CustomerId__c": "1000"
         },
@@ -17,9 +17,9 @@
                 "type": "Account",
                 "referenceId": "AccountRef2"
             },
-            "Name": "Testfirma GmbH",
-            "BillingStreet": "Maximilienstraße 1",
-            "BillingPostalCode": "80336",
+            "Name": "Colonial One",
+            "BillingStreet": "Bayerstraße 10",
+            "BillingPostalCode": "80335",
             "BillingCity": "München",
             "BillingCountryCode": "DE",
             "CustomerId__c": "1001"
@@ -29,10 +29,10 @@
                 "type": "Account",
                 "referenceId": "AccountRef3"
             },
-            "Name": "Occhio GmbH",
-            "BillingStreet": "Wiener Platz 7",
-            "BillingPostalCode": "81667",
-            "BillingCity": "München",
+            "Name": "Cloud 9 GmbH",
+            "BillingStreet": "Viktoriastraße 7-5",
+            "BillingPostalCode": "86150",
+            "BillingCity": "Augsburg",
             "BillingCountryCode": "DE",
             "CustomerId__c": "1002"
         }

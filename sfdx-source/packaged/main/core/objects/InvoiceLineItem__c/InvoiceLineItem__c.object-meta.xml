@@ -153,6 +153,7 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
+    <description>Individual Line Items to an Invoice. Can be linked to any Product.</description>
     <label>Invoice Line Item</label>
     <nameField>
         <displayFormat>{00000000}</displayFormat>

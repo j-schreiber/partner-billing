@@ -1,0 +1,177 @@
+<template>
+
+    <lightning-card title={invoiceTitle}>
+
+        <lightning-button-icon
+            class="slds-m-horizontal_medium"
+            slot="actions"
+            icon-name="utility:refresh"
+            alternative-text={LABELS.BUTTON_TEXT_REFRESH}
+            disabled={readOnly}
+            onclick={reset}>
+        </lightning-button-icon>
+        <lightning-button
+            label={LABELS.BUTTON_LABEL_NEWITEM}
+            icon-name="utility:add"
+            slot="actions"
+            class="slds-m-right_large"
+            disabled={readOnly}
+            onclick={addLineItem}>
+        </lightning-button>
+
+        <lightning-button-group slot="actions">
+            <lightning-button-stateful
+                label-when-off="Activate"
+                label-when-on="Activated"
+                data-id="activateButton"
+                icon-name-when-off="utility:check"
+                icon-name-when-on="utility:check"
+                selected={isActivated}
+                variant="success"
+                onclick={handleActivateButtonClick}>
+            </lightning-button-stateful>
+            <lightning-button-stateful
+                label-when-off="Cancel"
+                label-when-on="Cancelled"
+                data-id="cancelButton"
+                icon-name-when-off="utility:close"
+                icon-name-when-on="utility:close"
+                variant="destructive"
+                selected={isCancelled}
+                onclick={handleCancelButtonClick}>
+            </lightning-button-stateful>
+        </lightning-button-group>
+
+        <lightning-button
+            slot="actions"
+            class="slds-m-left_medium"
+            data-id="saveButton"
+            label={LABELS.BUTTON_LABEL_SAVE}
+            variant="brand"
+            disabled={isWorking}
+            onclick={save}>
+        </lightning-button>
+
+        <template if:true={isWorking}>
+            <lightning-spinner alternative-text="Saving ..." size="medium"></lightning-spinner>
+        </template>
+
+
+        <!-- card body -->
+        <div class="slds-p-horizontal_medium">
+            
+            <!-- the invoice body -->
+            <div class="slds-m-bottom_large slds-grid slds-grid_vertical">
+                <div class="slds-col slds-grid">
+                    <div class="slds-col slds-size_4-of-12 slds-p-right_medium">
+                        <lightning-input
+                            value={record.Date__c}
+                            data-id="inputDate"
+                            variant="label-inline"
+                            name="Date__c"
+                            type="date"
+                            label="Invoice Date"
+                            disabled={readOnly}
+                            onchange={handleDataInput}>
+                        </lightning-input>
+                        <div class="slds-grid slds-grid_align-spread">
+                            <lightning-input
+                                class="slds-m-horizontal_xx-small"
+                                value={record.ServicePeriodFrom__c}
+                                data-id="inputServicePeriodFrom"
+                                name="ServicePeriodFrom__c"
+                                type="date"
+                                label="Service Period Start"
+                                max={record.ServicePeriodTo__c}
+                                disabled={readOnly}
+                                onchange={handleDataInput}>
+                            </lightning-input>
+                            <lightning-input
+                                class="slds-m-horizontal_xx-small"
+                                value={record.ServicePeriodTo__c}
+                                data-id="inputServicePeriodTo"
+                                name="ServicePeriodTo__c"
+                                type="date"
+                                label="Service Period End"
+                                min={record.ServicePeriodFrom__c}
+                                disabled={readOnly}
+                                onchange={handleDataInput}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+                        <lightning-input-address
+                            variant="label-hidden"
+                            street-label="Street"
+                            city-label="City"
+                            country-label="Country"
+                            province-label="Province"
+                            postal-code-label="Postal Code"
+                            onchange={addressChange}
+                            street={address.street}
+                            city={address.city}
+                            disabled={readOnly}
+                            postal-code={address.postalCode}
+                            province={address.province}
+                            country={address.country}>
+                        </lightning-input-address>
+                    </div>
+                    <div class="slds-size_4-of-12 slds-p-left_medium slds-grid slds-grid_vertical-align-end">
+                        <div class="summary-table-container">
+                            <table class="summary-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total Amount (Net)</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalAmount}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total VAT</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalTaxes}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="slds-form-element__label">Total Amount (Gross)</td>
+                                        <td>
+                                            <lightning-formatted-number
+                                                value={TotalGrossAmount}
+                                                format-style="currency"
+                                                currency-code={record.CurrencyIsoCode}>
+                                            </lightning-formatted-number>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-grid slds-grid_align-end">
+                    
+                    
+                </div>
+            </div>
+            
+            <!-- the line item table -->
+            <c-invoice-line-item-datatable
+                invoice-id={invoiceId}
+                line-items={lineItems}
+                is-disabled={readOnly}
+                onrecalculate={recalculateSums}>
+            </c-invoice-line-item-datatable>
+
+        </div>
+        
+    </lightning-card>
+
+</template>

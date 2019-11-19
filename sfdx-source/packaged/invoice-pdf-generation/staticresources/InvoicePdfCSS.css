@@ -48,22 +48,32 @@ body {
         margin: 0px !important;
         padding: 0px !important;
     }
+
+    div.line-item-container table {
+        table-layout: auto;
+    }
+
+}
+
+@media print {
+
+    .letter-body {
+        background-color: burlywood;
+        width: 175mm;
+    }
+
 }
 
 /** Override standard CSS for footer */
-div.footer td {
-    padding: 0mm;
-    max-width: initial;
-}
-
 div.footer {
     height: 15mm;
     color: black;
     text-align: center;
-    font-size: 8pt;
+    font-size: 7pt;
     width: 100vw;
     display: flex;
     align-items: center;
+    padding: 0mm 9mm 0mm 25mm;
     position: running(custom-footer);
 }
 
@@ -80,7 +90,6 @@ div.header {
 td, th {
     padding: 1px 5px 1px 5px;
     white-space: nowrap;
-    max-width: 6cm;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -111,11 +120,6 @@ table {
     font-weight: bold;
     font-size: 7pt;
     text-decoration: underline;
-}
-
-.letter-body {
-    position: relative;
-    width: 100%;
 }
 
 /** Set paddings for ISO standard letter */

@@ -22,7 +22,8 @@ public class InvoicePdfController_Test {
         InvoicePdfController.savePdfToInvoice(record.Id, orgProfile.Id, '', null);
 
         // VERIFY
-        System.assertEquals(1, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT() FROM Attachment');
+        System.assertEquals(0, [SELECT COUNT() FROM Attachment WHERE ParentId = :record.Id], 'COUNT() FROM Attachment');
+        System.assertEquals(1, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :record.Id], 'COUNT() FROM ContentDocumentLink');
     }
 
     @isTest
@@ -41,5 +42,21 @@ public class InvoicePdfController_Test {
         System.assertEquals([SELECT COUNT() FROM OrganizationProfile__c], actualOps.size(), 'actualOps.size()');
         OrganizationProfile__c defaultProfile = [SELECT Id FROM OrganizationProfile__c WHERE IsDefault__c = true LIMIT 1];
         System.assertEquals(defaultProfile.Id, actualOps[0].Id, 'actualOps[0].Id');
+    }
+
+    @isTest
+    static void deletePdf_ValidId_VersionAndDocumentDeleted() {
+        // SETUP
+        Blob pdfMock = Blob.valueOf('Teststring');
+        ContentVersion newVersion = new ContentVersion(Title='Test', PathOnClient='Test.pdf', VersionData=pdfMock);
+        insert newVersion;
+        newVersion = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :newVersion.Id];
+
+        // ACTION
+        InvoicePdfController.deletePdf(newVersion.ContentDocumentId);
+
+        // VERIFY
+        System.assertEquals(0, [SELECT COUNT() FROM ContentVersion], 'SELECT COUNT() FROM ContentVersion');
+        System.assertEquals(0, [SELECT COUNT() FROM ContentDocument], 'SELECT COUNT() FROM ContentDocument');
     }
 }
