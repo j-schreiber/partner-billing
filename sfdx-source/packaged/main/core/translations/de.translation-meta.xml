@@ -113,6 +113,10 @@
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>
     <customLabels>
+        <label>Es gibt aktuell keine aktivierten Rechnungen, die für diesen Schritt verfügbar sind. Bitte generiere und aktiviere Rechnungen und komm später wieder.</label>
+        <name>Message_Invoicing_NoActivatedInvoices</name>
+    </customLabels>
+    <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
         <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
     </customLabels>

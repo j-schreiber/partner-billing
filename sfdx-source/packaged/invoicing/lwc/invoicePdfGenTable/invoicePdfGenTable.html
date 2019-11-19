@@ -14,11 +14,17 @@
             slot="actions"
             label="Create PDFs"
             variant="brand"
+            data-id="createAllPdfs"
             onclick={createAllPdfs}>
         </lightning-button>
         
 
         <div class="slds-p-horizontal_medium slds-is-relative">
+            <template if:true={hasNoRecords}>
+                <div class="slds-m-vertical_medium">
+                    <c-message-box variant="warning" message={LABELS.MESSAGE_NO_RECORDS}></c-message-box>
+                </div>
+            </template>
             <template if:true={invoices.data}>
                 <table class="slds-table slds-table_bordered">
                     <thead>

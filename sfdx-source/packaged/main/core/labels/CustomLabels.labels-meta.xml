@@ -217,6 +217,14 @@
         <value>Nothing more to do here. No more Invoices in Status &quot;Draft&quot; found.</value>
     </labels>
     <labels>
+        <fullName>Message_Invoicing_NoActivatedInvoices</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used as warning in invoicing canvas</shortDescription>
+        <value>There are currently no activated invoices that are ready for this step. Please generate and activate some invoices and come back later.</value>
+    </labels>
+    <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
         <categories>trigger,validation,error</categories>
         <language>en_US</language>
