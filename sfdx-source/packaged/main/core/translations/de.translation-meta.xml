@@ -113,8 +113,12 @@
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>
     <customLabels>
-        <label>Es gibt aktuell keine aktivierten Rechnungen, die für diesen Schritt verfügbar sind. Bitte generiere und aktiviere Rechnungen und komm später wieder.</label>
+        <label>Es gibt aktuell keine Rechnungen, die für die PDF Erzeugung bereit sind. Eine Rechnung muss &quot;Aktiviert&quot; sein, um hier zu erscheinen.</label>
         <name>Message_Invoicing_NoActivatedInvoices</name>
+    </customLabels>
+    <customLabels>
+        <label>Es gibt derzeit keine Rechnungen, die für diesen Schritt verfügbar sind. Rechnungen müssen &quot;Aktiviert&quot; sein und mindestens ein PDF erzeugt haben, um hier zu erscheinen. Erzeuge einige PDFs und komm dann wieder!</label>
+        <name>Message_Invoicing_NoPdfSendInvoices</name>
     </customLabels>
     <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>

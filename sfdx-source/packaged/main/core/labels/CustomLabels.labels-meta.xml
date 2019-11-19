@@ -221,8 +221,16 @@
         <categories>ui,text,warning</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Used as warning in invoicing canvas</shortDescription>
-        <value>There are currently no activated invoices that are ready for this step. Please generate and activate some invoices and come back later.</value>
+        <shortDescription>Message box warning for invoice PDF generation</shortDescription>
+        <value>There are currently no invoices ready for PDF generation. An invoice must be &quot;Activated&quot; to appear hear.</value>
+    </labels>
+    <labels>
+        <fullName>Message_Invoicing_NoPdfSendInvoices</fullName>
+        <categories>ui,text,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message box warning text for PDF send step</shortDescription>
+        <value>There are currently no invoices ready for this step. Invoices must be &quot;Activated&quot; and have at least one generated PDF to appear here. Create some PDFs and come back!</value>
     </labels>
     <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
