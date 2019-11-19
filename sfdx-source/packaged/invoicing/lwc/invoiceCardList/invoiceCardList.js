@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 import { getErrorsAsString } from 'c/utilities';
@@ -29,9 +29,18 @@ export default class InvoiceCardList extends LightningElement {
     @wire(getInvoices, { status: 'Draft' })
     invoices;
 
+    /**                                         LIFECYCLE HOOKS                                       */
+
+    connectedCallback() {
+        if (this.invoices.data) {
+            refreshApex(this.invoices);
+        }
+    }
+
     /**                                         EVENT HANDLERS                                           */
 
-    refreshData() {
+    @api
+    refresh() {
         this.dirtyInvoices = new Map();
         this.dirtyLineItems = new Map();
         this.deletedLineItems = new Set();
@@ -93,13 +102,7 @@ export default class InvoiceCardList extends LightningElement {
         })
         return arr;
     }
-    /*
-    printCache() {
-        console.log('Invoice modifications: ' + JSON.stringify(this.getUpdatedInvoiceRecords()));
-        console.log('All modified Line Items: ' + JSON.stringify(this.getUpdatedAndNewLineItemRecords()));
-        console.log('Deleted Line Item Ids: ' + JSON.stringify(this.getDeletedLineItemRecordIds()));
-    }
-    */
+
     dispatchToast(type, title, message) {
         let toast = new ShowToastEvent({
             title : title,

@@ -1,4 +1,4 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, wire, track, api } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 
 import getInvoicesWithPdfs from '@salesforce/apex/BillingController.getInvoicesWithPdfs';
@@ -18,8 +18,15 @@ export default class UnvoicePdfSendTable extends LightningElement {
         MESSAGE_NO_RECORDS
     }
 
-    refreshData() {
+    @api
+    refresh() {
         refreshApex(this.invoices);
+    }
+
+    connectedCallback() {
+        if (this.invoices.data) {
+            refreshApex(this.invoices);
+        }
     }
 
     get hasNoRecords() {

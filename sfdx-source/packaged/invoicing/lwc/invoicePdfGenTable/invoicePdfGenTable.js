@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import { getErrorsAsString } from 'c/utilities';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -20,8 +20,15 @@ export default class InvoicePdfGenTable extends LightningElement {
     @wire(getInvoices, { status: 'Activated' })
     invoices;
 
-    refreshData() {
+    @api
+    refresh() {
         refreshApex(this.invoices);
+    }
+
+    connectedCallback() {
+        if (this.invoices.data) {
+            refreshApex(this.invoices);
+        }
     }
 
     createAllPdfs() {
