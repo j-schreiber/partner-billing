@@ -20,7 +20,7 @@ export default class InvoiceCard extends LightningElement {
 
     oldRecord = {};
     rowdata;
-
+    
     @track record = {};
     @track readOnly = false;
     @track isWorking = false;
@@ -66,7 +66,7 @@ export default class InvoiceCard extends LightningElement {
     getModifiedFields() {
         let inv = {};
         Object.keys(this.record).forEach ( (key) => {
-            if (this.record[key] !== this.rowdata.Record[key] && key.endsWith('__c')) {
+            if ((this.record[key] !== this.rowdata.Record[key]) && key.endsWith('__c')) {
                 inv[key] = this.record[key];
             }
         });
@@ -87,9 +87,15 @@ export default class InvoiceCard extends LightningElement {
     @api 
     isModified() {
         let modifiedSoFar = false;
-        if (Object.keys(this.getModifiedFields()).length > 0) modifiedSoFar = true;
-        if (this.getModifiedLineItems().length > 0) modifiedSoFar = true;
-        if (this.getDeletedLineItems().length > 0) modifiedSoFar = true;
+        if (Object.keys(this.getModifiedFields()).length > 0) {
+            modifiedSoFar = true;
+        }
+        if (this.getModifiedLineItems().length > 0) {
+            modifiedSoFar = true;
+        }
+        if (this.getDeletedLineItems().length > 0) {
+            modifiedSoFar = true;
+        }
         return modifiedSoFar;
     }
 

@@ -92,7 +92,7 @@ describe('c-invoice-card', () => {
     
         test('cached changes on invoice: apex call with changes only', () => {
     
-            commitData.mockResolvedValue({});
+            commitData.mockResolvedValue();
             refreshInvoices.mockResolvedValue(MOCK_UPDATED_INVOICE);
             
             const element = createElement('c-invoice-card', {
@@ -187,10 +187,11 @@ describe('c-invoice-card', () => {
             
         });
     
-        test('data refreshed after commit', async () => {
+        test('data refreshed after commit', () => {
     
-            commitData.mockResolvedValue({});
+            commitData.mockResolvedValue();
             refreshInvoices.mockResolvedValue(MOCK_UPDATED_INVOICE);
+            let newDate = MOCK_UPDATED_INVOICE.a062F000003epifQAA.Record.Date__c;
             
             const element = createElement('c-invoice-card', {
                 is: invoiceCard
@@ -199,33 +200,36 @@ describe('c-invoice-card', () => {
             document.body.appendChild(element);
     
             let dateInput = element.shadowRoot.querySelector('lightning-input[data-id="inputDate"]');
-            dateInput.value = '2019-10-04';
-            dateInput.dispatchEvent(new CustomEvent('change', {detail : { value : '2019-10-04'}}));
+            dateInput.value = newDate;
+            dateInput.dispatchEvent(new CustomEvent('change', {detail : { value : newDate}}));
     
             let saveBtn = element.shadowRoot.querySelector('lightning-button[data-id="saveButton"]');
             saveBtn.click();
     
             // commit data is called immediately
             expect(commitData).toHaveBeenCalledWith({
-                invoices: [{ Id : MOCK_VALID_INVOICE.Record.Id, Date__c : '2019-10-04'}],
+                invoices: [{ Id : MOCK_VALID_INVOICE.Record.Id, Date__c : newDate}],
                 upsertLineItems: [],
                 deleteLineItemIds: []
             });
     
             // refresh invoices is called after resolve of commit data
-            await Promise.resolve();
-            expect(refreshInvoices).toHaveBeenCalledWith({
-                invoiceIds: [MOCK_VALID_INVOICE.Record.Id]
-            });
-
-            await Promise.resolve();
-            expect(element.isModified()).toBe(false);
-
-            await Promise.resolve();
-            saveBtn = element.shadowRoot.querySelector('lightning-button[data-id="saveButton"]');
-            expect(saveBtn.disabled).toBe(false);
-            dateInput = element.shadowRoot.querySelector('lightning-input[data-id="inputDate"]');
-            expect(dateInput.classList).not.toContain('is-dirty');
+            return Promise.resolve()
+            .then(() => {
+                expect(refreshInvoices).toHaveBeenCalledWith({
+                    invoiceIds: [MOCK_VALID_INVOICE.Record.Id]
+                });
+                return Promise.resolve();
+            })
+            .then(() => {
+                expect(element.isModified()).toBe(false);
+            })
+            .then(() => {
+                saveBtn = element.shadowRoot.querySelector('lightning-button[data-id="saveButton"]');
+                expect(saveBtn.disabled).toBe(false);
+                dateInput = element.shadowRoot.querySelector('lightning-input[data-id="inputDate"]');
+                expect(dateInput.classList).not.toContain('is-dirty');
+            })
         });
 
     });
