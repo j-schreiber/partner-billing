@@ -1,45 +1,39 @@
-import { LightningElement, api, track, wire } from 'lwc';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import { LightningElement, api } from 'lwc';
 
 import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.UI_Label_SelectOrgProfile';
 import OPTION_LABEL_LANGUAGE from '@salesforce/label/c.UI_Label_SelectRenderLanguage';
 import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.UI_Label_ActivateTimesheet';
 
-import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
-
 export default class pdfGenerationOptions extends LightningElement {
 
-    // public properties
+    @api languageOptions;
+
     @api
-    get invoice() {
-        return this.invoiceRecord;
+    get orgProfileOptions() {
+        return this.internalProfiles;
     }
-    set invoice(value) {
-        this.invoiceRecord = value;
-        this.selectedLanguageOption = value.PdfLanguage__c;
-        this.renderTimesheetOption = value.PdfRenderTimesheet__c;
+    set orgProfileOptions(input) {
+        this.internalProfiles = input;
+        if (input && input.length > 0) {
+            this.selectedProfileOption = input[0].value;
+        }
     }
 
     @api
-    get orgProfiles() {
-        return this.orgProfileOptions;
+    get invoice() {
+        return this.internalInvoice;
     }
-    set orgProfiles(value) {
-        this.orgProfileOptions = value;
-        if (value && value.length >= 1) {
-            this.selectedProfileOption = value[0].value;
-        }
+    set invoice(input) {
+        this.internalInvoice = input;
+        this.selectedLanguageOption = input.Record.PdfLanguage__c;
+        this.renderTimesheetOption = input.Record.PdfRenderTimesheet__c;
     }
 
     @api disabled = false;
 
-    // private properties
-    invoiceRecord;
-    @track orgProfileOptions;
-    @track languageOptions;
-    selectedProfileOption = '';
-    selectedLanguageOption = '';
-    renderTimesheetOption = true;
+    selectedProfileOption;
+    selectedLanguageOption;
+    renderTimesheetOption;
 
     LABELS = {
         OPTION_LABEL_ORGPROFILE,
@@ -47,33 +41,38 @@ export default class pdfGenerationOptions extends LightningElement {
         OPTION_LABEL_TIMESHEET
     }
 
-    @wire( getPicklistValues, { recordTypeId : '012000000000000AAA', fieldApiName : LANGUAGE_FIELD})
-    getLanguagePicklistValues ({data}) {
-        if (data) {
-            this.languageOptions = Array.from(data.values);
-        }
+    /**                           PUBLIC COMPONENT API                           */  
+
+    @api
+    getSelectedOptions() {
+        return {
+            recordId : (this.invoice) ? this.invoice.Record.Id : undefined,
+            profile : this.selectedProfileOption,
+            language : this.selectedLanguageOption,
+            timesheet : (typeof this.renderTimesheetOption !== 'undefined') ? this.renderTimesheetOption : this.invoice.Record.PdfRenderTimesheet__c
+        };
     }
+    
 
     /**                             LIFE CYCLE HOOKS                           */
-
-    connectedCallback() {
-        this.sendSelectedOptions();
-    }
 
 
     /**                             EVENT HANDLERS                            */
 
     handleProfileSelection(event) {
+        event.stopPropagation();
         this.selectedProfileOption = event.detail.value;
         this.sendSelectedOptions();
     }
 
     handleLanguageSelection(event) {
+        event.stopPropagation();
         this.selectedLanguageOption = event.detail.value;
         this.sendSelectedOptions();
     }
 
     handleTimesheetToggle(event) {
+        event.stopPropagation();
         this.renderTimesheetOption = Boolean(event.detail.checked);
         this.sendSelectedOptions();
     }
@@ -86,12 +85,16 @@ export default class pdfGenerationOptions extends LightningElement {
             new CustomEvent(
                 'optionchange', 
                 { detail: {
-                    recordId : this.invoiceRecord.Id,
+                    recordId : this.invoice.Record.Id,
                     profile : this.selectedProfileOption,
                     language : this.selectedLanguageOption,
                     timesheet : this.renderTimesheetOption
                 }}
             )
         );
+    }
+
+    get initialTimesheetOption() {
+        return (this.invoice) ? this.invoice.Record.PdfRenderTimesheet__c : false;
     }
 }

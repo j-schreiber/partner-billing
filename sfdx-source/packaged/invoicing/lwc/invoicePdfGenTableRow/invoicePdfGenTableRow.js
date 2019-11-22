@@ -3,8 +3,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
-import { getOrgProfiles } from 'c/utilities';
-
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInvoice';
 import apexDeletePdf from '@salesforce/apex/InvoicePdfController.deletePdf';
@@ -15,38 +13,44 @@ import LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
 
 export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElement) {
 
-    @api
-    get invoice() {
-        return this.internalInvoice;
-    }
-    set invoice(value) {
-        this.internalInvoice = value;
-        if (value.Attachments.length > 0) this.pdfRecordId = value.Attachments[0].Id;
-    }
+    @api invoice;
 
-    @track internalInvoice;
     @track isWorking = false;
     @track pdfRecordId;
+
     invoicePdfOptions = {};
 
     LABELS = {
         TOAST_TITLE_ERROR
     }
 
-    @track orgProfiles;
+    @track profileOptions;
     @wire (getOrganizationProfiles, {})
-    wiredOrgProfiles(value) {
-        if (value.data) { 
-            this.orgProfiles = getOrgProfiles(value.data);
+    wiredOrgProfiles(records) {
+        if (records.data) { 
+            let arr = [];
+            records.data.forEach( (entry) => { arr.push({ label : entry.Name, value : entry.Id }) });
+            this.profileOptions = arr;
         } else {
-            this.orgProfiles = [];
+            this.profileOptions = [];
         }
     }
 
+    @track languageOptions;
     @wire( getPicklistValues, { recordTypeId : '012000000000000AAA', fieldApiName : LANGUAGE_FIELD})
-    getLanguagePicklistValues ({data}) {
-        if (data) {
-            this.languageOptions = Array.from(data.values);
+    getLanguagePicklistValues (fieldOptions) {
+        if (fieldOptions.data && fieldOptions.data.values) {
+            this.languageOptions = Array.from(fieldOptions.data.values);
+        } else {
+            this.languageOptions = [];
+        }
+    }
+
+    /**                             LIFE CYCLE HOOKS                           */
+
+    connectedCallback() {
+        if (this.invoice && this.invoice.Attachments && this.invoice.Attachments.length > 0) {
+            this.pdfRecordId = this.invoice.Attachments[0].Id;
         }
     }
 
@@ -54,17 +58,17 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
 
     @api
     getSelectedOptions() {
-        return this.invoicePdfOptions;
+        return this.template.querySelector('c-pdf-generation-options').getSelectedOptions();
     }
 
     @api
     createPdf() {
         this.isWorking = true;
         savePdfToInvoice({
-            invoiceId : this.invoicePdfOptions.recordId,
-            orgProfileId : this.invoicePdfOptions.profile,
-            renderLanguage : this.invoicePdfOptions.language,
-            displayTimesheet: this.invoicePdfOptions.timesheet
+            invoiceId : this.getSelectedOptions().recordId,
+            orgProfileId : this.getSelectedOptions().profile,
+            renderLanguage : this.getSelectedOptions().language,
+            displayTimesheet: this.getSelectedOptions().timesheet
         })
         .then( (data) => {
             this.pdfRecordId = data.ContentDocumentId;
@@ -93,10 +97,6 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
     }
 
     /**                            PRIVATE COMPONENT FUNCTIONALITY                         */
-
-    handleOptionsChange(event) {
-        this.invoicePdfOptions = event.detail;
-    }
 
     viewPdf() {
         this[NavigationMixin.Navigate]({

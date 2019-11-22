@@ -21,10 +21,10 @@
     </td>
     <td>
         <c-pdf-generation-options
-            invoice={invoice.Record}
+            invoice={invoice}
             disabled={pdfRecordId}
-            onoptionchange={handleOptionsChange}
-            org-profiles={orgProfiles}>
+            language-options={languageOptions}
+            org-profile-options={profileOptions}>
         </c-pdf-generation-options>
     </td>
     <td>
@@ -32,6 +32,7 @@
             <template if:false={pdfRecordId}>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
+                    data-id="generatePdfButton"
                     label="Generate PDF"
                     icon-name="utility:insert_template"
                     variant="success"
@@ -45,6 +46,7 @@
             <template if:true={pdfRecordId}>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
+                    data-id="viewPdfButton"
                     label="View"
                     icon-name="utility:display_text"
                     variant="success"
@@ -53,6 +55,7 @@
                 </lightning-button>
                 <lightning-button
                     class="slds-m-horizontal_xx-small"
+                    data-id="deletePdfButton"
                     label="Delete"
                     icon-name="utility:delete"
                     variant="destructive"
