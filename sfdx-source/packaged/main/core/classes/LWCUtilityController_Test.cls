@@ -23,7 +23,7 @@ public class LWCUtilityController_Test {
     @isTest
     static void getMailTemplates_ZeroTemplates_EmptyList() {
         // SETUP
-        delete [SELECT Id FROM EmailTemplate];
+        delete [SELECT Id FROM EmailTemplate WHERE Folder.DeveloperName = 'Billing_Communication_Templates'];
         // ACTION
         List<EmailTemplate> templates = LWCUtilityController.getMailTemplates();
         // VERIFY
@@ -35,7 +35,7 @@ public class LWCUtilityController_Test {
         // ACTION
         List<EmailTemplate> templates = LWCUtilityController.getMailTemplates();
         // VERIFY
-        System.assertEquals([SELECT COUNT() FROM EmailTemplate], templates.size(), 'size()');
+        System.assertEquals([SELECT COUNT() FROM EmailTemplate WHERE Folder.DeveloperName = 'Billing_Communication_Templates'], templates.size(), 'size()');
     }
 
     @isTest
