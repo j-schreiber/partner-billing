@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <brand>
-        <headerColor>#FDBA01</headerColor>
-        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+        <headerColor>#4CB13B</headerColor>
+        <logo>money_120</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
     </brand>
-    <description>Track projects, time entries and generate invoices.</description>
+    <description>Track Budgets and Time Entries. Manage Org Profiles, Bank Accounts and Invoices.</description>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <label>Enterprise Resource Planning</label>
+    <label>Billing</label>
     <navType>Standard</navType>
     <tabs>BankAccount__c</tabs>
     <tabs>OrganizationProfile__c</tabs>
@@ -20,5 +22,5 @@
     <tabs>BankAccountTransaction__c</tabs>
     <tabs>Invoicing</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Enterprise_Resource_Planning_UtilityBar</utilityBar>
+    <utilityBar>Billing_UtilityBar</utilityBar>
 </CustomApplication>

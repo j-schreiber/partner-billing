@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
-        <application>Enterprise_Resource_Planning</application>
+        <application>Billing</application>
         <visible>true</visible>
     </applicationVisibilities>
     <description>Grants full access to core functionality: Manage Budgets, Time Entries, Bank Accounts, etc</description>
