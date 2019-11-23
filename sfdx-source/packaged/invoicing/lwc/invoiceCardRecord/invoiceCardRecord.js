@@ -74,4 +74,8 @@ export default class InvoiceCardRecord extends LightningElement {
         return this.invoice.error.body.message;
     }
 
+    get isLocked() {
+        return this.invoice.data && this.invoice.data.Record.Status__c !== 'Draft';
+    }
+
 }
