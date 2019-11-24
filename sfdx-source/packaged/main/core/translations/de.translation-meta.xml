@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
-        <label><!-- Enterprise Resource Planning --></label>
-        <name>Enterprise_Resource_Planning</name>
+        <label><!-- Billing --></label>
+        <name>Billing</name>
     </customApplications>
     <customLabels>
         <label>E-Mail(s) konnten nicht zugestellt werden. Bitte prüfe die Fehlermeldungen.</label>
@@ -107,6 +107,10 @@
     <customLabels>
         <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
         <name>Message_Generic_NoRecordsFound</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Rechnung kann nicht mehr bearbeitet werden, sobald sie aktiviert oder zurückgerufen wurde.</label>
+        <name>Message_InvoiceValidation_CanNotEditLockedField</name>
     </customLabels>
     <customLabels>
         <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>

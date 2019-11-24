@@ -209,6 +209,14 @@
         <value>The entered filter criteria did not find any records. Please change your filters and try again.</value>
     </labels>
     <labels>
+        <fullName>Message_InvoiceValidation_CanNotEditLockedField</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on record, if locked field is edited</shortDescription>
+        <value>An Invoice can not be edited after it has been activated or cancelled.</value>
+    </labels>
+    <labels>
         <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
         <categories>ui,text,success</categories>
         <language>en_US</language>

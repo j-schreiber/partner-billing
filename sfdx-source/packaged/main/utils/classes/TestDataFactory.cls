@@ -75,6 +75,17 @@ public class TestDataFactory {
                                           VATNumber__c = 'DE123456789');
     }
 
+    public static User CreateDefaultUser() {
+        return new User(Alias = 'testUser',
+                        Email='testuser@example.com',
+                        EmailEncodingKey='UTF-8',
+                        LastName='Tester',
+                        LanguageLocaleKey='en_US',
+                        LocaleSidKey='en_US',
+                        TimeZoneSidKey='America/Los_Angeles',
+                        UserName='pb-test' + Integer.valueOf(Math.random() * 1000000) + '@example.com');
+    }
+
     public static Product2 CreateDefaultProduct() {
         return new Product2(Name = 'Test Product',
                             IsActive = true,
@@ -115,6 +126,10 @@ public class TestDataFactory {
 
     public static Product2 CreateProduct(Product2 template) {
         return (Product2)mergeSObjects(template, CreateDefaultProduct());
+    }
+
+    public static User CreateUser(User template) {
+        return (User)mergeSObjects(template, CreateDefaultUser());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {
