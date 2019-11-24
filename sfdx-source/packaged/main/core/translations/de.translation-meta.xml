@@ -125,6 +125,18 @@
         <name>Message_Invoicing_NoPdfSendInvoices</name>
     </customLabels>
     <customLabels>
+        <label>Eine Position kann nicht mehr gelöscht werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotDeleteWhenLocked</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Position kann nicht mehr bearbeitet werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotEditFieldsWhenLocked</name>
+    </customLabels>
+    <customLabels>
+        <label>Es können keine neuen Positionen mehr erstellt werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotInsertWhenLocked</name>
+    </customLabels>
+    <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
         <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
     </customLabels>

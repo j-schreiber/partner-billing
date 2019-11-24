@@ -33,6 +33,7 @@ public class Invoice_Test {
         System.assertEquals(record.Id, objUnderTest.Record.Id, 'Record.Id');
         System.assertEquals(record.LineItems__r.size(), objUnderTest.LineItems.size(), 'LineItems.size()');
         System.assertEquals(0, objUnderTest.Record.TimeEntries__r.size(), 'Record.TimeEntries__r.size()');
+        System.assertEquals(false, objUnderTest.IsLocked, 'Invoice.IsLocked');
     }
 
     @isTest
@@ -103,21 +104,23 @@ public class Invoice_Test {
         // SETUP
         String recordId;
         // ACTION
-        Invoice actualObj = new Invoice(recordId);
+        Invoice objUnderTest = new Invoice(recordId);
         // VERIFY
-        System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
-        System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
-        System.assertEquals(new List<ContentDocument>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(new Invoice__c(), objUnderTest.Record, 'Invoice.Record');
+        System.assertEquals(new List<InvoiceLineItem>(), objUnderTest.LineItems, 'Invoice.LineItems');
+        System.assertEquals(new List<ContentDocument>(), objUnderTest.Attachments, 'Invoice.Attachments');
+        System.assertEquals(false, objUnderTest.IsLocked, 'Invoice.IsLocked');
     }
 
     @isTest
     static void init_BlankConstructor_EmptyInvoiceInitialized() {
         // ACTION
-        Invoice actualObj = new Invoice();
+        Invoice objUnderTest = new Invoice();
         // VERIFY
-        System.assertEquals(new Invoice__c(), actualObj.Record, 'Invoice.Record');
-        System.assertEquals(new List<InvoiceLineItem>(), actualObj.LineItems, 'Invoice.LineItems');
-        System.assertEquals(new List<ContentDocument>(), actualObj.Attachments, 'Invoice.Attachments');
+        System.assertEquals(new Invoice__c(), objUnderTest.Record, 'Invoice.Record');
+        System.assertEquals(new List<InvoiceLineItem>(), objUnderTest.LineItems, 'Invoice.LineItems');
+        System.assertEquals(new List<ContentDocument>(), objUnderTest.Attachments, 'Invoice.Attachments');
+        System.assertEquals(false, objUnderTest.IsLocked, 'Invoice.IsLocked');
     }
 
     @isTest
@@ -407,5 +410,15 @@ public class Invoice_Test {
         System.assertEquals(6187.50, invObj.Record.TotalGrossAmount__c, 'Record.GrossAmount__c');
         System.assertEquals(937.50, invObj.TotalTaxes, 'TotalTaxes');
         System.assertEquals(0.1786, invObj.TotalTaxesPercentage, 'TotalTaxesPercentage');
+    }
+
+    @isTest
+    static void getIsLocked_ActivatedInvoice_True() {
+        // SETUP
+        Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Status__c = Constants.INVOICE_STATUS_ACTIVATED));
+        // ACTION
+        Invoice objUnderTest = new Invoice(i);
+        // VERIFY
+        System.assertEquals(true, objUnderTest.IsLocked, 'IsLocked');
     }
 }

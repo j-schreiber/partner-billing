@@ -241,6 +241,30 @@
         <value>There are currently no invoices ready for this step. Invoices must be &quot;Activated&quot; and have at least one generated PDF to appear here. Create some PDFs and come back!</value>
     </labels>
     <labels>
+        <fullName>Message_LineItemValidation_CanNotDeleteWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item, when user tries to delete record on locked invoice</shortDescription>
+        <value>A line item record can not be deleted, after the Invoice has been Activated or Cancelled.</value>
+    </labels>
+    <labels>
+        <fullName>Message_LineItemValidation_CanNotEditFieldsWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item record when it edited and invoice is locked</shortDescription>
+        <value>The line item can not be modified, after the Invoice has been Activated or Cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Message_LineItemValidation_CanNotInsertWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item record for new records when invoice is locked</shortDescription>
+        <value>Can not insert new line item records, after the Invoice is Activated or Cancelled.</value>
+    </labels>
+    <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
         <categories>trigger,validation,error</categories>
         <language>en_US</language>

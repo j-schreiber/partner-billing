@@ -19,6 +19,11 @@ public virtual class Invoice {
         public get { return !LineItems.isEmpty(); }
     }
 
+    /** @Description    Evaluates if invoice is read-only based on Status */
+    public Boolean IsLocked {
+        public get { return Record.Status__c == Constants.INVOICE_STATUS_ACTIVATED || Record.Status__c == Constants.INVOICE_STATUS_CANCELLED; }
+    }
+
     /** @Description    Attachments for this invoice */
     @AuraEnabled
     public List<ContentDocument> Attachments;

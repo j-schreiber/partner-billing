@@ -170,7 +170,6 @@ public class InvoiceTriggerHandler_Test {
             System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, sr.getErrors()[0].getStatusCode(), 'sr.getErrors()[0].getStatusCode()');
             System.assertEquals(Label.Message_InvoiceValidation_CanNotEditLockedField, sr.getErrors()[0].getMessage(), 'sr.getErrors()[0].getMessage()');
         }
-
     }
 
     @isTest
