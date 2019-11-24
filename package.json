@@ -1,6 +1,6 @@
 {
   "name": "partner-erp",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "ERP functionality for salesforce freelancers",
   "main": "index.js",
   "scripts": {
