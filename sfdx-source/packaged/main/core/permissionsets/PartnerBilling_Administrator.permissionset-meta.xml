@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Modify_Activated_Invoices</name>
+    </customPermissions>
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Delete_Activated_Invoices</name>
+    </customPermissions>
+    <description>Admin-specific features like editing activated invoices, deleting invoices, etc</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Partner Billing: Administrator</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Invoice__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+</PermissionSet>

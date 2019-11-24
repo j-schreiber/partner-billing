@@ -24,6 +24,9 @@ sfdx force:user:permset:assign -n PartnerBilling_Core_FullAccess -u $ScratchOrgA
 Write-Host "sfdx force:user:permset:assign -n PartnerBilling_Developer -u $ScratchOrgAlias"
 sfdx force:user:permset:assign -n PartnerBilling_Developer -u $ScratchOrgAlias
 
+Write-Host "sfdx force:user:permset:assign -n PartnerBilling_Administrator -u $ScratchOrgAlias"
+sfdx force:user:permset:assign -n PartnerBilling_Administrator -u $ScratchOrgAlias
+
 Write-Host "sfdx force:data:tree:import -p .\data\plans\standard-plan.json -u $ScratchOrgAlias"
 sfdx force:data:tree:import -p .\data\plans\standard-plan.json -u $ScratchOrgAlias
 

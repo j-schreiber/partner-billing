@@ -4,7 +4,7 @@
         <application>Billing</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Grants full access to core functionality: Manage Budgets, Time Entries, Bank Accounts, etc</description>
+    <description>Base functionality: Manage Budgets, Time Entries, Bank Accounts, etc</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.CustomerId__c</field>
