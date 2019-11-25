@@ -4,6 +4,28 @@
     <apex:stylesheet value="{! $Resource.InvoicePdfCSS }" />
     <apex:stylesheet value="{! $Resource.GenericCSS }" />
 
+    <apex:outputPanel rendered="{! !Invoice.IsLocked }">
+        <div class="watermark"></div>
+    </apex:outputPanel>
+
+    <head>
+        <style type="text/css">
+            .watermark {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                z-index: -1;
+                background-repeat: repeat;
+                background-image: url("{! $Resource.InvoicePdf_Watermark_EN }");
+                background-position: center center;
+            }
+
+            @page {
+                background: url("{! $Resource.InvoicePdf_Watermark_EN }") no-repeat center center;
+            }
+        </style>
+    </head>
+
     <div class="header">
         <h1>{! OrgProfile.OrganizationName__c }</h1>
     </div>

@@ -81,6 +81,10 @@
         <name>InvoicePdf_Text_TermsAndConditions</name>
     </customLabels>
     <customLabels>
+        <label>ENTWURF</label>
+        <name>InvoicePdf_Watermark_Draft</name>
+    </customLabels>
+    <customLabels>
         <label>Wähle Leistungszeitraum und konfiguriere die Rechnungserstellung</label>
         <name>Invoicing_Label_FilterHeader</name>
     </customLabels>
