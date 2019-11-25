@@ -156,3 +156,17 @@ table {
 tr:first-child td {
     border-top: none;
 }
+
+.watermark {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    font-size: 115pt;
+    font-weight: bold;
+    color: darkgrey;
+    opacity: 0.4;
+    z-index: -1;
+    transform: rotate(45deg);
+    transform-origin: 30% 50%;
+}
