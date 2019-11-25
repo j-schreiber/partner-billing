@@ -13,7 +13,7 @@ public class InvoicePrint extends Invoice {
     public String PdfTitle {
         public get {
             List<String> titles = new List<String>();
-            if (!IsLocked) titles.add('DRAFT');
+            if (!IsLocked) titles.add(Label.InvoicePdf_Watermark_Draft);
             titles.addAll(new List<String>{Record.PdfLanguage__c, Record.Name, Record.Account__r.Name});
             PdfTitle = String.join(titles, '_');
             return PdfTitle;
