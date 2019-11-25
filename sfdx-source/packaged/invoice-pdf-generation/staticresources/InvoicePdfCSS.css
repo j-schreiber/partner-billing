@@ -53,6 +53,10 @@ body {
         table-layout: auto;
     }
 
+    .pdf-watermark {
+        display: none;
+    }
+
 }
 
 @media print {
@@ -60,6 +64,14 @@ body {
     .letter-body {
         background-color: burlywood;
         width: 175mm;
+    }
+
+    .preview-watermark {
+        display: none;
+    }
+
+    .pdf-watermark {
+        display: initial;
     }
 
 }
@@ -157,7 +169,7 @@ tr:first-child td {
     border-top: none;
 }
 
-.watermark {
+.preview-watermark {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -169,4 +181,11 @@ tr:first-child td {
     z-index: -1;
     transform: rotate(45deg);
     transform-origin: 30% 50%;
+}
+
+.pdf-watermark {
+    top: 1cm;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
