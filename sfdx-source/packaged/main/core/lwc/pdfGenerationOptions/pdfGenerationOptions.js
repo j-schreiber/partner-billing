@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 import OPTION_LABEL_ORGPROFILE from '@salesforce/label/c.UI_Label_SelectOrgProfile';
 import OPTION_LABEL_LANGUAGE from '@salesforce/label/c.UI_Label_SelectRenderLanguage';
@@ -6,18 +6,19 @@ import OPTION_LABEL_TIMESHEET from '@salesforce/label/c.UI_Label_ActivateTimeshe
 
 export default class pdfGenerationOptions extends LightningElement {
 
-    @api languageOptions;
+    @api languageOptions = [];
 
     @api
     get orgProfileOptions() {
         return this.internalProfiles;
     }
     set orgProfileOptions(input) {
-        this.internalProfiles = input;
         if (input && input.length > 0) {
+            this.internalProfiles = input;
             this.selectedProfileOption = input[0].value;
         }
     }
+    @track internalProfiles = [];
 
     @api
     get invoice() {

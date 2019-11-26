@@ -4,7 +4,6 @@ import tableRow from 'c/invoicePdfGenTableRow';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInvoice';
-import apexDeletePdf from '@salesforce/apex/InvoicePdfController.deletePdf';
 
 import { registerApexTestWireAdapter } from '@salesforce/sfdx-lwc-jest';
 

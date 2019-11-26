@@ -1,11 +1,11 @@
 import { LightningElement, api, track, wire } from 'lwc';
+import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInvoice';
-import apexDeletePdf from '@salesforce/apex/InvoicePdfController.deletePdf';
 
 import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
@@ -83,9 +83,7 @@ export default class InvoicePdfGenTableRow extends NavigationMixin(LightningElem
     @api
     deletePdf() {
         this.isWorking = true;
-        apexDeletePdf({
-            pdfId : this.pdfRecordId
-        })
+        deleteRecord(this.pdfRecordId)
         .then( () => {
             this.pdfRecordId = null;
             this.isWorking = false;
