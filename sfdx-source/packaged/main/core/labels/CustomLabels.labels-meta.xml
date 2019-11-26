@@ -153,6 +153,14 @@
         <value>Payment is due within 30 days from Invoice Date to the below printed bank account. Please use Invoice Number for reference.</value>
     </labels>
     <labels>
+        <fullName>InvoicePdf_Watermark_Draft</fullName>
+        <categories>visualforce,watermark</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Background for Draft (non-locked) invoice PDFs</shortDescription>
+        <value>DRAFT</value>
+    </labels>
+    <labels>
         <fullName>Invoicing_Label_FilterHeader</fullName>
         <categories>lwc,label</categories>
         <language>en_US</language>
