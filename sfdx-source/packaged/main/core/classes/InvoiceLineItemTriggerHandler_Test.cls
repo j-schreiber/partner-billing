@@ -21,7 +21,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -46,7 +46,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_ACTIVATED));
             insert i;
@@ -73,7 +73,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(true, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_ACTIVATED));
             insert i;
@@ -97,7 +97,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -122,7 +122,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -151,7 +151,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(true, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -179,7 +179,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -207,7 +207,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(true, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
@@ -238,7 +238,7 @@ class InvoiceLineItemTriggerHandler_Test {
             System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
             
             // SETUP
-            Account a = TestDataFactory.CreateDefaultAccount();
+            Account a = TestDataFactory.CreateAccount(new Account(Name='Permission Testing GmbH', BillingCity='Permcity'));
             insert a;
             Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
             insert i;
