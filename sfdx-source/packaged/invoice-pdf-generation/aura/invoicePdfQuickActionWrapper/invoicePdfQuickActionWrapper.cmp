@@ -1,6 +1,4 @@
 <aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
-
     <ltng:require styles="{!$Resource.GenericCSS}"/>
     <c:invoicePdfQuickAction invoiceId="{!v.recordId}" onsavesuccess="{!c.refreshView}"/>
-    
 </aura:component>	

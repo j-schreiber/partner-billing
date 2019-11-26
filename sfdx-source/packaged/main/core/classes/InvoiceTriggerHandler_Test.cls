@@ -129,7 +129,7 @@ public class InvoiceTriggerHandler_Test {
         System.runAs(userWithoutPermission) {
 
             // VERIFY PERMISSION
-            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'));
+            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // ACTION
             Account a = TestDataFactory.CreateDefaultAccount();
@@ -154,7 +154,7 @@ public class InvoiceTriggerHandler_Test {
         System.runAs(userWithoutPermission) {
 
             // VERIFY PERMISSION
-            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'));
+            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // ACTION
             Account a = TestDataFactory.CreateDefaultAccount();
@@ -181,7 +181,7 @@ public class InvoiceTriggerHandler_Test {
         System.runAs(userWithPermission) {
 
             // VERIFY PERMISSION
-            System.assertEquals(true, FeatureManagement.checkPermission('Modify_Activated_Invoices'));
+            System.assertEquals(true, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // ACTION
             Account a = TestDataFactory.CreateDefaultAccount();
@@ -206,7 +206,7 @@ public class InvoiceTriggerHandler_Test {
         System.runAs(userWithoutPermission) {
 
             // VERIFY PERMISSION
-            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'));
+            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // ACTION
             Account a = TestDataFactory.CreateDefaultAccount();
@@ -233,7 +233,7 @@ public class InvoiceTriggerHandler_Test {
         System.runAs(userWithoutPermission) {
 
             // VERIFY PERMISSION
-            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'));
+            System.assertEquals(false, FeatureManagement.checkPermission('Modify_Activated_Invoices'), 'checkPermission(Modify_Activated_Invoices)');
 
             // ACTION
             Account a = TestDataFactory.CreateDefaultAccount();

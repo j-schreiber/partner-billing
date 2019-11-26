@@ -18,7 +18,6 @@ export default class InvoicePdfQuickAction extends LightningElement {
     @track isWorking = false;
 
     @track invoice;
-
     @wire(getRecord, { recordId: '$invoiceId', fields: [LANGUAGE_FIELD, RENDER_TIMESHEET_FIELD] })
     setDataFromInvoice ({data}) {
         if (data) {
@@ -35,10 +34,10 @@ export default class InvoicePdfQuickAction extends LightningElement {
 
     @track profileOptions;
     @wire (getOrganizationProfiles)
-    wiredOrgProfiles(records) {
-        if (records.data) { 
+    wiredOrgProfiles({data}) {
+        if (data) { 
             let arr = [];
-            records.data.forEach( (entry) => { arr.push({ label : entry.Name, value : entry.Id }) });
+            data.forEach( (entry) => { arr.push({ label : entry.Name, value : entry.Id }) });
             this.profileOptions = arr;
             if (this.profileOptions.length > 0) this.selectedProfile = this.profileOptions[0].value;
         } else {
@@ -65,6 +64,8 @@ export default class InvoicePdfQuickAction extends LightningElement {
         TOAST_TITLE_SUCCESS,
         TOAST_TITLE_ERROR
     }
+
+    /**                            GETTERS AND SETTERS                        */
 
     get invoicePdfUrl() {
         return '/apex/InvoicePdf?Id='+ this.invoiceId +

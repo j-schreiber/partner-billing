@@ -1,4 +1,4 @@
-.iframe-container {
+iframe {
     width: 100%;
     height: 100%;
     border: none;
@@ -6,7 +6,7 @@
 }
 
 .pdf-container {
-    min-height: 60vh;
+    min-height: 700px;
     overflow: auto;
     padding: 8px;
     border: solid black 2px;

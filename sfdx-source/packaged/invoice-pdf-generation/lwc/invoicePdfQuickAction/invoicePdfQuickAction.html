@@ -4,7 +4,7 @@
     <div class="slds-grid slds-grid_vertical slds-grid_vertical-stretch">
         
         <!-- Control Elements to change the pdf's content -->
-        <div class="slds-col slds-m-bottom_small">
+        <div class="slds-col">
             <template if:true={loadingCompleted}>
                 <c-pdf-generation-options
                     invoice={invoice}
@@ -16,17 +16,22 @@
         </div>
 
         <!-- Pdf Renderer -->
-        <div class="slds-col slds-size_1-of-1 slds-is-relative pdf-container">
+        <div class="slds-col slds-is-relative pdf-container slds-m-bottom_medium">
             <template if:true={isWorking}>
                 <lightning-spinner alternative-text="Saving PDF ..." size="large"></lightning-spinner>
             </template>
-            <iframe src={invoicePdfUrl} class="iframe-container"></iframe>
+            <iframe src={invoicePdfUrl}></iframe>
         </div>
-    
+        
         <!-- Action buttons to save generated PDF as attachment or abort -->
-        <div class="slds-col slds-m-top_large">
+        <div class="slds-col slds-m-bottom_large">
             <div class="slds-grid slds-grid_align-center">
-                <lightning-button variant="brand" label={LABELS.BUTTON_LABEL_SAVE} onclick={savePdf}></lightning-button>
+                <lightning-button
+                    variant="brand"
+                    data-id="savePdfButton"
+                    label={LABELS.BUTTON_LABEL_SAVE}
+                    onclick={savePdf}>
+                </lightning-button>
             </div>
         </div>
     </div>

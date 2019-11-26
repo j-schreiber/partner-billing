@@ -30,6 +30,22 @@ describe('c-pdf-generation-options', () => {
             expect(timesheetToggle.checked).toBe(true);
             
         });
+
+        test('with undefined options: successfully rendered', () => {
+
+            const element = createElement('c-pdf-generation-options', {
+                is: pdfOptions 
+            });
+            element.invoice = INVOICE;
+            document.body.appendChild(element);
+
+            let orgOptions = element.shadowRoot.querySelector('lightning-combobox[data-id="orgProfileInput"]');
+            let langOptions = element.shadowRoot.querySelector('lightning-combobox[data-id="languageInput"]');
+
+            expect(orgOptions.options.length).toBe(0);
+            expect(langOptions.options.length).toBe(0);
+
+        });
         
         test('with valid options: successfully rendered', () => {
             

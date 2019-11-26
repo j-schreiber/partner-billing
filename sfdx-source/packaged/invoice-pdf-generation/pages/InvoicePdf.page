@@ -5,7 +5,9 @@
     <apex:stylesheet value="{! $Resource.GenericCSS }" />
 
     <apex:outputPanel rendered="{! !Invoice.IsLocked }">
-        <div class="preview-watermark">{! $Label.InvoicePdf_Watermark_Draft }</div>
+        <div class="preview-watermark-container">
+            <p class="preview-watermark-paragraph">{! $Label.InvoicePdf_Watermark_Draft }</p>
+        </div>
         <img class="pdf-watermark" src="{! $Resource.InvoicePdf_Watermark_EN }"></img>
     </apex:outputPanel>
 
