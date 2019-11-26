@@ -1,9 +1,40 @@
 <template>
     <div>
-        <lightning-input
-            label="Customer Id"
-            disabled={hasCustomerId}
-            value={CustomerId}>
-        </lightning-input>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-input
+                    variant="label-hidden"
+                    label="Customer Id"
+                    data-id="customerIdInput"
+                    disabled={hasCustomerId}
+                    value={CustomerId}>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-grid slds-grid_reverse">
+                <div class=" slds-is-relative">
+                    <template if:false={hasCustomerId}>
+                        <lightning-button
+                            label="Create New Id"
+                            variant="brand"
+                            data-id="createNewIdButton"
+                            disabled={isWorking}
+                            onclick={createNextCustomerId}>
+                        </lightning-button>
+                        <template if:true={isWorking}>
+                            <lightning-spinner alternative-text="Generating Customer Id ..." size="small"></lightning-spinner>
+                        </template>
+                    </template>
+                    <template if:true={newCustomerId}>
+                        <lightning-button
+                            label="Save New Id"
+                            variant="success"
+                            data-id="saveNewIdButton"
+                            disabled={isWorking}
+                            onclick={saveNewCustomerId}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
