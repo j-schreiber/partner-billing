@@ -11,9 +11,9 @@
         {
             "path": ".\\sfdx-source\\packaged",
             "package": "Partner Billing",
-            "versionName": "Ver 0.3: Invoicing",
-            "versionNumber": "0.3.1.NEXT",
-            "versionDescription": "Usability improvements for Invoicing",
+            "versionName": "Ver 0.4: Time Tracking",
+            "versionNumber": "0.4.0.NEXT",
+            "versionDescription": "Functionality for time entry insert, editing and approvals",
             "definitionFile": "config/project-scratch-def.json",
             "default": false
         }
