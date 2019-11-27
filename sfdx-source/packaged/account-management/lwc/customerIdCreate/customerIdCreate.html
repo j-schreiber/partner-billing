@@ -1,40 +1,57 @@
 <template>
-    <div>
-        <div class="slds-grid slds-gutters">
-            <div class="slds-col">
-                <lightning-input
-                    variant="label-hidden"
-                    label="Customer Id"
-                    data-id="customerIdInput"
-                    disabled={hasCustomerId}
-                    value={CustomerId}>
-                </lightning-input>
-            </div>
-            <div class="slds-col slds-grid slds-grid_reverse">
-                <div class=" slds-is-relative">
-                    <template if:false={hasCustomerId}>
+    <lightning-card title="Customer Id">
+        <div class="slds-p-horizontal_medium">
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col">
+                    <lightning-input
+                        variant="label-hidden"
+                        label="Customer Id"
+                        data-id="customerIdInput"
+                        disabled={hasCustomerId}
+                        pattern="[0-9]{4,}"
+                        message-when-pattern-mismatch="Must be a number with at least 4 digits"
+                        onchange={handleCustomerIdInput}
+                        value={CustomerId}>
+                    </lightning-input>
+                </div>
+
+                <template if:false={hasCustomerId}>
+                    <div class="slds-col slds-grow-none slds-grid slds-grid_reverse slds-is-relative">
                         <lightning-button
-                            label="Create New Id"
+                            label="Create"
                             variant="brand"
                             data-id="createNewIdButton"
-                            disabled={isWorking}
+                            disabled={disableActions}
                             onclick={createNextCustomerId}>
                         </lightning-button>
                         <template if:true={isWorking}>
-                            <lightning-spinner alternative-text="Generating Customer Id ..." size="small"></lightning-spinner>
+                            <lightning-spinner alternative-text="Generating Customer Id" size="small"></lightning-spinner>
                         </template>
-                    </template>
+                    </div>
+                </template>
+
+            </div>
+
+            <template if:false={hasCustomerId}>
+                <div class="slds-grid slds-grid_align-center slds-m-top_medium">
                     <template if:true={newCustomerId}>
-                        <lightning-button
-                            label="Save New Id"
-                            variant="success"
-                            data-id="saveNewIdButton"
-                            disabled={isWorking}
-                            onclick={saveNewCustomerId}>
-                        </lightning-button>
+                        <div class="slds-is-relative">
+                            <lightning-button
+                                label="Save New Id"
+                                variant="success"
+                                data-id="saveNewIdButton"
+                                disabled={disableActions}
+                                onclick={saveNewCustomerId}>
+                            </lightning-button>
+                            <template if:true={isWorking}>
+                                <lightning-spinner alternative-text="Saving Customer Id" size="small"></lightning-spinner>
+                            </template>
+                        </div>
                     </template>
                 </div>
-            </div>
+            </template>
+
         </div>
-    </div>
+    </lightning-card>
 </template>

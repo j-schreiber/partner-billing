@@ -1,5 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import { getRecord, updateRecord } from 'lightning/uiRecordApi';
+import { getRecord, updateRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { refreshApex } from '@salesforce/apex';
 import getLatestCustomerId from '@salesforce/apex/AccountController.getLatestCustomerId';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
@@ -7,16 +8,17 @@ import CUSTOMER_ID_FIELD from '@salesforce/schema/Account.CustomerId__c';
 import CUSTOMER_ID_NUMBER_FIELD from '@salesforce/schema/Account.CustomerIdNumber__c';
 
 export default class CustomerIdCreate extends LightningElement {
-    @api accountId;
+    @api recordId;
     @track isWorking = false;
     @track newCustomerId;
 
-    @wire(getRecord, { recordId: '$accountId', fields: [CUSTOMER_ID_FIELD, CUSTOMER_ID_NUMBER_FIELD] })
+    @wire(getRecord, { recordId: '$recordId', fields: [CUSTOMER_ID_FIELD, CUSTOMER_ID_NUMBER_FIELD] })
     account;
 
+    @api
     get CustomerId() {
-        if (this.account.data && this.account.data.fields.CustomerId__c.value !== null) {
-            return this.account.data.fields.CustomerId__c.value;
+        if (this.account.data && getFieldValue(this.account.data, CUSTOMER_ID_NUMBER_FIELD) !== null) {
+            return getFieldValue(this.account.data, CUSTOMER_ID_NUMBER_FIELD);
         } else if (this.newCustomerId) {
             return this.newCustomerId;
         }
@@ -24,16 +26,22 @@ export default class CustomerIdCreate extends LightningElement {
     }
 
     get hasCustomerId() {
-        if (this.newCustomerId) {
-            return true;
-        } else if (this.account.data) {
-            return this.account.data.fields.CustomerId__c.value !== null;
+        if (this.account.data) {
+            return getFieldValue(this.account.data, CUSTOMER_ID_FIELD) !== null;
         }
         return false;
     }
 
-    get disableCreateButton() {
+    get disableActions() {
         return this.hasCustomerId || this.isWorking;
+    }
+
+    handleCustomerIdInput(event) {
+        if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
+            this.newCustomerId = Number(event.detail.value);
+        } else {
+            this.newCustomerId = undefined;
+        }
     }
 
     createNextCustomerId() {
@@ -52,11 +60,13 @@ export default class CustomerIdCreate extends LightningElement {
         this.isWorking = true;
 
         let fields = {};
-        fields.Id = this.accountId;
+        fields.Id = this.recordId;
         fields[CUSTOMER_ID_FIELD.fieldApiName] = String(this.newCustomerId);
 
         updateRecord({ fields })
         .then(() => {
+            refreshApex(this.account);
+            this.newCustomerId = undefined;
             this.dispatchToast('success', 'Saved!');
             this.isWorking = false;
         })
