@@ -209,6 +209,14 @@
         <value>Service Period Start</value>
     </labels>
     <labels>
+        <fullName>Message_CustomerIdGeneration_Duplicate</fullName>
+        <categories>ui,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Customer Id create widget</shortDescription>
+        <value>The entered customer Id already exists!</value>
+    </labels>
+    <labels>
         <fullName>Message_Generic_NoRecordsFound</fullName>
         <categories>ui,text,warning</categories>
         <language>en_US</language>
@@ -369,6 +377,14 @@
         <value>Delete</value>
     </labels>
     <labels>
+        <fullName>UI_Button_Label_Generate</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that generate new data</shortDescription>
+        <value>Generate</value>
+    </labels>
+    <labels>
         <fullName>UI_Button_Label_NewLineItem</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
@@ -393,7 +409,7 @@
         <value>Reset All Changes</value>
     </labels>
     <labels>
-        <fullName>UI_Button_Label_Save</fullName>
+        <fullName>UI_Button_Label_SaveChanges</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
         <protected>false</protected>
@@ -417,12 +433,12 @@
         <value>Save All Changes</value>
     </labels>
     <labels>
-        <fullName>UI_Button_Label_SaveButton</fullName>
+        <fullName>UI_Button_Label_Save</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used for commit buttons that save to database</shortDescription>
-        <value>Save Changes</value>
+        <value>Save</value>
     </labels>
     <labels>
         <fullName>UI_Label_ActivateTimesheet</fullName>

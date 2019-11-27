@@ -7,6 +7,12 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import CUSTOMER_ID_FIELD from '@salesforce/schema/Account.CustomerId__c';
 import CUSTOMER_ID_NUMBER_FIELD from '@salesforce/schema/Account.CustomerIdNumber__c';
 
+import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_DataSaved';
+import CARD_TITLE from '@salesforce/label/c.InvoicePdf_Label_CustomerId';
+import ERROR_MESSAGE_DUPLICATE from '@salesforce/label/c.Message_CustomerIdGeneration_Duplicate';
+import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_Save';
+import BUTTON_LABEL_GENERATE from '@salesforce/label/c.UI_Button_Label_Generate';
+
 export default class CustomerIdCreate extends LightningElement {
     @api recordId;
     @track isWorking = false;
@@ -15,12 +21,20 @@ export default class CustomerIdCreate extends LightningElement {
     @wire(getRecord, { recordId: '$recordId', fields: [CUSTOMER_ID_FIELD, CUSTOMER_ID_NUMBER_FIELD] })
     account;
 
+    LABELS = {
+        CARD_TITLE,
+        TOAST_TITLE_SUCCESS,
+        ERROR_MESSAGE_DUPLICATE,
+        BUTTON_LABEL_SAVE,
+        BUTTON_LABEL_GENERATE
+    }
+
+    existingIds = new Set();
+
     @api
     get CustomerId() {
         if (this.account.data && getFieldValue(this.account.data, CUSTOMER_ID_NUMBER_FIELD) !== null) {
             return getFieldValue(this.account.data, CUSTOMER_ID_NUMBER_FIELD);
-        } else if (this.newCustomerId) {
-            return this.newCustomerId;
         }
         return undefined;
     }
@@ -37,8 +51,13 @@ export default class CustomerIdCreate extends LightningElement {
     }
 
     handleCustomerIdInput(event) {
+        this.setInputValidity('');
         if (!isNaN(event.detail.value) && event.currentTarget.checkValidity()) {
-            this.newCustomerId = Number(event.detail.value);
+            if (this.existingIds.has(Number(event.detail.value))) {
+                this.setInputValidity(this.LABELS.ERROR_MESSAGE_DUPLICATE);
+            } else {
+                this.newCustomerId = Number(event.detail.value);
+            }
         } else {
             this.newCustomerId = undefined;
         }
@@ -49,6 +68,8 @@ export default class CustomerIdCreate extends LightningElement {
         getLatestCustomerId()
         .then((result) => {
             this.newCustomerId = result === 0 ? 1000 : result + 1;
+            this.template.querySelector('lightning-input').value = this.newCustomerId;
+            this.setInputValidity('');
             this.isWorking = false;
         })
         .catch(() => {
@@ -67,11 +88,18 @@ export default class CustomerIdCreate extends LightningElement {
         .then(() => {
             refreshApex(this.account);
             this.newCustomerId = undefined;
-            this.dispatchToast('success', 'Saved!');
+            this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
         .catch((error) => {
-            this.dispatchToast('error', 'Error!', error.body.message);
+            let errMsg;
+            if (error.body.output && error.body.output.errors && error.body.output.errors.length > 0 && error.body.output.errors[0].errorCode === 'DUPLICATE_VALUE') {
+                errMsg = this.LABELS.ERROR_MESSAGE_DUPLICATE;
+                this.existingIds.add(this.newCustomerId);
+            } else {
+                errMsg = error.body.message;
+            }
+            this.setInputValidity(errMsg);
             this.isWorking = false;
         })
     }
@@ -83,5 +111,10 @@ export default class CustomerIdCreate extends LightningElement {
             variant : type
         });
         this.dispatchEvent(toast);
+    }
+
+    setInputValidity(msg) {
+        this.template.querySelector('lightning-input').setCustomValidity(msg);
+        this.template.querySelector('lightning-input').reportValidity();
     }
 }

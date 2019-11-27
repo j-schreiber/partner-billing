@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
+        <label><!-- Account --></label>
+        <name>Account</name>
+    </customApplications>
+    <customApplications>
         <label><!-- Billing --></label>
         <name>Billing</name>
     </customApplications>
@@ -109,6 +113,10 @@
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>
     <customLabels>
+        <label>Die eingegebene Kundennummer existiert bereits!</label>
+        <name>Message_CustomerIdGeneration_Duplicate</name>
+    </customLabels>
+    <customLabels>
         <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
         <name>Message_Generic_NoRecordsFound</name>
     </customLabels>
@@ -189,6 +197,10 @@
         <name>UI_Button_Label_Delete</name>
     </customLabels>
     <customLabels>
+        <label>Generieren</label>
+        <name>UI_Button_Label_Generate</name>
+    </customLabels>
+    <customLabels>
         <label>Neue Position</label>
         <name>UI_Button_Label_NewLineItem</name>
     </customLabels>
@@ -202,7 +214,7 @@
     </customLabels>
     <customLabels>
         <label>Speichern</label>
-        <name>UI_Button_Label_Save</name>
+        <name>UI_Button_Label_SaveChanges</name>
     </customLabels>
     <customLabels>
         <label>Alle Speichern</label>
@@ -214,7 +226,7 @@
     </customLabels>
     <customLabels>
         <label>Speichern</label>
-        <name>UI_Button_Label_SaveButton</name>
+        <name>UI_Button_Label_Save</name>
     </customLabels>
     <customLabels>
         <label>Aktiviere Timesheet</label>

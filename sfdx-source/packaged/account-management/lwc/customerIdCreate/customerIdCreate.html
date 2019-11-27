@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Customer Id">
+    <lightning-card title={LABELS.CARD_TITLE}>
         <div class="slds-p-horizontal_medium">
             <div class="slds-grid slds-gutters">
 
@@ -19,7 +19,7 @@
                 <template if:false={hasCustomerId}>
                     <div class="slds-col slds-grow-none slds-grid slds-grid_reverse slds-is-relative">
                         <lightning-button
-                            label="Create"
+                            label={LABELS.BUTTON_LABEL_GENERATE}
                             variant="brand"
                             data-id="createNewIdButton"
                             disabled={disableActions}
@@ -38,7 +38,7 @@
                     <template if:true={newCustomerId}>
                         <div class="slds-is-relative">
                             <lightning-button
-                                label="Save New Id"
+                                label={LABELS.BUTTON_LABEL_SAVE}
                                 variant="success"
                                 data-id="saveNewIdButton"
                                 disabled={disableActions}

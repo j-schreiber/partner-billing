@@ -5,10 +5,13 @@ import getLatestCustomerId from '@salesforce/apex/AccountController.getLatestCus
 
 import { registerLdsTestWireAdapter } from '@salesforce/sfdx-lwc-jest';
 
+import ERROR_DUPLICATE from '@salesforce/label/c.Message_CustomerIdGeneration_Duplicate';
+
 const getRecordWireAdapter = registerLdsTestWireAdapter(getRecord);
 
 const ACCOUNT_WITH_ID = require('./data/account-with-id.json');
 const ACCOUNT_WITHOUT_ID = require('./data/account-without-id.json');
+const DUPLICATE_ERROR = require('./data/duplicate-error-message.json');
 
 jest.mock(
     '@salesforce/apex/AccountController.getLatestCustomerId',
@@ -95,21 +98,6 @@ describe('c-customer-id-create', () => {
                 let saveBtn = element.shadowRoot.querySelector('lightning-button[data-id="saveNewIdButton"]');
                 expect(saveBtn).not.toBeNull();
             });
-            
-        });
-
-        test('manually enter valid id: value stored', () => {
-        
-            const element = createElement('c-customer-id-create', {
-                is: myComponent 
-            });
-            document.body.appendChild(element);
-
-            let inputField = element.shadowRoot.querySelector('lightning-input');
-            inputField.checkValidity = jest.fn(() => { return true; });
-            inputField.dispatchEvent(new CustomEvent('change', { detail : { value : '1005' }}));
-
-            expect(element.CustomerId).toBe(1005);
             
         });
 
@@ -242,7 +230,65 @@ describe('c-customer-id-create', () => {
                 expect(element.shadowRoot.querySelector('lightning-button[data-id="saveNewIdButton"]')).toBeNull();
                 expect(element.shadowRoot.querySelector('lightning-button[data-id="createNewIdButton"]')).toBeNull();
                 expect(element.shadowRoot.querySelector('lightning-input').disabled).toBe(true);
+            });
+        });
+
+        test('save with invalid duplicate id: error displayed on field', () => {
+
+            const SET_VALIDITY_MOCK = jest.fn();
+            updateRecord.mockRejectedValue(DUPLICATE_ERROR);
+
+            const element = createElement('c-customer-id-create', {
+                is: myComponent 
+            });
+            element.recordId = '0011D00000epwpNQAQ';
+            document.body.appendChild(element);
+
+            // mock validity checker: returnes true
+            let inputField = element.shadowRoot.querySelector('lightning-input');
+            inputField.checkValidity = jest.fn().mockReturnValue(true);
+            inputField.setCustomValidity = SET_VALIDITY_MOCK;
+            inputField.dispatchEvent(new CustomEvent('change', { detail : { value : '1005' }}));
+
+            return Promise.resolve().then(() => {
+                element.shadowRoot.querySelector('lightning-button[data-id="saveNewIdButton"]').click();
+                expect(updateRecord).toHaveBeenCalled();
+                return Promise.resolve();
             })
+            .then(() => {
+                expect(SET_VALIDITY_MOCK).toHaveBeenCalledWith(ERROR_DUPLICATE);
+            });
+        });
+
+        test('save with invalid duplicate id: invalid id stored after field updates', () => {
+
+            updateRecord.mockRejectedValue(DUPLICATE_ERROR);
+
+            const element = createElement('c-customer-id-create', {
+                is: myComponent 
+            });
+            element.recordId = '0011D00000epwpNQAQ';
+            document.body.appendChild(element);
+
+            // mock validity checker: returnes true
+            let inputField = element.shadowRoot.querySelector('lightning-input');
+            inputField.checkValidity = jest.fn().mockReturnValue(true);
+            inputField.setCustomValidity = jest.fn();
+            inputField.dispatchEvent(new CustomEvent('change', { detail : { value : '1005' }}));
+
+            return Promise.resolve().then(() => {
+                element.shadowRoot.querySelector('lightning-button[data-id="saveNewIdButton"]').click();
+                expect(updateRecord).toHaveBeenCalled();
+                return Promise.resolve();
+            })
+            .then(() => {
+                // this will clear the custom error message
+                inputField.dispatchEvent(new CustomEvent('change', { detail : { value : '1000' }}));
+                expect(inputField.setCustomValidity).toHaveBeenLastCalledWith('');
+                // this will add the original duplicate error message again
+                inputField.dispatchEvent(new CustomEvent('change', { detail : { value : '1005' }}));
+                expect(inputField.setCustomValidity).toHaveBeenLastCalledWith(ERROR_DUPLICATE);
+            });
         });
 
     });
