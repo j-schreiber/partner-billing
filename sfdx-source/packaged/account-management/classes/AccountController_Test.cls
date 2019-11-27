@@ -28,7 +28,7 @@ class AccountController_Test {
     }
 
     @isTest
-    static void getLatestCustomerId_AccountsWithGabsInIds_ReturnsHighestId() {
+    static void getLatestCustomerId_AccountsWithNonSequentialIds_ReturnsHighestId() {
         // SETUP
         insert TestDataFactory.CreateAccount(new Account(Name='Third Test Company GmbH', CustomerId__c = '10'));
         // ACTION
