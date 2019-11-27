@@ -10,7 +10,7 @@
                         data-id="customerIdInput"
                         disabled={hasCustomerId}
                         pattern="[0-9]{4,}"
-                        message-when-pattern-mismatch="Must be a number with at least 4 digits"
+                        message-when-pattern-mismatch={LABELS.ERROR_MESSAGE_PATTERN}
                         onchange={handleCustomerIdInput}
                         value={CustomerId}>
                     </lightning-input>

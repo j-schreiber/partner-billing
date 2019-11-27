@@ -10,6 +10,7 @@ import CUSTOMER_ID_NUMBER_FIELD from '@salesforce/schema/Account.CustomerIdNumbe
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_DataSaved';
 import CARD_TITLE from '@salesforce/label/c.InvoicePdf_Label_CustomerId';
 import ERROR_MESSAGE_DUPLICATE from '@salesforce/label/c.Message_CustomerIdGeneration_Duplicate';
+import ERROR_MESSAGE_PATTERN from '@salesforce/label/c.Message_CustomerIdGeneration_InvalidId';
 import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_Save';
 import BUTTON_LABEL_GENERATE from '@salesforce/label/c.UI_Button_Label_Generate';
 
@@ -25,6 +26,7 @@ export default class CustomerIdCreate extends LightningElement {
         CARD_TITLE,
         TOAST_TITLE_SUCCESS,
         ERROR_MESSAGE_DUPLICATE,
+        ERROR_MESSAGE_PATTERN,
         BUTTON_LABEL_SAVE,
         BUTTON_LABEL_GENERATE
     }
