@@ -5,7 +5,7 @@ import { cloneInvoiceRecord } from 'c/utilities';
 import commitData from '@salesforce/apex/BillingController.commitInvoiceEditData';
 import refreshInvoices from '@salesforce/apex/BillingController.refreshInvoices';
 
-import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_Save';
+import BUTTON_LABEL_SAVE from '@salesforce/label/c.UI_Button_Label_SaveChanges';
 import BUTTON_LABEL_NEWITEM from '@salesforce/label/c.UI_Button_Label_NewLineItem';
 import BUTTON_TEXT_REFRESH from '@salesforce/label/c.UI_Button_Label_ResetAll';
 import TOAST_TITLE_SUCCESS from '@salesforce/label/c.Toast_Title_DataSaved';
@@ -20,7 +20,7 @@ export default class InvoiceCard extends LightningElement {
 
     oldRecord = {};
     rowdata;
-
+    
     @track record = {};
     @track readOnly = false;
     @track isWorking = false;
@@ -66,7 +66,7 @@ export default class InvoiceCard extends LightningElement {
     getModifiedFields() {
         let inv = {};
         Object.keys(this.record).forEach ( (key) => {
-            if (this.record[key] !== this.rowdata.Record[key] && key.endsWith('__c')) {
+            if ((this.record[key] !== this.rowdata.Record[key]) && key.endsWith('__c')) {
                 inv[key] = this.record[key];
             }
         });
@@ -87,9 +87,15 @@ export default class InvoiceCard extends LightningElement {
     @api 
     isModified() {
         let modifiedSoFar = false;
-        if (Object.keys(this.getModifiedFields()).length > 0) modifiedSoFar = true;
-        if (this.getModifiedLineItems().length > 0) modifiedSoFar = true;
-        if (this.getDeletedLineItems().length > 0) modifiedSoFar = true;
+        if (Object.keys(this.getModifiedFields()).length > 0) {
+            modifiedSoFar = true;
+        }
+        if (this.getModifiedLineItems().length > 0) {
+            modifiedSoFar = true;
+        }
+        if (this.getDeletedLineItems().length > 0) {
+            modifiedSoFar = true;
+        }
         return modifiedSoFar;
     }
 

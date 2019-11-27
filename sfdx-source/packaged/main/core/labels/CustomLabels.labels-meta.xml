@@ -153,6 +153,14 @@
         <value>Payment is due within 30 days from Invoice Date to the below printed bank account. Please use Invoice Number for reference.</value>
     </labels>
     <labels>
+        <fullName>InvoicePdf_Watermark_Draft</fullName>
+        <categories>visualforce,watermark</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Background for Draft (non-locked) invoice PDFs</shortDescription>
+        <value>DRAFT</value>
+    </labels>
+    <labels>
         <fullName>Invoicing_Label_FilterHeader</fullName>
         <categories>lwc,label</categories>
         <language>en_US</language>
@@ -201,12 +209,36 @@
         <value>Service Period Start</value>
     </labels>
     <labels>
+        <fullName>Message_CustomerIdGeneration_Duplicate</fullName>
+        <categories>ui,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Customer Id create widget</shortDescription>
+        <value>The entered customer Id already exists!</value>
+    </labels>
+    <labels>
+        <fullName>Message_CustomerIdGeneration_InvalidId</fullName>
+        <categories>ui,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used in Customer Id create widget</shortDescription>
+        <value>A customer Id must be numeric and be at least 4 digits long!</value>
+    </labels>
+    <labels>
         <fullName>Message_Generic_NoRecordsFound</fullName>
         <categories>ui,text,warning</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>General warning display, if a query did not find any results</shortDescription>
         <value>The entered filter criteria did not find any records. Please change your filters and try again.</value>
+    </labels>
+    <labels>
+        <fullName>Message_InvoiceValidation_CanNotEditLockedField</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on record, if locked field is edited</shortDescription>
+        <value>An Invoice can not be edited after it has been activated or cancelled.</value>
     </labels>
     <labels>
         <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
@@ -231,6 +263,30 @@
         <protected>false</protected>
         <shortDescription>Message box warning text for PDF send step</shortDescription>
         <value>There are currently no invoices ready for this step. Invoices must be &quot;Activated&quot; and have at least one generated PDF to appear here. Create some PDFs and come back!</value>
+    </labels>
+    <labels>
+        <fullName>Message_LineItemValidation_CanNotDeleteWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item, when user tries to delete record on locked invoice</shortDescription>
+        <value>A line item record can not be deleted, after the Invoice has been Activated or Cancelled.</value>
+    </labels>
+    <labels>
+        <fullName>Message_LineItemValidation_CanNotEditFieldsWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item record when it edited and invoice is locked</shortDescription>
+        <value>The line item can not be modified, after the Invoice has been Activated or Cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Message_LineItemValidation_CanNotInsertWhenLocked</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on line item record for new records when invoice is locked</shortDescription>
+        <value>Can not insert new line item records, after the Invoice is Activated or Cancelled.</value>
     </labels>
     <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
@@ -329,6 +385,14 @@
         <value>Delete</value>
     </labels>
     <labels>
+        <fullName>UI_Button_Label_Generate</fullName>
+        <categories>ui,button,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for buttons (label or alternative test) that generate new data</shortDescription>
+        <value>Generate</value>
+    </labels>
+    <labels>
         <fullName>UI_Button_Label_NewLineItem</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
@@ -358,7 +422,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Used for commit buttons that save to database</shortDescription>
-        <value>Save Changes</value>
+        <value>Save</value>
     </labels>
     <labels>
         <fullName>UI_Button_Label_SaveAll</fullName>
@@ -377,7 +441,7 @@
         <value>Save All Changes</value>
     </labels>
     <labels>
-        <fullName>UI_Button_Label_SaveButton</fullName>
+        <fullName>UI_Button_Label_SaveChanges</fullName>
         <categories>ui,button,label</categories>
         <language>en_US</language>
         <protected>false</protected>

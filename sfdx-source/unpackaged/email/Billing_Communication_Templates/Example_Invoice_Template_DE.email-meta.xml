@@ -2,7 +2,7 @@
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <encodingKey>UTF-8</encodingKey>
-    <name>Standard Rechnung (DE)</name>
+    <name>Beispiel Rechnungs Template (DE)</name>
     <style>none</style>
     <subject>Rechnung vom {!Invoice__c.Date__c}: {!Invoice__c.Name}</subject>
     <type>custom</type>

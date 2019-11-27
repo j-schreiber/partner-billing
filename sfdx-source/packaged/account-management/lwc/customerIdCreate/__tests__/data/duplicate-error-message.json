@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "status": 400,
+  "statusText": "Bad Request",
+  "body": {
+    "message": "An error occurred while trying to update the record. Please try again.",
+    "statusCode": 400,
+    "enhancedErrorType": "RecordError",
+    "output": {
+      "errors": [
+        {
+          "constituentField": null,
+          "duplicateRecordError": null,
+          "errorCode": "DUPLICATE_VALUE",
+          "field": null,
+          "fieldLabel": null,
+          "message": "duplicate value found: CustomerId__c duplicates value on record with id: 0011D00000epwpM"
+        }
+      ],
+      "fieldErrors": {}
+    }
+  }
+}

@@ -3,24 +3,26 @@
     <lightning-card>
         <lightning-button-icon
             class="slds-m-horizontal_medium"
+            data-id="refreshButton"
             slot="actions"
             icon-name="utility:refresh"
             alternative-text="Refresh Data"
-            disabled={readonly}
+            disabled={isLocked}
             onclick={reset}>
         </lightning-button-icon>
         <lightning-button
             label="New Line Item"
+            data-id="addLineItemButton"
             icon-name="utility:add"
             slot="actions"
             class="slds-m-right_large"
-            disabled={readonly}
+            disabled={isLocked}
             onclick={addLineItem}>
         </lightning-button>
         <lightning-button
             slot="actions"
             label="Commit Changes"
-            data-id="commitChanges"
+            data-id="commitButton"
             variant="brand"
             onclick={commitLineItems}>
         </lightning-button>
@@ -30,6 +32,7 @@
             <template if:true={invoice.data}>
                 <c-invoice-line-item-datatable
                     invoice-id={recordId}
+                    is-disabled={isLocked}
                     line-items={invoice.data.LineItems}>
                 </c-invoice-line-item-datatable>
             </template>

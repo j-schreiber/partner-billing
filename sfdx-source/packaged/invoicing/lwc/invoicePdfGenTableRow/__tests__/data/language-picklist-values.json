@@ -1,0 +1,30 @@
+{
+  "controllerValues": {},
+  "defaultValue": {
+    "attributes": null,
+    "label": "German (Germany)",
+    "validFor": [],
+    "value": "de_DE"
+  },
+  "url": "/services/data/v47.0/ui-api/object-info/Invoice__c/picklist-values/012000000000000AAA/PdfLanguage__c",
+  "values": [
+    {
+      "attributes": null,
+      "label": "German (Germany)",
+      "validFor": [],
+      "value": "de_DE"
+    },
+    {
+      "attributes": null,
+      "label": "English (Germany)",
+      "validFor": [],
+      "value": "en_DE"
+    },
+    {
+      "attributes": null,
+      "label": "English (USA)",
+      "validFor": [],
+      "value": "en_US"
+    }
+  ]
+}

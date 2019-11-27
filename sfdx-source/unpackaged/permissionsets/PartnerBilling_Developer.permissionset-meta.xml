@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Grants access to developer-only features that are not packaged</description>
+    <description>Developer-only features that are not packaged</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Partner Billing: Developer</label>
     <tabSettings>

@@ -11,9 +11,9 @@
         {
             "path": ".\\sfdx-source\\packaged",
             "package": "Partner Billing",
-            "versionName": "Ver 0.2: Invoicing",
-            "versionNumber": "0.2.0.NEXT",
-            "versionDescription": "Invoicing for time entries, preview and activate invoices, generate and send PDFs",
+            "versionName": "Ver 0.3: Invoicing",
+            "versionNumber": "0.3.0.NEXT",
+            "versionDescription": "Usability improvements for Invoicing",
             "definitionFile": "config/project-scratch-def.json",
             "default": false
         }
@@ -36,6 +36,10 @@
         "Partner Billing@0.2.0-3": "04t4P000002fMPEQA2",
         "Partner Billing@0.2.0-4": "04t4P000002fMPnQAM",
         "Partner Billing@0.2.0-6": "04t4P000002fMPxQAM",
-        "Partner Billing@0.2.0-7": "04t4P000002KiaTQAS"
+        "Partner Billing@0.2.0-7": "04t4P000002KiaTQAS",
+        "Partner Billing@0.3.0-1": "04t4P000002KijIQAS",
+        "Partner Billing@0.3.0-2": "04t4P000002KijNQAS",
+        "Partner Billing@0.3.0-3": "04t4P000002KijSQAS",
+        "Partner Billing@0.3.0-4": "04t4P000002KijmQAC"
     }
 }

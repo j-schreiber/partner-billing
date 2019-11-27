@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Allows to modify Activated and Cancelled Invoices (including Line Items). Those Invoices are generally locked from any modification.</description>
+    <label>Modify Activated Invoices</label>
+</CustomPermission>

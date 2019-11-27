@@ -46,6 +46,7 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         switch on Trigger.OperationType {
             when BEFORE_INSERT { for (SObject so : Trigger.new) beforeInsert((Invoice__c)so); }
             when AFTER_UPDATE { for (SObject so : Trigger.new) afterUpdate((Invoice__c)so, (Invoice__c)(Trigger.oldMap.get(so.Id))); }
+            when BEFORE_UPDATE { for (SObject so : Trigger.new) beforeUpdate((Invoice__c)so, (Invoice__c)(Trigger.oldMap.get(so.Id))); }
         }
         commitRelatedRecords();
     }
@@ -66,11 +67,20 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     }
 
     /** @Description
+    *   All functionality that runs in before update scope. Order of execution is defined here.
+    */
+    public void beforeUpdate(Invoice__c newSo, Invoice__c oldSo) {
+        validateModifications(new Invoice(newSo), new Invoice(oldSo));
+    }
+
+    /** @Description
     *   Commit all related records that have been cached
     */
     public void commitRelatedRecords() {
         Database.update(TimeEntriesToUpdate, true);
     }
+
+    /**                                 PRIVATE METHODS                                      */
 
     private void copyBillingAddressFromAccount(Invoice__c newInvoice) {
         if (Accounts.containsKey(newInvoice.Account__c) && Accounts.get(newInvoice.Account__c).BillingAddress != null) {
@@ -89,6 +99,17 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
                 te.Invoice__c = null;
             }
             TimeEntriesToUpdate.addAll(TimeEntries.get(inv.Id));
+        }
+    }
+
+    private void validateModifications(Invoice newInvoice, Invoice oldInvoice) {
+        for (String fieldName : Invoice.ACTIVATED_LOCKED_FIELDS) {
+            if (newInvoice.Record.get(fieldName) != oldInvoice.Record.get(fieldName) && oldInvoice.IsLocked) {
+                if (!FeatureManagement.checkPermission('Modify_Activated_Invoices')) {
+                    newInvoice.Record.addError(Label.Message_InvoiceValidation_CanNotEditLockedField);
+                    break;
+                }
+            }
         }
     }
 }

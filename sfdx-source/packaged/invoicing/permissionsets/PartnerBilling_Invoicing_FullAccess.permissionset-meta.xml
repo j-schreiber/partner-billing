@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Grants access to perform Billing Runs and manage Invoices.</description>
+    <description>Access to Bill Runs and manage functionality for Invoices.</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.AccountId</field>

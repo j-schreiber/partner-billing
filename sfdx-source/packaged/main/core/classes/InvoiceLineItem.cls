@@ -10,6 +10,19 @@ public class InvoiceLineItem {
     /** @Description    Reference to the parent invoice of this line item */
     public Invoice Invoice {public get; private set;}
 
+    /** @Description    Defines all record fields that can not be edited, if the related invoice is locked */
+    public static final Set<String> ACTIVATED_LOCKED_FIELDS = new Set<String>{
+        'Amount__c',
+        'Description__c',
+        'Discount__c',
+        'Price__c',
+        'Product__c',
+        'Quantity__c',
+        'ServiceDate__c',
+        'Tax__c',
+        'Unit__c'
+    };
+
     /** @Description    Create Decorator from original SObject record */
     public InvoiceLineItem(InvoiceLineItem__c originalRecord) {
         Record = originalRecord;

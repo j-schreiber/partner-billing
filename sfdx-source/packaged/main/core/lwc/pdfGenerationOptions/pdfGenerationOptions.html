@@ -3,10 +3,11 @@
             <div class="slds-col">
                 <lightning-combobox 
                     class="slds-m-around_small"
+                    data-id="orgProfileInput"
                     disabled={disabled}
                     variant="label-hidden"
                     label={LABELS.OPTION_LABEL_ORGPROFILE}
-                    options={orgProfileOptions}
+                    options={internalProfiles}
                     value={selectedProfileOption}
                     onchange={handleProfileSelection}>
                 </lightning-combobox>
@@ -14,6 +15,7 @@
             <div class="slds-col">
                 <lightning-combobox
                     class="slds-m-around_small"
+                    data-id="languageInput"
                     disabled={disabled}
                     variant="label-hidden"
                     label={LABELS.OPTION_LABEL_LANGUAGE}
@@ -30,7 +32,7 @@
                     type="toggle"
                     message-toggle-active="Show"
                     message-toggle-inactive="Don't Show"
-                    checked={renderTimesheetOption}
+                    checked={initialTimesheetOption}
                     onchange={handleTimesheetToggle}>
                 </lightning-input>
             </div>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
-        <label><!-- Enterprise Resource Planning --></label>
-        <name>Enterprise_Resource_Planning</name>
+        <label><!-- Billing --></label>
+        <name>Billing</name>
     </customApplications>
     <customLabels>
         <label>E-Mail(s) konnten nicht zugestellt werden. Bitte prüfe die Fehlermeldungen.</label>
@@ -81,6 +81,10 @@
         <name>InvoicePdf_Text_TermsAndConditions</name>
     </customLabels>
     <customLabels>
+        <label>ENTWURF</label>
+        <name>InvoicePdf_Watermark_Draft</name>
+    </customLabels>
+    <customLabels>
         <label>Wähle Leistungszeitraum und konfiguriere die Rechnungserstellung</label>
         <name>Invoicing_Label_FilterHeader</name>
     </customLabels>
@@ -105,8 +109,20 @@
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>
     <customLabels>
+        <label>Die eingegebene Kundennummer existiert bereits!</label>
+        <name>Message_CustomerIdGeneration_Duplicate</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Kundennummer muss numerisch und mindestens 4 Zeichen lang sein!</label>
+        <name>Message_CustomerIdGeneration_InvalidId</name>
+    </customLabels>
+    <customLabels>
         <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
         <name>Message_Generic_NoRecordsFound</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Rechnung kann nicht mehr bearbeitet werden, sobald sie aktiviert oder zurückgerufen wurde.</label>
+        <name>Message_InvoiceValidation_CanNotEditLockedField</name>
     </customLabels>
     <customLabels>
         <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
@@ -119,6 +135,18 @@
     <customLabels>
         <label>Es gibt derzeit keine Rechnungen, die für diesen Schritt verfügbar sind. Rechnungen müssen &quot;Aktiviert&quot; sein und mindestens ein PDF erzeugt haben, um hier zu erscheinen. Erzeuge einige PDFs und komm dann wieder!</label>
         <name>Message_Invoicing_NoPdfSendInvoices</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Position kann nicht mehr gelöscht werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotDeleteWhenLocked</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Position kann nicht mehr bearbeitet werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotEditFieldsWhenLocked</name>
+    </customLabels>
+    <customLabels>
+        <label>Es können keine neuen Positionen mehr erstellt werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
+        <name>Message_LineItemValidation_CanNotInsertWhenLocked</name>
     </customLabels>
     <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
@@ -169,6 +197,10 @@
         <name>UI_Button_Label_Delete</name>
     </customLabels>
     <customLabels>
+        <label>Generieren</label>
+        <name>UI_Button_Label_Generate</name>
+    </customLabels>
+    <customLabels>
         <label>Neue Position</label>
         <name>UI_Button_Label_NewLineItem</name>
     </customLabels>
@@ -194,7 +226,7 @@
     </customLabels>
     <customLabels>
         <label>Speichern</label>
-        <name>UI_Button_Label_SaveButton</name>
+        <name>UI_Button_Label_SaveChanges</name>
     </customLabels>
     <customLabels>
         <label>Aktiviere Timesheet</label>

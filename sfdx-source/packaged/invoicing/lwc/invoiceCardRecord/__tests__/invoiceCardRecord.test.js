@@ -6,6 +6,8 @@ import getInvoice from '@salesforce/apex/InvoiceController.getInvoice';
 import commitInvoiceLineItems from '@salesforce/apex/InvoiceController.commitInvoiceLineItems';
 
 const DRAFT_INVOICE = require('./data/draft-invoice.json');
+const ACTIVATED_INVOICE = require('./data/activated-invoice.json');
+const CANCELLED_INVOICE = require('./data/cancelled-invoice.json');
 
 jest.mock(
     '@salesforce/apex/InvoiceController.commitInvoiceLineItems',
@@ -28,6 +30,79 @@ const NEW_LINE_ITEM = {
 
 describe('c-invoice-card-record', () => {
 
+    describe('initialization', () => {
+
+        afterEach(() => { reset(); });
+
+        test('activated invoice: all functionality disabled', async () => {
+
+            const element = createElement('c-my-component', {
+                is: recordCard
+            });
+            element.recordId = ACTIVATED_INVOICE.Record.Id;
+            document.body.appendChild(element);
+
+            getInvoiceAdapter.emit(ACTIVATED_INVOICE);
+            await Promise.resolve();
+
+            let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
+            expect(dataTable.isDisabled).toBe(true);
+
+            let addBtn = element.shadowRoot.querySelector('lightning-button[data-id="addLineItemButton"]');
+            expect(addBtn.disabled).toBe(true);
+
+            let refreshButton = element.shadowRoot.querySelector('lightning-button-icon[data-id="refreshButton"]');
+            expect(refreshButton.disabled).toBe(true);
+
+
+        });
+
+        test('cancelled invoice: all functionality disabled', async () => {
+
+            const element = createElement('c-my-component', {
+                is: recordCard
+            });
+            element.recordId = CANCELLED_INVOICE.Record.Id;
+            document.body.appendChild(element);
+
+            getInvoiceAdapter.emit(CANCELLED_INVOICE);
+            await Promise.resolve();
+
+            let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
+            expect(dataTable.isDisabled).toBe(true);
+
+            let addBtn = element.shadowRoot.querySelector('lightning-button[data-id="addLineItemButton"]');
+            expect(addBtn.disabled).toBe(true);
+
+            let refreshButton = element.shadowRoot.querySelector('lightning-button-icon[data-id="refreshButton"]');
+            expect(refreshButton.disabled).toBe(true);
+
+        });
+
+        test('draft invoice: functionality enabled', async () => {
+
+            const element = createElement('c-my-component', {
+                is: recordCard
+            });
+            element.recordId = DRAFT_INVOICE.Record.Id;
+            document.body.appendChild(element);
+
+            getInvoiceAdapter.emit(DRAFT_INVOICE);
+            await Promise.resolve();
+
+            let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
+            expect(dataTable.isDisabled).toBe(false);
+
+            let addBtn = element.shadowRoot.querySelector('lightning-button[data-id="addLineItemButton"]');
+            expect(addBtn.disabled).toBe(false);
+
+            let refreshButton = element.shadowRoot.querySelector('lightning-button-icon[data-id="refreshButton"]');
+            expect(refreshButton.disabled).toBe(false);
+
+        });
+
+    });
+
     describe('commit changes', () => {
 
         // reset DOM after each test
@@ -37,7 +112,7 @@ describe('c-invoice-card-record', () => {
 
             commitInvoiceLineItems.mockResolvedValue();
 
-            const element = createElement('c-invoice-card-list', {
+            const element = createElement('c-my-component', {
                 is: recordCard
             });
             element.recordId = DRAFT_INVOICE.Record.Id;
@@ -50,7 +125,7 @@ describe('c-invoice-card-record', () => {
             let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
             dataTable.addRow();
 
-            let commitBtn = element.shadowRoot.querySelector('lightning-button[data-id="commitChanges"]');
+            let commitBtn = element.shadowRoot.querySelector('lightning-button[data-id="commitButton"]');
             commitBtn.click();
             
             expect(commitInvoiceLineItems).toHaveBeenCalled();
@@ -69,7 +144,7 @@ describe('c-invoice-card-record', () => {
 
             commitInvoiceLineItems.mockResolvedValue();
 
-            const element = createElement('c-invoice-card-list', {
+            const element = createElement('c-my-component', {
                 is: recordCard
             });
             element.recordId = DRAFT_INVOICE.Record.Id;
@@ -82,7 +157,7 @@ describe('c-invoice-card-record', () => {
             let dataTable = element.shadowRoot.querySelector('c-invoice-line-item-datatable');
             dataTable.addRow();
 
-            let commitBtn = element.shadowRoot.querySelector('lightning-button[data-id="commitChanges"]');
+            let commitBtn = element.shadowRoot.querySelector('lightning-button[data-id="commitButton"]');
 
             // click button first time & wait for response
             commitBtn.click();

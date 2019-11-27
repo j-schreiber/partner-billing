@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "Test Profile 1",
+        "Id": "a07210000055nHyAAI",
+        "IsDefault__c": true
+    },
+    {
+        "Name": "Test Profile 2",
+        "Id": "a07210000055nHxAAI",
+        "IsDefault__c": false
+    }
+]

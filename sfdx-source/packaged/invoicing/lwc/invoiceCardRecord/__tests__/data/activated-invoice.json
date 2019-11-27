@@ -1,0 +1,156 @@
+{
+  "Attachments": [],
+  "hasLineItems": true,
+  "LineItems": [
+    {
+      "Record": {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKKQAY",
+        "Name": "00000037",
+        "Amount__c": 877.5,
+        "GrossAmount__c": 877.5,
+        "Description__c": "Test data description",
+        "Price__c": 650,
+        "Quantity__c": 1.5,
+        "Tax__c": 0,
+        "Product__c": "01t2F000003zealQAA",
+        "Productname__c": "Standard Beratungsdienstleistung",
+        "Discount__c": 10,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Beratungsdienstleistung",
+          "Id": "01t2F000003zealQAA"
+        }
+      }
+    },
+    {
+      "Record": {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKLQAY",
+        "Name": "00000038",
+        "Amount__c": 5525,
+        "GrossAmount__c": 6574.75,
+        "Description__c": "Test data description",
+        "Price__c": 650,
+        "Quantity__c": 8.5,
+        "Tax__c": 19,
+        "Product__c": "01t2F000003zealQAA",
+        "Productname__c": "Standard Beratungsdienstleistung",
+        "Discount__c": 0,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Beratungsdienstleistung",
+          "Id": "01t2F000003zealQAA"
+        }
+      }
+    },
+    {
+      "Record": {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKMQAY",
+        "Name": "00000039",
+        "Amount__c": 5225,
+        "GrossAmount__c": 5225,
+        "Description__c": "Test data description",
+        "Price__c": 1100,
+        "Quantity__c": 9.5,
+        "Tax__c": 0,
+        "Product__c": "01t2F000003zeamQAA",
+        "Productname__c": "Standard Implementierung",
+        "Discount__c": 50,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Implementierung",
+          "Id": "01t2F000003zeamQAA"
+        }
+      }
+    }
+  ],
+  "Record": {
+    "Id": "a062F000003epifQAA",
+    "Name": "2019-11-000004",
+    "Date__c": "2019-09-30",
+    "Status__c": "Activated",
+    "TotalAmount__c": 11627.5,
+    "TotalGrossAmount__c": 12677.25,
+    "BillingStreet__c": "Bayerstraße 10",
+    "BillingCity__c": "München",
+    "BillingPostalCode__c": "80335",
+    "BillingCountry__c": "Germany",
+    "PdfLanguage__c": "de_DE",
+    "PdfRenderTimesheet__c": true,
+    "Account__c": "0012F00000X9EKzQAN",
+    "ServicePeriodFrom__c": "2019-09-01",
+    "ServicePeriodTo__c": "2019-09-30",
+    "LineItems__r": [
+      {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKKQAY",
+        "Name": "00000037",
+        "Amount__c": 877.5,
+        "GrossAmount__c": 877.5,
+        "Description__c": "Test data description",
+        "Price__c": 650,
+        "Quantity__c": 1.5,
+        "Tax__c": 0,
+        "Product__c": "01t2F000003zealQAA",
+        "Productname__c": "Standard Beratungsdienstleistung",
+        "Discount__c": 10,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Beratungsdienstleistung",
+          "Id": "01t2F000003zealQAA"
+        }
+      },
+      {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKLQAY",
+        "Name": "00000038",
+        "Amount__c": 5525,
+        "GrossAmount__c": 6574.75,
+        "Description__c": "Test data description",
+        "Price__c": 650,
+        "Quantity__c": 8.5,
+        "Tax__c": 19,
+        "Product__c": "01t2F000003zealQAA",
+        "Productname__c": "Standard Beratungsdienstleistung",
+        "Discount__c": 0,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Beratungsdienstleistung",
+          "Id": "01t2F000003zealQAA"
+        }
+      },
+      {
+        "Invoice__c": "a062F000003epifQAA",
+        "Id": "a052F000003tzKMQAY",
+        "Name": "00000039",
+        "Amount__c": 5225,
+        "GrossAmount__c": 5225,
+        "Description__c": "Test data description",
+        "Price__c": 1100,
+        "Quantity__c": 9.5,
+        "Tax__c": 0,
+        "Product__c": "01t2F000003zeamQAA",
+        "Productname__c": "Standard Implementierung",
+        "Discount__c": 50,
+        "CurrencyIsoCode": "EUR",
+        "Product__r": {
+          "Name": "Standard Implementierung",
+          "Id": "01t2F000003zeamQAA"
+        }
+      }
+    ],
+    "Account__r": {
+      "Name": "Colonial One",
+      "CustomerId__c": "1001",
+      "OwnerId": "0052F000004SfepQAC",
+      "Id": "0012F00000X9EKzQAN",
+      "Owner": {
+        "Name": "User User",
+        "Email": "business@lietzau-consulting.de",
+        "Id": "0052F000004SfepQAC"
+      }
+    }
+  }
+}

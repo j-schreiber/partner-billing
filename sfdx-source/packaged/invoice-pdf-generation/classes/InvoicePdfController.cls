@@ -11,23 +11,14 @@ public class InvoicePdfController {
     *   @param  orgProfileId        The organization profile that will be used to render footer/header
     *   @param  renderLanguage      The language that will be used to render all translatable labels
     *   @param  displayTimesheet    Option to display the invoice's timesheet
+    *
+    *   @return                     The created content version that holds the newly created PDF
     */
     @AuraEnabled
     public static ContentVersion savePdfToInvoice(Id invoiceId, String orgProfileId, String renderLanguage, Boolean displayTimesheet) {
         InvoicePrint inv = new InvoicePrint(invoiceId);
         PageReference pdfFile = inv.createPdf(orgProfileId, renderLanguage, displayTimesheet);
         return inv.saveToContentAttachments(pdfFile);
-    }
-
-    /** @Description
-    *   Deletes the requested content version. This also deletes the original content template, if
-    *   the version was the only version left.
-    *
-    *   @param  pdfId               The record id of the content version to delete
-    */
-    @AuraEnabled
-    public static void deletePdf(String pdfId) {
-        Database.delete(pdfId);
     }
 
     /** @Description

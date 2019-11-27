@@ -19,6 +19,11 @@ public virtual class Invoice {
         public get { return !LineItems.isEmpty(); }
     }
 
+    /** @Description    Evaluates if invoice is read-only based on Status */
+    public Boolean IsLocked {
+        public get { return Record.Status__c == Constants.INVOICE_STATUS_ACTIVATED || Record.Status__c == Constants.INVOICE_STATUS_CANCELLED; }
+    }
+
     /** @Description    Attachments for this invoice */
     @AuraEnabled
     public List<ContentDocument> Attachments;
@@ -58,6 +63,20 @@ public virtual class Invoice {
                 '(SELECT Id,Subject FROM Tasks),'+
                 '(SELECT Id,Name,Date__c,StartTime__c,EndTime__c,Duration__c,Status__c,TotalAmount__c,Description__c,ResourceName__c FROM TimeEntries__r ORDER BY Date__c,Name ASC)'+
         ' FROM Invoice__c';
+
+    public static final Set<String> ACTIVATED_LOCKED_FIELDS = new Set<String>{
+        'Date__c',
+        'ServicePeriodFrom__c',
+        'ServicePeriodTo__c',
+        'Status__c',
+        'TotalAmount__c',
+        'TotalGrossAmount__c',
+        'BillingStreet__c',
+        'BillingCity__c',
+        'BillingPostalCode__c',
+        'BillingCountry__c',
+        'BillingState__c'
+    };
 
     /** @Description    All line items (with decorator object) for this invoice mapped by record id */
     public Map<Id, InvoiceLineItem> LineItemMap {public get; private set;}

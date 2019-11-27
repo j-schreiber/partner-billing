@@ -122,6 +122,30 @@ public class InvoicePrint_Test {
     }
 
     @isTest
+    static void getPdfTitle_DraftInvoice_HasDraftInTitle() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_DRAFT));
+        insert i;
+        InvoicePrint objUnderTest = new InvoicePrint(i.Id);
+
+        // VERIFY
+        System.assert(objUnderTest.PdfTitle.startsWith(Label.InvoicePdf_Watermark_Draft), 'startsWith(DRAFT): ' + objUnderTest.PdfTitle);
+    }
+
+    @isTest
+    static void getPdfTitle_ActivatedInvoice_NoDraftInTitle() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c i = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, Status__c=Constants.INVOICE_STATUS_ACTIVATED));
+        insert i;
+        InvoicePrint objUnderTest = new InvoicePrint(i.Id);
+
+        // VERIFY
+        System.assertEquals(false, objUnderTest.PdfTitle.contains(Label.InvoicePdf_Watermark_Draft), 'contains(DRAFT): ' + objUnderTest.PdfTitle);
+    }
+
+    @isTest
     static void getFormattedTotalTaxes_DefaultInput_FormatterPopulated() {
         // SETUP
         Invoice__c record = [SELECT Id,Name,Account__r.Name,PdfLanguage__c FROM Invoice__c LIMIT 1];

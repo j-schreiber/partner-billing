@@ -1,6 +1,7 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getRecord } from 'lightning/uiRecordApi';
+import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
 import savePdfToInvoice from '@salesforce/apex/InvoicePdfController.savePdfToInvoice';
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
@@ -16,17 +17,41 @@ export default class InvoicePdfQuickAction extends LightningElement {
     @api invoiceId;
     @track isWorking = false;
 
-    @track organizationProfiles;
     @track invoice;
-
     @wire(getRecord, { recordId: '$invoiceId', fields: [LANGUAGE_FIELD, RENDER_TIMESHEET_FIELD] })
     setDataFromInvoice ({data}) {
         if (data) {
-            this.invoice = {
+            this.invoice = {};
+            this.invoice.Record = {
                 Id : data.id,
                 PdfLanguage__c : data.fields.PdfLanguage__c.value,
                 PdfRenderTimesheet__c : data.fields.PdfRenderTimesheet__c.value
             }
+            this.selectedLanguage = data.fields.PdfLanguage__c.value;
+            this.displayTimesheet = data.fields.PdfRenderTimesheet__c.value;
+        }
+    }
+
+    @track profileOptions;
+    @wire (getOrganizationProfiles)
+    wiredOrgProfiles({data}) {
+        if (data) { 
+            let arr = [];
+            data.forEach( (entry) => { arr.push({ label : entry.Name, value : entry.Id }) });
+            this.profileOptions = arr;
+            if (this.profileOptions.length > 0) this.selectedProfile = this.profileOptions[0].value;
+        } else {
+            this.profileOptions = [];
+        }
+    }
+
+    @track languageOptions;
+    @wire( getPicklistValues, { recordTypeId : '012000000000000AAA', fieldApiName : LANGUAGE_FIELD})
+    getLanguagePicklistValues (fieldOptions) {
+        if (fieldOptions.data && fieldOptions.data.values) {
+            this.languageOptions = Array.from(fieldOptions.data.values);
+        } else {
+            this.languageOptions = [];
         }
     }
 
@@ -40,11 +65,7 @@ export default class InvoicePdfQuickAction extends LightningElement {
         TOAST_TITLE_ERROR
     }
 
-    connectedCallback() {
-        this.isWorking = true;
-        this.getOrgProfiles();
-        this.isWorking = false;
-    }
+    /**                            GETTERS AND SETTERS                        */
 
     get invoicePdfUrl() {
         return '/apex/InvoicePdf?Id='+ this.invoiceId +
@@ -54,31 +75,13 @@ export default class InvoicePdfQuickAction extends LightningElement {
     }
 
     get loadingCompleted() {
-        return this.organizationProfiles && this.invoice;
+        return this.profileOptions && this.invoice && this.languageOptions;
     }
 
     handleOptionsChange(event) {
         this.selectedProfile = event.detail.profile;
         this.selectedLanguage = event.detail.language;
         this.displayTimesheet = event.detail.timesheet;
-    }
-
-    getOrgProfiles() {
-
-        getOrganizationProfiles({})
-        .then( (data) => {
-            let profiles = [];
-            data.forEach( (entry) => {
-                profiles.push({
-                    label : entry.Name,
-                    value : entry.Id
-                })
-            });
-            this.organizationProfiles = profiles;            
-        })
-        .catch( () => {
-            this.organizationProfiles = [];
-        });
     }
 
     savePdf() {
@@ -91,22 +94,22 @@ export default class InvoicePdfQuickAction extends LightningElement {
             displayTimesheet: this.displayTimesheet
         })
         .then( () => {
-            let successToast = new ShowToastEvent({
-                title : this.LABELS.TOAST_TITLE_SUCCESS,
-                variant : 'success'
-            });
-            this.dispatchEvent(successToast);
+            this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.dispatchEvent(new CustomEvent('savesuccess'));
             this.isWorking = false;
         })
         .catch( (error) => {
-            let errorToast = new ShowToastEvent({
-                title : this.LABELS.TOAST_TITLE_ERROR,
-                variant : 'error',
-                message : error.body.message
-            });
-            this.dispatchEvent(errorToast);
+            this.dispatchToast('error', this.LABELS.TOAST_TITLE_ERROR, error.body.message);
             this.isWorking = false;
         })
+    }
+
+    dispatchToast(type, title, message) {
+        let toast = new ShowToastEvent({
+            title : title,
+            message : message,
+            variant : type
+        });
+        this.dispatchEvent(toast);
     }
 }

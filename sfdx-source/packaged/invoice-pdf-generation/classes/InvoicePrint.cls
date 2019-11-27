@@ -12,8 +12,10 @@ public class InvoicePrint extends Invoice {
     /** @Description    Generated PDF title from language, name and related parent account */
     public String PdfTitle {
         public get {
-            PdfTitle = Record.PdfLanguage__c + '_' + Record.Name + '_' +
-                Record.Account__r.Name;
+            List<String> titles = new List<String>();
+            if (!IsLocked) titles.add(Label.InvoicePdf_Watermark_Draft);
+            titles.addAll(new List<String>{Record.PdfLanguage__c, Record.Name, Record.Account__r.Name});
+            PdfTitle = String.join(titles, '_');
             return PdfTitle;
         }
         private set;
