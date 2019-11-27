@@ -109,6 +109,14 @@
         <name>Invoicing_Label_ServiceDateStart</name>
     </customLabels>
     <customLabels>
+        <label>Die eingegebene Kundennummer existiert bereits!</label>
+        <name>Message_CustomerIdGeneration_Duplicate</name>
+    </customLabels>
+    <customLabels>
+        <label>Eine Kundennummer muss numerisch und mindestens 4 Zeichen lang sein!</label>
+        <name>Message_CustomerIdGeneration_InvalidId</name>
+    </customLabels>
+    <customLabels>
         <label>Zu den eingegebenen Filterkriterien wurden keine Datensätze gefunden. Bitte ändere die Filter und versuche es erneut.</label>
         <name>Message_Generic_NoRecordsFound</name>
     </customLabels>
@@ -189,6 +197,10 @@
         <name>UI_Button_Label_Delete</name>
     </customLabels>
     <customLabels>
+        <label>Generieren</label>
+        <name>UI_Button_Label_Generate</name>
+    </customLabels>
+    <customLabels>
         <label>Neue Position</label>
         <name>UI_Button_Label_NewLineItem</name>
     </customLabels>
@@ -214,7 +226,7 @@
     </customLabels>
     <customLabels>
         <label>Speichern</label>
-        <name>UI_Button_Label_SaveButton</name>
+        <name>UI_Button_Label_SaveChanges</name>
     </customLabels>
     <customLabels>
         <label>Aktiviere Timesheet</label>

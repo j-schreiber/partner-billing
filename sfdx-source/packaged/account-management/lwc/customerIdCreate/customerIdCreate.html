@@ -1,0 +1,57 @@
+<template>
+    <lightning-card title={LABELS.CARD_TITLE}>
+        <div class="slds-p-horizontal_medium">
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col">
+                    <lightning-input
+                        variant="label-hidden"
+                        label="Customer Id"
+                        data-id="customerIdInput"
+                        disabled={hasCustomerId}
+                        pattern="[0-9]{4,}"
+                        message-when-pattern-mismatch={LABELS.ERROR_MESSAGE_PATTERN}
+                        onchange={handleCustomerIdInput}
+                        value={CustomerId}>
+                    </lightning-input>
+                </div>
+
+                <template if:false={hasCustomerId}>
+                    <div class="slds-col slds-grow-none slds-grid slds-grid_reverse slds-is-relative">
+                        <lightning-button
+                            label={LABELS.BUTTON_LABEL_GENERATE}
+                            variant="brand"
+                            data-id="createNewIdButton"
+                            disabled={disableActions}
+                            onclick={createNextCustomerId}>
+                        </lightning-button>
+                        <template if:true={isWorking}>
+                            <lightning-spinner alternative-text="Generating Customer Id" size="small"></lightning-spinner>
+                        </template>
+                    </div>
+                </template>
+
+            </div>
+
+            <template if:false={hasCustomerId}>
+                <div class="slds-grid slds-grid_align-center slds-m-top_medium">
+                    <template if:true={newCustomerId}>
+                        <div class="slds-is-relative">
+                            <lightning-button
+                                label={LABELS.BUTTON_LABEL_SAVE}
+                                variant="success"
+                                data-id="saveNewIdButton"
+                                disabled={disableActions}
+                                onclick={saveNewCustomerId}>
+                            </lightning-button>
+                            <template if:true={isWorking}>
+                                <lightning-spinner alternative-text="Saving Customer Id" size="small"></lightning-spinner>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

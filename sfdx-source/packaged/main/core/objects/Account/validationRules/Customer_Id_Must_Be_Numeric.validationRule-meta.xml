@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Id_Must_Be_Numeric</fullName>
+    <active>true</active>
+    <description>Enforces that value in Customer Id must be numeric, if it is not empty</description>
+    <errorConditionFormula>AND(
+        NOT(ISNUMBER(CustomerId__c)),
+        NOT(ISBLANK(CustomerId__c))
+      )</errorConditionFormula>
+    <errorDisplayField>CustomerId__c</errorDisplayField>
+    <errorMessage>Must be numeric!</errorMessage>
+</ValidationRule>

@@ -2,9 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>CustomerId__c</fullName>
     <caseSensitive>false</caseSensitive>
-    <description>Customer Ids that could be populated from external systems</description>
+    <description>Manually created unique Customer Id</description>
     <externalId>true</externalId>
-    <inlineHelpText>Customer Id from external system</inlineHelpText>
+    <inlineHelpText>The Customer Id is unique and manually created for customers only.</inlineHelpText>
     <label>Customer Id</label>
     <length>10</length>
     <required>false</required>

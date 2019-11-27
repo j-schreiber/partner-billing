@@ -1,0 +1,13 @@
+{
+  "apiName": "Account",
+  "childRelationships": {},
+  "fields": {
+    "CustomerIdNumber__c": { "displayValue": null, "value": 1001 },
+    "CustomerId__c": { "displayValue": null, "value": "1001" }
+  },
+  "id": "0011D00000epwpNQAQ",
+  "lastModifiedById": "0051D0000037a6iQAA",
+  "lastModifiedDate": "2019-11-26T16:46:35.000Z",
+  "recordTypeInfo": null,
+  "systemModstamp": "2019-11-26T16:46:35.000Z"
+}
