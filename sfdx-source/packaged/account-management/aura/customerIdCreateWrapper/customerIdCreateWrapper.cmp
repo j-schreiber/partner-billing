@@ -1,3 +1,0 @@
-<aura:component implements="force:lightningQuickAction,force:hasRecordId">
-    <c:customerIdCreate recordId="{!v.recordId}" onsavesuccess="{!c.refreshView}"/>
-</aura:component>
