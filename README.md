@@ -12,8 +12,6 @@ In a galaxy far, far away, this app will provide full Billing / Account Manageme
 
 I use JIRA to organize releases and epics, however the release logs in GitHub are accurate.
 
-# Functionality
-
 ## Mass Edit Line Items
 * Conventiently mass-edit line items in tableview
 * Highlight edited cells (fields) and new rows
@@ -38,6 +36,15 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 * Watermark is added for PDFs that were generated during Draft
 
 <img src="screenshots/draft-and-activated-invoice-pdf.gif" alt="Draft and activated PDF"/>
+
+## Perform invoicing runs
+* Automatically generate invoices for selected time entries in filtered service period
+* Review and edit generated draft invoices and activate them
+* Generate PDFs for all activated invoices and preview them
+* Send PDFs with selected E-Mail template to dedicated billing Contacts
+
+<img src="screenshots/full-invoicing-run.gif" alt="Full Invoicing Run"/>
+
 
 # Contribute
 Please contact me if you want to fork the repo or contribute. Lincense is tbd.
