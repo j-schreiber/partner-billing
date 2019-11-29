@@ -6,11 +6,45 @@ I currently do not have decided upon a license, so please do not fork / clone!
 # Overview
 In a galaxy far, far away, this app will provide full Billing / Account Management capabilities. For now, you can:
 * Create Budgets for your Accounts to keep track of hours logged and hours invoiced (against said budget)
-* Log time entries to track your work (and enrich wich different type of services (products) and the resource)
-* Bill these time entries and generate invoices
-* Generate PDFs (based on a fixed template) for your invoices and send invoices per e-mail to billing contacts.
+* Log time entries to track your work (store additional information like the resource and the product)
+* Perform a bill run to convert time entries to invoices
+* Generate PDFs for your invoice records and send them to billing contacts (using e-mail).
 
 I use JIRA to organize releases and epics, however the release logs in GitHub are accurate.
+
+## Mass Edit Line Items
+* Conventiently mass-edit line items in tableview
+* Highlight edited cells (fields) and new rows
+* Reset changes (for complete table or single row)
+* Add new rows and delete complete rows with single button-clicks
+* Commit all changes with a single button-click
+
+<img src="screenshots/edit-line-items.gif" alt="Edit line items animation"/>
+
+## Preview the generated PDF
+* Multi-language support (maintain existing and add new translations with translation workbench)
+* Toggle rendering of the Invoice's timesheet
+* Select your company profile, that is used to fill header and footer
+* Review all changes in real-time
+
+<img src="screenshots/show-pdf-preview.gif" alt="PDF Preview"/>
+<img src="screenshots/draft-invoice-preview.gif" alt="Preview for Draft"/>
+
+## Store generated PDFs as Attachments and Documents
+* Store all generated PDFs as full "Content Documents"
+* Creates new content versions for subsequently generated PDFs with same settings, new Documents for different settings
+* Watermark is added for PDFs that are generated while Invoice is still a draft (currently not localized)
+
+<img src="screenshots/draft-and-activated-invoice-pdf.gif" alt="Draft and activated PDF"/>
+
+## Perform invoicing runs
+* Automatically generate invoices for selected time entries in a filtered service period
+* Review and edit generated draft invoices and activate them
+* Generate PDFs for all activated invoices and preview them
+* Send PDFs with selected E-Mail template to configured billing contacts
+
+<img src="screenshots/full-invoicing-run.gif" alt="Full Invoicing Run"/>
+
 
 # Contribute
 Please contact me if you want to fork the repo or contribute. Lincense is tbd.
