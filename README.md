@@ -31,7 +31,12 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 
 <img src="screenshots/show-pdf-preview.gif" alt="PDF Preview"/>
 
-## Add Watermark on PDFs for Draft Invoices
+## Store generated PDFs as Attachments and Documents
+* Store all generated PDFs as full "Content Documents"
+* Creates new content versions for subsequently generated PDFs with same settings, new Documents for different settings
+* Watermark is added for PDFs that were generated during Draft
+
+<img src="screenshots/draft-and-activated-invoice-pdf.gif" alt="Draft and activated PDF"/>
 
 # Contribute
 Please contact me if you want to fork the repo or contribute. Lincense is tbd.
