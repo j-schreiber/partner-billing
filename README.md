@@ -15,12 +15,23 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 # Functionality
 
 ## Mass Edit Line Items
-* Conventiently edit line items in a table
-* Highlight edited cells (fields)
+* Conventiently mass-edit line items in tableview
+* Highlight edited cells (fields) and new rows
 * Reset changes (for complete table or single row)
-* Add new rows and delete rows
+* Add new rows and delete complete rows with single button-clicks
+* Commit all changes with a single button-click
 
 <img src="screenshots/edit-line-items.gif" alt="Edit line items animation"/>
+
+## Preview the generated PDF
+* Multi-Language support (easily add additional languages with Translation Workbench)
+* Toggle rendering of the Invoice's timesheet
+* Select your company profile, that is used to fill header and footer
+* Review all changes in real-time
+
+<img src="screenshots/show-pdf-preview.gif" alt="PDF Preview"/>
+
+## Add Watermark on PDFs for Draft Invoices
 
 # Contribute
 Please contact me if you want to fork the repo or contribute. Lincense is tbd.
