@@ -12,6 +12,16 @@ In a galaxy far, far away, this app will provide full Billing / Account Manageme
 
 I use JIRA to organize releases and epics, however the release logs in GitHub are accurate.
 
+# Functionality
+
+## Mass Edit Line Items
+* Conventiently edit line items in a table
+* Highlight edited cells (fields)
+* Reset changes (for complete table or single row)
+* Add new rows and delete rows
+
+<img src="screenshots/edit-line-items.gif" alt="Edit line items animation"/>
+
 # Contribute
 Please contact me if you want to fork the repo or contribute. Lincense is tbd.
 
