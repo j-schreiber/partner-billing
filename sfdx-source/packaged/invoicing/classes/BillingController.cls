@@ -122,6 +122,7 @@ public with sharing class BillingController {
             auraExp.setMessage(errMsg);
             throw auraExp; 
         }
+        System.debug('Success! No errors found: ' + errors);
     }
 
     /** @Description

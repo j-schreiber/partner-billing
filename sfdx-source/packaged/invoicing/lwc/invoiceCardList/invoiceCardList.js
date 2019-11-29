@@ -41,14 +41,9 @@ export default class InvoiceCardList extends LightningElement {
 
     @api
     refresh() {
-        this.dirtyInvoices = new Map();
-        this.dirtyLineItems = new Map();
-        this.deletedLineItems = new Set();
-
         this.template.querySelectorAll('c-invoice-card').forEach( (card) => {
             if (!card.isLocked()) card.reset();
         });
-
         return refreshApex(this.invoices);
     }
 
@@ -65,11 +60,11 @@ export default class InvoiceCardList extends LightningElement {
             deleteLineItemIds : this.getDeletedLineItemRecordIds()
         })
         .then( () => {
-            this.refreshData();
+            this.refresh();
             this.dispatchToast('success', this.LABELS.TOAST_TITLE_SUCCESS);
             this.isWorking = false;
         })
-        .catch ( (error) => {
+        .catch( (error) => {
             this.dispatchToast('error', this.LABELS.TOAST_TITLE_ERROR, error.body.message);
             this.isWorking = false;
         })
