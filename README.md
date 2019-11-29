@@ -30,6 +30,7 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 * Review all changes in real-time
 
 <img src="screenshots/show-pdf-preview.gif" alt="PDF Preview"/>
+<img src="screenshots/draft-invoice-preview.gif" alt="Preview for Draft"/>
 
 ## Store generated PDFs as Attachments and Documents
 * Store all generated PDFs as full "Content Documents"
