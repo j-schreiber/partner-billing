@@ -273,6 +273,10 @@
         <name>UI_Placeholder_SelectSender</name>
     </customLabels>
     <customLabels>
+        <label>Wähle PDF Sync Einstellungen</label>
+        <name>UI_Title_SelectPdfSettings</name>
+    </customLabels>
+    <customLabels>
         <label>Keine Änderungen gefunden!</label>
         <name>UI_Toast_Title_NoChanges</name>
     </customLabels>

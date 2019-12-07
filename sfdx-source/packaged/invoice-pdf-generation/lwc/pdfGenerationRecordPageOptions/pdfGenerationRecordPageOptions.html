@@ -1,6 +1,6 @@
 <template>
     
-    <lightning-card title="Select PDF Sync options">
+    <lightning-card title={LABELS.CARD_TITLE}>
         <lightning-combobox 
             class="slds-m-around_small"
             data-id="pdfSettingsInput"
@@ -9,10 +9,6 @@
             value={selectedSetting}
             onchange={handleSettingsSelection}>
         </lightning-combobox>
-
-        <template if:true={showNone}>
-            
-        </template>
 
         <template if:true={showDeleteOptions}>
             <div class="slds-p-horizontal_medium">

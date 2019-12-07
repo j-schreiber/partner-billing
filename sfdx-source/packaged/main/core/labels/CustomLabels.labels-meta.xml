@@ -537,6 +537,14 @@
         <value>- Select Sender -</value>
     </labels>
     <labels>
+        <fullName>UI_Title_SelectPdfSettings</fullName>
+        <categories>ui,title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI card title for PDF Sync Settings</shortDescription>
+        <value>Select PDF Sync Settings</value>
+    </labels>
+    <labels>
         <fullName>UI_Toast_Title_NoChanges</fullName>
         <categories>ui,toast,title,warning</categories>
         <language>en_US</language>

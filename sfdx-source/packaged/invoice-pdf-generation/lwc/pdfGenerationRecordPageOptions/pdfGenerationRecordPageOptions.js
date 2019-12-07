@@ -11,13 +11,15 @@ import PDF_ORG_PROFILE_FIELD from '@salesforce/schema/Invoice__c.OrganizationPro
 
 import EXPLANATION_MSG_DELETE from '@salesforce/label/c.Message_PdfSyncSelection_Delete';
 import EXPLANATION_MSG_SYNC from '@salesforce/label/c.Message_PdfSyncSelection_Sync';
+import CARD_TITLE from '@salesforce/label/c.UI_Title_SelectPdfSettings';
 
 export default class PdfGenerationRecordPageOptions extends LightningElement {
     @api recordId;
 
     LABELS = {
         EXPLANATION_MSG_DELETE,
-        EXPLANATION_MSG_SYNC
+        EXPLANATION_MSG_SYNC,
+        CARD_TITLE
     }
 
     @track invoice;
@@ -79,10 +81,6 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
 
     get showSyncOptions() {
         return this.selectedSetting === 'Sync';
-    }
-
-    get showNone() {
-        return this.selectedSetting === 'Deactivated';
     }
 
     get showDeleteOptions() {
