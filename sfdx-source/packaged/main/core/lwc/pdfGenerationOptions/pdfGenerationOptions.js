@@ -13,10 +13,8 @@ export default class pdfGenerationOptions extends LightningElement {
         return this.internalProfiles;
     }
     set orgProfileOptions(input) {
-        if (input && input.length > 0) {
-            this.internalProfiles = input;
-            this.selectedProfileOption = input[0].value;
-        }
+        if (input && input.length > 0) this.internalProfiles = input;
+        if (input && input.length > 0 && !this.selectedProfileOption) this.selectedProfileOption = input[0].value;
     }
     @track internalProfiles = [];
 
@@ -28,6 +26,7 @@ export default class pdfGenerationOptions extends LightningElement {
         this.internalInvoice = input;
         this.selectedLanguageOption = input.Record.PdfLanguage__c;
         this.renderTimesheetOption = input.Record.PdfRenderTimesheet__c;
+        if (input.Record.OrganizationProfile__c) this.selectedProfileOption = input.Record.OrganizationProfile__c;
     }
 
     @api disabled = false;

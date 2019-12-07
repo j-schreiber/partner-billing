@@ -4,6 +4,7 @@ import pdfOptions from 'c/pdfGenerationOptions';
 const LANGUAGE_OPTIONS = require('./data/language-options.json');
 const PROFILE_OPTIONS = require('./data/org-profile-options.json');
 const INVOICE = require('./data/invoice.json');
+const INVOICE_WITH_ORG = require('./data/invoice-with-orgprofile.json');
 
 describe('c-pdf-generation-options', () => {
 
@@ -85,6 +86,20 @@ describe('c-pdf-generation-options', () => {
             expect(langOptions.value).toBe(INVOICE.Record.PdfLanguage__c);
             expect(timesheetToggle.checked).toBe(INVOICE.Record.PdfRenderTimesheet__c);
 
+        });
+
+        test('invoice has org profile: select profile from invoice as option', () => {
+
+            const element = createElement('c-pdf-generation-options', {
+                is: pdfOptions 
+            });
+            element.languageOptions = LANGUAGE_OPTIONS;
+            element.orgProfileOptions = PROFILE_OPTIONS;
+            element.invoice = INVOICE_WITH_ORG;
+            document.body.appendChild(element);
+
+            let orgOptions = element.shadowRoot.querySelector('lightning-combobox[data-id="orgProfileInput"]');
+            expect(orgOptions.value).toBe(INVOICE_WITH_ORG.Record.OrganizationProfile__c);
         });
         
     });
