@@ -79,11 +79,15 @@
         <label>PDF Rendering Configuration</label>
         <layoutColumns>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>PDFSyncSettings__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OrganizationProfile__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>PdfLanguage__c</field>
             </layoutItems>
             <layoutItems>

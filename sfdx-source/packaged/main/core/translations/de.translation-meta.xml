@@ -149,6 +149,14 @@
         <name>Message_LineItemValidation_CanNotInsertWhenLocked</name>
     </customLabels>
     <customLabels>
+        <label>Änderungen an der Rechnung, Rechnungspositionen oder den Zeitaufwänden der Rechnung werden dafür sorgen, dass alle bereits erzeugten PDFs gelöscht werden.</label>
+        <name>Message_PdfSyncSelection_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen an der Rechnung, den Rechnungspositionen oder den Zeitaufwänden, werden eine neue Version des PDFs erzeugen.</label>
+        <name>Message_PdfSyncSelection_Sync</name>
+    </customLabels>
+    <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
         <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
     </customLabels>

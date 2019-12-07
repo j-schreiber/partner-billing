@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <inlineHelpText>Set the languge of the rendered PDF</inlineHelpText>
     <label>Language (PDF)</label>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>

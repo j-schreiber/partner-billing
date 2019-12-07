@@ -1,0 +1,20 @@
+[
+  {
+    "attributes": null,
+    "label": "Sync",
+    "validFor": [],
+    "value": "Sync"
+  },
+  {
+    "attributes": null,
+    "label": "Deactivated",
+    "validFor": [],
+    "value": "Deactivated"
+  },
+  {
+    "attributes": null,
+    "label": "Delete",
+    "validFor": [],
+    "value": "Delete"
+  }
+]

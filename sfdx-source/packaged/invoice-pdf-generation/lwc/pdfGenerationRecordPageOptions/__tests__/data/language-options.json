@@ -1,0 +1,20 @@
+[
+  {
+    "attributes": null,
+    "label": "German (Germany)",
+    "validFor": [],
+    "value": "de_DE"
+  },
+  {
+    "attributes": null,
+    "label": "English (Germany)",
+    "validFor": [],
+    "value": "en_DE"
+  },
+  {
+    "attributes": null,
+    "label": "English (USA)",
+    "validFor": [],
+    "value": "en_US"
+  }
+]

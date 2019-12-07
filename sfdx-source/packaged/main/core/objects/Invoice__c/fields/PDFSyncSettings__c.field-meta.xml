@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PDFSyncSettings__c</fullName>
+    <description>Controls how the rendered PDF is handled. None: Nothing happens, Delete: Any changes will delete all PDFs, Sync: Changes will cause an async re-render.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select, how changes on relevant data is handled</inlineHelpText>
+    <label>PDF Sync Settings</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deactivated</fullName>
+                <default>true</default>
+                <label>Deactivated</label>
+            </value>
+            <value>
+                <fullName>Delete</fullName>
+                <default>false</default>
+                <label>Delete</label>
+            </value>
+            <value>
+                <fullName>Sync</fullName>
+                <default>false</default>
+                <label>Sync</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -289,6 +289,22 @@
         <value>Can not insert new line item records, after the Invoice is Activated or Cancelled.</value>
     </labels>
     <labels>
+        <fullName>Message_PdfSyncSelection_Delete</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User message in PDF Sync Settings component</shortDescription>
+        <value>Changes on the invoice, line items and time entries will cause the deletion of PDFs that are attached to the invoice.</value>
+    </labels>
+    <labels>
+        <fullName>Message_PdfSyncSelection_Sync</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User message in PDF Sync Settings component</shortDescription>
+        <value>Changes on the invoice, line items or time entries will cause a new version of the PDF to be rendered and attached to the record.</value>
+    </labels>
+    <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
         <categories>trigger,validation,error</categories>
         <language>en_US</language>
