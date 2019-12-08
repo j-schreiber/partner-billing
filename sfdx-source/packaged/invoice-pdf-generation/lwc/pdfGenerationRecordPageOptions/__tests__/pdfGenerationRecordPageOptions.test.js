@@ -12,6 +12,7 @@ const GET_ORGPROFILES_ADAPTER = registerApexTestWireAdapter(getOrganizationProfi
 const INVOICE_FULL = require('./data/invoice-full.json');
 const ORG_PROFILE_RECORDS = require('./data/org-profile-records.json');
 const LANGUAGE_OPTIONS = require('./data/language-options.json');
+const DML_ERROR = require('./data/modification-blocked-error.json');
 //const PDF_SETTING_OPTIONS = require('./data/pdf-settings-options.json');
 
 describe('c-pdf-generation-record-page-options', () => {
@@ -175,6 +176,34 @@ describe('c-pdf-generation-record-page-options', () => {
                 PdfRenderTimesheet__c : true
             }});
         });
+
+        test('record update fails: reset all options', async () => {
+
+            const SELECTED_OPTIONS = {
+                recordId : INVOICE_FULL.id,
+                profile : '1234',
+                language : 'en_US',
+                timesheet : true
+            }
+            updateRecord.mockRejectedValue(DML_ERROR);
+
+            const element = createElement('c-pdf-generation-record-page-options', {
+                is: pdfGenOptions 
+            });
+            element.recordId = INVOICE_FULL.id;
+            GET_RECORD_ADAPTER.emit(INVOICE_FULL);
+            GET_ORGPROFILES_ADAPTER.emit(ORG_PROFILE_RECORDS);
+            GET_PICKLISTVALUES_ADAPTER.emit(LANGUAGE_OPTIONS);
+            document.body.appendChild(element);
+
+            let pdfOptions = element.shadowRoot.querySelector('c-pdf-generation-options');
+            pdfOptions.reset = jest.fn();
+            pdfOptions.dispatchEvent(new CustomEvent('optionchange', { detail : SELECTED_OPTIONS }));
+
+            await Promise.resolve();
+            expect(pdfOptions.reset).toHaveBeenCalled();
+        });
+
     });
 
 });

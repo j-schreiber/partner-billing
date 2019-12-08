@@ -187,8 +187,8 @@ describe('c-time-entries-tree-grid', () => {
 
             expect(createInvoices).toHaveBeenCalledWith({
                 filters: {
-                    endDate: "2019-10-31",
-                    startDate: "2019-10-01"
+                    endDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), 0)).toISOString().split("T")[0],
+                    startDate: new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth() -1, 1)).toISOString().split("T")[0]
                 },
                 options: {
                     collapseTimeEntries: true,

@@ -61,10 +61,22 @@ const getErrorsAsString = (errorInput) => {
     return error;
 }
 
+const reduceDMLErrors = (errorObject) => {
+    let errMsg = 'Unknown Error!';
+    if (errorObject.body.message) errMsg = errorObject.body.message;
+    if (errorObject.body.output && errorObject.body.output.errors.length >= 1) {
+        let errMsgs = [];
+        errorObject.body.output.errors.forEach((err) => errMsgs.push(err.message));
+        errMsg = errMsgs.join('; ');
+    }
+    return errMsg;
+}
+
 export { 
     getOrgProfiles,
     cloneInvoiceRecord,
     cloneInvoiceLineItemRecord,
     getMapValuesAsList,
-    getErrorsAsString
+    getErrorsAsString,
+    reduceDMLErrors
 };

@@ -1,7 +1,9 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord, updateRecord } from 'lightning/uiRecordApi';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
+import { reduceDMLErrors } from 'c/utilities';
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 
 import PDF_SETTINGS_FIELD from '@salesforce/schema/Invoice__c.PDFSyncSetting__c';
@@ -12,6 +14,7 @@ import PDF_ORG_PROFILE_FIELD from '@salesforce/schema/Invoice__c.OrganizationPro
 import EXPLANATION_MSG_DELETE from '@salesforce/label/c.Message_PdfSyncSelection_Delete';
 import EXPLANATION_MSG_SYNC from '@salesforce/label/c.Message_PdfSyncSelection_Sync';
 import CARD_TITLE from '@salesforce/label/c.UI_Title_SelectPdfSettings';
+import TOAST_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 
 export default class PdfGenerationRecordPageOptions extends LightningElement {
     @api recordId;
@@ -19,7 +22,8 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
     LABELS = {
         EXPLANATION_MSG_DELETE,
         EXPLANATION_MSG_SYNC,
-        CARD_TITLE
+        CARD_TITLE,
+        TOAST_ERROR
     }
 
     @track invoice;
@@ -79,6 +83,14 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
         return (this.invoice !== undefined && this.profileOptions !== undefined && this.languageOptions !== undefined);
     }
 
+    /** @description
+     *  Resets the component to default values
+     * */
+    @api
+    reset() {
+        this.template.querySelector('c-pdf-generation-options').reset();
+    }
+
     get showSyncOptions() {
         return this.selectedSetting === 'Sync';
     }
@@ -96,6 +108,10 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
         fields[PDF_TIMESHEET_FIELD.fieldApiName] = Boolean(event.detail.timesheet);
         fields[PDF_ORG_PROFILE_FIELD.fieldApiName] = String(event.detail.profile);
         updateRecord({ fields })
+        .catch((error) => {
+            this.reset();
+            this.dispatchToast('error', this.LABELS.TOAST_ERROR, reduceDMLErrors(error));
+        });
     }
 
     handleSettingsSelection(event) {
@@ -103,6 +119,18 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
         let fields = {};
         fields.Id = this.recordId;
         fields[PDF_SETTINGS_FIELD.fieldApiName] = String(this.selectedSetting);
-        updateRecord({ fields });
+        updateRecord({ fields })
+        .catch((error) => {
+            this.dispatchToast('error', this.LABELS.TOAST_ERROR, error.body.message);
+        });
+    }
+
+    dispatchToast(type, title, message) {
+        let toast = new ShowToastEvent({
+            title : title,
+            message : message,
+            variant : type
+        });
+        this.dispatchEvent(toast);
     }
 }
