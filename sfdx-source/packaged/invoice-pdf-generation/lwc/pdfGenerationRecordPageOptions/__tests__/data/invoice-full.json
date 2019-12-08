@@ -5,7 +5,7 @@
     "PdfLanguage__c": { "displayValue": null, "value": "de_DE" },
     "PdfRenderTimesheet__c": { "displayValue": null, "value": true },
     "OrganizationProfile__c": { "displayValue": null, "value": "a078A000005QcpHQAS" },
-    "PDFSyncSettings__c": { "displayValue": null, "value": "Sync" }
+    "PDFSyncSetting__c": { "displayValue": null, "value": "Sync" }
   },
   "id": "a062F000003epigQAA",
   "lastModifiedById": "0051D0000037a6iQAA",

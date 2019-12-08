@@ -307,7 +307,7 @@ public class InvoiceTriggerHandler_Test {
         // SETUP
         Account a = [SELECT Id FROM Account LIMIT 1];
 
-        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSettings__c = Constants.INVOICE_PDF_SETTING_DELETE));
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSetting__c = Constants.INVOICE_PDF_SETTING_DELETE));
         insert inv;
 
         Blob pdfMock = Blob.valueOf('Teststring');
@@ -332,7 +332,7 @@ public class InvoiceTriggerHandler_Test {
         // SETUP
         Account a = [SELECT Id FROM Account LIMIT 1];
 
-        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSettings__c = Constants.INVOICE_PDF_SETTING_DELETE));
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSetting__c = Constants.INVOICE_PDF_SETTING_DELETE));
         insert inv;
 
         Blob pdfMock = Blob.valueOf('Teststring');
@@ -343,7 +343,7 @@ public class InvoiceTriggerHandler_Test {
         insert new ContentDocumentLink(LinkedEntityId=inv.Id, ContentDocumentId=contentDoc.Id, ShareType='V');
 
         // ACTION
-        inv.PDFSyncSettings__c = Constants.INVOICE_PDF_SETTING_DEACTIVATED;
+        inv.PDFSyncSetting__c = Constants.INVOICE_PDF_SETTING_DEACTIVATED;
         Database.SaveResult sr = Database.update(inv, false);
 
         // VERIFY
@@ -356,7 +356,7 @@ public class InvoiceTriggerHandler_Test {
         // SETUP
         Account a = [SELECT Id FROM Account LIMIT 1];
 
-        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSettings__c = Constants.INVOICE_PDF_SETTING_DEACTIVATED));
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSetting__c = Constants.INVOICE_PDF_SETTING_DEACTIVATED));
         insert inv;
 
         Blob pdfMock = Blob.valueOf('Teststring');

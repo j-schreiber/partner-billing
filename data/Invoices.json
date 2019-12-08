@@ -15,7 +15,7 @@
             "BillingCity__c": "Augsburg",
             "BillingCountry__c": "Deutschland",
             "BillingState__c": "Bayern",
-            "PDFSyncSettings__c": "Sync"
+            "PDFSyncSetting__c": "Sync"
         },
         {
             "attributes": {
@@ -27,7 +27,7 @@
             "Date__c": "2019-07-31",
             "ServicePeriodFrom__c": "2019-07-01",
             "ServicePeriodTo__c": "2019-07-31",
-            "PDFSyncSettings__c": "Sync"
+            "PDFSyncSetting__c": "Sync"
         },
         {
             "attributes": {
@@ -39,7 +39,7 @@
             "Date__c": "2019-08-31",
             "ServicePeriodFrom__c": "2019-08-01",
             "ServicePeriodTo__c": "2019-08-31",
-            "PDFSyncSettings__c": "Delete"
+            "PDFSyncSetting__c": "Delete"
         },
         {
             "attributes": {
@@ -51,7 +51,7 @@
             "Date__c": "2019-09-30",
             "ServicePeriodFrom__c": "2019-09-01",
             "ServicePeriodTo__c": "2019-09-30",
-            "PDFSyncSettings__c": "Delete"
+            "PDFSyncSetting__c": "Delete"
         },
         {
             "attributes": {

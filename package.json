@@ -21,8 +21,8 @@
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^0.8.0",
     "@salesforce/eslint-config-lwc": "^0.4.0",
-    "@salesforce/sfdx-lwc-jest": "^0.6.1",
+    "@salesforce/sfdx-lwc-jest": "^0.6.2",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.6.0"
+    "eslint": "^6.7.2"
   }
 }

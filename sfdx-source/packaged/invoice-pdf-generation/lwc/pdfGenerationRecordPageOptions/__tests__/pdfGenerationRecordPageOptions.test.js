@@ -63,7 +63,7 @@ describe('c-pdf-generation-record-page-options', () => {
             pdfSettingsPicklist.dispatchEvent(new CustomEvent('change', { detail : { value : 'Sync' }}));
 
             await Promise.resolve();
-            expect(updateRecord).toHaveBeenCalledWith({ fields : { Id : INVOICE_FULL.id, PDFSyncSettings__c : 'Sync'}});
+            expect(updateRecord).toHaveBeenCalledWith({ fields : { Id : INVOICE_FULL.id, PDFSyncSetting__c : 'Sync'}});
         });
 
         test('user selected sync: pdf options rendered', async () => {

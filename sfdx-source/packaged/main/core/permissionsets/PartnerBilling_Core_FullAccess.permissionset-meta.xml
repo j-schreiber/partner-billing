@@ -177,6 +177,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Invoice__c.PDFSyncSetting__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Invoice__c.ServicePeriodFrom__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -154,7 +154,7 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     }
 
     private void removeDocumentsFromDeleteConfiguredInvoice(Invoice__c newRecord) {
-        if (newRecord.PDFSyncSettings__c == Constants.INVOICE_PDF_SETTING_DELETE) {
+        if (newRecord.PDFSyncSetting__c == Constants.INVOICE_PDF_SETTING_DELETE) {
             for (ContentDocumentLink cdl : Documents.get(newRecord.Id)) {
                 DocumentsToDelete.add(cdl.ContentDocument);
             }

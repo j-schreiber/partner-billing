@@ -4,7 +4,7 @@ import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
 import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
 
-import PDF_SETTINGS_FIELD from '@salesforce/schema/Invoice__c.PDFSyncSettings__c';
+import PDF_SETTINGS_FIELD from '@salesforce/schema/Invoice__c.PDFSyncSetting__c';
 import PDF_LANGUAGE_FIELD from '@salesforce/schema/Invoice__c.PdfLanguage__c';
 import PDF_TIMESHEET_FIELD from '@salesforce/schema/Invoice__c.PdfRenderTimesheet__c';
 import PDF_ORG_PROFILE_FIELD from '@salesforce/schema/Invoice__c.OrganizationProfile__c';
@@ -33,7 +33,7 @@ export default class PdfGenerationRecordPageOptions extends LightningElement {
                 PdfRenderTimesheet__c : data.fields.PdfRenderTimesheet__c.value,
                 OrganizationProfile__c : data.fields.OrganizationProfile__c.value
             }
-            this.selectedSetting = data.fields.PDFSyncSettings__c.value;
+            this.selectedSetting = data.fields.PDFSyncSetting__c.value;
         }
     }
 
