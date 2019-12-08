@@ -1,7 +1,6 @@
 public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
 
     private List<TimeEntry__c> TimeEntriesToUpdate = new List<TimeEntry__c>();
-    private List<ContentDocument> DocumentsToDelete = new List<ContentDocument>();
 
     /** @Description    All time entries (time sheets), mapped by invoice id. Lazy init. */
     private Map<Id, List<TimeEntry__c>> TimeEntries {
@@ -49,22 +48,6 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         private set;
     }
 
-    /** @Description    All content document links mapped by invoice id */
-    private Map<Id, List<ContentDocumentLink>> Documents {
-        private get {
-            if (Documents == null) {
-                Documents = new Map<Id, List<ContentDocumentLink>>();
-                if (Trigger.isUpdate) {
-                    for (Invoice__c inv : [SELECT Id,(SELECT Id,ContentDocumentId,ContentDocument.Title FROM ContentDocumentLinks) FROM Invoice__c WHERE Id IN :Trigger.oldMap.keySet()]) {
-                        Documents.put(inv.Id, inv.ContentDocumentLinks);
-                    }
-                }
-            }
-            return Documents;
-        }
-        private set;
-    }
-
     public InvoiceTriggerHandler() { }
 
     /** @Description
@@ -96,7 +79,6 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     */
     public void afterUpdate(Invoice__c newSo, Invoice__c oldSo) {
         removeTimesheetFromCancelledInvoice(newSo);
-        removeDocumentsFromDeleteConfiguredInvoice(newSo);
     }
 
     /** @Description
@@ -111,7 +93,6 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     */
     public void commitRelatedRecords() {
         Database.update(TimeEntriesToUpdate, true);
-        Database.delete(DocumentsToDelete, true);
     }
 
     /**                                 PRIVATE METHODS                                      */
@@ -153,11 +134,4 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         }
     }
 
-    private void removeDocumentsFromDeleteConfiguredInvoice(Invoice__c newRecord) {
-        if (newRecord.PDFSyncSetting__c == Constants.INVOICE_PDF_SETTING_DELETE) {
-            for (ContentDocumentLink cdl : Documents.get(newRecord.Id)) {
-                DocumentsToDelete.add(cdl.ContentDocument);
-            }
-        }
-    }
 }

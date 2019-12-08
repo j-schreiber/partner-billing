@@ -14,17 +14,24 @@ public with sharing class VFInvoicePdfController {
     public OrganizationProfile__c OrgProfile {
         public get {
             if (OrgProfile == null) {
-                String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
-                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
-                                                         BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
-                                                         FROM OrganizationProfile__c
-                                                         WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
-                                                         ORDER BY IsDefault__c ASC];
-                OrgProfile = profiles.isEmpty() ? new OrganizationProfile__c() : profiles[0];
+                if (String.isNotBlank(Invoice.Record.OrganizationProfile__c)) {
+                    OrgProfile = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
+                                    BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
+                                    FROM OrganizationProfile__c
+                                    WHERE Id = :Invoice.Record.OrganizationProfile__c];
+                } else if (String.isNotBlank(ApexPages.currentPage().getParameters().get('orgProfileId'))) {
+                    String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
+                    List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
+                                                            BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
+                                                            FROM OrganizationProfile__c
+                                                            WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
+                                                            ORDER BY IsDefault__c ASC];
+                    OrgProfile = profiles.isEmpty() ? new OrganizationProfile__c() : profiles[0];
+                }
             }
             return OrgProfile;
         }
-        private set;
+        public set;
     }
 
     /** @Description    Render As Property from Page Parameters */

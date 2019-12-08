@@ -150,6 +150,28 @@ public class VFInvoicePdfController_Test {
     }
 
     @isTest
+    static void getOrgProfile_NoParam_ProfileInInvoice_InvoiceProfileReturned() {
+        // SETUP
+        OrganizationProfile__c newProfile = TestDataFactory.CreateOrganizationProfile(
+            new OrganizationProfile__c(IsDefault__c = false, OrganizationName__c = 'Other Company GmbH')
+        );
+        insert newProfile;
+
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.OrganizationProfile__c = newProfile.Id;
+        update record;
+
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+
+        // VERIFY
+        System.assertEquals(newProfile.Id, op.Id, 'OrgProfile');
+    }
+
+    @isTest
     static void getOrgProfile_InvalidParam_DefaultProfileExists_DefaultProfileReturned() {
         // SETUP
         Test.setCurrentPage(Page.InvoicePdf);
