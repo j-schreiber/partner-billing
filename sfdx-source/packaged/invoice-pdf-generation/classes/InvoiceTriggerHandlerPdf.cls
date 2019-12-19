@@ -64,7 +64,11 @@ public with sharing class InvoiceTriggerHandlerPdf implements ITriggerHandler {
 
     private void generateNewDocumentVersionForSyncConfiguredInvoice(Invoice__c newRecord, Invoice__c oldRecord) {
         if (newRecord.PDFSyncSetting__c == Constants.INVOICE_PDF_SETTING_SYNC && hasActivatedFieldModified(newRecord, oldRecord)) {
-            RerenderDocumentsQueue.add(newRecord.Id);
+            if (RerenderDocumentsQueue.size() < 10) {
+                RerenderDocumentsQueue.add(newRecord.Id);
+            } else {
+                newRecord.addError(System.Label.Message_InvoiceValidation_SyncUpdateLimit);
+            }
         }
     }
 

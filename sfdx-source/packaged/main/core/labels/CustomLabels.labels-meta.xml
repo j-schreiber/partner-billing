@@ -241,6 +241,14 @@
         <value>An Invoice can not be edited after it has been activated or cancelled.</value>
     </labels>
     <labels>
+        <fullName>Message_InvoiceValidation_SyncUpdateLimit</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on invoice record, if too many synced invoices are updated</shortDescription>
+        <value>Too many Invoices that are syncing changes to PDF. Update syncing invoices in smaller batches or temporarily deactive Sync for these records. Maximum allowed records in batch: 10.</value>
+    </labels>
+    <labels>
         <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
         <categories>ui,text,success</categories>
         <language>en_US</language>

@@ -125,6 +125,10 @@
         <name>Message_InvoiceValidation_CanNotEditLockedField</name>
     </customLabels>
     <customLabels>
+        <label>Zu viele Rechnungen, die Updates zu ihrem PDF synchronisieren. Bearbeite diese Rechnungen in kleineren Batches oder deaktiviere die PDF-Synchronisation temporär. Maximum erlaubte Datensätze in Batch: 10.</label>
+        <name>Message_InvoiceValidation_SyncUpdateLimit</name>
+    </customLabels>
+    <customLabels>
         <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>

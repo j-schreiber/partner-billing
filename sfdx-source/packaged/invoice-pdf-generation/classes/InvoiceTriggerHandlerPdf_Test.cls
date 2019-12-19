@@ -108,4 +108,30 @@ public class InvoiceTriggerHandlerPdf_Test {
         System.assertEquals(true, sr.isSuccess(), sr.getErrors());
         System.assertEquals(1, [SELECT COUNT() FROM ContentDocument], 'COUNT() FROM ContentDocument');
     }
+
+    @isTest
+    static void update_PdfSettingIsSync_TooManyRecords_DMLError() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+
+        List<Invoice__c> invs = new List<Invoice__c>();
+        for (Integer i = 0; i<11; i++) {
+            invs.add(TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id, PDFSyncSetting__c = Constants.INVOICE_PDF_SETTING_SYNC)));
+        }
+        insert invs;
+        
+        // ACTION
+        Test.startTest();
+        for (Invoice__c inv : invs) {
+            inv.Date__c = System.today();
+            inv.BillingCountry__c = 'England';
+        }
+        Database.SaveResult[] srs = Database.update(invs, false);
+        Test.stopTest();
+
+        // VERIFY
+        for (Integer i = 0; i<10; i++) System.assertEquals(true, srs[i].isSuccess(), srs[i].getErrors());
+        System.assertEquals(false, srs[10].isSuccess(), 'srs[10].isSuccess()');
+        System.assertEquals(System.Label.Message_InvoiceValidation_SyncUpdateLimit, srs[10].getErrors()[0].getMessage(), 'srs[10].getErrors()[0].getMessage()');
+    }
 }
