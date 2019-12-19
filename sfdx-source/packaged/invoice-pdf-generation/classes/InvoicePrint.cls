@@ -43,10 +43,10 @@ public class InvoicePrint extends Invoice {
     }
 
     public static final Map<String, RenderProperty> PdfRenderProperties = new Map<String, RenderProperty> {
-        'Id' => new RenderProperty('Id', false),
-        'orgProfileId' => new RenderProperty('Organization Profile Id', true),
-        'lang' => new RenderProperty('Language', true),
-        'displayTimesheet' => new RenderProperty('Display Timesheet', true)
+        'Id' => new RenderProperty('Id', 'Id', 'Id', false),
+        'orgProfileId' => new RenderProperty('Organization Profile Id', 'orgProfileId', 'OrganizationProfile__c', true),
+        'lang' => new RenderProperty('Language', 'lang', 'PdfLanguage__c', true),
+        'displayTimesheet' => new RenderProperty('Display Timesheet', 'displayTimesheet', 'PdfRenderTimesheet__c', true)
     };
 
     public InvoicePrint(String recordId) {
@@ -128,16 +128,23 @@ public class InvoicePrint extends Invoice {
     *   @param  fileToSave  File that will be saved as attachment
     */
     public ContentVersion saveToContentAttachments(PageReference pageRefToConvert) {
-        ContentVersion newVersion = getNewContentVersion(pageRefToConvert);
+        ContentVersion newVersion = getPdfFileContentVersion(pageRefToConvert);
         insert newVersion;
         newVersion = [SELECT Id,ContentDocumentId,IsLatest,Title,FileExtension,VersionNumber,ReasonForChange FROM ContentVersion WHERE Id = :newVersion.Id];
         Database.SaveResult linkSr = Database.insert(new ContentDocumentLink(LinkedEntityId=Record.Id, ContentDocumentId=PdfDocument.Id, ShareType='V'), false);
         return newVersion;
     }
 
-    /**                                 PRIVATE AREA                                 */
-
-    private ContentVersion getNewContentVersion(PageReference pageRefToConvert) {
+    /** @Description
+    *   Creates a new content version (PDF file) from a page reference and automatically sets the original
+    *   content document, if this is a new version to an existing file. This method automatically fail safes
+    *   during tests and does not perform DML operations.
+    *
+    *   @param  pageRefToConvert    Page Reference that will be converted to PDF
+    *
+    *   @return                     The uncommited PDF File as content version
+    */
+    public ContentVersion getPdfFileContentVersion(PageReference pageRefToConvert) {
         Blob convertedPdf = Test.isRunningTest() ? Blob.valueOf(String.valueOf(pageRefToConvert)) : pageRefToConvert.getContentAsPdf();
         ContentVersion ver = new ContentVersion(
             Title=PdfTitle,
@@ -149,23 +156,31 @@ public class InvoicePrint extends Invoice {
         return ver;
     }
 
+    /**                                 PRIVATE AREA                                 */
+
     private String getReasonForChangeFromPageParameters(PageReference pageRefToConvert) {
         List<String> params = new List<String>();
-        for (String param : pageRefToConvert.getParameters().keySet()) {
-            if (PdfRenderProperties.containsKey(param) && PdfRenderProperties.get(param).Visible) {
-                params.add(PdfRenderProperties.get(param).DisplayName + '=' + pageRefToConvert.getParameters().get(param));
-            } 
+        for (RenderProperty rp : PdfRenderProperties.values()) {
+            if (pageRefToConvert.getParameters().containsKey(rp.InternalName) && rp.Visible) {
+                params.add(rp.DisplayName + '=' + pageRefToConvert.getParameters().get(rp.InternalName));
+            } else {
+                params.add(rp.DisplayName + '=' + this.Record.get(rp.RecordFieldName));
+            }
         }
         return 'Rendered new PDF Version with: ' + String.join(params, ',');
     }
 
     public class RenderProperty {
 
-        String DisplayName;
-        Boolean Visible;
+        public String DisplayName;
+        public String InternalName;
+        public String RecordFieldName;
+        public Boolean Visible;
 
-        public RenderProperty(String name, Boolean isVis) {
+        public RenderProperty(String name, String paramName, String invField, Boolean isVis) {
             DisplayName = name;
+            InternalName = paramName;
+            RecordFieldName = invField;
             Visible = isVis;
         }
     }

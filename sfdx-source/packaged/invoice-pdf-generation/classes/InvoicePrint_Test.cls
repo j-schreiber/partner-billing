@@ -267,7 +267,7 @@ public class InvoicePrint_Test {
     }
 
     @isTest
-    static void saveToContentAttachments_WithPageParameter_PdfCreateParamsInReasonForChange() {
+    static void getPdfFileContentVersion_WithPageParameter_PdfCreateParamsInReasonForChange() {
         // SETUP
         Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
         InvoicePrint objUnderTest = new InvoicePrint(record.Id);
@@ -279,12 +279,35 @@ public class InvoicePrint_Test {
         invoicePdfPage.getParameters().put('displayTimesheet', 'true');
 
         // ACTION
-        ContentVersion createdVersion = objUnderTest.saveToContentAttachments(invoicePdfPage);
+        ContentVersion createdVersion = objUnderTest.getPdfFileContentVersion(invoicePdfPage);
 
         // VERIFY
         System.assertEquals(true, createdVersion.ReasonForChange.contains('Language=de_DE'), 'contains(Language=de_DE)');
         System.assertEquals(true, createdVersion.ReasonForChange.contains('Organization Profile Id=testId'), 'contains(Organization Profile=testId)');
         System.assertEquals(true, createdVersion.ReasonForChange.contains('Display Timesheet=true'), 'contains(Display Timesheet=true)');
+    }
+
+    @isTest
+    static void getPdfFileContentVersion_WithoutPageParameter_InvoicePdfParamsInReasonForChange() {
+        // SETUP
+        Invoice__c record = [SELECT Id,Name,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        OrganizationProfile__c op = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        record.PdfLanguage__c = 'en_DE';
+        record.PdfRenderTimesheet__c = false;
+        record.OrganizationProfile__c = op.Id;
+        update record;
+        InvoicePrint objUnderTest = new InvoicePrint(record.Id);
+
+        PageReference invoicePdfPage = Page.InvoicePdf;
+        invoicePdfPage.getParameters().put('Id', Record.Id);
+
+        // ACTION
+        ContentVersion createdVersion = objUnderTest.getPdfFileContentVersion(invoicePdfPage);
+
+        // VERIFY
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Language=en_DE'), 'contains(Language=de_DE)');
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Organization Profile Id=' + op.Id), 'contains(Organization Profile=' + op.Id + ')');
+        System.assertEquals(true, createdVersion.ReasonForChange.contains('Display Timesheet=false'), 'contains(Display Timesheet=false)');
     }
 
 }
