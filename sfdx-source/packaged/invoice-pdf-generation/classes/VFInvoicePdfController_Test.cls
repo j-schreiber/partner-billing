@@ -141,11 +141,12 @@ public class VFInvoicePdfController_Test {
     @isTest
     static void getOrgProfile_NoParam_DefaultProfileExists_DefaultProfileReturned() {
         // SETUP
+        insert TestDataFactory.CreateOrganizationProfile(new OrganizationProfile__c(IsDefault__c = false, Name = 'Non Default Test 2'));
         Test.setCurrentPage(Page.InvoicePdf);
         // ACTION
         OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
         // VERIFY
-        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c WHERE IsDefault__c = true LIMIT 1];
         System.assertEquals(expectedProfile.Id, op.Id, 'OrgProfile');
     }
 
