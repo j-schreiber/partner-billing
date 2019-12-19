@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "a061D000002SdoHQAS",
+    "Name": "Standard Default Profile DE",
+    "IsDefault__c": true
+  },
+  {
+    "Id": "a061D000002SdoIQAS",
+    "Name": "Standard Default Profile EN",
+    "IsDefault__c": false
+  },
+  {
+    "Id": "a061D000002SdoJQAS",
+    "Name": "Special Sub Division Profile",
+    "IsDefault__c": false
+  }
+]

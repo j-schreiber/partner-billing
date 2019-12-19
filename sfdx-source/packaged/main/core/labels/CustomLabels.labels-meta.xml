@@ -241,6 +241,14 @@
         <value>An Invoice can not be edited after it has been activated or cancelled.</value>
     </labels>
     <labels>
+        <fullName>Message_InvoiceValidation_SyncUpdateLimit</fullName>
+        <categories>trigger,validation,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message on invoice record, if too many synced invoices are updated</shortDescription>
+        <value>Too many Invoices that are syncing changes to PDF. Update syncing invoices in smaller batches or temporarily deactive Sync for these records. Maximum allowed records in batch: 10.</value>
+    </labels>
+    <labels>
         <fullName>Message_Invoicing_DraftInvoicesCompleted</fullName>
         <categories>ui,text,success</categories>
         <language>en_US</language>
@@ -287,6 +295,22 @@
         <protected>false</protected>
         <shortDescription>Error message on line item record for new records when invoice is locked</shortDescription>
         <value>Can not insert new line item records, after the Invoice is Activated or Cancelled.</value>
+    </labels>
+    <labels>
+        <fullName>Message_PdfSyncSelection_Delete</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User message in PDF Sync Settings component</shortDescription>
+        <value>Changes on the invoice, line items and time entries will cause the deletion of PDFs that are attached to the invoice.</value>
+    </labels>
+    <labels>
+        <fullName>Message_PdfSyncSelection_Sync</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User message in PDF Sync Settings component</shortDescription>
+        <value>Changes on the invoice, line items or time entries will cause a new version of the PDF to be rendered and attached to the record.</value>
     </labels>
     <labels>
         <fullName>Message_TimeEntryValidation_CanNotDeleteRecord</fullName>
@@ -519,6 +543,14 @@
         <protected>false</protected>
         <shortDescription>Used as placeholder in PDF sending UI for sender address selection</shortDescription>
         <value>- Select Sender -</value>
+    </labels>
+    <labels>
+        <fullName>UI_Title_SelectPdfSettings</fullName>
+        <categories>ui,title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UI card title for PDF Sync Settings</shortDescription>
+        <value>Select PDF Sync Settings</value>
     </labels>
     <labels>
         <fullName>UI_Toast_Title_NoChanges</fullName>

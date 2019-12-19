@@ -13,22 +13,22 @@ export default class pdfGenerationOptions extends LightningElement {
         return this.internalProfiles;
     }
     set orgProfileOptions(input) {
-        if (input && input.length > 0) {
-            this.internalProfiles = input;
-            this.selectedProfileOption = input[0].value;
-        }
+        if (input && input.length > 0) this.internalProfiles = input;
+        if (input && input.length > 0 && !this.selectedProfileOption) this.selectedProfileOption = input[0].value;
     }
     @track internalProfiles = [];
 
     @api
     get invoice() {
-        return this.internalInvoice;
+        return this.originalInvoice;
     }
     set invoice(input) {
-        this.internalInvoice = input;
+        this.originalInvoice = input;
         this.selectedLanguageOption = input.Record.PdfLanguage__c;
         this.renderTimesheetOption = input.Record.PdfRenderTimesheet__c;
+        if (input.Record.OrganizationProfile__c) this.selectedProfileOption = input.Record.OrganizationProfile__c;
     }
+    originalInvoice;
 
     @api disabled = false;
 
@@ -44,6 +44,13 @@ export default class pdfGenerationOptions extends LightningElement {
 
     /**                           PUBLIC COMPONENT API                           */  
 
+    /** 
+     * @description
+     * Returns all selected options as a single object. The return includes manually set options and the initial defaults.
+     *  
+     * @returns
+     * The currently selected options of the component, including the record id.
+     * */
     @api
     getSelectedOptions() {
         return {
@@ -52,6 +59,25 @@ export default class pdfGenerationOptions extends LightningElement {
             language : this.selectedLanguageOption,
             timesheet : (typeof this.renderTimesheetOption !== 'undefined') ? this.renderTimesheetOption : this.invoice.Record.PdfRenderTimesheet__c
         };
+    }
+
+    /** 
+     * @description
+     * Resets the component to default (both selections that are received from `getSelectedOptions()`
+     * and input fields.)
+     * */
+    @api
+    reset() {
+        this.selectedLanguageOption = this.originalInvoice.Record.PdfLanguage__c;
+        this.template.querySelector('lightning-combobox[data-id="languageInput"]').value = this.originalInvoice.Record.PdfLanguage__c;
+
+        this.renderTimesheetOption = this.originalInvoice.Record.PdfRenderTimesheet__c;
+        this.template.querySelector('lightning-input').checked = this.originalInvoice.Record.PdfRenderTimesheet__c;
+
+        if (this.originalInvoice.Record.OrganizationProfile__c) {
+            this.selectedProfileOption = this.originalInvoice.Record.OrganizationProfile__c;
+            this.template.querySelector('lightning-combobox[data-id="orgProfileInput"]').value = this.originalInvoice.Record.OrganizationProfile__c;
+        }
     }
     
 

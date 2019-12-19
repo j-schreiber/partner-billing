@@ -125,6 +125,10 @@
         <name>Message_InvoiceValidation_CanNotEditLockedField</name>
     </customLabels>
     <customLabels>
+        <label>Zu viele Rechnungen, die Updates zu ihrem PDF synchronisieren. Bearbeite diese Rechnungen in kleineren Batches oder deaktiviere die PDF-Synchronisation temporär. Maximum erlaubte Datensätze in Batch: 10.</label>
+        <name>Message_InvoiceValidation_SyncUpdateLimit</name>
+    </customLabels>
+    <customLabels>
         <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>
@@ -147,6 +151,14 @@
     <customLabels>
         <label>Es können keine neuen Positionen mehr erstellt werden, nachdem die Rechnung aktiviert oder zurückgezogen wurde.</label>
         <name>Message_LineItemValidation_CanNotInsertWhenLocked</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen an der Rechnung, Rechnungspositionen oder den Zeitaufwänden der Rechnung werden dafür sorgen, dass alle bereits erzeugten PDFs gelöscht werden.</label>
+        <name>Message_PdfSyncSelection_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen an der Rechnung, den Rechnungspositionen oder den Zeitaufwänden, werden eine neue Version des PDFs erzeugen.</label>
+        <name>Message_PdfSyncSelection_Sync</name>
     </customLabels>
     <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
@@ -263,6 +275,10 @@
     <customLabels>
         <label>- Absender auswählen -</label>
         <name>UI_Placeholder_SelectSender</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle PDF Sync Einstellungen</label>
+        <name>UI_Title_SelectPdfSettings</name>
     </customLabels>
     <customLabels>
         <label>Keine Änderungen gefunden!</label>

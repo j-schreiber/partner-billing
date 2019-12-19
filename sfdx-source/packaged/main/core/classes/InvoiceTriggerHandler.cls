@@ -34,6 +34,20 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
         private set;
     }
 
+    /** @Description    All org profiles that are available for the current user */
+    private Map<Id, OrganizationProfile__c> OrganizationProfiles {
+        private get {
+            if (OrganizationProfiles == null) {
+                OrganizationProfiles = new Map<Id, OrganizationProfile__c>(
+                    [SELECT Id,Name,IsDefault__c
+                    FROM OrganizationProfile__c ORDER BY IsDefault__c DESC]
+                );
+            }
+            return OrganizationProfiles;
+        }
+        private set;
+    }
+
     public InvoiceTriggerHandler() { }
 
     /** @Description
@@ -57,6 +71,7 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
     */
     public void beforeInsert(Invoice__c newSo) {
         copyBillingAddressFromAccount(newSo);
+        prefillDefaultOrgProfileId(newSo);
     }
 
     /** @Description
@@ -112,4 +127,11 @@ public with sharing class InvoiceTriggerHandler implements ITriggerHandler {
             }
         }
     }
+
+    private void prefillDefaultOrgProfileId(Invoice__c newRecord) {
+        if (!OrganizationProfiles.isEmpty()) {
+            newRecord.OrganizationProfile__c = OrganizationProfiles.values()[0].Id;
+        }
+    }
+
 }

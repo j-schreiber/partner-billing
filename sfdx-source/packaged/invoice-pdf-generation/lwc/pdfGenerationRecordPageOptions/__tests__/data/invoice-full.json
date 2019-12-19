@@ -1,0 +1,15 @@
+{
+  "apiName": "Invoice__c",
+  "childRelationships": {},
+  "fields": {
+    "PdfLanguage__c": { "displayValue": null, "value": "de_DE" },
+    "PdfRenderTimesheet__c": { "displayValue": null, "value": true },
+    "OrganizationProfile__c": { "displayValue": null, "value": "a078A000005QcpHQAS" },
+    "PDFSyncSetting__c": { "displayValue": null, "value": "Sync" }
+  },
+  "id": "a062F000003epigQAA",
+  "lastModifiedById": "0051D0000037a6iQAA",
+  "lastModifiedDate": "2019-11-26T16:46:35.000Z",
+  "recordTypeInfo": null,
+  "systemModstamp": "2019-11-26T16:46:35.000Z"
+}

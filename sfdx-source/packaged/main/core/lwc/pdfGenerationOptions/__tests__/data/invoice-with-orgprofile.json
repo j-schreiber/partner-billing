@@ -1,0 +1,35 @@
+{
+  "Attachments": [],
+  "hasLineItems": false,
+  "LineItems": [],
+  "Record": {
+    "Id": "a062F000003epigQAA",
+    "Name": "2019-11-000003",
+    "Date__c": "2019-10-02",
+    "Status__c": "Activated",
+    "TotalAmount__c": 0,
+    "TotalGrossAmount__c": 0,
+    "BillingStreet__c": "Bayerstraße 11",
+    "BillingCity__c": "München",
+    "BillingPostalCode__c": "80335",
+    "BillingCountry__c": "Germany",
+    "PdfLanguage__c": "de_DE",
+    "PdfRenderTimesheet__c": true,
+    "OrganizationProfile__c": "a078A000005QcpHQAS",
+    "Account__c": "0012F00000X9EKzQAN",
+    "ServicePeriodFrom__c": "2019-09-01",
+    "ServicePeriodTo__c": "2019-09-30",
+    "LineItems__r": [],
+    "Account__r": {
+      "Name": "Colonial One",
+      "CustomerId__c": "1001",
+      "OwnerId": "0052F000004SfepQAC",
+      "Id": "0012F00000X9EKzQAN",
+      "Owner": {
+        "Name": "User User",
+        "Email": "business@lietzau-consulting.de",
+        "Id": "0052F000004SfepQAC"
+      }
+    }
+  }
+}

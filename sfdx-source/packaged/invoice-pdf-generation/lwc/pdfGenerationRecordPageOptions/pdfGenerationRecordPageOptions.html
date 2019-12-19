@@ -1,0 +1,34 @@
+<template>
+    
+    <lightning-card title={LABELS.CARD_TITLE}>
+        <lightning-combobox 
+            class="slds-m-around_small"
+            data-id="pdfSettingsInput"
+            variant="label-hidden"
+            options={pdfSettingsOptions}
+            value={selectedSetting}
+            onchange={handleSettingsSelection}>
+        </lightning-combobox>
+
+        <template if:true={showDeleteOptions}>
+            <div class="slds-p-horizontal_medium">
+                <c-message-box variant="warning" message={LABELS.EXPLANATION_MSG_DELETE}></c-message-box>
+            </div>
+        </template>
+
+        <template if:true={showSyncOptions}>
+            <div class="slds-p-horizontal_medium">
+                <c-message-box variant="success" message={LABELS.EXPLANATION_MSG_SYNC}></c-message-box>
+            </div>
+            <template if:true={isLoaded}>
+                <c-pdf-generation-options
+                    invoice={invoice}
+                    onoptionchange={handleOptionsChange}
+                    org-profile-options={profileOptions}
+                    language-options={languageOptions}>
+                </c-pdf-generation-options>
+            </template>
+        </template>
+    </lightning-card>
+
+</template>

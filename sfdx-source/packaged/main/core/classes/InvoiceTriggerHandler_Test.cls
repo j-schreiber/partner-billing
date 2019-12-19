@@ -7,6 +7,12 @@ public class InvoiceTriggerHandler_Test {
             new Account(BillingStreet = 'Teststraße 1', BillingPostalCode = '80336', BillingCity = 'München', BillingCountryCode = 'DE')
         );
         insert a;
+
+        List<OrganizationProfile__c> orgProfiles = new List<OrganizationProfile__c>();
+        orgProfiles.add(TestDataFactory.CreateDefaultOrganizationProfile());
+        orgProfiles.add(TestDataFactory.CreateOrganizationProfile(new OrganizationProfile__c(IsDefault__c = false, Name = 'Test Profile #1')));
+        orgProfiles.add(TestDataFactory.CreateOrganizationProfile(new OrganizationProfile__c(IsDefault__c = false, Name = 'Test Profile #2')));
+        insert orgProfiles;
     }
 
     @isTest
@@ -21,6 +27,23 @@ public class InvoiceTriggerHandler_Test {
         System.assertEquals(false, sr.isSuccess(), 'isSuccess()');
         System.assertEquals(StatusCode.REQUIRED_FIELD_MISSING, sr.getErrors()[0].getStatusCode(), 'getErrors()[0].getStatusCode()');
         System.assertEquals('Account__c', sr.getErrors()[0].getFields()[0], 'getErrors()[0].getFields()[0]');
+    }
+
+    @isTest
+    static void insert_NewBlankInvoices_NoUnnecessaryQueryExecutions() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        List<Invoice__c> invs = new List<Invoice__c>();
+        for (Integer i = 0; i < 10; i++) invs.add(TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id)));
+
+        // ACTION
+        Test.startTest();
+        Database.SaveResult[] srs = Database.insert(invs, false);
+
+        // VERIFY
+        // Accounts and Org Profiles have been queried
+        System.assertEquals(2, Limits.getQueries(), 'getQueries()');
+        Test.stopTest();
     }
     
     @isTest
@@ -81,6 +104,36 @@ public class InvoiceTriggerHandler_Test {
         System.assertEquals('81667', actualInv.BillingPostalCode__c, 'BillingPostalCode__c');
         System.assertEquals('Augsburg', actualInv.BillingCity__c, 'BillingCity__c');
         System.assertEquals('Deutschland', actualInv.BillingCountry__c, 'BillingCountry__c');
+    }
+
+    @isTest
+    static void insert_OrgProfilesExist_DefaultProfileAdded() {
+        // SETUP
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id));
+
+        // ACTION
+        Database.SaveResult sr = Database.insert(inv, false);
+
+        // VERIFY
+        Invoice__c actualInv = [SELECT Id,OrganizationProfile__c FROM Invoice__c WHERE Id = :inv.Id];
+        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c WHERE IsDefault__c = true];
+        System.assertEquals(expectedProfile.Id, actualInv.OrganizationProfile__c, 'OrganizationProfile__c');
+    }
+
+    @isTest
+    static void insert_NoOrgProfilesExist_NoOperation() {
+        // SETUP
+        delete [SELECT Id FROM OrganizationProfile__c];
+        Account a = [SELECT Id FROM Account LIMIT 1];
+        Invoice__c inv = TestDataFactory.CreateInvoice(new Invoice__c(Account__c = a.Id));
+
+        // ACTION
+        Database.SaveResult sr = Database.insert(inv, false);
+
+        // VERIFY
+        Invoice__c actualInv = [SELECT Id,OrganizationProfile__c FROM Invoice__c WHERE Id = :inv.Id];
+        System.assertEquals(null, actualInv.OrganizationProfile__c, 'OrganizationProfile__c');
     }
 
     @isTest
@@ -248,4 +301,5 @@ public class InvoiceTriggerHandler_Test {
             System.assertEquals(true, sr.isSuccess(), 'sr.isSuccess(): ' + sr.getErrors());
         }
     }
+
 }

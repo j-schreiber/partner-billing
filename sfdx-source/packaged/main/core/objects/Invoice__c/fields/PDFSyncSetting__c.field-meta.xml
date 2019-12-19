@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>PdfLanguage__c</fullName>
+    <fullName>PDFSyncSetting__c</fullName>
+    <description>Controls how the rendered PDF is handled when relevant changes are performed: Deactivated: Nothing happens, Delete: Any changes will delete all PDFs, Sync: Changes will cause an async re-render.</description>
     <externalId>false</externalId>
-    <inlineHelpText>Set the languge of the rendered PDF</inlineHelpText>
-    <label>Language (PDF)</label>
+    <inlineHelpText>Select, how changes on relevant data is handled</inlineHelpText>
+    <label>PDF Sync Settings</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -12,19 +13,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>de_DE</fullName>
+                <fullName>Deactivated</fullName>
                 <default>true</default>
-                <label>German (Germany)</label>
+                <label>Deactivated</label>
             </value>
             <value>
-                <fullName>en_DE</fullName>
+                <fullName>Delete</fullName>
                 <default>false</default>
-                <label>English (Germany)</label>
+                <label>Delete</label>
             </value>
             <value>
-                <fullName>en_US</fullName>
+                <fullName>Sync</fullName>
                 <default>false</default>
-                <label>English (USA)</label>
+                <label>Sync</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -11,20 +11,33 @@ public with sharing class VFInvoicePdfController {
         private set;
     }
 
+    /** @Description    Retrieves the Org-Profile that will be used to render the PDF. 
+                        First, selects profile from params, then profile from invoice record, then default profile */
     public OrganizationProfile__c OrgProfile {
         public get {
             if (OrgProfile == null) {
-                String orgProfileId = ApexPages.currentPage().getParameters().get('orgProfileId');
-                List<OrganizationProfile__c> profiles = [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
-                                                         BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
-                                                         FROM OrganizationProfile__c
-                                                         WHERE Id = :orgProfileId OR (IsDefault__c = true AND Id != :orgProfileId)
-                                                         ORDER BY IsDefault__c ASC];
-                OrgProfile = profiles.isEmpty() ? new OrganizationProfile__c() : profiles[0];
+
+                Map<String, OrganizationProfile__c> orgProfiles = new Map<String, OrganizationProfile__c>(
+                    [SELECT Id,Name,OrganizationName__c,Street__c,PostalCode__c,City__c,State__c,Country__c,Email__c,Phone__c,VATNumber__c,IsDefault__c,
+                    BankAccount__r.IBAN__c,BankAccount__r.BankName__c,BankAccount__r.BankNameFull__c,BankAccount__r.BankAccountOwner__c
+                    FROM OrganizationProfile__c
+                    ORDER BY IsDefault__c DESC]
+                );
+                
+                if (String.isNotBlank(ApexPages.currentPage().getParameters().get('orgProfileId')) && orgProfiles.containsKey(ApexPages.currentPage().getParameters().get('orgProfileId'))) {
+                    OrgProfile = orgProfiles.get(ApexPages.currentPage().getParameters().get('orgProfileId'));
+                } else if (String.isNotBlank(Invoice.Record.OrganizationProfile__c) && orgProfiles.containsKey(Invoice.Record.OrganizationProfile__c)) {
+                    OrgProfile = orgProfiles.get(Invoice.Record.OrganizationProfile__c);
+                } else if (!orgProfiles.isEmpty()) {
+                    OrgProfile = orgProfiles.values()[0];
+                } else {
+                    OrgProfile = new OrganizationProfile__c();
+                }
+
             }
             return OrgProfile;
         }
-        private set;
+        public set;
     }
 
     /** @Description    Render As Property from Page Parameters */
