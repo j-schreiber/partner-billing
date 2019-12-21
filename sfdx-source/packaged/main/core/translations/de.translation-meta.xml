@@ -169,6 +169,10 @@
         <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
     </customLabels>
     <customLabels>
+        <label>Zeiterfassung</label>
+        <name>TimeTracking_Title_TrackingWidget</name>
+    </customLabels>
+    <customLabels>
         <label>Änderungen gespeichert!</label>
         <name>Toast_Title_DataSaved</name>
     </customLabels>

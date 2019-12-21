@@ -329,6 +329,14 @@
         <value>Invoice can not be removed, once it is set.</value>
     </labels>
     <labels>
+        <fullName>TimeTracking_Title_TrackingWidget</fullName>
+        <categories>ui,title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Title for tracking widget that can be used on Home Page</shortDescription>
+        <value>Time Tracking</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_DataSaved</fullName>
         <categories>ui,toast,title,success</categories>
         <language>en_US</language>

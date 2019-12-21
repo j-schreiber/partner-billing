@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title={LABELS.CARD_TITLE}>
+
+        <div class="slds-grid slds-grid_align-center slds-p-around_medium">
+
+            <template if:true={isRecording}>
+                Currently recording ...
+            </template>
+            <template if:false={isRecording}>
+                <lightning-button-icon
+                    style="transform: scale(1.75)"
+                    icon-name="utility:record"
+                    variant="brand"
+                    alternative-text="Start recording ..."
+                    size="large"
+                    onclick={startRecording}>
+                </lightning-button-icon>
+            </template>
+
+        </div>
+
+    </lightning-card>
+</template>

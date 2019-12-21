@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>Billing_App_Home_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#4CB13B</headerColor>
         <logo>money_120</logo>
@@ -12,6 +20,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Billing</label>
     <navType>Standard</navType>
+    <tabs>standard-home</tabs>
     <tabs>BankAccount__c</tabs>
     <tabs>OrganizationProfile__c</tabs>
     <tabs>standard-Account</tabs>
