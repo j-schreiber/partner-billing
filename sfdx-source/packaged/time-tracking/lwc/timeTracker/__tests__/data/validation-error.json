@@ -1,0 +1,25 @@
+{
+    "ok": false,
+    "status": 400,
+    "statusText": "Bad Request",
+    "body": {
+        "message": "An error occurred while trying to update the record. Please try again.",
+        "statusCode": 400,
+        "enhancedErrorType": "RecordError",
+        "output": {
+            "errors": [],
+            "fieldErrors": {
+                "EndTime__c": [
+                    {
+                        "constituentField": null,
+                        "duplicateRecordError": null,
+                        "errorCode": "FIELD_CUSTOM_VALIDATION_EXCEPTION",
+                        "field": "EndTime__c",
+                        "fieldLabel": "End Time",
+                        "message": "Duration must be positive at least 5 minutes (0,08)"
+                    }
+                ]
+            }
+        }
+    }
+}

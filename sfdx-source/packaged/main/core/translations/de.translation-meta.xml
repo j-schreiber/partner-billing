@@ -169,6 +169,22 @@
         <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
     </customLabels>
     <customLabels>
+        <label>Zeiterfassung</label>
+        <name>TimeTracking_Title_TrackingWidget</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeiteintrag konnte nicht abgeschlossen werden!</label>
+        <name>TimeTracking_Toast_CanNotStopRecording</name>
+    </customLabels>
+    <customLabels>
+        <label>Aufzeichnung des Zeiteintrags begonnen!</label>
+        <name>TimeTracking_Toast_RecordingStarted</name>
+    </customLabels>
+    <customLabels>
+        <label>Aufzeichnung erfolgreich beendet. Zeiteintrag abgeschlossen.</label>
+        <name>TimeTracking_Toast_RecordingStopped</name>
+    </customLabels>
+    <customLabels>
         <label>Änderungen gespeichert!</label>
         <name>Toast_Title_DataSaved</name>
     </customLabels>

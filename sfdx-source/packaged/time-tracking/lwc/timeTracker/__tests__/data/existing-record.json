@@ -1,0 +1,51 @@
+{
+    "apiName": "TimeEntry__c",
+    "childRelationships": {},
+    "fields": {
+        "Account__c": {
+            "displayValue": null,
+            "value": "0011D00000fEWljQAG"
+        },
+        "Budget__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "DailyRate__c": {
+            "displayValue": "EUR 500,66",
+            "value": 500.66
+        },
+        "Date__c": {
+            "displayValue": "25.12.2019",
+            "value": "2019-12-25"
+        },
+        "Description__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "EndTime__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Product__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Resource__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "StartTime__c": {
+            "displayValue": "22:08",
+            "value": "22:08:18.000Z"
+        },
+        "Status__c": {
+            "displayValue": "New",
+            "value": "New"
+        }
+    },
+    "id": "a091D000009ktsiQAA",
+    "lastModifiedById": "0051D000003MC4RQAW",
+    "lastModifiedDate": "2019-12-25T21:08:18.000Z",
+    "recordTypeInfo": null,
+    "systemModstamp": "2019-12-25T21:08:18.000Z"
+}

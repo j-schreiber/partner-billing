@@ -4,9 +4,13 @@
     <c-message-box variant="warning" message={boxMessage}></c-message-box>
     <c-message-box variant="error"></c-message-box>
     <c-message-box></c-message-box>-->
+    
+    <lightning-card>
+        <div class="slds-m-horizontal_medium">
+            <c-duration-timer start-time-string={initTime} end-time-string={now}></c-duration-timer>
+            <lightning-button label="Start Time" onclick={startTimer}></lightning-button>
+        </div>
+    </lightning-card>
 
-    <template if:true={invoices.data}>
-        <c-invoice-card invoice={Invoice}></c-invoice-card>
-    </template>
 
 </template>
