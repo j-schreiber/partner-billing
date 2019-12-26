@@ -1,20 +1,82 @@
 <template>
     <lightning-card title={LABELS.CARD_TITLE}>
 
-        <div class="slds-grid slds-grid_align-center slds-p-around_medium">
+        <div class="slds-p-around_medium">
 
-            <template if:true={isRecording}>
-                Currently recording ...
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Looking for unfinished business ..." size="medium"></lightning-spinner>
             </template>
-            <template if:false={isRecording}>
-                <lightning-button-icon
-                    style="transform: scale(1.75)"
-                    icon-name="utility:record"
-                    variant="brand"
-                    alternative-text="Start recording ..."
-                    size="large"
-                    onclick={startRecording}>
-                </lightning-button-icon>
+            
+            <lightning-record-edit-form object-api-name="TimeEntry__c">
+                <lightning-input-field
+                    data-id="Account__c"
+                    value={AccountId}
+                    field-name="Account__c">
+                </lightning-input-field>
+            </lightning-record-edit-form>
+
+            <template if:true={isFullyLoaded}>
+
+                <div class="slds-grid slds-grid_vertical">
+                    <lightning-record-edit-form record-id={activeTimeEntryId} object-api-name="TimeEntry__c">
+                        <lightning-input-field
+                            onchange={updateProduct}
+                            field-name="Product__c">
+                        </lightning-input-field>
+                        <lightning-input-field
+                            onchange={updateResource}
+                            field-name="Resource__c">
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+
+                    <lightning-textarea
+                        value={Description}
+                        name="Description__c"
+                        onblur={updateDescription}
+                        data-id="InputDescription__c"
+                        label="Description">
+                    </lightning-textarea>
+
+                    <lightning-input
+                        value={DailyRate}
+                        name="DailyRate__c"
+                        type="number"
+                        formatter="currency"
+                        label="Daily Rate"
+                        onblur={updateDailyRate}
+                        data-id="InputDailyRate__c"
+                        min="0"
+                        step="0.01">
+                    </lightning-input>
+
+                    <div class="slds-grid slds-grid_align-center">
+                        <lightning-button
+                            class="slds-m-top_medium"
+                            data-id="submitTimeEntry"
+                            label="Submit"
+                            icon-name="utility:record_create"
+                            variant="success"
+                            disabled={isWorking}
+                            onclick={stopRecording}>
+                        </lightning-button>
+                    </div>
+                    
+                </div>
+
+            </template>
+
+            <template if:true={isReady}>
+                <div class="slds-grid slds-grid_align-center slds-m-top_large">
+                    <lightning-button-icon
+                        style="transform: scale(1.75)"
+                        icon-name="utility:play"
+                        variant="brand"
+                        alternative-text="Start recording ..."
+                        size="large"
+                        disabled={isWorking}
+                        onclick={startRecording}>
+                    </lightning-button-icon>
+                </div>
             </template>
 
         </div>

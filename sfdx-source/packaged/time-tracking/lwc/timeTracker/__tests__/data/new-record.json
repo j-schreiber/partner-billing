@@ -1,0 +1,173 @@
+{
+    "apiName": "TimeEntry__c",
+    "childRelationships": {},
+    "fields": {
+        "Account__c": {
+            "displayValue": null,
+            "value": "0011D00000fEWljQAG"
+        },
+        "Account__r": {
+            "displayValue": "Cloud 9 GmbH",
+            "value": {
+                "apiName": "Account",
+                "childRelationships": {},
+                "fields": {
+                    "Id": {
+                        "displayValue": null,
+                        "value": "0011D00000fEWljQAG"
+                    },
+                    "Name": {
+                        "displayValue": null,
+                        "value": "Cloud 9 GmbH"
+                    }
+                },
+                "id": "0011D00000fEWljQAG",
+                "lastModifiedById": "0051D000003MC4RQAW",
+                "lastModifiedDate": "2019-12-21T20:23:11.000Z",
+                "recordTypeInfo": null,
+                "systemModstamp": "2019-12-21T20:23:11.000Z"
+            }
+        },
+        "Budget__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Budget__r": {
+            "displayValue": null,
+            "value": null
+        },
+        "CreatedBy": {
+            "displayValue": "User User",
+            "value": {
+                "apiName": "User",
+                "childRelationships": {},
+                "fields": {
+                    "Id": {
+                        "displayValue": null,
+                        "value": "0051D000003MC4RQAW"
+                    },
+                    "Name": {
+                        "displayValue": null,
+                        "value": "User User"
+                    }
+                },
+                "id": "0051D000003MC4RQAW",
+                "lastModifiedById": "0051D000003MC4RQAW",
+                "lastModifiedDate": "2019-12-21T16:55:19.000Z",
+                "recordTypeInfo": null,
+                "systemModstamp": "2019-12-25T20:25:55.000Z"
+            }
+        },
+        "CreatedById": {
+            "displayValue": null,
+            "value": "0051D000003MC4RQAW"
+        },
+        "CreatedDate": {
+            "displayValue": "25.12.2019, 21:52",
+            "value": "2019-12-25T20:52:14.000Z"
+        },
+        "CurrencyIsoCode": {
+            "displayValue": null,
+            "value": "EUR"
+        },
+        "DailyRate__c": {
+            "displayValue": "EUR 500,66",
+            "value": 500.66
+        },
+        "Date__c": {
+            "displayValue": "25.12.2019",
+            "value": "2019-12-25"
+        },
+        "Description__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Duration__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "EndTime__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Invoice__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Invoice__r": {
+            "displayValue": null,
+            "value": null
+        },
+        "IsInvoiced__c": {
+            "displayValue": null,
+            "value": false
+        },
+        "LastModifiedBy": {
+            "displayValue": "User User",
+            "value": {
+                "apiName": "User",
+                "childRelationships": {},
+                "fields": {
+                    "Id": {
+                        "displayValue": null,
+                        "value": "0051D000003MC4RQAW"
+                    },
+                    "Name": {
+                        "displayValue": null,
+                        "value": "User User"
+                    }
+                },
+                "id": "0051D000003MC4RQAW",
+                "lastModifiedById": "0051D000003MC4RQAW",
+                "lastModifiedDate": "2019-12-21T16:55:19.000Z",
+                "recordTypeInfo": null,
+                "systemModstamp": "2019-12-25T20:25:55.000Z"
+            }
+        },
+        "LastModifiedById": {
+            "displayValue": null,
+            "value": "0051D000003MC4RQAW"
+        },
+        "LastModifiedDate": {
+            "displayValue": "25.12.2019, 21:52",
+            "value": "2019-12-25T20:52:14.000Z"
+        },
+        "Name": {
+            "displayValue": null,
+            "value": "20191225-000042"
+        },
+        "Product__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Product__r": {
+            "displayValue": null,
+            "value": null
+        },
+        "Resource__c": {
+            "displayValue": null,
+            "value": null
+        },
+        "Resource__r": {
+            "displayValue": null,
+            "value": null
+        },
+        "StartTime__c": {
+            "displayValue": "21:52",
+            "value": "21:52:15.000Z"
+        },
+        "Status__c": {
+            "displayValue": "New",
+            "value": "New"
+        },
+        "TotalAmount__c": {
+            "displayValue": "EUR 0,00",
+            "value": 0
+        }
+    },
+    "id": "a091D000009ktsdQAA",
+    "lastModifiedById": "0051D000003MC4RQAW",
+    "lastModifiedDate": "2019-12-25T20:52:14.000Z",
+    "recordTypeInfo": null,
+    "systemModstamp": "2019-12-25T20:52:14.000Z"
+}

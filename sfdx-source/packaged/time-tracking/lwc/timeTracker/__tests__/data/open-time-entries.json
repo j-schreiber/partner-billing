@@ -1,0 +1,22 @@
+[
+    {
+        "Id": "a091D000009ktsiQAA",
+        "Name": "20191225-000043",
+        "Account__c": "0011D00000fEWljQAG",
+        "StartTime__c": 79698000,
+        "OwnerId": "0051D000003MC4RQAW",
+        "Status__c": "New",
+        "DailyRate__c": 500.66,
+        "Date__c": "2019-12-25"
+    },
+    {
+        "Id": "a091D000009ktsdQAA",
+        "Name": "20191225-000042",
+        "Account__c": "0011D00000fEWljQAG",
+        "StartTime__c": 78735000,
+        "OwnerId": "0051D000003MC4RQAW",
+        "Status__c": "New",
+        "DailyRate__c": 500.66,
+        "Date__c": "2019-12-25"
+    }
+]
