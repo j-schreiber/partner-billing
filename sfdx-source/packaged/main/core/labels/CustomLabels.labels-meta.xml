@@ -337,6 +337,30 @@
         <value>Time Tracking</value>
     </labels>
     <labels>
+        <fullName>TimeTracking_Toast_CanNotStopRecording</fullName>
+        <categories>time-tracking,toast,title,error</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Time tracking widget toast title when recording can not be stopped</shortDescription>
+        <value>Time Entry could not be saved!</value>
+    </labels>
+    <labels>
+        <fullName>TimeTracking_Toast_RecordingStarted</fullName>
+        <categories>time-tracking,toast,title,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Time tracking widget toast title for recording start</shortDescription>
+        <value>Recording of Time Entry successfully started!</value>
+    </labels>
+    <labels>
+        <fullName>TimeTracking_Toast_RecordingStopped</fullName>
+        <categories>time-tracking,toast,title,success</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Time tracking widget toast title for recording stopped</shortDescription>
+        <value>Recording successfully stopped. Time Entry submitted.</value>
+    </labels>
+    <labels>
         <fullName>Toast_Title_DataSaved</fullName>
         <categories>ui,toast,title,success</categories>
         <language>en_US</language>

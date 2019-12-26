@@ -1,58 +1,15 @@
 import { LightningElement, track, wire } from 'lwc';
-
-import getInvoices from '@salesforce/apex/BillingController.getInvoices';
-import getOrganizationProfiles from '@salesforce/apex/InvoicePdfController.getOrganizationProfiles';
-
 export default class TestComponent extends LightningElement {
 
-    recordId = 'a061k000002cWnKAAU';
-
-    @wire(getInvoices, { status : 'Draft' })
-    invoices;
-
-    @track organizationProfiles;
-    @track isWorking = true;
-
-    connectedCallback() {
-        this.isWorking = true;
-        this.getOrgProfiles();
-        this.isWorking = false;
-    }
-
-
-    getOrgProfiles() {
-
-        getOrganizationProfiles({})
-        .then( (data) => {
-            let profiles = [];
-            data.forEach( (entry) => {
-                profiles.push({
-                    label : entry.Name,
-                    value : entry.Id
-                })
-            });
-            this.organizationProfiles = profiles;            
-        })
-        .catch( () => {
-            this.organizationProfiles = [];
-        });
-    }
-
-    handleOptionsChange(event) {
-        console.log(JSON.stringify(event.detail));
-    }
-
-    get loadCompleted() {
-        return this.invoices && this.organizationProfiles;
-    }
-
-    get Invoice() {
-        return this.invoices.data[0];
-    }
-
-    get boxMessage() {
-        return 'Meine tolle Nachricht, die gezeigt werden muss!';
-    }
+    @track now = new Date(Date.now()).toLocaleTimeString();
+    initTime = new Date(Date.now()).toLocaleTimeString();
     
+    startTimer() {
+        this.now = new Date(Date.now()).toLocaleTimeString();
 
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        setInterval(() => {
+            this.now = new Date(Date.now()).toLocaleTimeString();
+        }, 500);
+    }
 }
