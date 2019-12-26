@@ -1,9 +1,10 @@
 import { createElement } from 'lwc';
-import myComponent from 'c/timeTracker';
-import imperativeApexMethod from '@salesforce/apex/ClassName.methodName';
+import timeTrackerWidget from 'c/timeTracker';
+
+import getUnfinishedTimeEntries from '@salesforce/apex/TimeTrackingController.getUnfinishedTimeEntries';
 
 jest.mock(
-    '@salesforce/apex/ClassName.methodName',
+    '@salesforce/apex/TimeTrackingController.getUnfinishedTimeEntries',
     () => {
         return {
             default: jest.fn()
@@ -12,18 +13,16 @@ jest.mock(
     { virtual: true }
 );
 
-describe('c-my-component', () => {
+describe('c-time-tracker', () => {
 
     describe('get wired data', () => {
     
         afterEach(() => { reset(); });
         
-        test('apex method test', () => {
+        test('test 1', () => {
         
-            imperativeApexMethod.mockResolvedValue('arbitrary');
-        
-            const element = createElement('c-my-component', {
-                is: myComponent 
+            const element = createElement('c-time-tracker', {
+                is: timeTrackerWidget 
             });
             document.body.appendChild(element);
             
