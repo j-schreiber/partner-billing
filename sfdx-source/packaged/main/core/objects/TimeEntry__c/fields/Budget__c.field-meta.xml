@@ -5,10 +5,22 @@
     <description>Add this time entry to a budget to roll up costs</description>
     <externalId>false</externalId>
     <label>Budget</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>The Budget must be related to the same Account</errorMessage>
+        <filterItems>
+            <field>Budget__c.Account__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Account__c</valueField>
+        </filterItems>
+        <infoMessage>Select a Budget from the same Account</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Budget__c</referenceTo>
     <relationshipLabel>Time Entries</relationshipLabel>
     <relationshipName>TimeEntries</relationshipName>
     <required>false</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

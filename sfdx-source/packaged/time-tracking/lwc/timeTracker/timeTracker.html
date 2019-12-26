@@ -15,6 +15,7 @@
             
             <lightning-record-edit-form object-api-name="TimeEntry__c">
                 <lightning-input-field
+                    disabled={isRecording}
                     data-id="InputAccount__c"
                     value={AccountId}
                     field-name="Account__c">
@@ -26,12 +27,16 @@
                 <div class="slds-grid slds-grid_vertical">
                     <lightning-record-edit-form record-id={activeTimeEntryId} object-api-name="TimeEntry__c">
                         <lightning-input-field
-                            onchange={updateProduct}
-                            field-name="Product__c">
+                            onchange={updateRecordLookup}
+                            field-name="Budget__c">
                         </lightning-input-field>
                         <lightning-input-field
-                            onchange={updateResource}
+                            onchange={updateRecordLookup}
                             field-name="Resource__c">
+                        </lightning-input-field>
+                        <lightning-input-field
+                            onchange={updateRecordLookup}
+                            field-name="Product__c">
                         </lightning-input-field>
                     </lightning-record-edit-form>
 
@@ -41,7 +46,7 @@
                         type="number"
                         formatter="currency"
                         label="Daily Rate"
-                        onblur={updateDailyRate}
+                        onblur={updateRecordValue}
                         data-id="InputDailyRate__c"
                         min="0"
                         step="0.01">
@@ -50,7 +55,7 @@
                     <lightning-textarea
                         value={Description}
                         name="Description__c"
-                        onblur={updateDescription}
+                        onblur={updateRecordValue}
                         data-id="InputDescription__c"
                         label="Description">
                     </lightning-textarea>

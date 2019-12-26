@@ -6,6 +6,7 @@
     <inlineHelpText>Time when work started</inlineHelpText>
     <label>Start Time</label>
     <required>true</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Time</type>
 </CustomField>

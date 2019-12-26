@@ -6,6 +6,7 @@
     <inlineHelpText>Time when work was finished.</inlineHelpText>
     <label>End Time</label>
     <required>false</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Time</type>
 </CustomField>
