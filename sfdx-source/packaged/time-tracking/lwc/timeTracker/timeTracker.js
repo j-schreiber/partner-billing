@@ -119,11 +119,9 @@ export default class TimeTracker extends LightningElement {
         this.isWorking = true;
         let updateTimeEntry = this.createTimeEntryRecordInputForField(TIME_ENTRY_ENDTIME_FIELD.fieldApiName, new Date(Date.now()).toLocaleTimeString());
         updateRecord(updateTimeEntry)
-        .then(() => {
+        .then((updatedRecord) => {
             this.dispatchToast('success', this.LABELS.TOAST_TITLE_STOPPED_SUCCESS);
-            this.activeTimeEntryId = undefined;
-            this.activeTimeEntry = undefined;
-            this.isRecording = false;
+            this.updateActiveTimeEntry(updatedRecord);
             this.isWorking = false;
         })
         .catch((error) => {
@@ -148,32 +146,19 @@ export default class TimeTracker extends LightningElement {
         });
     }
 
-    updateProduct(event) {
+    updateRecordLookup(event) {
+        this.isWorking = true;
         let timeEntryUpdate = this.createTimeEntryRecordInputForField(
-            TIME_ENTRY_PRODUCT_FIELD.fieldApiName,
+            event.currentTarget.fieldName,
             (event.detail && event.detail.value.length === 0) ? '' : (event.detail.value)[0]
         );
-        updateRecord(timeEntryUpdate);
+        this.updateTimeEntryRecord(timeEntryUpdate);
     }
 
-    updateResource(event) {
-        let timeEntryUpdate = this.createTimeEntryRecordInputForField(
-            TIME_ENTRY_RESOURCE_FIELD.fieldApiName,
-            (event.detail && event.detail.value.length === 0) ? '' : (event.detail.value)[0]
-        );
-        updateRecord(timeEntryUpdate);
-    }
-
-    updateDailyRate() {
-        let dailyRate = this.template.querySelector('[data-id="InputDailyRate__c"]').value;
-        let timeEntryUpdate = this.createTimeEntryRecordInputForField(TIME_ENTRY_DAILYRATE_FIELD.fieldApiName, dailyRate);
-        updateRecord(timeEntryUpdate);
-    }
-
-    updateDescription() {
-        let description = this.template.querySelector('[data-id="InputDescription__c"]').value;
-        let timeEntryUpdate = this.createTimeEntryRecordInputForField(TIME_ENTRY_DESCRIPTION_FIELD.fieldApiName, description);
-        updateRecord(timeEntryUpdate);
+    updateRecordValue(event) {
+        this.isWorking = true;
+        let timeEntryUpdate = this.createTimeEntryRecordInputForField(event.currentTarget.name, event.currentTarget.value);
+        this.updateTimeEntryRecord(timeEntryUpdate);
     }
 
     /**                                GETTERS & SETTERS                                 */
@@ -233,6 +218,24 @@ export default class TimeTracker extends LightningElement {
             variant : variant
         });
         this.dispatchEvent(toast);
+    }
+
+    updateActiveTimeEntry(updatedRecord) {
+        if (updatedRecord.fields.EndTime__c.value !== null) {
+            this.isRecording = false;
+            this.activeTimeEntry = undefined;
+            this.activeTimeEntryId = undefined;
+        } else {
+            this.activeTimeEntry = updatedRecord;
+        }
+    }
+
+    updateTimeEntryRecord(recordInput) {
+        updateRecord(recordInput)
+        .then((updatedRecord) => {
+            this.updateActiveTimeEntry(updatedRecord);
+            this.isWorking = false;
+        });
     }
 
 }

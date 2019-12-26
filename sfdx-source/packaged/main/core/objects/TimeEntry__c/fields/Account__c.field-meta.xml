@@ -10,6 +10,7 @@
     <relationshipLabel>Time Entries</relationshipLabel>
     <relationshipName>TimeEntries</relationshipName>
     <required>true</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>
