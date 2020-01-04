@@ -1,0 +1,39 @@
+<template>
+    <div class="slds-grid slds-gutters_x-small">
+        <div class="slds-col">
+            <input
+                name="inputCode1"
+                data-id="codeComponent1"
+                class="slds-input code-input"
+                type="text"
+                maxlength="4"
+                oninput={handleCodeInput}
+            >
+        </div>
+        <span> - </span>
+        <div class="slds-col">
+            <input
+                name="inputCode2"
+                data-id="codeComponent2"
+                class="slds-input code-input"
+                type="text"
+                maxlength="4"
+                oninput={handleCodeInput}
+            >
+        </div>
+        <span> - </span>
+        <div class="slds-col">
+            <input
+                name="inputCode3"
+                data-id="codeComponent3"
+                class="slds-input code-input"
+                type="text"
+                maxlength="4"
+                oninput={handleCodeInput}
+            >
+        </div>
+    </div>
+    <div class="slds-m-left_large">
+        <span>{userInput}</span>
+    </div>
+</template>
