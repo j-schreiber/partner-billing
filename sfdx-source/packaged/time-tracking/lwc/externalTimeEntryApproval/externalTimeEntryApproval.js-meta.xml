@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>External Time Entry Approval</masterLabel>
+    <description>Access-secured widget that allows external users (customers) to approve and comment on time entries.</description>
+</LightningComponentBundle>
