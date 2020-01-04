@@ -5,7 +5,7 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef100"
             },
-            "Budget__c": "@BudgetRef1",
+            "Budget__c": "@BudgetRef3",
             "Account__c": "@AccountRef2",
             "Product__c": "@ProductRef3",
             "Date__c": "2019-08-30",
@@ -19,7 +19,7 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef101"
             },
-            "Budget__c": "@BudgetRef1",
+            "Budget__c": "@BudgetRef3",
             "Account__c": "@AccountRef2",
             "Product__c": "@ProductRef3",
             "Date__c": "2019-10-09",
@@ -33,7 +33,7 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef102"
             },
-            "Budget__c": "@BudgetRef1",
+            "Budget__c": "@BudgetRef3",
             "Account__c": "@AccountRef2",
             "Product__c": "@ProductRef4",
             "Date__c": "2019-10-09",
@@ -47,7 +47,7 @@
                 "type": "TimeEntry__c",
                 "referenceId": "TimeEntryRef103"
             },
-            "Budget__c": "@BudgetRef1",
+            "Budget__c": "@BudgetRef3",
             "Account__c": "@AccountRef2",
             "Product__c": "@ProductRef4",
             "Date__c": "2019-10-10",
