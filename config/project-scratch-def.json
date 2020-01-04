@@ -1,7 +1,7 @@
 {
   "orgName": "Partner ERP GmbH",
   "edition": "Enterprise",
-  "features": ["StateAndCountryPicklist", "MultiCurrency"],
+  "features": ["StateAndCountryPicklist", "MultiCurrency", "Communities"],
   "country": "DE",
   "language": "en_US",
   "settings": {
@@ -16,6 +16,9 @@
     },
     "chatterSettings": {
         "enableChatter": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
     }
   }
 }
