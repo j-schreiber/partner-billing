@@ -1,3 +1,24 @@
 <template>
-    This, is noise.
+
+    <div class="slds-m-top_large">
+
+        <template if:false={isAuthorized}>
+            <div class="slds-grid slds-grid_align-center">
+                <c-access-code-entry onvalidated={authorizeAccessCode}></c-access-code-entry>
+            </div>
+        </template>
+
+        <template if:true={isAuthorized}>
+
+            <template if:true={isLoading}>
+                <lightning-spinner size="large"></lightning-spinner>
+            </template>
+            
+            <template if:false={isLoading}>
+                Time Entries go here ...
+            </template>
+
+        </template>
+    </div>
+    
 </template>

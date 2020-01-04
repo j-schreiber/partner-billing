@@ -7,12 +7,8 @@ const inputSuccessors = {
     inputCode3 : 'codeComponent3'
 }
 
-import TOKEN_STATUS_FIELD from '@salesforce/schema/AccessToken__c.Status__c';
-
 export default class AccessCodeEntry extends LightningElement {
     @track userInput;
-    @track isValid;
-    @track hasLoaded;
 
     /**                         EVENT HANDLERS                       */
 
@@ -45,10 +41,12 @@ export default class AccessCodeEntry extends LightningElement {
     validateUserInput(accessCode) {
         validateAccessCode({ accessCode : accessCode })
         .then((result) => {
-            console.log('Is Valid: ' + result);
+            if (result === true) {
+                this.dispatchEvent(new CustomEvent('validated'));
+            }
         })
-        .catch((error) => {
-
+        .catch(() => {
+            
         });
     }
 }
