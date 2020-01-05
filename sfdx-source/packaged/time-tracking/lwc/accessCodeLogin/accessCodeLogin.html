@@ -1,0 +1,36 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="main-box slds-box">
+
+            <h1>Willkommen!</h1>
+            <p>Bitte geben Sie Ihren Zugangscode ein, um für Sie bereitgestellte Zeiterfassungen einsehen zu können.</p>
+
+            <div class="slds-m-vertical_medium">
+                <c-access-code-input onchange={handleUserInput}></c-access-code-input>
+            </div>
+
+            <template if:true={isVerified}>
+                <template if:false={isAuthorized}>
+                    <div class="slds-m-bottom_small">
+                        <p class="error-message">Der eingegebene Zugangscode ist ungültig.</p>
+                    </div>
+                </template>
+                <template if:true={isAuthorized}>
+                    <div class="slds-m-bottom_small">
+                        <p class="success-message">Zugangscode erfolgreich verifiziert.</p>
+                    </div>
+                </template>
+            </template>
+
+            <div class="slds-grid slds-grid_align-center">
+                <lightning-button
+                    disabled={disableLogin}
+                    label="Laden"
+                    variant="brand"
+                    onclick={login}>
+                </lightning-button>
+            </div>
+
+        </div>
+    </div>
+</template>

@@ -1,5 +1,4 @@
-import { LightningElement, track } from 'lwc';
-import validateAccessCode from '@salesforce/apex/TimeEntryApprovalController.validateAccessCode';
+import { LightningElement, track, api } from 'lwc';
 
 const inputSuccessors = {
     inputCode1 : 'codeComponent2',
@@ -7,23 +6,27 @@ const inputSuccessors = {
     inputCode3 : 'codeComponent3'
 }
 
-export default class AccessCodeEntry extends LightningElement {
+export default class AccessCodeInput extends LightningElement {
+
     @track userInput;
 
     /**                         EVENT HANDLERS                       */
 
     handleCodeInput(event) {
+        event.stopPropagation();
         if (event.target.value.length === 4) {
             this.getSuccessor(event.target).focus();
         }
         this.userInput = this.getConsolidatedUserInput().toUpperCase();
-        if (this.userInput.length === 12) {
-            this.validateUserInput(this.userInput);
-        }
+        this.dispatchEvent(new CustomEvent('change', { detail : { value : this.userInput }}));
     }
 
     /**                       GETTERS / SETTERS                    */
 
+    @api
+    getAccessCode() {
+        return this.userInput;
+    }
 
     /**                        PRIVATE HELPERS                      */
 
@@ -38,15 +41,4 @@ export default class AccessCodeEntry extends LightningElement {
         return fullCode;
     }
 
-    validateUserInput(accessCode) {
-        validateAccessCode({ accessCode : accessCode })
-        .then((result) => {
-            if (result === true) {
-                this.dispatchEvent(new CustomEvent('validated'));
-            }
-        })
-        .catch(() => {
-            
-        });
-    }
 }

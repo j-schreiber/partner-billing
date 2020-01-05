@@ -6,12 +6,16 @@ export default class ExternalTimeEntryApproval extends LightningElement {
 
     /**                         EVENT HANDLERS                       */
 
-    authorizeAccessCode() {
+    authorizeAccessCode(event) {
         this.isAuthorized = true;
-        this.isLoading = true;
+        console.log(JSON.stringify(event));
+        this.loadTimeEntries();
     }
 
     /**                            HELPERS                           */
 
-    
+    loadTimeEntries() {
+        this.isLoading = true;
+        // stuff
+    }
 }

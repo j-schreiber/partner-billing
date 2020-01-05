@@ -1,4 +1,4 @@
-public with sharing class TimeEntryApprovalController {
+public class TimeEntryApprovalController {
     
     /**
     *   @description

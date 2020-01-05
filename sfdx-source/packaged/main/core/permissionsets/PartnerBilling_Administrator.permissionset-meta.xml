@@ -9,6 +9,11 @@
         <name>Modify_Activated_Invoices</name>
     </customPermissions>
     <description>Admin-specific features like editing activated invoices, deleting invoices, etc</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>AccessToken__c.Contact__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Partner Billing: Administrator</label>
     <objectPermissions>

@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20pt;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+}
+
+.main-box {
+    height: 10cm;
+    width: 8cm;
+    border-width: 2px;
+}
+
+
+p.error-message {
+    font-size: 8pt;
+    text-align: center;
+    color: rgb(201, 38, 38);
+}
+
+p.success-message {
+    font-size: 8pt;
+    text-align: center;
+    color: rgb(25, 156, 36);
+}

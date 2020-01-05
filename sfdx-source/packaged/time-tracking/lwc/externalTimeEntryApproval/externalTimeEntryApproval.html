@@ -4,7 +4,7 @@
 
         <template if:false={isAuthorized}>
             <div class="slds-grid slds-grid_align-center">
-                <c-access-code-entry onvalidated={authorizeAccessCode}></c-access-code-entry>
+                <c-access-code-login onauthorized={authorizeAccessCode}></c-access-code-login>
             </div>
         </template>
 

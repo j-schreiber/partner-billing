@@ -2,4 +2,6 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>47.0</apiVersion>
     <isExposed>false</isExposed>
+    <masterLabel>Access Code Login Form</masterLabel>
+    <description>Login Form that displays the access code input.</description>
 </LightningComponentBundle>
