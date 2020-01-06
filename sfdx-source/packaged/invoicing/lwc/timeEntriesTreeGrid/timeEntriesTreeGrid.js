@@ -23,7 +23,8 @@ const COLUMN_DEFINITION = [
     { type: "text", fieldName: "Duration", label: "Duration", initialWidth : 100 },
     { type: "currency", fieldName: "DailyRate", label: "Daily Rate" },
     { type: "currency", fieldName: "TotalAmount", label: "Total Amount" },
-    { type: "text", fieldName: "ProductName", label: "Product", initialWidth : 140 },
+    { type: "text", fieldName: "CustomerApprovalStatus", label: "Customer Approval" },
+    { type: "text", fieldName: "ProductName", label: "Product", initialWidth : 200 },
     { type: "text", fieldName: "Description", label: "Description", initialWidth : 300 },
 ];
 

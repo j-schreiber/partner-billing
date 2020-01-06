@@ -62,6 +62,11 @@ public class TimeEntry {
         public get { return Record.Date__c; }
     }
 
+    @AuraEnabled
+    public String CustomerApprovalStatus {
+        public get { return Record.CustomerApprovalStatus__c; }
+    }
+
     public static final string QUERY_STRING = 
         'SELECT Id,Name,StartTime__c,EndTime__c,Duration__c,Date__c,DailyRate__c,Status__c,Invoice__c,Description__c,TotalAmount__c,CustomerApprovalStatus__c'+
         ',Budget__c,Budget__r.Name'+
