@@ -2,7 +2,7 @@ import { LightningElement, track } from 'lwc';
 import getTimeEntries from '@salesforce/apex/TimeEntryApprovalController.getTimeEntries';
 import getContactData from '@salesforce/apex/TimeEntryApprovalController.getContactData';
 
-export default class ExternalTimeEntryApproval extends LightningElement {
+export default class ExternalTimeSheetApproval extends LightningElement {
 
     @track isAuthorized = false;
     @track isLoadingTimeEntries = false;

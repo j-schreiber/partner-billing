@@ -4,5 +4,5 @@
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>Lightning Out Wrapper to expose Time Entry Approval LWC so it can be used in force.com Site</description>
-    <label>Time Entry Approval</label>
+    <label>Time Sheet Approval</label>
 </ApexPage>
