@@ -9,12 +9,11 @@ p {
     text-align: center;
 }
 
-.main-box {
-    height: 10cm;
+.login-box {
+    height: 75mm;
     width: 8cm;
     border-width: 2px;
 }
-
 
 p.error-message {
     font-size: 8pt;
