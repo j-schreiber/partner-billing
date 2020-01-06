@@ -11,6 +11,8 @@ export default class AccessCodeLogin extends LightningElement {
 
     handleUserInput(event) {
         this.isCompleted = event.detail.value.length === 12;
+        this.isAuthorized = false;
+        this.isVerified = false;
     }
 
     login() {
@@ -20,7 +22,7 @@ export default class AccessCodeLogin extends LightningElement {
             this.isVerified = true;
             if (result === true) {
                 this.isAuthorized = true;
-                this.dispatchEvent(new CustomEvent('success', { detail : { accessCode : this.userInput }}));
+                this.dispatchEvent(new CustomEvent('success', { detail : { accessCode : codeInput.getAccessCode() }}));
             } else {
                 this.isAuthorized = false;
             }

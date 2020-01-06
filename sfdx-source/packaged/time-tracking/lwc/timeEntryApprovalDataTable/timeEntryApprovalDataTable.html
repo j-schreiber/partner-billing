@@ -1,0 +1,24 @@
+<template>
+    <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+
+        <thead>
+            <th>Nummer</th>
+            <th>Kategorie</th>
+            <th>Budget</th>
+            <th>Berater</th>
+            <th>Datum</th>
+            <th>Dauer</th>
+            <th>Beschreibung</th>
+            <th>Aktionen</th>
+        </thead>
+        <tbody>
+            <template for:each={timeEntries} for:item='entry'>
+                <c-time-entry-approval-data-table-row
+                    time-entry={entry}
+                    key={entry.Id}
+                ></c-time-entry-approval-data-table-row>
+            </template>
+            
+        </tbody>
+    </table>
+</template>

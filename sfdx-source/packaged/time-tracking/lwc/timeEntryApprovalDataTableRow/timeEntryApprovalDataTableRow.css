@@ -1,0 +1,13 @@
+:host {
+    display: table-row;
+}
+
+p {
+    word-break: break-word;
+    white-space: normal;
+    min-width: 5cm;
+}
+
+td {
+    vertical-align: middle;
+}
