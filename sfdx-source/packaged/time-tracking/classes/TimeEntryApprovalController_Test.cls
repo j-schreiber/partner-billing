@@ -34,17 +34,25 @@ class TimeEntryApprovalController_Test {
     @isTest
     static void validateAccessCode_NonExistingCode_False() {
         // ACTION
-        Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD');
-        // VERIFY
-        System.assertEquals(false, isValid, 'validateAccessCode(ABCD)');
+        try {
+            Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD');
+            System.assert(false, 'Expected AuraHandledException');
+        } catch (Exception e) {
+            // VERIFY
+            System.assertEquals('System.AuraHandledException', e.getTypeName(), 'e.getTypeName()');
+        }
     }
 
     @isTest
     static void validateAccessCode_RevokedCode_False() {
         // ACTION
-        Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD1234XYZ3');
-        // VERIFY
-        System.assertEquals(false, isValid, 'validateAccessCode(ABCD1234XYZ3)');
+        try {
+            Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD1234XYZ3');
+            System.assert(false, 'Expected AuraHandledException');
+        } catch (Exception e) {
+            // VERIFY
+            System.assertEquals('System.AuraHandledException', e.getTypeName(), 'e.getTypeName()');
+        }
     }
 
     @isTest

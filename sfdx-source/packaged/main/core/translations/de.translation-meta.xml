@@ -13,6 +13,10 @@
         <name>Button_Label_SaveToAttachments</name>
     </customLabels>
     <customLabels>
+        <label>Ihre Kundennummer</label>
+        <name>Generic_Prompt_EnterCustomerId</name>
+    </customLabels>
+    <customLabels>
         <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
         <name>InvoicePdf_Label_ActivateTimesheet</name>
     </customLabels>
@@ -169,6 +173,26 @@
         <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
     </customLabels>
     <customLabels>
+        <label>Der eingegebene Zugangscode ist ungültig.</label>
+        <name>TimeSheetApproval_Error_AccessCodeInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Ihre Organisation ist für die Freigabe von Zeiterfassungen nicht aktiviert. Fragen Sie Ihren Accountmanager, um das Feature zu aktivieren.</label>
+        <name>TimeSheetApproval_Error_AccountNotEnabled</name>
+    </customLabels>
+    <customLabels>
+        <label>Die eingegebene Kundennummer ist ungültig!</label>
+        <name>TimeSheetApproval_Error_CustomerIdInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Bitte geben Sie Ihre Kundennummer und Ihren Zugangscode ein, um noch offene Zeiterfassungen für Ihre Organisation einsehen zu können.</label>
+        <name>TimeSheetApproval_Label_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Zugangscode erfolgreich verifiziert.</label>
+        <name>TimeSheetApproval_Success_AccessCodeVerified</name>
+    </customLabels>
+    <customLabels>
         <label>Zeiterfassung</label>
         <name>TimeTracking_Title_TrackingWidget</name>
     </customLabels>
@@ -279,6 +303,10 @@
     <customLabels>
         <label>Absender auswählen</label>
         <name>UI_Label_SelectSenderAddress</name>
+    </customLabels>
+    <customLabels>
+        <label>Willkommen!</label>
+        <name>UI_Label_Welcome</name>
     </customLabels>
     <customLabels>
         <label>Wähle Rechnungskontakt</label>

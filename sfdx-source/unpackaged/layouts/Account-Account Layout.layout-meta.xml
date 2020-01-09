@@ -26,6 +26,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>IsTimeSheetApprovalEnabled__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>CustomerId__c</field>
             </layoutItems>
             <layoutItems>

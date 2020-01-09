@@ -10,8 +10,7 @@ p {
 }
 
 .login-box {
-    height: 75mm;
-    width: 8cm;
+    width: 80mm;
     border-width: 2px;
 }
 
@@ -25,4 +24,8 @@ p.success-message {
     font-size: 8pt;
     text-align: center;
     color: rgb(25, 156, 36);
+}
+
+.code-input {
+    text-align: center;
 }

@@ -16,7 +16,7 @@ public without sharing class TimeEntryApprovalController {
     @AuraEnabled
     public static Boolean validateAccessCode(String accessCode) {
         List<AccessToken__c> ats = [SELECT Id FROM AccessToken__c WHERE Status__c = 'Active' AND Code__c = :String.escapeSingleQuotes(accessCode)];
-        if (ats.isEmpty()) return false;
+        if (ats.isEmpty()) throw new AuraHandledException(System.Label.TimeSheetApproval_Error_AccessCodeInvalid);
         return true;
     }
 
@@ -51,5 +51,20 @@ public without sharing class TimeEntryApprovalController {
         List<Contact> cs = [SELECT Name,Account.Name FROM Contact WHERE Id IN (SELECT Contact__c FROM AccessToken__c WHERE Status__c = 'Active' AND Code__c = :String.escapeSingleQuotes(accessCode)) LIMIT 1];
         if (cs.isEmpty()) return new Contact();
         return cs[0];
+    }
+
+    /**
+    *   @description
+    *   Queries the database for the corresponding account to a customer id
+    *
+    *   @param  customerId          The customer id
+    *
+    *   @return                     Account object that belongs to the customer id
+    */
+    @AuraEnabled(cacheable=true)
+    public static Account getCustomerAccountData(String customerId) {
+        List<Account> accs = [SELECT Id,CustomerId__c,IsTimeSheetApprovalEnabled__c FROM Account WHERE CustomerId__c = :String.escapeSingleQuotes(customerId)];
+        if (accs.isEmpty()) throw new AuraHandledException(System.Label.TimeSheetApproval_Error_CustomerIdInvalid);
+        return accs[0];
     }
 }

@@ -2,25 +2,32 @@
     <div class="slds-grid slds-grid_align-center">
         <div class="login-box slds-box">
 
-            <h1>Willkommen!</h1>
-            <p>Bitte geben Sie Ihren Zugangscode ein, um noch offene Zeiterfassungen einsehen zu können.</p>
+            <h1>{LABELS.TEXT_WELCOME}</h1>
+            <p>{LABELS.TEXT_INTRO}</p>
+
+            <template if:true={errorMessage}>
+                <div class="slds-m-top_medium slds-m-bottom_small">
+                    <p class="error-message">{errorMessage}</p>
+                </div>
+            </template>
 
             <div class="slds-m-vertical_medium">
-                <c-access-code-input onchange={handleUserInput}></c-access-code-input>
+                <input
+                    name="customerNumberInput"
+                    data-id="customerNumberInput"
+                    placeholder={LABELS.PLACEHOLDER_CUSTOMER_NUMBER}
+                    class="slds-input code-input slds-m-vertical_small"
+                    type="text"
+                    maxlength="6"
+                    onchange={handleCustomerIdInput}
+                >
+                <div >
+                    <c-access-code-input
+                        onchange={handleUserInput}
+                        is-disabled={disableAccessCodeInput}
+                    ></c-access-code-input>
+                </div>
             </div>
-
-            <template if:true={isVerified}>
-                <template if:false={isAuthorized}>
-                    <div class="slds-m-bottom_small">
-                        <p class="error-message">Der eingegebene Zugangscode ist ungültig.</p>
-                    </div>
-                </template>
-                <template if:true={isAuthorized}>
-                    <div class="slds-m-bottom_small">
-                        <p class="success-message">Zugangscode erfolgreich verifiziert.</p>
-                    </div>
-                </template>
-            </template>
 
             <div class="slds-grid slds-grid_align-center">
                 <lightning-button

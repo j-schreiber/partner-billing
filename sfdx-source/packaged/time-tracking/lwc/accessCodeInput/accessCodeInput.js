@@ -9,6 +9,7 @@ const inputSuccessors = {
 export default class AccessCodeInput extends LightningElement {
 
     @track userInput;
+    @api isDisabled;
 
     /**                         EVENT HANDLERS                       */
 

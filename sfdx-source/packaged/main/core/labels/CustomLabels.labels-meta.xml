@@ -17,6 +17,14 @@
         <value>Save PDF to Attachments</value>
     </labels>
     <labels>
+        <fullName>Generic_Prompt_EnterCustomerId</fullName>
+        <categories>ui,label,placeholder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic prompt to enter customer id</shortDescription>
+        <value>Your Customer Id</value>
+    </labels>
+    <labels>
         <fullName>InvoicePdf_Label_ActivateTimesheet</fullName>
         <categories>visualforce,label,invoice-pdf</categories>
         <language>en_US</language>
@@ -329,6 +337,46 @@
         <value>Invoice can not be removed, once it is set.</value>
     </labels>
     <labels>
+        <fullName>TimeSheetApproval_Error_AccessCodeInvalid</fullName>
+        <categories>ui,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message in time sheet approval for invalid access codes</shortDescription>
+        <value>The entered access code is invalid.</value>
+    </labels>
+    <labels>
+        <fullName>TimeSheetApproval_Error_AccountNotEnabled</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message in time sheet approval when account is not enabled</shortDescription>
+        <value>Your Organization is not enabled for external time sheet approval. Ask your account manager to enable this feature for you.</value>
+    </labels>
+    <labels>
+        <fullName>TimeSheetApproval_Error_CustomerIdInvalid</fullName>
+        <categories>ui,message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message in time sheet approval for invalid customer id</shortDescription>
+        <value>The entered Customer Id is invalid!</value>
+    </labels>
+    <labels>
+        <fullName>TimeSheetApproval_Label_Intro</fullName>
+        <categories>time-sheet-approval,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Intro Label for Time Sheet Approval</shortDescription>
+        <value>Please enter your Customer Number and your personal access code to view open time entries for your organization.</value>
+    </labels>
+    <labels>
+        <fullName>TimeSheetApproval_Success_AccessCodeVerified</fullName>
+        <categories>ui,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Success message in time sheet approval, when access code was verified</shortDescription>
+        <value>Access code successfully verified.</value>
+    </labels>
+    <labels>
         <fullName>TimeTracking_Title_TrackingWidget</fullName>
         <categories>ui,title</categories>
         <language>en_US</language>
@@ -551,6 +599,14 @@
         <protected>false</protected>
         <shortDescription>Used in bill run component as field label and placeholder</shortDescription>
         <value>Select Sender</value>
+    </labels>
+    <labels>
+        <fullName>UI_Label_Welcome</fullName>
+        <categories>ui,label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic welcome label</shortDescription>
+        <value>Welcome!</value>
     </labels>
     <labels>
         <fullName>UI_Placeholder_SelectBillingContact</fullName>
