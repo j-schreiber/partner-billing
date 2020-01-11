@@ -1,5 +1,5 @@
 {
     "Id": "0011F00000YGEd4QAH",
     "CustomerId__c": "1001",
-    "IsTimesheetApprovalEnabled__c": true
+    "IsTimeSheetApprovalEnabled__c": true
 }

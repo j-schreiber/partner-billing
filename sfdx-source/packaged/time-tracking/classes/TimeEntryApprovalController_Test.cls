@@ -4,7 +4,7 @@ class TimeEntryApprovalController_Test {
     @TestSetup
     static void makeData(){
 
-        Account a = TestDataFactory.CreateDefaultAccount();
+        Account a = TestDataFactory.CreateAccount(new Account(IsTimeSheetApprovalEnabled__c = true, CustomerId__c = '1000'));
         insert a;
 
         List<TimeEntry__c> tes = new List<TimeEntry__c>();
@@ -32,7 +32,7 @@ class TimeEntryApprovalController_Test {
     }
 
     @isTest
-    static void validateAccessCode_NonExistingCode_False() {
+    static void validateAccessCode_NonExistingCode_AuraHandledExceptionThrown() {
         // ACTION
         try {
             Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD');
@@ -44,7 +44,7 @@ class TimeEntryApprovalController_Test {
     }
 
     @isTest
-    static void validateAccessCode_RevokedCode_False() {
+    static void validateAccessCode_RevokedCode_AuraHandledExceptionThrown() {
         // ACTION
         try {
             Boolean isValid = TimeEntryApprovalController.validateAccessCode('ABCD1234XYZ3');
@@ -69,6 +69,26 @@ class TimeEntryApprovalController_Test {
         List<TimeEntry__c> tes = TimeEntryApprovalController.getTimeEntries('ABCD1234XYZ1');
         // VERIFY
         System.assertEquals(2, tes.size(), 'size()');
+    }
+
+    @isTest
+    static void getCustomerAccountData_ValidCustomerId_AccountDataReturned() {
+        // ACTION
+        Account a = TimeEntryApprovalController.getCustomerAccountData('1000');
+        // VERIFY
+        Account expected = [SELECT Id,CustomerId__c,IsTimeSheetApprovalEnabled__c FROM Account WHERE CustomerId__c = '1000'];
+        System.assertEquals(expected, a, 'Account');
+    }
+
+    @isTest
+    static void getCustomerAccountData_InvalidCustomerId_AuraHandledExceptionThrown() {
+        // ACTION
+        try {
+            Account a = TimeEntryApprovalController.getCustomerAccountData('1001');
+            System.assert(false, 'Expected AuraHandledException');
+        } catch (Exception e) {
+            System.assertEquals('System.AuraHandledException', e.getTypeName(), 'e.getTypeName()');
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import validateAccessCode from '@salesforce/apex/TimeEntryApprovalController.validateAccessCode';
 import getCustomerAccountData from '@salesforce/apex/TimeEntryApprovalController.getCustomerAccountData';
 
@@ -50,6 +50,7 @@ export default class AccessCodeLogin extends LightningElement {
     }
 
     login() {
+        if (!this.isValidCustomerId) return;
         let codeInput = this.template.querySelector('c-access-code-input');
         validateAccessCode({ accessCode : codeInput.getAccessCode() })
         .then((result) => {

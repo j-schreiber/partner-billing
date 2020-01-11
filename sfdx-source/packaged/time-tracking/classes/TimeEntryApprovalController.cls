@@ -15,7 +15,7 @@ public without sharing class TimeEntryApprovalController {
     */
     @AuraEnabled
     public static Boolean validateAccessCode(String accessCode) {
-        List<AccessToken__c> ats = [SELECT Id FROM AccessToken__c WHERE Status__c = 'Active' AND Code__c = :String.escapeSingleQuotes(accessCode)];
+        List<AccessToken__c> ats = [SELECT Id FROM AccessToken__c WHERE Status__c = 'Active' AND Code__c = :String.escapeSingleQuotes(accessCode) AND Contact__r.Account.IsTimeSheetApprovalEnabled__c = true];
         if (ats.isEmpty()) throw new AuraHandledException(System.Label.TimeSheetApproval_Error_AccessCodeInvalid);
         return true;
     }
