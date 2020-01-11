@@ -196,8 +196,3 @@ function reset() {
     }
     jest.clearAllMocks();
 }
-
-function flushPromises() {
-    // eslint-disable-next-line no-undef
-    return new Promise(resolve => setImmediate(resolve));
-}

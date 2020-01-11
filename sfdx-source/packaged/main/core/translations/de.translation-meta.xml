@@ -17,6 +17,38 @@
         <name>Generic_Prompt_EnterCustomerId</name>
     </customLabels>
     <customLabels>
+        <label>Aktionen</label>
+        <name>Generic_Word_Actions</name>
+    </customLabels>
+    <customLabels>
+        <label>Budget</label>
+        <name>Generic_Word_Budget</name>
+    </customLabels>
+    <customLabels>
+        <label>Kategorie</label>
+        <name>Generic_Word_Category</name>
+    </customLabels>
+    <customLabels>
+        <label>Berater</label>
+        <name>Generic_Word_Consultant</name>
+    </customLabels>
+    <customLabels>
+        <label>Datum</label>
+        <name>Generic_Word_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Beschreibung</label>
+        <name>Generic_Word_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Dauer</label>
+        <name>Generic_Word_Duration</name>
+    </customLabels>
+    <customLabels>
+        <label>Nummer der Erfassung</label>
+        <name>Generic_Word_Number</name>
+    </customLabels>
+    <customLabels>
         <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
         <name>InvoicePdf_Label_ActivateTimesheet</name>
     </customLabels>
@@ -191,6 +223,10 @@
     <customLabels>
         <label>Zugangscode erfolgreich verifiziert.</label>
         <name>TimeSheetApproval_Success_AccessCodeVerified</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeige Zeiterfassungen für {!Account}. Eingeloggt als {!Contact}</label>
+        <name>TimeSheetApproval_Title_AccountData</name>
     </customLabels>
     <customLabels>
         <label>Zeiterfassung</label>

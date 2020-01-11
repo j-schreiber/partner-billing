@@ -26,27 +26,29 @@
         <p>{timeEntry.Description__c}</p>
     </td>
     <td>
-        <lightning-button-group>
-            <lightning-button-stateful
-                label-when-off="Accept"
-                label-when-on="Accepted"
-                data-id="acceptButton"
-                icon-name-when-off="utility:check"
-                icon-name-when-on="utility:check"
-                selected={isAccepted}
-                variant={acceptButtonVariant}
-                onclick={userAcceptsTimeEntry}>
-            </lightning-button-stateful>
-            <lightning-button-stateful
-                label-when-off="Reject"
-                label-when-on="Rejected"
-                data-id="rejectButton"
-                icon-name-when-off="utility:close"
-                icon-name-when-on="utility:close"
-                variant={rejectButtonVariant}
-                selected={isRejected}
-                onclick={userRejectsTimeEntry}>
-            </lightning-button-stateful>
-        </lightning-button-group>
+        <div style="display: grid; justify-items: center;">
+            <lightning-button-group>
+                <lightning-button-stateful
+                    label-when-off="Accept"
+                    label-when-on="Accepted"
+                    data-id="acceptButton"
+                    icon-name-when-off="utility:check"
+                    icon-name-when-on="utility:check"
+                    selected={isAccepted}
+                    variant={acceptButtonVariant}
+                    onclick={userAcceptsTimeEntry}>
+                </lightning-button-stateful>
+                <lightning-button-stateful
+                    label-when-off="Reject"
+                    label-when-on="Rejected"
+                    data-id="rejectButton"
+                    icon-name-when-off="utility:close"
+                    icon-name-when-on="utility:close"
+                    variant={rejectButtonVariant}
+                    selected={isRejected}
+                    onclick={userRejectsTimeEntry}>
+                </lightning-button-stateful>
+            </lightning-button-group>
+        </div>
     </td>
 </template>

@@ -11,7 +11,7 @@
         <template if:true={isAuthorized}>
 
             <template if:false={isLoadingContactData}>
-                <h1>Zeiterfassungen für {contactData.Account.Name}. Eingeloggt als {contactData.Name}</h1>
+                <h1>{PageTitle}</h1>
             </template>
 
             <template if:true={isLoadingTimeEntries}>

@@ -34,7 +34,7 @@ public without sharing class TimeEntryApprovalController {
         List<Contact> cs = [SELECT AccountId FROM Contact WHERE Id IN (SELECT Contact__c FROM AccessToken__c WHERE Status__c = 'Active' AND Code__c = :String.escapeSingleQuotes(accessCode))];
         if (cs.isEmpty()) return new List<TimeEntry__c>();
         String accId = cs[0].AccountId;
-        List<TimeEntry__c> tes = Database.query(TimeEntry.QUERY_STRING + ' WHERE Account__c = :accId AND Status__c = \'Approved\' AND IsInvoiced__c = false');
+        List<TimeEntry__c> tes = Database.query(TimeEntry.QUERY_STRING + ' WHERE Account__c = :accId AND Status__c = \'Approved\' AND IsInvoiced__c = false ORDER BY Date__c');
         return tes;
     }
 

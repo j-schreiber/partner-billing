@@ -2,6 +2,8 @@ import { LightningElement, track } from 'lwc';
 import getTimeEntries from '@salesforce/apex/TimeEntryApprovalController.getTimeEntries';
 import getContactData from '@salesforce/apex/TimeEntryApprovalController.getContactData';
 
+import TITLE from '@salesforce/label/c.TimeSheetApproval_Title_AccountData';
+
 export default class ExternalTimeSheetApproval extends LightningElement {
 
     @track isAuthorized = false;
@@ -21,6 +23,9 @@ export default class ExternalTimeSheetApproval extends LightningElement {
 
     /**                       GETTERS / SETTERS                           */
 
+    get PageTitle() {
+        return TITLE.replace('{!Account}', this.contactData.Account.Name).replace('{!Contact}', this.contactData.Name);
+    }
 
     /**                            HELPERS                           */
 

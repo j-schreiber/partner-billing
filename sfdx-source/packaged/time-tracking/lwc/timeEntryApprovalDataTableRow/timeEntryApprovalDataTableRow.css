@@ -11,3 +11,8 @@ p {
 td {
     vertical-align: middle;
 }
+
+.align-self_center {
+    margin-left: auto;
+    margin-right: auto;
+}

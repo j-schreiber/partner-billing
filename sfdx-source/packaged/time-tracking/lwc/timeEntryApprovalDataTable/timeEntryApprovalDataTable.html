@@ -2,14 +2,14 @@
     <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
 
         <thead>
-            <th>Nummer</th>
-            <th>Kategorie</th>
-            <th>Budget</th>
-            <th>Berater</th>
-            <th>Datum</th>
-            <th>Dauer</th>
-            <th>Beschreibung</th>
-            <th>Aktionen</th>
+            <th>{LABELS.NUMBER}</th>
+            <th>{LABELS.CATEGORY}</th>
+            <th>{LABELS.BUDGET}</th>
+            <th>{LABELS.CONSULTANT}</th>
+            <th>{LABELS.DATE}</th>
+            <th>{LABELS.DURATION}</th>
+            <th>{LABELS.DESCRIPTION}</th>
+            <th style="text-align: center;">{LABELS.ACTIONS}</th>
         </thead>
         <tbody>
             <template for:each={timeEntries} for:item='entry'>
@@ -18,7 +18,6 @@
                     key={entry.Id}
                 ></c-time-entry-approval-data-table-row>
             </template>
-            
         </tbody>
     </table>
 </template>
