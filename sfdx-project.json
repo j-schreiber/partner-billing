@@ -5,11 +5,11 @@
             "default": true
         },
         {
-            "path": ".\\sfdx-source\\unpackaged",
+            "path": "sfdx-source/unpackaged",
             "default": false
         },
         {
-            "path": ".\\sfdx-source\\packaged",
+            "path": "sfdx-source/packaged",
             "package": "Partner Billing",
             "versionName": "Ver 0.4: Time Tracking",
             "versionNumber": "0.4.0.NEXT",

@@ -10,7 +10,8 @@
             "BillingPostalCode": "90461",
             "BillingCity": "Nürnberg",
             "BillingCountryCode": "DE",
-            "CustomerId__c": "1000"
+            "CustomerId__c": "1000",
+            "IsTimeSheetApprovalEnabled__c": true
         },
         {
             "attributes": {
