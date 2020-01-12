@@ -12,8 +12,7 @@ package.xml
 
 # Incompatible metadata that may cause push/pull errors (because it is not yet supported)
 # regularily review here: https://developer.salesforce.com/docs/metadata-coverage
-*.profile
 OrderStatus.standardValueSet
 *.settings
-*.site-meta.xml
 *.appMenu-meta
+*.profile-meta

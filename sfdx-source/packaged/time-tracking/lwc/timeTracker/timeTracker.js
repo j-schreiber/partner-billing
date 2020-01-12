@@ -5,7 +5,8 @@ import {
     createRecord,
     getRecord,
     updateRecord,
-    deleteRecord
+    deleteRecord,
+    getFieldValue
 } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { reduceDMLErrors } from 'c/utilities';
@@ -17,6 +18,7 @@ import TOAST_TITLE_ERROR from '@salesforce/label/c.Toast_Title_GenericError';
 import TOAST_TITLE_STARTED_SUCCESS from '@salesforce/label/c.TimeTracking_Toast_RecordingStarted';
 import TOAST_TITLE_STOPPED_SUCCESS from '@salesforce/label/c.TimeTracking_Toast_RecordingStopped';
 import TOAST_TITLE_STOPPED_ERROR from '@salesforce/label/c.TimeTracking_Toast_CanNotStopRecording';
+import TOAST_TITLE_RECORDING_ABORTED from '@salesforce/label/c.TimeTracking_RecordingAborted';
 
 import TIME_ENTRY_OBJECT from '@salesforce/schema/TimeEntry__c';
 import TIME_ENTRY_ACCOUNT_FIELD from '@salesforce/schema/TimeEntry__c.Account__c';
@@ -38,7 +40,8 @@ export default class TimeTracker extends LightningElement {
         TOAST_TITLE_ERROR,
         TOAST_TITLE_STARTED_SUCCESS,
         TOAST_TITLE_STOPPED_SUCCESS,
-        TOAST_TITLE_STOPPED_ERROR
+        TOAST_TITLE_STOPPED_ERROR,
+        TOAST_TITLE_RECORDING_ABORTED
     }
 
     @wire(getRecordCreateDefaults, { objectApiName : TIME_ENTRY_OBJECT})
@@ -134,7 +137,7 @@ export default class TimeTracker extends LightningElement {
         this.isWorking = true;
         deleteRecord(this.activeTimeEntryId)
         .then(() => {
-            this.dispatchToast('success', 'Deleted current Time Entry recording!');
+            this.dispatchToast('warning', this.LABELS.TOAST_TITLE_RECORDING_ABORTED);
             this.activeTimeEntryId = undefined;
             this.activeTimeEntry = undefined;
             this.isRecording = false;
@@ -172,19 +175,19 @@ export default class TimeTracker extends LightningElement {
     }
 
     get AccountId() {
-        return this.activeTimeEntry ? this.activeTimeEntry.fields.Account__c.value : undefined;
+        return getFieldValue(this.activeTimeEntry, TIME_ENTRY_ACCOUNT_FIELD);
     }
 
     get DailyRate() {
-        return this.activeTimeEntry ? this.activeTimeEntry.fields.DailyRate__c.value : undefined;
+        return getFieldValue(this.activeTimeEntry, TIME_ENTRY_DAILYRATE_FIELD);
     }
 
     get Description() {
-        return this.activeTimeEntry ? this.activeTimeEntry.fields.Description__c.value : undefined;
+        return getFieldValue(this.activeTimeEntry, TIME_ENTRY_DESCRIPTION_FIELD);
     }
 
     get startTime() {
-        return this.activeTimeEntry ? this.activeTimeEntry.fields.StartTime__c.value : undefined;
+        return getFieldValue(this.activeTimeEntry, TIME_ENTRY_STARTTIME_FIELD);
     }
 
     /**                                     HELPERS                                      */

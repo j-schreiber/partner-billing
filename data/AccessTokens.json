@@ -1,0 +1,31 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "AccessToken__c",
+                "referenceId": "AccessTokenRef1"
+            },
+            "Code__c" : "ABCD1234EFGH",
+            "Status__c" : "Active",
+            "Contact__c" : "@ContactRef1"
+        },
+        {
+            "attributes": {
+                "type": "AccessToken__c",
+                "referenceId": "AccessTokenRef2"
+            },
+            "Code__c" : "ABCD1234XXXX",
+            "Status__c" : "Revoked",
+            "Contact__c" : "@ContactRef1"
+        },
+        {
+            "attributes": {
+                "type": "AccessToken__c",
+                "referenceId": "AccessTokenRef3"
+            },
+            "Code__c" : "1234ABCDEFGH",
+            "Status__c" : "Active",
+            "Contact__c" : "@ContactRef5"
+        }
+    ]
+}

@@ -7,8 +7,9 @@
     
     <lightning-card>
         <div class="slds-m-horizontal_medium">
-            <c-duration-timer start-time-string={initTime} end-time-string={now}></c-duration-timer>
-            <lightning-button label="Start Time" onclick={startTimer}></lightning-button>
+            <template if:true={timeEntries.data}>
+                <c-time-entry-approval-data-table time-entries={timeEntries.data}></c-time-entry-approval-data-table>
+            </template>
         </div>
     </lightning-card>
 

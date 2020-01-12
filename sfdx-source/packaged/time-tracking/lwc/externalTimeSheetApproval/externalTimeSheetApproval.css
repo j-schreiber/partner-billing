@@ -1,0 +1,12 @@
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20pt;
+    margin-bottom: 20px;
+}
+
+.time-entry-data-table {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}

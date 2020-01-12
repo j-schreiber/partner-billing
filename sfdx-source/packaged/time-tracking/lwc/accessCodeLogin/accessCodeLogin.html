@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="login-box slds-box">
+
+            <h1>{LABELS.TEXT_WELCOME}</h1>
+            <p>{LABELS.TEXT_INTRO}</p>
+
+            <template if:true={errorMessage}>
+                <div class="slds-m-top_medium slds-m-bottom_small">
+                    <p class="error-message">{errorMessage}</p>
+                </div>
+            </template>
+
+            <div class="slds-m-vertical_medium">
+                <input
+                    name="customerNumberInput"
+                    data-id="customerNumberInput"
+                    placeholder={LABELS.PLACEHOLDER_CUSTOMER_NUMBER}
+                    class="slds-input code-input slds-m-vertical_small"
+                    type="text"
+                    maxlength="6"
+                    onchange={handleCustomerIdInput}
+                >
+                <div >
+                    <c-access-code-input
+                        onchange={handleUserInput}
+                        is-disabled={disableAccessCodeInput}
+                    ></c-access-code-input>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-grid_align-center">
+                <lightning-button
+                    disabled={disableLogin}
+                    label="Laden"
+                    variant="brand"
+                    onclick={login}>
+                </lightning-button>
+            </div>
+
+        </div>
+    </div>
+</template>

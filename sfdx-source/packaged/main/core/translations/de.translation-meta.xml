@@ -13,6 +13,42 @@
         <name>Button_Label_SaveToAttachments</name>
     </customLabels>
     <customLabels>
+        <label>Ihre Kundennummer</label>
+        <name>Generic_Prompt_EnterCustomerId</name>
+    </customLabels>
+    <customLabels>
+        <label>Aktionen</label>
+        <name>Generic_Word_Actions</name>
+    </customLabels>
+    <customLabels>
+        <label>Budget</label>
+        <name>Generic_Word_Budget</name>
+    </customLabels>
+    <customLabels>
+        <label>Kategorie</label>
+        <name>Generic_Word_Category</name>
+    </customLabels>
+    <customLabels>
+        <label>Berater</label>
+        <name>Generic_Word_Consultant</name>
+    </customLabels>
+    <customLabels>
+        <label>Datum</label>
+        <name>Generic_Word_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Beschreibung</label>
+        <name>Generic_Word_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Dauer</label>
+        <name>Generic_Word_Duration</name>
+    </customLabels>
+    <customLabels>
+        <label>Nummer der Erfassung</label>
+        <name>Generic_Word_Number</name>
+    </customLabels>
+    <customLabels>
         <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
         <name>InvoicePdf_Label_ActivateTimesheet</name>
     </customLabels>
@@ -169,6 +205,34 @@
         <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
     </customLabels>
     <customLabels>
+        <label>Der eingegebene Zugangscode ist ungültig.</label>
+        <name>TimeSheetApproval_Error_AccessCodeInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Ihre Organisation ist für die Freigabe von Zeiterfassungen nicht aktiviert. Fragen Sie Ihren Accountmanager, um das Feature zu aktivieren.</label>
+        <name>TimeSheetApproval_Error_AccountNotEnabled</name>
+    </customLabels>
+    <customLabels>
+        <label>Die eingegebene Kundennummer ist ungültig!</label>
+        <name>TimeSheetApproval_Error_CustomerIdInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Bitte geben Sie Ihre Kundennummer und Ihren Zugangscode ein, um noch offene Zeiterfassungen für Ihre Organisation einsehen zu können.</label>
+        <name>TimeSheetApproval_Label_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Zugangscode erfolgreich verifiziert.</label>
+        <name>TimeSheetApproval_Success_AccessCodeVerified</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeige Zeiterfassungen für {!Account}. Eingeloggt als {!Contact}</label>
+        <name>TimeSheetApproval_Title_AccountData</name>
+    </customLabels>
+    <customLabels>
+        <label>Recording abgebrochen. Zeiterfassungseintrag gelöscht.</label>
+        <name>TimeTracking_RecordingAborted</name>
+    </customLabels>
+    <customLabels>
         <label>Zeiterfassung</label>
         <name>TimeTracking_Title_TrackingWidget</name>
     </customLabels>
@@ -279,6 +343,10 @@
     <customLabels>
         <label>Absender auswählen</label>
         <name>UI_Label_SelectSenderAddress</name>
+    </customLabels>
+    <customLabels>
+        <label>Willkommen!</label>
+        <name>UI_Label_Welcome</name>
     </customLabels>
     <customLabels>
         <label>Wähle Rechnungskontakt</label>

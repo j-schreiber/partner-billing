@@ -21,15 +21,16 @@
     <label>Billing</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
+    <tabs>Invoicing</tabs>
     <tabs>BankAccount__c</tabs>
     <tabs>OrganizationProfile__c</tabs>
     <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
     <tabs>standard-Product2</tabs>
     <tabs>Budget__c</tabs>
     <tabs>TimeEntry__c</tabs>
     <tabs>Invoice__c</tabs>
     <tabs>BankAccountTransaction__c</tabs>
-    <tabs>Invoicing</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Billing_UtilityBar</utilityBar>
 </CustomApplication>
