@@ -80,9 +80,12 @@ public class BudgetTriggerHandler_Test {
         // ACTION
         Id undeleteId = toUndelete.Id;
         Database.DeleteResult dr = Database.delete(undeleteId);
-        // update time entry, so budget will need recalculation
+
+        // update time entry, so budget will need recalculation after undelete
+        te = [SELECT Id FROM TimeEntry__c WHERE Id = :te.Id];
         te.DailyRate__c = 1600.00;
         update te;
+        
         // undelete budget, which will also restore lookup
         Database.UndeleteResult ur = Database.undelete(undeleteId, false);
 

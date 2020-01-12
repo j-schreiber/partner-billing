@@ -5,15 +5,15 @@
             "default": true
         },
         {
-            "path": ".\\sfdx-source\\unpackaged",
+            "path": "sfdx-source/unpackaged",
             "default": false
         },
         {
-            "path": ".\\sfdx-source\\packaged",
+            "path": "sfdx-source/packaged",
             "package": "Partner Billing",
-            "versionName": "Ver 0.3: Invoicing",
-            "versionNumber": "0.3.1.NEXT",
-            "versionDescription": "Usability improvements for Invoicing",
+            "versionName": "Ver 0.4: Time Tracking",
+            "versionNumber": "0.4.0.NEXT",
+            "versionDescription": "Functionality for time entry insert, editing and approvals",
             "definitionFile": "config/project-scratch-def.json",
             "default": false
         }
@@ -41,6 +41,14 @@
         "Partner Billing@0.3.0-2": "04t4P000002KijNQAS",
         "Partner Billing@0.3.0-3": "04t4P000002KijSQAS",
         "Partner Billing@0.3.0-4": "04t4P000002KijmQAC",
-        "Partner Billing@0.3.1-1": "04t4P000002KijwQAC"
+        "Partner Billing@0.3.1-1": "04t4P000002KijwQAC",
+        "Partner Billing@0.4.0-1": "04t4P000002KircQAC",
+        "Partner Billing@0.4.0-2": "04t4P000002KisLQAS",
+        "Partner Billing@0.4.0-3": "04t4P000002KisVQAS",
+        "Partner Billing@0.4.0-4": "04t4P000002KiszQAC",
+        "Partner Billing@0.4.0-5": "04t4P000002Kit4QAC",
+        "Partner Billing@0.4.0-6": "04t4P000002KiuHQAS",
+        "Partner Billing@0.4.0-7": "04t4P000002KiuMQAS",
+        "Partner Billing@0.4.0-8": "04t4P000002KiuRQAS"
     }
 }

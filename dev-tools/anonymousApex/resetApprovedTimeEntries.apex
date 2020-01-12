@@ -44,5 +44,5 @@ public Time getEndTime() {
 }
 
 public Date getDate() {
-    return Date.newInstance(2019, System.today().month() - 1, 1).addDays(Integer.valueOf(Math.random() * 30));
+    return Date.newInstance(System.today().year(), System.today().month() - 1, 1).addDays(Integer.valueOf(Math.random() * 30));
 }

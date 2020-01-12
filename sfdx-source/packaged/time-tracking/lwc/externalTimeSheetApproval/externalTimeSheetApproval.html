@@ -1,0 +1,30 @@
+<template>
+
+    <div class="slds-m-top_large">
+
+        <template if:false={isAuthorized}>
+            <div class="slds-grid slds-grid_align-center">
+                <c-access-code-login onsuccess={authorizeAccessCode}></c-access-code-login>
+            </div>
+        </template>
+
+        <template if:true={isAuthorized}>
+
+            <template if:false={isLoadingContactData}>
+                <h1>{PageTitle}</h1>
+            </template>
+
+            <template if:true={isLoadingTimeEntries}>
+                <lightning-spinner size="large"></lightning-spinner>
+            </template>
+            
+            <template if:false={isLoadingTimeEntries}>
+                <div class="time-entry-data-table">
+                    <c-time-entry-approval-data-table time-entries={timeEntries}></c-time-entry-approval-data-table>
+                </div>
+            </template>
+
+        </template>
+    </div>
+    
+</template>

@@ -5,5 +5,5 @@
     <description>Ensures that calculated difference between start and end time is at least 5 minutes and positive number</description>
     <errorConditionFormula>Duration__c &lt; 0.08</errorConditionFormula>
     <errorDisplayField>EndTime__c</errorDisplayField>
-    <errorMessage>Duration must be positive at least 5 minutes (0,08)</errorMessage>
+    <errorMessage>Duration must be positive and at least 5 minutes (0,08)</errorMessage>
 </ValidationRule>

@@ -1,0 +1,14 @@
+<apex:page showHeader="false" sidebar="false" >
+
+    <apex:includeLightning />
+    <div id="lightning" />
+
+    <!-- Embeds stand-alone aura app (which references the LWC implementation) and create LWC component -->
+    <script>
+        $Lightning.use("c:externalTimeSheetApprovalLwcContainer", function() {
+            $Lightning.createComponent("c:externalTimeSheetApproval", {}, 
+            "lightning");
+        });
+    </script>
+
+</apex:page>

@@ -4,8 +4,8 @@
     <externalId>false</externalId>
     <label>Status</label>
     <required>true</required>
-    <trackTrending>false</trackTrending>
     <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -20,6 +20,11 @@
                 <fullName>Approved</fullName>
                 <default>false</default>
                 <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
             </value>
         </valueSetDefinition>
     </valueSet>

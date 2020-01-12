@@ -31,9 +31,15 @@
     },
     {
         "sobject": "Contact",
-        "saveRefs": false,
+        "saveRefs": true,
         "resolveRefs": true,
         "files": ["../Contacts.json"]
+    },
+    {
+        "sobject": "AccessToken__c",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": ["../AccessTokens.json"]
     },
     {
         "sobject": "Budget__c",

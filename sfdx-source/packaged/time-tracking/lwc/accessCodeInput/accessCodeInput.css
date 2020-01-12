@@ -1,0 +1,16 @@
+div.slds-grid {
+    max-width: 8cm;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+}
+
+span {
+    vertical-align: middle;
+    font-size: 12pt;
+}
+
+.code-input {
+    text-align: center;
+    text-transform: uppercase;
+}

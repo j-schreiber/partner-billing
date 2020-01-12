@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsTimeSheetApprovalEnabled__c</fullName>
+    <description>Activates this account for time sheet approval.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Activate to enabled external time sheet approval for this account.</inlineHelpText>
+    <label>Timesheet Approval Enabled</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+</CustomField>

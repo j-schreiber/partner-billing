@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "status": 400,
+  "statusText": "Bad Request",
+  "body": {
+    "message": "An error occurred while trying to update the record. Please try again.",
+    "statusCode": 400,
+    "enhancedErrorType": "RecordError",
+    "output": {
+      "errors": [
+        {
+          "constituentField": null,
+          "duplicateRecordError": null,
+          "errorCode": "FIELD_CUSTOM_VALIDATION_EXCEPTION",
+          "field": null,
+          "fieldLabel": null,
+          "message": "An Invoice can not be edited after it has been activated or cancelled."
+        }
+      ],
+      "fieldErrors": {}
+    }
+  }
+}

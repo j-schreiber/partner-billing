@@ -67,10 +67,9 @@ public with sharing class BillingController {
     @AuraEnabled(cacheable=true)
     public static List<TimeEntry> getNonInvoicedTimeEntries(Date startDate, Date endDate) {
         List<TimeEntry> results = new List<TimeEntry>();
-        for (TimeEntry__c te : [SELECT Id,Name,Account__r.Name,Date__c,StartTime__c,EndTime__c,Duration__c,DailyRate__c,TotalAmount__c,Product__r.Name,Description__c
-                                FROM TimeEntry__c 
-                                WHERE IsInvoiced__c = false AND Status__c = 'Approved' AND (Date__c >= :startDate AND Date__c <= :endDate)
-                                ORDER BY Account__c,Date__c])
+        for (TimeEntry__c te : Database.query(TimeEntry.QUERY_STRING + 
+                                ' WHERE IsInvoiced__c = false AND Status__c = \'Approved\' AND (Date__c >= :startDate AND Date__c <= :endDate)' +
+                                ' ORDER BY Account__c,Date__c'))
             results.add(new TimeEntry(te));
         return results;
     }

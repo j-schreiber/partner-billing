@@ -21,7 +21,10 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 
 <img src="screenshots/edit-line-items.gif" alt="Edit line items animation"/>
 
-## Preview the generated PDF
+## Create PDFs from Invoice Records
+Many utility features to handle PDF generation from the record.
+
+### Preview the generated PDF
 * Multi-language support (maintain existing and add new translations with translation workbench)
 * Toggle rendering of the Invoice's timesheet
 * Select your company profile, that is used to fill header and footer
@@ -30,12 +33,19 @@ I use JIRA to organize releases and epics, however the release logs in GitHub ar
 <img src="screenshots/show-pdf-preview.gif" alt="PDF Preview"/>
 <img src="screenshots/draft-invoice-preview.gif" alt="Preview for Draft"/>
 
-## Store generated PDFs as Attachments and Documents
+### Store generated PDFs as Attachments and Documents
 * Store all generated PDFs as full "Content Documents"
 * Creates new content versions for subsequently generated PDFs with same settings, new Documents for different settings
 * Watermark is added for PDFs that are generated while Invoice is still a draft (currently not localized)
 
 <img src="screenshots/draft-and-activated-invoice-pdf.gif" alt="Draft and activated PDF"/>
+
+### Handle automatic sync or delete of PDF
+* Track changes on all relevant fields (amount, billing address, date, etc)
+* Decide, if changes will create a new version of PDF or delete the whole document alltogether
+* Store the configurable options that will be used when creating a new PDF file
+
+<img src="screenshots/select-pdf-sync-options.gif" alt="Sync/Delete PDFs"/>
 
 ## Perform invoicing runs
 * Automatically generate invoices for selected time entries in a filtered service period

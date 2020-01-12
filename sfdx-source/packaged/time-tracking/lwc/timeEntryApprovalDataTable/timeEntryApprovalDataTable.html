@@ -1,0 +1,23 @@
+<template>
+    <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+
+        <thead>
+            <th>{LABELS.NUMBER}</th>
+            <th>{LABELS.CATEGORY}</th>
+            <th>{LABELS.BUDGET}</th>
+            <th>{LABELS.CONSULTANT}</th>
+            <th>{LABELS.DATE}</th>
+            <th>{LABELS.DURATION}</th>
+            <th>{LABELS.DESCRIPTION}</th>
+            <th style="text-align: center;">{LABELS.ACTIONS}</th>
+        </thead>
+        <tbody>
+            <template for:each={timeEntries} for:item='entry'>
+                <c-time-entry-approval-data-table-row
+                    time-entry={entry}
+                    key={entry.Id}
+                ></c-time-entry-approval-data-table-row>
+            </template>
+        </tbody>
+    </table>
+</template>

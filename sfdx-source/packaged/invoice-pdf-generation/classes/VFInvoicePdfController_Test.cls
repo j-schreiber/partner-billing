@@ -141,12 +141,35 @@ public class VFInvoicePdfController_Test {
     @isTest
     static void getOrgProfile_NoParam_DefaultProfileExists_DefaultProfileReturned() {
         // SETUP
+        insert TestDataFactory.CreateOrganizationProfile(new OrganizationProfile__c(IsDefault__c = false, Name = 'Non Default Test 2'));
         Test.setCurrentPage(Page.InvoicePdf);
         // ACTION
         OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
         // VERIFY
-        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c LIMIT 1];
+        OrganizationProfile__c expectedProfile = [SELECT Id FROM OrganizationProfile__c WHERE IsDefault__c = true LIMIT 1];
         System.assertEquals(expectedProfile.Id, op.Id, 'OrgProfile');
+    }
+
+    @isTest
+    static void getOrgProfile_NoParam_ProfileInInvoice_InvoiceProfileReturned() {
+        // SETUP
+        OrganizationProfile__c newProfile = TestDataFactory.CreateOrganizationProfile(
+            new OrganizationProfile__c(IsDefault__c = false, OrganizationName__c = 'Other Company GmbH')
+        );
+        insert newProfile;
+
+        Invoice__c record = [SELECT Id,PdfLanguage__c FROM Invoice__c LIMIT 1];
+        record.OrganizationProfile__c = newProfile.Id;
+        update record;
+
+        Test.setCurrentPage(Page.InvoicePdf);
+        ApexPages.currentPage().getParameters().put('Id', record.Id);
+
+        // ACTION
+        OrganizationProfile__c op = new VFInvoicePdfController().OrgProfile;
+
+        // VERIFY
+        System.assertEquals(newProfile.Id, op.Id, 'OrgProfile');
     }
 
     @isTest

@@ -14,7 +14,8 @@
             "BillingPostalCode__c": "86159",
             "BillingCity__c": "Augsburg",
             "BillingCountry__c": "Deutschland",
-            "BillingState__c": "Bayern"
+            "BillingState__c": "Bayern",
+            "PDFSyncSetting__c": "Sync"
         },
         {
             "attributes": {
@@ -25,7 +26,8 @@
             "Account__c": "@AccountRef1",
             "Date__c": "2019-07-31",
             "ServicePeriodFrom__c": "2019-07-01",
-            "ServicePeriodTo__c": "2019-07-31"
+            "ServicePeriodTo__c": "2019-07-31",
+            "PDFSyncSetting__c": "Sync"
         },
         {
             "attributes": {
@@ -36,7 +38,8 @@
             "Account__c": "@AccountRef1",
             "Date__c": "2019-08-31",
             "ServicePeriodFrom__c": "2019-08-01",
-            "ServicePeriodTo__c": "2019-08-31"
+            "ServicePeriodTo__c": "2019-08-31",
+            "PDFSyncSetting__c": "Delete"
         },
         {
             "attributes": {
@@ -47,7 +50,8 @@
             "Account__c": "@AccountRef1",
             "Date__c": "2019-09-30",
             "ServicePeriodFrom__c": "2019-09-01",
-            "ServicePeriodTo__c": "2019-09-30"
+            "ServicePeriodTo__c": "2019-09-30",
+            "PDFSyncSetting__c": "Delete"
         },
         {
             "attributes": {

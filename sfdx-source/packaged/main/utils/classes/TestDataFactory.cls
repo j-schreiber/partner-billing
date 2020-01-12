@@ -86,6 +86,11 @@ public class TestDataFactory {
                         UserName='pb-test' + Integer.valueOf(Math.random() * 1000000) + '@example.com');
     }
 
+    public static AccessToken__c CreateDefaultAccessToken() {
+        return new AccessToken__c(Code__c = 'ABCD1234DCBA',
+                                  Status__c = 'Active');
+    }
+
     public static Product2 CreateDefaultProduct() {
         return new Product2(Name = 'Test Product',
                             IsActive = true,
@@ -130,6 +135,10 @@ public class TestDataFactory {
 
     public static User CreateUser(User template) {
         return (User)mergeSObjects(template, CreateDefaultUser());
+    }
+
+    public static AccessToken__c CreateAccessToken(AccessToken__c template) {
+        return (AccessToken__c)mergeSObjects(template, CreateDefaultAccessToken());
     }
 
     private static SObject mergeSObjects(SObject masterRecord, SObject slaveRecord) {

@@ -13,6 +13,42 @@
         <name>Button_Label_SaveToAttachments</name>
     </customLabels>
     <customLabels>
+        <label>Ihre Kundennummer</label>
+        <name>Generic_Prompt_EnterCustomerId</name>
+    </customLabels>
+    <customLabels>
+        <label>Aktionen</label>
+        <name>Generic_Word_Actions</name>
+    </customLabels>
+    <customLabels>
+        <label>Budget</label>
+        <name>Generic_Word_Budget</name>
+    </customLabels>
+    <customLabels>
+        <label>Kategorie</label>
+        <name>Generic_Word_Category</name>
+    </customLabels>
+    <customLabels>
+        <label>Berater</label>
+        <name>Generic_Word_Consultant</name>
+    </customLabels>
+    <customLabels>
+        <label>Datum</label>
+        <name>Generic_Word_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Beschreibung</label>
+        <name>Generic_Word_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Dauer</label>
+        <name>Generic_Word_Duration</name>
+    </customLabels>
+    <customLabels>
+        <label>Nummer der Erfassung</label>
+        <name>Generic_Word_Number</name>
+    </customLabels>
+    <customLabels>
         <label><!-- Used in visualforce page (pdf rendering) as field label --></label>
         <name>InvoicePdf_Label_ActivateTimesheet</name>
     </customLabels>
@@ -125,6 +161,10 @@
         <name>Message_InvoiceValidation_CanNotEditLockedField</name>
     </customLabels>
     <customLabels>
+        <label>Zu viele Rechnungen, die Updates zu ihrem PDF synchronisieren. Bearbeite diese Rechnungen in kleineren Batches oder deaktiviere die PDF-Synchronisation temporär. Maximum erlaubte Datensätze in Batch: 10.</label>
+        <name>Message_InvoiceValidation_SyncUpdateLimit</name>
+    </customLabels>
+    <customLabels>
         <label>Hier gibt&#39;s nichts mehr zu tun. Es wurden keine Rechnungen im Entwurfsmodus mehr gefunden.</label>
         <name>Message_Invoicing_DraftInvoicesCompleted</name>
     </customLabels>
@@ -149,12 +189,64 @@
         <name>Message_LineItemValidation_CanNotInsertWhenLocked</name>
     </customLabels>
     <customLabels>
+        <label>Änderungen an der Rechnung, Rechnungspositionen oder den Zeitaufwänden der Rechnung werden dafür sorgen, dass alle bereits erzeugten PDFs gelöscht werden.</label>
+        <name>Message_PdfSyncSelection_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Änderungen an der Rechnung, den Rechnungspositionen oder den Zeitaufwänden, werden eine neue Version des PDFs erzeugen.</label>
+        <name>Message_PdfSyncSelection_Sync</name>
+    </customLabels>
+    <customLabels>
         <label>Der Datensatz kann nicht mehr gelöscht werden, wenn eine Rechnung verknüpft ist!</label>
         <name>Message_TimeEntryValidation_CanNotDeleteRecord</name>
     </customLabels>
     <customLabels>
         <label>Die Rechnung kann nicht entfernt werden!</label>
         <name>Message_TimeEntryValidation_CanNotRemoveInvoice</name>
+    </customLabels>
+    <customLabels>
+        <label>Der eingegebene Zugangscode ist ungültig.</label>
+        <name>TimeSheetApproval_Error_AccessCodeInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Ihre Organisation ist für die Freigabe von Zeiterfassungen nicht aktiviert. Fragen Sie Ihren Accountmanager, um das Feature zu aktivieren.</label>
+        <name>TimeSheetApproval_Error_AccountNotEnabled</name>
+    </customLabels>
+    <customLabels>
+        <label>Die eingegebene Kundennummer ist ungültig!</label>
+        <name>TimeSheetApproval_Error_CustomerIdInvalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Bitte geben Sie Ihre Kundennummer und Ihren Zugangscode ein, um noch offene Zeiterfassungen für Ihre Organisation einsehen zu können.</label>
+        <name>TimeSheetApproval_Label_Intro</name>
+    </customLabels>
+    <customLabels>
+        <label>Zugangscode erfolgreich verifiziert.</label>
+        <name>TimeSheetApproval_Success_AccessCodeVerified</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeige Zeiterfassungen für {!Account}. Eingeloggt als {!Contact}</label>
+        <name>TimeSheetApproval_Title_AccountData</name>
+    </customLabels>
+    <customLabels>
+        <label>Recording abgebrochen. Zeiterfassungseintrag gelöscht.</label>
+        <name>TimeTracking_RecordingAborted</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeiterfassung</label>
+        <name>TimeTracking_Title_TrackingWidget</name>
+    </customLabels>
+    <customLabels>
+        <label>Zeiteintrag konnte nicht abgeschlossen werden!</label>
+        <name>TimeTracking_Toast_CanNotStopRecording</name>
+    </customLabels>
+    <customLabels>
+        <label>Aufzeichnung des Zeiteintrags begonnen!</label>
+        <name>TimeTracking_Toast_RecordingStarted</name>
+    </customLabels>
+    <customLabels>
+        <label>Aufzeichnung erfolgreich beendet. Zeiteintrag abgeschlossen.</label>
+        <name>TimeTracking_Toast_RecordingStopped</name>
     </customLabels>
     <customLabels>
         <label>Änderungen gespeichert!</label>
@@ -253,6 +345,10 @@
         <name>UI_Label_SelectSenderAddress</name>
     </customLabels>
     <customLabels>
+        <label>Willkommen!</label>
+        <name>UI_Label_Welcome</name>
+    </customLabels>
+    <customLabels>
         <label>Wähle Rechnungskontakt</label>
         <name>UI_Placeholder_SelectBillingContact</name>
     </customLabels>
@@ -263,6 +359,10 @@
     <customLabels>
         <label>- Absender auswählen -</label>
         <name>UI_Placeholder_SelectSender</name>
+    </customLabels>
+    <customLabels>
+        <label>Wähle PDF Sync Einstellungen</label>
+        <name>UI_Title_SelectPdfSettings</name>
     </customLabels>
     <customLabels>
         <label>Keine Änderungen gefunden!</label>

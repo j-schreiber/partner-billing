@@ -41,21 +41,6 @@
         <value><!-- Invoice --></value>
     </caseValues>
     <gender><!-- Neuter --></gender>
-    <layouts>
-        <layout>Invoice Layout</layout>
-        <sections>
-            <label><!-- Address Information --></label>
-            <section>Address Information</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- PDF Rendering Configuration --></label>
-            <section>PDF Rendering Configuration</section>
-        </sections>
-    </layouts>
     <nameFieldLabel><!-- Invoice Number --></nameFieldLabel>
     <quickActions>
         <label><!-- Create PDF --></label>

@@ -4,9 +4,14 @@
     <c-message-box variant="warning" message={boxMessage}></c-message-box>
     <c-message-box variant="error"></c-message-box>
     <c-message-box></c-message-box>-->
+    
+    <lightning-card>
+        <div class="slds-m-horizontal_medium">
+            <template if:true={timeEntries.data}>
+                <c-time-entry-approval-data-table time-entries={timeEntries.data}></c-time-entry-approval-data-table>
+            </template>
+        </div>
+    </lightning-card>
 
-    <template if:true={invoices.data}>
-        <c-invoice-card invoice={Invoice}></c-invoice-card>
-    </template>
 
 </template>
