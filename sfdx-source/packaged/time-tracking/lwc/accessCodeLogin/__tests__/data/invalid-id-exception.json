@@ -3,6 +3,6 @@
     "status": 400,
     "statusText": "Bad Request",
     "body": {
-        "message": "Invalid Customer Id!"
+        "message": "TimeSheetApproval_Error_CustomerIdInvalid"
     }
 }
