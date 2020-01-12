@@ -68,7 +68,7 @@
                                 icon-name="utility:record_create"
                                 variant="success"
                                 disabled={isWorking}
-                                alternative-text="Submit active recording"
+                                name="Submit active recording"
                                 onclick={stopRecording}>
                             </lightning-button>
                         </div>
@@ -76,7 +76,7 @@
                             <lightning-button-icon
                                 icon-name="utility:delete"
                                 data-id="deleteTimeEntryButton"
-                                alternative-text="Delete active recording"
+                                name="Delete active recording"
                                 disabled={isWorking}
                                 onclick={deleteRecording}>
                             </lightning-button-icon>
@@ -91,9 +91,10 @@
                 <div class="slds-grid slds-grid_align-center slds-m-top_large">
                     <lightning-button-icon
                         style="transform: scale(1.75)"
+                        data-id="startRecordingButton"
                         icon-name="utility:play"
                         variant="brand"
-                        alternative-text="Start recording ..."
+                        name="Start recording ..."
                         size="large"
                         disabled={isWorking}
                         onclick={startRecording}>

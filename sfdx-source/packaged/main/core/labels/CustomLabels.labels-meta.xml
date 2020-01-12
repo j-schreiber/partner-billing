@@ -449,6 +449,14 @@
         <value>Timesheet for: {!Account}. Logged in as: {!Contact}</value>
     </labels>
     <labels>
+        <fullName>TimeTracking_RecordingAborted</fullName>
+        <categories>ui,toast,title,warning</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General purpose message for abortion of time recording</shortDescription>
+        <value>Recording aborted! Time Entry has been deleted.</value>
+    </labels>
+    <labels>
         <fullName>TimeTracking_Title_TrackingWidget</fullName>
         <categories>ui,title</categories>
         <language>en_US</language>
