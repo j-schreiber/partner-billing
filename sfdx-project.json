@@ -5,16 +5,16 @@
             "default": true
         },
         {
-            "path": "sfdx-source/unpackaged",
-            "default": false
-        },
-        {
-            "path": "sfdx-source/packaged",
+            "path": "src/packaged",
             "package": "Partner Billing",
             "versionName": "Ver 0.4: Time Tracking",
             "versionNumber": "0.4.0.NEXT",
             "versionDescription": "Functionality for time entry insert, editing and approvals",
-            "definitionFile": "config/project-scratch-def.json",
+            "definitionFile": "config/default-scratch-def.json",
+            "default": false
+        },
+        {
+            "path": "src/unpackaged",
             "default": false
         }
     ],
@@ -22,33 +22,6 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "47.0",
     "packageAliases": {
-        "Partner Billing": "0Ho4P000000GmhySAC",
-        "Partner Billing@0.1.0-1": "04t4P000002KiKJQA0",
-        "Partner Billing@0.1.0-2": "04t4P000002KiWHQA0",
-        "Partner Billing@0.1.0-3": "04t4P000002KiWMQA0",
-        "Partner Billing@0.1.0-4": "04t4P000002KiXeQAK",
-        "Partner Billing@0.1.1-1": "04t4P000002KiXjQAK",
-        "Partner Billing@0.1.2-1": "04t4P000002KiXoQAK",
-        "Partner Billing@0.1.2-2": "04t4P000002KiYIQA0",
-        "Partner Billing@0.1.2-3": "04t4P000002KiYNQA0",
-        "Partner Billing@0.2.0-1": "04t4P000002fMKrQAM",
-        "Partner Billing@0.2.0-2": "04t4P000002fMP9QAM",
-        "Partner Billing@0.2.0-3": "04t4P000002fMPEQA2",
-        "Partner Billing@0.2.0-4": "04t4P000002fMPnQAM",
-        "Partner Billing@0.2.0-6": "04t4P000002fMPxQAM",
-        "Partner Billing@0.2.0-7": "04t4P000002KiaTQAS",
-        "Partner Billing@0.3.0-1": "04t4P000002KijIQAS",
-        "Partner Billing@0.3.0-2": "04t4P000002KijNQAS",
-        "Partner Billing@0.3.0-3": "04t4P000002KijSQAS",
-        "Partner Billing@0.3.0-4": "04t4P000002KijmQAC",
-        "Partner Billing@0.3.1-1": "04t4P000002KijwQAC",
-        "Partner Billing@0.4.0-1": "04t4P000002KircQAC",
-        "Partner Billing@0.4.0-2": "04t4P000002KisLQAS",
-        "Partner Billing@0.4.0-3": "04t4P000002KisVQAS",
-        "Partner Billing@0.4.0-4": "04t4P000002KiszQAC",
-        "Partner Billing@0.4.0-5": "04t4P000002Kit4QAC",
-        "Partner Billing@0.4.0-6": "04t4P000002KiuHQAS",
-        "Partner Billing@0.4.0-7": "04t4P000002KiuMQAS",
-        "Partner Billing@0.4.0-8": "04t4P000002KiuRQAS"
+        "Partner Billing": "0Ho4P000000GmhySAC"
     }
 }
