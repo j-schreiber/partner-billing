@@ -1,0 +1,54 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef1"
+            },
+            "Name": "Hull and Support-Systems Maintenance",
+            "Description": "Contains small fixed on hull and life-support systems as well as non-critical internal systems.",
+            "IsActive": true,
+            "Family": "Implementation"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef2"
+            },
+            "Name": "Battle-Damage Ship Repair",
+            "Description": "Repair of crucial structural damage on hull, engines and weapon systems.",
+            "IsActive": true,
+            "Family": "Implementation"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef3"
+            },
+            "Name": "Engine Maintenance",
+            "Description": "Standard maintenance for all engines, not including jumps.",
+            "IsActive": true,
+            "Family": "Implementation"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef4"
+            },
+            "Name": "Flight Maneuver Training: Beginner",
+            "Description": "Basic maneuvers for rookies. No pre-requisites!",
+            "IsActive": true,
+            "Family": "Coaching"
+        },
+        {
+            "attributes": {
+                "type": "Product2",
+                "referenceId": "ProductRef5"
+            },
+            "Name": "Flight Maneuver Training: Intermediate",
+            "Description": "Building on the basic maneuvers also includes weapon usage during fights.",
+            "IsActive": true,
+            "Family": "Coaching"
+        }
+    ]
+}

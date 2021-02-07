@@ -1,0 +1,20 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "PricebookRef1"
+            },
+            "Name": "Standard Price Book",
+            "IsActive": true
+        },
+        {
+            "attributes": {
+                "type": "Pricebook2",
+                "referenceId": "PricebookRef2"
+            },
+            "Name": "Standard Prices DE",
+            "IsActive": true
+        }
+    ]
+}

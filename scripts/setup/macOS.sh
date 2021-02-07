@@ -1,39 +1,31 @@
 #!/bin/bash
 set -e
 
-alias=
+alias='PartnerBilling'
 duration=7
-configFile=config/default-scratch-def.json
-requiredParamMissing="false"
-installationKeys=
-devhubusername="Production"
+configFile='config/default-scratch-def.json'
+devhubusername=
 
-while getopts a:d:f:p:k: option
+while getopts a:d:f:v: option
 do
     case "${option}" in
         a )             alias=${OPTARG};;
         d )             duration=${OPTARG};;
         f )             configFile=${OPTARG};;
-        p )             packageName=${OPTARG};;
-        k )             installationKeys=${OPTARG};;
+        v )             devhubusername=${OPTARG};;
     esac
 done
-
-if [ -z "$alias" ]; then
-    requiredParamMissing="true"
-    echo "Missing required parameter: alias. Use '-a MyAlias'"
-fi
-
-if [ $requiredParamMissing == "true" ]
-then
-    exit 1
-fi
 
 echo "mkdir -p force-app"
 mkdir -p force-app
 
-echo "sfdx force:org:create -v $devhubusername -d $duration -f $configFile -a $alias -s"
-sfdx force:org:create -v $devhubusername -d $duration -f $configFile -a $alias -s
+if [ -z "$devhubusername" ]; then
+    echo "sfdx force:org:create -d $duration -f $configFile -a $alias -s"
+    sfdx force:org:create -d $duration -f $configFile -a $alias -s
+else
+    echo "sfdx force:org:create -v $devhubusername -d $duration -f $configFile -a $alias -s"
+    sfdx force:org:create -v $devhubusername -d $duration -f $configFile -a $alias -s
+fi
 
 echo "sfdx force:source:push -u $alias"
 sfdx force:source:push -u $alias

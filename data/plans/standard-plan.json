@@ -3,66 +3,66 @@
         "sobject": "BankAccount__c",
         "saveRefs": true,
         "resolveRefs": false,
-        "files": ["../BankAccounts.json"]
+        "files": ["../bank-accounts.json"]
     },
     {
         "sobject": "OrganizationProfile__c",
         "saveRefs": false,
         "resolveRefs": true,
-        "files": ["../OrganizationProfiles.json"]
+        "files": ["../organization-profiles.json"]
     },
     {
         "sobject": "Resource__c",
         "saveRefs": true,
         "resolveRefs": false,
-        "files": ["../Resources.json"]
+        "files": ["../resources.json"]
     },
     {
         "sobject": "Product2",
         "saveRefs": true,
         "resolveRefs": false,
-        "files": ["../Products.json"]
+        "files": ["../products.json"]
     },
     {
         "sobject": "Account",
         "saveRefs": true,
         "resolveRefs": false,
-        "files": ["../BusinessAccounts.json"]
+        "files": ["../accounts.json"]
     },
     {
         "sobject": "Contact",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../Contacts.json"]
+        "files": ["../contacts.json"]
     },
     {
         "sobject": "AccessToken__c",
         "saveRefs": false,
         "resolveRefs": true,
-        "files": ["../AccessTokens.json"]
+        "files": ["../access-tokens.json"]
     },
     {
         "sobject": "Budget__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../Budgets.json"]
+        "files": ["../budgets.json"]
     },
     {
         "sobject": "Invoice__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../Invoices.json"]
+        "files": ["../invoices.json"]
     },
     {
         "sobject": "InvoiceLineItem__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../InvoiceLineItems.json"]
+        "files": ["../invoice-line-items.json"]
     },
     {
         "sobject": "TimeEntry__c",
         "saveRefs": true,
         "resolveRefs": true,
-        "files": ["../TimeEntries.json", "../TimeEntries_NonInvoiced.json"]
+        "files": ["../time-entries.json"]
     }
 ]
