@@ -1,0 +1,8 @@
+{
+    "namespace": "c",
+    "main": "test",
+    "modulesSourceDirectory": "whatever",
+    "staticResourcesDirectory": "staticresources",
+    "port": 3333,
+    "customLabelsFile": "labels/CustomLabels.labels-meta.xml"
+}

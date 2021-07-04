@@ -1,0 +1,33 @@
+<template>
+    <lightning-card>
+        <lightning-layout horizontal-align="spread">
+            <lightning-layout-item padding="horizontal-large">
+                <lightning-button
+                    label="Previous"
+                    icon-name="utility:chevronleft"
+                    icon-position="left"
+                    onclick={decreaseProcessStage}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="grow">
+                <lightning-progress-indicator current-step={processIndicatorStage} type="base" variant="base">
+                    <template for:each={steps} for:item="step">
+                        <lightning-progress-step
+                            key={step.value}
+                            label={step.name}
+                            value={step.value}>
+                        </lightning-progress-step>
+                    </template>
+                </lightning-progress-indicator>
+            </lightning-layout-item>
+            <lightning-layout-item padding="horizontal-large">
+                <lightning-button
+                    label="Next"
+                    icon-name="utility:chevronright"
+                    icon-position="right"
+                    onclick={increaseProcessStage}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

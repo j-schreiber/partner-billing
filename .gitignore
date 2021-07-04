@@ -8,6 +8,7 @@ jsconfig.json
 
 # Salesforce cache
 .sfdx/
+.localdevserver
 
 # Logs
 logs
